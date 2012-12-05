@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+  <link rel="openid.server" href="http://www.myopenid.com/server" />
+  <link rel="openid.delegate" href="http://berkes.myopenid.com/" />
+  <link rel="openid2.local_id" href="http://berkes.myopenid.com" />
+  <link rel="openid2.provider" href="http://www.myopenid.com/server" />
+  <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=berkes.myopenid.com" />
+
+   <title>Top 10 mistakes made by Drupal newcomers</title>
+   <meta name="author" content="Bèr ‘berkes’ Kessels" />
+   <link href="http://feeds.feedburner.com/berkes" rel="alternate" title="your title" type="application/atom+xml" />
+   <link rel="author" href="/humans.txt" type="text/plain" />
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+   <!-- Included CSS Files -->
+   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
+
+
+   <!--[if lt IE 9]>
+   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
+
+   <![endif]-->
+
+   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
+
+
+   <!-- IE Fix for HTML5 Tags -->
+   <!--[if lt IE 9]>
+   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
+
+   <![endif]-->
+</head>
+<body>
+	<!-- container -->
+	<div class="container">
+    <header>
+      <div class="row">
+        <a href="/" title="Home">
+          <img src="/assets//images/logo.png" alt="Logo" title="Bèr ‘berkes’ Kessels" />
+        </a>
+      </div>
+
+      <nav id="main" class="row">
+        <div class="onion">
+        <ul>
+          <li>
+          <a href="/about.html">EN / About</a>
+          </li>
+          <li>
+          <a href="/archive.html">EN / Articles</a>
+          </li>
+          <li>
+          <a href="/over.html">NL / Over</a>
+          </li>
+          <li>
+          <a href="/archief.html">NL / Artikelen</a>
+          </li>
+        </ul>
+        </div>
+      </nav>
+    </header>
+    <section id="main-content" class="row">
+      <article>
+  <header>
+    <h1>Top 10 mistakes made by Drupal newcomers</h1>
+  </header> 
+  <div class="body">
+    <p>I thought it to be a good idea to sum up <em>my vision</em> of the ten biggest mistakes made by people new to Drupal. <em>I</em> encountered all these issues on several occasions, and have seen them pass by, in support threads, and so on. But that does not mean that <em>you</em> will run into them, still I think they are very recognisable for many amongst us. Many are not even specific to Drupal. I've collected the notes and solutions from several mails and conversations, selected the ones I thought can do most harm and ordered them by overall weight:<!--break-->1. <strong>Blindly trusting the description on a module page.</strong> Many people write a quote, RFC, etceteras without testing the modules in several environments, and even testing them all together. Module developers are not marketing guru's or communication experts. They make a module for their own needs. My rule of thumb: a module I don't know (yet) will cost me just as much time to develop from scratch, as I will cost me to get used to, to implement it, and to fit into my needs.1. <strong>Going for an unstable module, or unstable core.</strong> Eventhough developers told you that a 'release is around the corner' or that 'the current head is really stable': if you need proven technology, use proven technology. A backport of some feature is often far less work then keeping up with all the progress, and dealing with all the uncertainty. Developers might think something is stable, but that is only because they are familiar with their work. A pilot will tell you that flying a plane is dead-easy. You know better. Or should.1. <strong>Foobar inc. has a Drupal site, we need almost the same, Drupal is ready to let us build such a site.</strong> Off course not. If someone else did it, that does not mean You+Drupal+SomeDevelopment can do it too! Without knowing all the ins and outs of that foobar inc. project, consider your project as "needing to re-invent all the wheels", consider it like you would when developing something that has never been done yet.1. <strong>Assuming that a module fullfills your exact needs Out Of The Box.</strong> Even if you tried the module, your actual case might not be solved with the module. Changing something is often far from the trivial task you thought it to be.1. <strong>Assuming contribs don't come with extras.</strong> Many contribs have nice features and extras, or dependencies. Often that is stuff you don't need or want. The larger the module, the bigger the chance it will not be what you want it to be out of the box. I have seen developers loose many valuable hours on <strong>removing</strong> stuff. Don't just look at what you need, also look at what you don't need.1. <strong>Assuming a bug will be fixed because it is reported.</strong> Contributors are people. Just like you. If they don't have an itch to fix a bug, it won't be fixed.1. <strong>Theming is simply 'changing a few thingies to alter the look'.</strong> Theming is a complete development track. Even simply changing a few colors in an existing theme, if done right, can prove to become an endless project. My rule of thumb: I count two hours theming for every three hours spent on module and site development. And that is only possible because I know my way around in the themes and in CSS.1. <strong>Translating is easy.</strong> For every word you know you have to translate, there are ten, twenty you did not think of. Translating an average site, when using contributed, almost finished PO files, will cost you days, if not more, and certainly not hours.1. <strong>Knowing how to make a module means its nearly done.</strong> You will, so says Murphy, encouter things you never expected. The fact Drupal development is not very hard, the fact Drupals APIs are well documented, does not mean that the development of your specific ideas or needs are easy. 1. <strong>Mambo/Joomla!/RubyonRails/Any other platform CMS is not good because of Foo, Drupal has a good solution for Foo. Drupal is better for me.</strong> Sure, probably right. But does that mean that --in contrary to that other system-- Drupal has Bar done right? you probably did not know about Bar because, where you come from, Bar was never an issue, in Drupal it may very well be your killer issue.</p>
+
+<p>The fact you did not read anything about these issues in Drupals handbooks does not mean Drupal is perfect. A perfect system is just that: perfect. It would therefore require no more development (it's perfect, remember?). Wherever you see developers, you know you are dealing with a "thing" that needs improvement, a thing that is not perfect.</p>
+
+<p>Did I miss any? did you run into the same, but had other solutions, or <a href="http://webschuur.com/comment/reply/695#comment_form">variations on a problem</a>?</p>
+
+  </div>
+  <footer>
+    <p class="note">
+    
+      <em>This article was published on webschuur.com. And migrated to this blog. </em>
+    
+    </p>
+    <time datetime="2007-02-03T00:00:00+01:00"
+    pubdate="pubdate">
+      Posted on 03 February 2007
+    </time>
+    in
+    
+    
+      
+      
+
+
+  
+    
+      <a href="/tags.html#project management-ref" class="black radius label">project management<span class="size">28</span></a>
+    
+      <a href="/tags.html#php-ref" class="black radius label">php<span class="size">41</span></a>
+    
+      <a href="/tags.html#tips and tricks-ref" class="black radius label">tips and tricks<span class="size">23</span></a>
+    
+      <a href="/tags.html#theming-ref" class="black radius label">theming<span class="size">25</span></a>
+    
+      <a href="/tags.html#drupal-ref" class="black radius label">drupal<span class="size">212</span></a>
+    
+      <a href="/tags.html#drupal-ref" class="black radius label">drupal<span class="size">212</span></a>
+    
+  
+
+
+
+    
+  </footer>
+</article>
+
+<div id="author">
+  <p>
+  
+  
+    <strong>About  the author:</strong> Bèr Kessels is an experienced webdeveloper  with a great passion for
+    technology and Open Source. A golden combination to implement that technology in a good and efficient
+    way. Follow <a href="https://twitter.com/berkes">@berkes</a> on Twitter. Or read more <a href="/over.html">about Bèr</a>.
+  
+  </p>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'berkes'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </section>
+
+    <footer class="main row">
+      <div class="contact four columns">
+        <p>
+            Bèr ‘berkes’ Kessels<br />
+            Bèr Kessels is an Open Source Webdeveloper.<br />
+            <a href='mailto:ber@webschuur.com'>ber@webschuur.com</a>
+          </p>
+          <p>
+            <a href="http://github.com/berkes/">github.com/berkes</a><br />
+            <a href="http://twitter.com/berkes/">twitter.com/berkes</a><br />
+          </p>
+      </div>
+      <div class="four columns">
+        Copyright 2001-2012
+        with a
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Atrribute-Share-alike 3.0 Unported license</a>
+      </div>
+      <div class="four columns">
+        <a class="extra" href="/archive.html">Archive (All English articles)</a> <br />
+        <a class="extra" href="/archief.html">Archief (Alle Nederlandse artikelen)</a> <br />
+        <a class="extra" href="/tags.html">Tags</a> <br />
+        <a href="http://feeds.feedburner.com/berkes"> RSS </a> <br />
+      </div>
+    </footer>
+  </div>
+  <!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik.webschuur.com/" : "http://piwik.webschuur.com/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 9);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://piwik.webschuur.com/piwik.php?idsite=9" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</body>
+</html>

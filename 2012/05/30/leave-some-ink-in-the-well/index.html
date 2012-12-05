@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+  <link rel="openid.server" href="http://www.myopenid.com/server" />
+  <link rel="openid.delegate" href="http://berkes.myopenid.com/" />
+  <link rel="openid2.local_id" href="http://berkes.myopenid.com" />
+  <link rel="openid2.provider" href="http://www.myopenid.com/server" />
+  <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=berkes.myopenid.com" />
+
+   <title>Leave some Ink in the Well</title>
+   <meta name="author" content="Bèr ‘berkes’ Kessels" />
+   <link href="http://feeds.feedburner.com/berkes" rel="alternate" title="your title" type="application/atom+xml" />
+   <link rel="author" href="/humans.txt" type="text/plain" />
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+   <!-- Included CSS Files -->
+   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
+
+
+   <!--[if lt IE 9]>
+   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
+
+   <![endif]-->
+
+   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
+
+
+   <!-- IE Fix for HTML5 Tags -->
+   <!--[if lt IE 9]>
+   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
+
+   <![endif]-->
+</head>
+<body>
+	<!-- container -->
+	<div class="container">
+    <header>
+      <div class="row">
+        <a href="/" title="Home">
+          <img src="/assets//images/logo.png" alt="Logo" title="Bèr ‘berkes’ Kessels" />
+        </a>
+      </div>
+
+      <nav id="main" class="row">
+        <div class="onion">
+        <ul>
+          <li>
+          <a href="/about.html">EN / About</a>
+          </li>
+          <li>
+          <a href="/archive.html">EN / Articles</a>
+          </li>
+          <li>
+          <a href="/over.html">NL / Over</a>
+          </li>
+          <li>
+          <a href="/archief.html">NL / Artikelen</a>
+          </li>
+        </ul>
+        </div>
+      </nav>
+    </header>
+    <section id="main-content" class="row">
+      <article>
+  <header>
+    <h1>Leave some Ink in the Well</h1>
+  </header> 
+  <div class="body content">
+    <p>Many writers know Hemingway's tip:</p>
+
+<blockquote><p>Leave some water in the well.</p></blockquote>
+
+<p>From
+<a href="http://artisticwhim.com/blog/2005/12/leaving-a-little-ink-in-the-well/">Impulse</a>:</p>
+
+<blockquote><p>It’s a great idea: stop work­ing when you’re writing your best and it’s easier to start writing next time.
+You leave the work excited to return. You only face the dreaded Blank Page in the middle of your writing session, fresh from a success.</p></blockquote>
+
+<p>I found the same goes for Coding, albeit for different reasons. And, as
+a coder, I created a silly little script to help me with that.</p>
+
+<p><img src="/images/inline/ink.png" alt="Screenshot showing where I left the ink in the
+well" /></p>
+
+<h2>You get disturbed.</h2>
+
+<p><em>I</em> get disturbed a lot, during work, anyway. When finally you have mapped the
+entire stack of some weird application in your brain, your phone rings,
+alarms for some server start blinking, or you get some new twitter reply.
+Woosh, the effort is lost; the energy put into mapping everythin in your
+brain: wasted.</p>
+
+<p>But even more often you have planned interuptions. Such as the end of
+the day, lunch, or some meeting.</p>
+
+<h2>You have many projects intermingling.</h2>
+
+<p>Ideally, as a programmer, you work on one problem at a time. Lucky
+people work on one technology, in one environment with only one language
+and toolset.</p>
+
+<p>Luckily I don't, because that would bore me to death. I love working on
+multiple projects simultaneaously. Most of us do, if the average github
+commitlog is any proof.</p>
+
+<p>So, you are working on some problem in, say, Drupal. And suddenly your
+time is, up, or a more urgent, say, CSS-issue needs solving. Or some
+server configuration needs sorting out, because backups or builds are
+failing.</p>
+
+<p>What do you do? Commit the unfinished state? <code>git stash</code> it? just leave
+it as it is?</p>
+
+<p>You could leave some ink in the well. Using a simple <code>@INK</code> marker.</p>
+
+<p>For example:</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">def</span> <span class="nf">by_ranking</span>
+  <span class="c1"># @INK: the rank attribute is not updated or filled</span>
+  <span class="c1">#       in the database, it seems. @TODO: make a </span>
+  <span class="c1">#       migration to add this field to the database,</span>
+  <span class="c1">#       then an after_update hook to actually fill this value.</span>
+  <span class="n">sort</span> <span class="p">{</span><span class="o">|</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">|</span> <span class="n">a</span><span class="o">.</span><span class="n">rank</span><span class="o">.</span><span class="n">to_f</span> <span class="o">&lt;</span> <span class="n">b</span><span class="o">.</span><span class="n">rank</span><span class="o">.</span><span class="n">to_f</span><span class="p">}</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+
+<p>A simple '@INK' with a comment. <code>@INK</code> is a different marker then
+<code>@FIXME</code> or <code>@TODO</code>. Actually, <code>@INK</code> is <em>also</em> a TODO.</p>
+
+<p>Then, whenever you pick up a project, you look for the @INK, have your
+<em>aha-moment</em> and can jump right in where you left.</p>
+
+<p>The only problem I have with this, is when you get disturbed, you often
+don't have the time to dump your thoughts and mental-state into such a
+comment. But telling the person behind you to "wait a sec till I finish
+this sentence" is not too strange.</p>
+
+<p>Some rules apply:</p>
+
+<ul>
+<li>There can be only one <code>@INK</code>. Ever. (A project can have many <code>@FIXME</code>'s or
+<code>@TODO</code>'s)</li>
+<li><code>@INK</code> marked code may never be pushed to other people's or a central
+repository. They are your private markers.</li>
+<li>Whenever you open a project, you <em>must</em> search for the ink first. Then
+either remove it, replace it with a TODO or start where you left.</li>
+</ul>
+
+
+<p>And with a simple script, you can find your ink in the well:</p>
+
+<div class="highlight"><pre><code class="bash"><span class="c">#!/bin/bash</span>
+<span class="nb">echo</span> <span class="s2">&quot;-- Last four commits --&quot;</span>
+git log --graph --pretty<span class="o">=</span>format:<span class="s1">&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39;</span> --abbrev-commit --date<span class="o">=</span>relative -n4
+<span class="nb">echo</span> <span class="s2">&quot;-- Git status --&quot;</span>
+git status -s
+<span class="nb">echo</span> <span class="s2">&quot;-- The INK --&quot;</span>
+ack-grep -C 4 <span class="s2">&quot;@INK&quot;</span> --all
+</code></pre>
+</div>
+
+
+<p>It gets some context with two git commands, one to render a short,
+<a href="http://www.jukie.net/bart/blog/pimping-out-git-log">pretty git log</a>,
+to learn what you did last, before you left the project.
+The other to show the changes in the repository: uncomitted, changed and
+removed files and such.
+And the last shows you where you placed the <code>@INK</code> marker, with a few
+lines of context.</p>
+
+<p>Instead of <a href="http://betterthangrep.com/">ack-grep</a>, you can use <code>grep</code> if
+you prefer. I'ts just slower and needs additional "--recursive *"
+parameters.</p>
+
+<p>There, it works very <code>@INK [berkes wo may 30 15:09:51 CEST 2012]: write some catchy finishing line; the postman is ringing at the door</code>.</p>
+
+    <figure>
+  <img src="/images//2012/05/30/leave-some-ink-in-the-well.png" alt="Woodcut from Doré. Purely illustrative" />
+  
+    <figcaption>Doré Woodcut. Its only function is to make the layout look better. And these images are really nice themselves</figcaption>
+  
+</figure>
+
+  </div>
+  <footer>
+    <time datetime="2012-05-30T00:00:00+02:00"
+    pubdate="pubdate">
+      Posted on 30 May 2012
+    </time>
+    in
+    
+    
+      
+      
+
+
+  
+    
+      <a href="/tags.html#programming-ref" class="black radius label">programming<span class="size">53</span></a>
+    
+      <a href="/tags.html#tips and tricks-ref" class="black radius label">tips and tricks<span class="size">23</span></a>
+    
+  
+
+
+
+    
+  </footer>
+</article>
+
+<div id="author">
+  <p>
+  
+  
+    <strong>About  the author:</strong> Bèr Kessels is an experienced webdeveloper  with a great passion for
+    technology and Open Source. A golden combination to implement that technology in a good and efficient
+    way. Follow <a href="https://twitter.com/berkes">@berkes</a> on Twitter. Or read more <a href="/over.html">about Bèr</a>.
+  
+  </p>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'berkes'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </section>
+
+    <footer class="main row">
+      <div class="contact four columns">
+        <p>
+            Bèr ‘berkes’ Kessels<br />
+            Bèr Kessels is an Open Source Webdeveloper.<br />
+            <a href='mailto:ber@webschuur.com'>ber@webschuur.com</a>
+          </p>
+          <p>
+            <a href="http://github.com/berkes/">github.com/berkes</a><br />
+            <a href="http://twitter.com/berkes/">twitter.com/berkes</a><br />
+          </p>
+      </div>
+      <div class="four columns">
+        Copyright 2001-2012
+        with a
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Atrribute-Share-alike 3.0 Unported license</a>
+      </div>
+      <div class="four columns">
+        <a class="extra" href="/archive.html">Archive (All English articles)</a> <br />
+        <a class="extra" href="/archief.html">Archief (Alle Nederlandse artikelen)</a> <br />
+        <a class="extra" href="/tags.html">Tags</a> <br />
+        <a href="http://feeds.feedburner.com/berkes"> RSS </a> <br />
+      </div>
+    </footer>
+  </div>
+  <!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik.webschuur.com/" : "http://piwik.webschuur.com/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 9);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://piwik.webschuur.com/piwik.php?idsite=9" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="nl"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="nl"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="nl"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="nl"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+  <link rel="openid.server" href="http://www.myopenid.com/server" />
+  <link rel="openid.delegate" href="http://berkes.myopenid.com/" />
+  <link rel="openid2.local_id" href="http://berkes.myopenid.com" />
+  <link rel="openid2.provider" href="http://www.myopenid.com/server" />
+  <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=berkes.myopenid.com" />
+
+   <title>Automatically Play  a CD with Zinf in Windows</title>
+   <meta name="author" content="Bèr ‘berkes’ Kessels" />
+   <link href="http://feeds.feedburner.com/berkes" rel="alternate" title="your title" type="application/atom+xml" />
+   <link rel="author" href="/humans.txt" type="text/plain" />
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+   <!-- Included CSS Files -->
+   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
+
+
+   <!--[if lt IE 9]>
+   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
+
+   <![endif]-->
+
+   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
+
+
+   <!-- IE Fix for HTML5 Tags -->
+   <!--[if lt IE 9]>
+   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
+
+   <![endif]-->
+</head>
+<body>
+	<!-- container -->
+	<div class="container">
+    <header>
+      <div class="row">
+        <a href="/" title="Home">
+          <img src="/assets//images/logo.png" alt="Logo" title="Bèr ‘berkes’ Kessels" />
+        </a>
+      </div>
+
+      <nav id="main" class="row">
+        <div class="onion">
+        <ul>
+          <li>
+          <a href="/about.html">EN / About</a>
+          </li>
+          <li>
+          <a href="/archive.html">EN / Articles</a>
+          </li>
+          <li>
+          <a href="/over.html">NL / Over</a>
+          </li>
+          <li>
+          <a href="/archief.html">NL / Artikelen</a>
+          </li>
+        </ul>
+        </div>
+      </nav>
+    </header>
+    <section id="main-content" class="row">
+      <article>
+  <header>
+    <h1>Automatically Play  a CD with Zinf in Windows</h1>
+  </header> 
+  <div class="body">
+    <p>Read some information on how to add auotplay on in zinf for windows. <a href="http://zinf.org">Zinf</a> is a free Open Source music player for all sorts of platforms. <!--break-->Becuase My girlfriend uses a quite old computer windows media player gobbles up all the resources. But also because Windows media player is ugly, and has one of the worst UI's ever. (and then I don't even start about the fact tha Windows media player is the excuse for microsoft to enforce its own media standards)<br /><br />So all in all there are millions of reasons for choosing a light and small application that does some great media managing. <br />One thing it does not do properly, however, is play a CD on insert in Windows. This feature is called Autoplay.<br /><br />To use autoplay you must assign zinf with audio CDS. But then you will find another problem: Zinf will not play the CD properly. I have no idea why, neither do I know if this feature is not implemented at all or if its broken. <br />I do know that zinf will play adudio files with the command<br /><pre>c:\path\to\zinf\zinf.exe file1 file2 etc</pre><br />So all we need to do, is feed zinf the files on the cd as filenames in nice list.<br />I made a small batch file for that and called it zinfAudioCD.batthe file looks like this:<br /><pre>@ECHO OFFSET STRING=FOR %%X IN (%1*.cda) DO SET STRING=!STRING! %%Xc:\progra~1\zinf\zinf.exe %STRING%</pre><br />As you can see I prepare a small list with all cda files on a cd and present them to the zinf program.<br />One problem that occurs here is that not all windows systems (can these guys at Micro$oft actually do anything properly?) support the so called "delayed environment variable". Look <a href="http://ss64.com/nt/cmd.html">on this dos resourse website</a> for more information.<br /><br />So let's assume you have the batch file working. <br /><br />You now need to assign this batch file with the AutoPlay function in windows. I have only (an English) windows XP at hand, so the example might only work for XP.<br /><br />1) Open "my Computer"<br />2) Open menu "Tools" then "Folder Options"<br />3) Select tab "File Types"<br />4) selection "audio CD"<br />5) Press button "[ advanced ]"<br />6) Press button "[ New ]"<br />7) Type at Action: Play in Zinf<br />8) Type at Appl...: the name and location of the batch and "%L" <br />I have: C:\Progra~1\Zinf\zinfAudioCD.bat "%L"<br />9) press OK.<br />10) Choose "[ set Default ]" for "play in Zinf"<br />11) Press apply and close <br />And try inserting a music cd.<br /><br />Please report me any questions, and or ideas below!</p>
+
+  </div>
+  <footer>
+    <p class="note">
+    
+      <em>Dit artikel verscheen op bler.webschuur.com. En is overgezet naar dit blog</em>
+    
+    </p>
+    <time datetime="2004-08-22T00:00:00+02:00"
+    pubdate="pubdate">
+      Posted on 22 August 2004
+    </time>
+    in
+    
+    
+      
+      
+
+
+  
+    
+      <a href="/tags.html#programming-ref" class="black radius label">programming<span class="size">53</span></a>
+    
+  
+
+
+
+    
+  </footer>
+</article>
+
+<div id="author">
+  <p>
+  
+    <strong>Over de auteur:</strong> Bèr Kessels is een ervaren webdeveloper met een grote passie voor
+    techniek en Open Source. Een gouden combinatie om de techniek goed en
+    efficiënt toe te passen. Volg <a href="https://twitter.com/berkes">@berkes</a> op Twitter. Of lees meer <a href="/over.html">over Bèr</a>.
+  
+  
+  </p>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'berkes'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </section>
+
+    <footer class="main row">
+      <div class="contact four columns">
+        <p>
+            Bèr ‘berkes’ Kessels<br />
+            Bèr Kessels is an Open Source Webdeveloper.<br />
+            <a href='mailto:ber@webschuur.com'>ber@webschuur.com</a>
+          </p>
+          <p>
+            <a href="http://github.com/berkes/">github.com/berkes</a><br />
+            <a href="http://twitter.com/berkes/">twitter.com/berkes</a><br />
+          </p>
+      </div>
+      <div class="four columns">
+        Copyright 2001-2012
+        with a
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Atrribute-Share-alike 3.0 Unported license</a>
+      </div>
+      <div class="four columns">
+        <a class="extra" href="/archive.html">Archive (All English articles)</a> <br />
+        <a class="extra" href="/archief.html">Archief (Alle Nederlandse artikelen)</a> <br />
+        <a class="extra" href="/tags.html">Tags</a> <br />
+        <a href="http://feeds.feedburner.com/berkes"> RSS </a> <br />
+      </div>
+    </footer>
+  </div>
+  <!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik.webschuur.com/" : "http://piwik.webschuur.com/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 9);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://piwik.webschuur.com/piwik.php?idsite=9" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</body>
+</html>

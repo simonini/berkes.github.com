@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+  <link rel="openid.server" href="http://www.myopenid.com/server" />
+  <link rel="openid.delegate" href="http://berkes.myopenid.com/" />
+  <link rel="openid2.local_id" href="http://berkes.myopenid.com" />
+  <link rel="openid2.provider" href="http://www.myopenid.com/server" />
+  <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=berkes.myopenid.com" />
+
+   <title>Help maintainers maintain. And helping contributors help the maintainers.</title>
+   <meta name="author" content="Bèr ‘berkes’ Kessels" />
+   <link href="http://feeds.feedburner.com/berkes" rel="alternate" title="your title" type="application/atom+xml" />
+   <link rel="author" href="/humans.txt" type="text/plain" />
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+   <!-- Included CSS Files -->
+   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
+
+
+   <!--[if lt IE 9]>
+   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
+
+   <![endif]-->
+
+   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
+
+
+   <!-- IE Fix for HTML5 Tags -->
+   <!--[if lt IE 9]>
+   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
+
+   <![endif]-->
+</head>
+<body>
+	<!-- container -->
+	<div class="container">
+    <header>
+      <div class="row">
+        <a href="/" title="Home">
+          <img src="/assets//images/logo.png" alt="Logo" title="Bèr ‘berkes’ Kessels" />
+        </a>
+      </div>
+
+      <nav id="main" class="row">
+        <div class="onion">
+        <ul>
+          <li>
+          <a href="/about.html">EN / About</a>
+          </li>
+          <li>
+          <a href="/archive.html">EN / Articles</a>
+          </li>
+          <li>
+          <a href="/over.html">NL / Over</a>
+          </li>
+          <li>
+          <a href="/archief.html">NL / Artikelen</a>
+          </li>
+        </ul>
+        </div>
+      </nav>
+    </header>
+    <section id="main-content" class="row">
+      <article>
+  <header>
+    <h1>Help maintainers maintain. And helping contributors help the maintainers.</h1>
+  </header> 
+  <div class="body">
+    <p>This morning I found an email in my inbox telling me that I am a bad maintainer and that I am making people fork my modules. The mail was not meant to go to me, but the sender hit reply and thought he was moaning about me to someone else. Basically I was asking for my modules to be forked because I was too ### to release a new version. I don't release a version unless I am confident it is release-worthy: when I have used it myself.</p>
+
+<p>Not a big deal, but it gave me food for thought about maintainance and release of Drupal modules, in general. And about how to improve the general issue of not having enough time to dedicate to a contributionIn general, I think there are three reasons to maintain a module on Drupal.org<em> You think it is fun or/and like to "give something back"</em> It allows you to have your module improved without having to invest much time and money* It works as marketing for you, as a highly visible portfolio: people see you, see your work and therefore might hire your services.</p>
+
+<p>The second is what makes me and other most often not release new versions, or let a module die a slow death. Even if many others depend on your work, that should not be a reason for you to sit trough sleepless nights of code and coffee. If people apparently depend so much on your module, then they would scratch their own ithces: you would find patches and improvements in other forms appearing.</p>
+
+<p>As a maintainer, without much time, there are a few things you can do. As a contributor there also are a few things you can do to help.</p>
+
+<p>The maintainer can and should communicate clearly what is going on. Try to at least leave a comment in every submitted issue. This gives contributors the signal that their work is noticed.</p>
+
+<p>The maintainer can, and should give good developers CVS access. What makes a "good" developer depends on your own wishes and standards: in my book, people who come up with cosmetic patches are often good developers: they care about the details. Also developers whom run the code themselves on more then one site (you can read about this in the issues, most of the times) are often to be considered serious. They have a reason to make it work well. Developers who run a contrib on only one site, often make worse contributors: their sole purpose is to make that one site run well: not to make good re-usable and modular code.</p>
+
+<p>The contributor, the one creating a patch or another improvement should consider the fact that the the maintainer is low on time. At all costs. First read some other issues in the project. You will often find out what the maintainer is aiming for, why he or she is not taking features or when new bugfixes are allowed in again.</p>
+
+<p>Make self-containing patches. A patch that contains both cosmetich changes, a nifty new feature, a few typofixes and an upgrade to 5.x is a very tough one to review. Especially if people are pressing on a module to be upgraded to 5.x. That new feature may be disputable. The cosmetic changes may not be what the maintainer had in mind. And typofixes are always nice, but often clutter the real issue. I personally dislike this way of working, because it requires eye-shades. Instead of actually improving a module, you are making it worse, even if it works after your changes, the code is often far from what it could be, had you kept the helicopter-view.</p>
+
+<p>To solve that, use SVN, or another revision system. If running an SVN server is too hard, ask someone else: I don't mind giving contributors to my code an svn account on my server, if that helps improve the patches and modules. I bet most maintainers with access to an svn server think the same. Once something is in your SVN, you can create many kinds of patches from there. Obviously you must commit to your SVN very often. And you must work in an issue-based manner. My preferred way is:cosmetic changes: indentation, comments, whitespace function order etc. Then commit.# bugfixes: one bug a time. After every tiny bug, make a commit. It will allow you to create patches per bug if the maintainer prefers that (I prefer that).features: one feature a time. After every feature make a commit.</p>
+
+<p>And so forth.</p>
+
+<p>This way you can make patches against any version, or between any versions. You can then re-create a patch for a certain bug without loosing all the cosmetic changes, and without them being in the way of the actual bugfix. If you really want the cosmetic improvements in first: you should tell the maintainer so, and promise to come with the bugfixes only after the general improvements are committed.</p>
+
+<p>And last: don't see a maintainer as some God. They often are no more, or even less, experienced then you are. Just ask for CVS access. Ask what they are looking for, and send a personal mail to tell them what you are up to, and what they can expect from you.</p>
+
+<p>Oh, and doublecheck the reciepient if you are sending a mail in which you gossip or moan about somebodies attitude, it might happen that you do this to your boss one day... But better is to just tell it to the person in question, in a nicer tone, off course.</p>
+
+  </div>
+  <footer>
+    <p class="note">
+    
+      <em>This article was published on webschuur.com. And migrated to this blog. </em>
+    
+    </p>
+    <time datetime="2007-05-01T00:00:00+02:00"
+    pubdate="pubdate">
+      Posted on 01 May 2007
+    </time>
+    in
+    
+    
+      
+      
+
+
+  
+    
+      <a href="/tags.html#drupal-ref" class="black radius label">drupal<span class="size">212</span></a>
+    
+  
+
+
+
+    
+  </footer>
+</article>
+
+<div id="author">
+  <p>
+  
+  
+    <strong>About  the author:</strong> Bèr Kessels is an experienced webdeveloper  with a great passion for
+    technology and Open Source. A golden combination to implement that technology in a good and efficient
+    way. Follow <a href="https://twitter.com/berkes">@berkes</a> on Twitter. Or read more <a href="/over.html">about Bèr</a>.
+  
+  </p>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'berkes'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </section>
+
+    <footer class="main row">
+      <div class="contact four columns">
+        <p>
+            Bèr ‘berkes’ Kessels<br />
+            Bèr Kessels is an Open Source Webdeveloper.<br />
+            <a href='mailto:ber@webschuur.com'>ber@webschuur.com</a>
+          </p>
+          <p>
+            <a href="http://github.com/berkes/">github.com/berkes</a><br />
+            <a href="http://twitter.com/berkes/">twitter.com/berkes</a><br />
+          </p>
+      </div>
+      <div class="four columns">
+        Copyright 2001-2012
+        with a
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Atrribute-Share-alike 3.0 Unported license</a>
+      </div>
+      <div class="four columns">
+        <a class="extra" href="/archive.html">Archive (All English articles)</a> <br />
+        <a class="extra" href="/archief.html">Archief (Alle Nederlandse artikelen)</a> <br />
+        <a class="extra" href="/tags.html">Tags</a> <br />
+        <a href="http://feeds.feedburner.com/berkes"> RSS </a> <br />
+      </div>
+    </footer>
+  </div>
+  <!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik.webschuur.com/" : "http://piwik.webschuur.com/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 9);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://piwik.webschuur.com/piwik.php?idsite=9" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</body>
+</html>

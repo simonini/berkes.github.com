@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="nl"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="nl"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="nl"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="nl"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+  <link rel="openid.server" href="http://www.myopenid.com/server" />
+  <link rel="openid.delegate" href="http://berkes.myopenid.com/" />
+  <link rel="openid2.local_id" href="http://berkes.myopenid.com" />
+  <link rel="openid2.provider" href="http://www.myopenid.com/server" />
+  <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=berkes.myopenid.com" />
+
+   <title>Meeloper of vasthoudend, fluid of fixed</title>
+   <meta name="author" content="Bèr ‘berkes’ Kessels" />
+   <link href="http://feeds.feedburner.com/berkes" rel="alternate" title="your title" type="application/atom+xml" />
+   <link rel="author" href="/humans.txt" type="text/plain" />
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+   <!-- Included CSS Files -->
+   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
+
+
+   <!--[if lt IE 9]>
+   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
+
+   <![endif]-->
+
+   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
+
+
+   <!-- IE Fix for HTML5 Tags -->
+   <!--[if lt IE 9]>
+   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
+
+   <![endif]-->
+</head>
+<body>
+	<!-- container -->
+	<div class="container">
+    <header>
+      <div class="row">
+        <a href="/" title="Home">
+          <img src="/assets//images/logo.png" alt="Logo" title="Bèr ‘berkes’ Kessels" />
+        </a>
+      </div>
+
+      <nav id="main" class="row">
+        <div class="onion">
+        <ul>
+          <li>
+          <a href="/about.html">EN / About</a>
+          </li>
+          <li>
+          <a href="/archive.html">EN / Articles</a>
+          </li>
+          <li>
+          <a href="/over.html">NL / Over</a>
+          </li>
+          <li>
+          <a href="/archief.html">NL / Artikelen</a>
+          </li>
+        </ul>
+        </div>
+      </nav>
+    </header>
+    <section id="main-content" class="row">
+      <article>
+  <header>
+    <h1>Meeloper of vasthoudend, fluid of fixed</h1>
+  </header> 
+  <div class="body">
+    <p><img src="/sites/bler.webschuur.com/files/fluid_vs_fixed_compilation.jpg" alt="fixed width screenshots in a compilation" />Dit artikel is al lange tijd te lezen als onderdeel van <a href="http://help.sympal.nl/meeloper_of_vasthoudend_fluid_of_fixed">het help.sympal.nl ontwerpkeuze handboek</a>. Het ligt daar echter een beetje weg te stoffen, vandaar dat ik besloot een grote opruiming te houden en wat artikelen naar mijn blog te verhuizen. <strong>Vandaag over Fluid versus Fixed.</strong>Fluid betekend dat je layout mee-schaalt met de grootte van het venster waarin hij weergegeven wordt. We spreken hierin eigenlijk alleen over de breedte. Op een heel klein scherm (of venster), zal de site heel smal weergegeven worden, op een groot scherm (bijvoorbeeld een breed venster) wordt de site heel breed weergeven.</p>
+
+<p>Fixed betekent, dat onafhankelijk van de grootte van het scherm van de gebruiker, de site een vooraf ingestelde breedte heeft. Soms neemt zij dus maar een klein deel van het scherm in beslag (op een groot scherm) en soms loopt zij in de breedte van het scherm af (op een klein scherm).</p>
+
+<p>De voor en nadelen zijn eenvoudig in een lijst op te nemen:<!--break-->- Voordelen fluid</p>
+
+<ul><li>de ruimte wordt optimaal gebruikt. Gebruikers met grote schermen kunnen hun scherm ook goed gebruiken.</li><li>geen "horizontaal scrollen". Op kleine schermen wordt nog steeds alles weergegeven.</li></ul>
+
+
+<ul>
+<li>Voordelen fixed</li>
+</ul>
+
+
+<ul><li>in het design is er maximale controle over hoe zaken er komen uit te zien.</li><li>elementen die fixed moeten zijn (zoals afbeeldingen die nooit mee kunnen schalen) komen altijd goed tot hun recht.</li><li>het designen is aanzienlijk makkelijker (de reden ook dat veel ontwerp-bureaus u ook fixed zullen voorstellen!).</li></ul>
+
+
+<ul>
+<li>Nadelen fluid</li>
+</ul>
+
+
+<ul><li>heel grote schermen, of heel kleine schermen kunnen het design "verpesten" omdat elementen bijvoorbeeld onder elkaar willen gaan staan (op een klein scherm is er gewoon geen ruimte om alles langs elkaar te laten staan)</li><li>het designen is moeilijker omdat rekening moet worden gehouden met allerlei schermgroottes en verhoudingen.</li></ul>
+
+
+<ul>
+<li>Nadelen fixed</li>
+</ul>
+
+
+<ul><li>Op grote schermen is de tekst meestal onleesbaar (zij staat immers op een vastte grootte).</li><li>Op kleine schermen kan de tekst overkomen als "koeien-letters". Zelfde reden als hierboven.</li><li>Op kleine schermen kunnen er dingen buiten het zichtbare venster zitten. Als er bijvoorbeeld advertenties rechts staan, kan het zijn dat een aanzienlijk deel van de gebruikers deze niet ziet zonder horizontaal te scrollen (iets wat uit onderzoek blijkt, dat haast niemand doet). Of nog erger: het einde van elke zin staat net buiten beeld!</li><li>Op grote schermen is er heel veel ongebruikte ruimte over. Als de gebruiker tevens ziet dat de lettertjes haast niet te lezen zijn, kan dit heel irriterend zijn.</li></ul>
+
+
+<p>Het is al een tijd niet meer makkelijk te zeggen welke soorten schermen mensen "het meeste" hebben. Flatscreens en de grote populariteit van goedkopere PC systemen (standaard met kleine schermen) hebben tot gevolg dat er nauwelijks "een meerderheid" is.<strong>Heel in het kort is het volgende te stellen:</strong> Als functionaliteit, gebruiksvriendelijkheid en inhoud van de site belangrijkste is, is fluid de betere optie. Als echter het ontwerp een dusdanig belangrijke factor is, kan het beste worden gekozen voor fixed.<a href="http://www.volkskrant.nl"><img src="/sites/bler.webschuur.com/files/fixed_too_small.png" alt="De volkskrant te klein" /><br /><img src="/sites/bler.webschuur.com/files/fixed_too_big2.png" alt="De volkskrant te groot" /></a><br />De volkskrant gebruikt een soort fixed width, wat ertoe leidt dat op sommige schermen veel ruimte ongebruikt is terwijl op andere schermen inhoud van het scherm afloopt.</p>
+
+  </div>
+  <footer>
+    <p class="note">
+    
+      <em>Dit artikel verscheen op bler.webschuur.com. En is overgezet naar dit blog</em>
+    
+    </p>
+    <time datetime="2007-01-22T00:00:00+01:00"
+    pubdate="pubdate">
+      Posted on 22 January 2007
+    </time>
+    in
+    
+    
+      
+      
+
+
+  
+    
+      <a href="/tags.html#design-ref" class="black radius label">design<span class="size">14</span></a>
+    
+      <a href="/tags.html#css-ref" class="black radius label">css<span class="size">17</span></a>
+    
+      <a href="/tags.html#ontwerp-ref" class="black radius label">ontwerp<span class="size">1</span></a>
+    
+  
+
+
+
+    
+  </footer>
+</article>
+
+<div id="author">
+  <p>
+  
+    <strong>Over de auteur:</strong> Bèr Kessels is een ervaren webdeveloper met een grote passie voor
+    techniek en Open Source. Een gouden combinatie om de techniek goed en
+    efficiënt toe te passen. Volg <a href="https://twitter.com/berkes">@berkes</a> op Twitter. Of lees meer <a href="/over.html">over Bèr</a>.
+  
+  
+  </p>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'berkes'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </section>
+
+    <footer class="main row">
+      <div class="contact four columns">
+        <p>
+            Bèr ‘berkes’ Kessels<br />
+            Bèr Kessels is an Open Source Webdeveloper.<br />
+            <a href='mailto:ber@webschuur.com'>ber@webschuur.com</a>
+          </p>
+          <p>
+            <a href="http://github.com/berkes/">github.com/berkes</a><br />
+            <a href="http://twitter.com/berkes/">twitter.com/berkes</a><br />
+          </p>
+      </div>
+      <div class="four columns">
+        Copyright 2001-2012
+        with a
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Atrribute-Share-alike 3.0 Unported license</a>
+      </div>
+      <div class="four columns">
+        <a class="extra" href="/archive.html">Archive (All English articles)</a> <br />
+        <a class="extra" href="/archief.html">Archief (Alle Nederlandse artikelen)</a> <br />
+        <a class="extra" href="/tags.html">Tags</a> <br />
+        <a href="http://feeds.feedburner.com/berkes"> RSS </a> <br />
+      </div>
+    </footer>
+  </div>
+  <!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik.webschuur.com/" : "http://piwik.webschuur.com/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 9);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://piwik.webschuur.com/piwik.php?idsite=9" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</body>
+</html>

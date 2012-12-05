@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+  <link rel="openid.server" href="http://www.myopenid.com/server" />
+  <link rel="openid.delegate" href="http://berkes.myopenid.com/" />
+  <link rel="openid2.local_id" href="http://berkes.myopenid.com" />
+  <link rel="openid2.provider" href="http://www.myopenid.com/server" />
+  <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=berkes.myopenid.com" />
+
+   <title>Druby on rails (version 0)</title>
+   <meta name="author" content="Bèr ‘berkes’ Kessels" />
+   <link href="http://feeds.feedburner.com/berkes" rel="alternate" title="your title" type="application/atom+xml" />
+   <link rel="author" href="/humans.txt" type="text/plain" />
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+   <!-- Included CSS Files -->
+   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
+
+
+   <!--[if lt IE 9]>
+   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
+
+   <![endif]-->
+
+   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
+
+
+   <!-- IE Fix for HTML5 Tags -->
+   <!--[if lt IE 9]>
+   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
+
+   <![endif]-->
+</head>
+<body>
+	<!-- container -->
+	<div class="container">
+    <header>
+      <div class="row">
+        <a href="/" title="Home">
+          <img src="/assets//images/logo.png" alt="Logo" title="Bèr ‘berkes’ Kessels" />
+        </a>
+      </div>
+
+      <nav id="main" class="row">
+        <div class="onion">
+        <ul>
+          <li>
+          <a href="/about.html">EN / About</a>
+          </li>
+          <li>
+          <a href="/archive.html">EN / Articles</a>
+          </li>
+          <li>
+          <a href="/over.html">NL / Over</a>
+          </li>
+          <li>
+          <a href="/archief.html">NL / Artikelen</a>
+          </li>
+        </ul>
+        </div>
+      </nav>
+    </header>
+    <section id="main-content" class="row">
+      <article>
+  <header>
+    <h1>Druby on rails (version 0)</h1>
+  </header> 
+  <div class="body">
+    <p><strong>A Drupal developer's first impression of Ruby on Rails.</strong></p>
+
+<p>I just received that <a href="http://www.pragmaticprogrammer.com/titles/rails/index.html">famous Ruby on Rails</a> (RoR) book, and off course put everyhing aside and started reading. After less then an hour I had my first RoR site running (and I did not know a single line of Ruby, before). And, as promised by all he taglines, it is dead easy. So, does that  mean for me <a href="http://drupal.org">Drupal</a> is passÃ©?</p>
+
+<p>Off course not. This means that I can move to a new viewpoint for looking at Drupal. I think Drupal can learn a lot from RoR, and I am confident I can use a lot of Drupal concepts in my RoR development (well, not yet real development, just playing, for now ;) ).</p>
+
+<p>The title, 'version 0' indicates that there is more to follow. I think there will be, because I am just starting. There are a lot more chapters to go, still, and off course I need to get really into this Ruby stuff too, in order to really compare Drupal and RoR ideas.</p>
+
+<p>After finishing the first chapters and my first RoR application, here is what I think Drupal can do on short terms:</p>
+
+<ul>
+<li>Code generation. I have already experimented with tiny shell scripts that build small modules from the commandline. A lot of Drupal programming is Copy Paste Search Replace work. Scripts can do that much faster than any human can. We should share such scripts to build a code builder. It should, IMO, not live in Bash scripts, but in php scripts, invoked from the commandline.
+Another good thing about this, is that it will allow new developers to start of faster. And prevent these developers from developing incompatible, non-standard code.</li>
+<li>Offline Online Documentation. Huh? No, that is not a typo. What i mean is the Gems brilliant documentation <a href="http://localhost:8808">server</a>. Drupal has drupaldocs.org, but it is not evident to get this running on your localhost. An installation profile for development (including devel.module, theme_development.module, apidocs.module and off course our fabulous unit testing framework). Every developer should be able to install and run this to gain time, not to loose time tweaking and modifying that site.</li>
+<li>Clearer aims. What is drupal for. Who is it for. I know that Dries does not really believe in imposing these constraints, but one fact of the success of RoR is that it is not aimed at end user, but focused on developers only.</li>
+<li>Less cruft. In Ruby this is a mantra, highly overused, if you ask me, but still, it is a nice philosophy. Drupal ships with a lot of ready made solutions; Ready made solutions that actually never truly solve all developers needs. I cannot remember any website that I built where I did not need additional contributions and core replacements. Nor any where I used all the modules from core. I believe Drupal should Ship Nothing. Like RoR, which is 'nothing really'. Something that is 'nothing really' is everything in potential. While something that pretends t be something already gives you a hard time if you want it to become something completely different. But for this to happen, we need distro's that maintain the experience of 'intall and get going'. This, in fact, is highly related to the point before this one, that we need 'clearer aims'</li>
+</ul>
+
+
+<p>Some longer terms concepts we should think of, include:</p>
+
+<ul>
+<li>A real MVC. Drupal has no real model view controller framework. Well, in fact it has many, which are rather inconsistent. Yes, this is that endless debate on 'everything should be nodes'. The node part is the very best MVC in Drupal, but comments have a rather limited, and incompatible (with nodes) one. So do users and even taxonomy.</li>
+<li>Object Relational Mappings (ORM). PHP is fairly limited when it comes to high level database programming. RoR has a very fancy very well structured ORM. Drupal has a few, which (surprise) are inconsistent. Again, this boils down to the 'everything should be nodes' debate. Since nodes have a very well worked out ORM. All the other parts have not worked this out that well. It is sheer impossible to develop a module that alters any of the data, without hardcoding SQL into that module. That is a bad practise. I am aware of the potential performance penalties. But it needs not be that way. Our node_load system is highly abstracted, while its internals take care of performance. I am confident that this system actually performs better then spread out hardcoded queries against the node table. Contrib users have not got that time, or knowledge, on average, to optimise all these queries.</li>
+<li>Consistent path-mapping. Ruby has a written down convention on how URLs (paths) are structured. Drupal does not really have this. It has de-facto conventions, but even in core these conventions are broken all over the place. I have not yet seen them, but I am confident that there are conflicting paths in the contributions. Two modules implementing a /list/123 path, will break, yet nothing tells developers not to use that path syntax.</li>
+</ul>
+
+
+<p>Well, i can almost hear you thinking: "talk is silver, code is gold', or 'well then fsking DO IT'. sure, and that is the god part of this all.
+Last week I finally revived the DrupalCOM project. It will be the core of our business sympal.nl and thus it needs to solve our needs. The funny thing, is that about all the abovementioned points were already considered when I worked out the definition and philosophy of Sympal/DrupalCOM.
+So, yes, expect real code and real results. Rather then just talk. Code that will flow back to Drupal itself.</p>
+
+<p>O, and don't forget, if you have ideas about this, hop on. Only by participating can you steer this stuff in a direction that you want it to go too. Otherwise it will only go in my direction, for that is the way I want it to go, for now.</p>
+
+  </div>
+  <footer>
+    <p class="note">
+    
+      <em>This article was published on webschuur.com. And migrated to this blog. </em>
+    
+    </p>
+    <time datetime="2005-12-21T00:00:00+01:00"
+    pubdate="pubdate">
+      Posted on 21 December 2005
+    </time>
+    in
+    
+    
+      
+      
+
+
+  
+    
+      <a href="/tags.html#drupal-ref" class="black radius label">drupal<span class="size">212</span></a>
+    
+      <a href="/tags.html#ruby-ref" class="black radius label">ruby<span class="size">22</span></a>
+    
+  
+
+
+
+    
+  </footer>
+</article>
+
+<div id="author">
+  <p>
+  
+  
+    <strong>About  the author:</strong> Bèr Kessels is an experienced webdeveloper  with a great passion for
+    technology and Open Source. A golden combination to implement that technology in a good and efficient
+    way. Follow <a href="https://twitter.com/berkes">@berkes</a> on Twitter. Or read more <a href="/over.html">about Bèr</a>.
+  
+  </p>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'berkes'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </section>
+
+    <footer class="main row">
+      <div class="contact four columns">
+        <p>
+            Bèr ‘berkes’ Kessels<br />
+            Bèr Kessels is an Open Source Webdeveloper.<br />
+            <a href='mailto:ber@webschuur.com'>ber@webschuur.com</a>
+          </p>
+          <p>
+            <a href="http://github.com/berkes/">github.com/berkes</a><br />
+            <a href="http://twitter.com/berkes/">twitter.com/berkes</a><br />
+          </p>
+      </div>
+      <div class="four columns">
+        Copyright 2001-2012
+        with a
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Atrribute-Share-alike 3.0 Unported license</a>
+      </div>
+      <div class="four columns">
+        <a class="extra" href="/archive.html">Archive (All English articles)</a> <br />
+        <a class="extra" href="/archief.html">Archief (Alle Nederlandse artikelen)</a> <br />
+        <a class="extra" href="/tags.html">Tags</a> <br />
+        <a href="http://feeds.feedburner.com/berkes"> RSS </a> <br />
+      </div>
+    </footer>
+  </div>
+  <!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik.webschuur.com/" : "http://piwik.webschuur.com/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 9);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://piwik.webschuur.com/piwik.php?idsite=9" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</body>
+</html>

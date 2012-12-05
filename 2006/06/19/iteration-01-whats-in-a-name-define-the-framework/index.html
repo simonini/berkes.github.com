@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+  <link rel="openid.server" href="http://www.myopenid.com/server" />
+  <link rel="openid.delegate" href="http://berkes.myopenid.com/" />
+  <link rel="openid2.local_id" href="http://berkes.myopenid.com" />
+  <link rel="openid2.provider" href="http://www.myopenid.com/server" />
+  <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=berkes.myopenid.com" />
+
+   <title>Iteration 01: Whats in a name, define the framework</title>
+   <meta name="author" content="Bèr ‘berkes’ Kessels" />
+   <link href="http://feeds.feedburner.com/berkes" rel="alternate" title="your title" type="application/atom+xml" />
+   <link rel="author" href="/humans.txt" type="text/plain" />
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+   <!-- Included CSS Files -->
+   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
+
+
+   <!--[if lt IE 9]>
+   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
+
+   <![endif]-->
+
+   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
+
+
+   <!-- IE Fix for HTML5 Tags -->
+   <!--[if lt IE 9]>
+   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
+
+   <![endif]-->
+</head>
+<body>
+	<!-- container -->
+	<div class="container">
+    <header>
+      <div class="row">
+        <a href="/" title="Home">
+          <img src="/assets//images/logo.png" alt="Logo" title="Bèr ‘berkes’ Kessels" />
+        </a>
+      </div>
+
+      <nav id="main" class="row">
+        <div class="onion">
+        <ul>
+          <li>
+          <a href="/about.html">EN / About</a>
+          </li>
+          <li>
+          <a href="/archive.html">EN / Articles</a>
+          </li>
+          <li>
+          <a href="/over.html">NL / Over</a>
+          </li>
+          <li>
+          <a href="/archief.html">NL / Artikelen</a>
+          </li>
+        </ul>
+        </div>
+      </nav>
+    </header>
+    <section id="main-content" class="row">
+      <article>
+  <header>
+    <h1>Iteration 01: Whats in a name, define the framework</h1>
+  </header> 
+  <div class="body">
+    <p>If you have been following some of the recent CSS and webdesign trends, you might have noticed the trend slowly bending towards semantic correct designs. As it should have been from the start.</p>
+
+<p>This means that you don't just design a site, but really build it. Starting with its foundation. No, starting with a good blueprint, which results in a good foundation.</p>
+
+<!--break-->
+
+
+<p>Such a foundation must be semantically best. This way we fulfil three of our four mayor requirements, <strong>for free</strong>:</p>
+
+<ul>
+<li>be fully SEO supporting</li>
+<li>be accessible on mobile devices</li>
+<li>highlight the content, content comes first</li>
+</ul>
+
+
+<p>In fact we want to use three buzzwords:</p>
+
+<ul>
+<li><a href="http://www.usability.com.au/resources/source-order.cfm">Source order</a></li>
+<li><a href="http://www.hotdesign.com/seybold/everything.html">Tableless</a></li>
+<li><a href="http://www.stuffandnonsense.co.uk/archives/whats_in_a_name_pt2.html">What's in a name</a></li>
+</ul>
+
+
+<p>Lets look at one by one:</p>
+
+<h2>Source order</h2>
+
+<p>Basically this means that you order your (X)HTML the way you want your stuff to <strong>be</strong>, rather then the way you want it to <strong>look</strong>. Pragmatics often call this «puristic bull», but they tend to forget that HTML has nothing to do with presentation. HTML is to your site, like the database is to your CMS: it hands the data. But has nothing to do with the way that data is shown.
+We therefore want an HTML source that comes closest to the way we want the data to be correlated. Source order generally means: Most important first, less important stuff later. Again, forget about how it will look. That is for the CSS, the design, to sort out. That is for later.</p>
+
+<h2>Tableless</h2>
+
+<p>Need I say more? Lets conclude: It is nothing puristic, but just pragmatic to use CSS for designing your content. It will save you time, money and lots of annoyances. Yes, CSS has its downsides (in fact, it has <a href="http://en.wikipedia.org/wiki/Internet_explorer">only one</a>), but if you dive into it, it is nothing like black magic. Besides, three of our four requirements cannot be met when using tables for design.</p>
+
+<h2>Whats in a name</h2>
+
+<p><a href="http://www.stuffandnonsense.co.uk/archives/whats_in_a_name.html">Malarkey started</a> this buzz. <a href="http://www.meyerweb.com/eric/thoughts/2004/06/18/elemental-nomenclature/">Eric Meyer picked it up</a>. Then Malarkey <a href="http://www.stuffandnonsense.co.uk/archives/whats_in_a_name_pt2.html">finished it up</a> by providing a nice draft for a naming convention.
+Not some new law to superimpose on the web, nor some XML standard RFC. Just a good start-off. Saves you from going «I want a search block there, should I call it <em>#search-block</em>, or rather <em>#top-search</em>?». It saves you precious thinking.</p>
+
+<h2>The result</h2>
+
+<p>The result is a solid HTML source that we can slowly mould into a Drupal theme.
+Since I did not even think about what my pages might contain, or how they might look, the HTML source is very raw. It is a nearly 1 to 1 copy of Malarkey's CSS namings. Also, this is more of a sketch, then a real blueprint. CSS trickses, like sliding doors might require some additional fiddling with the source. But we will see that later on.</p>
+
+<pre><code>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;&lt;/title&gt;
+  &lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id="container"&gt;&lt;!--Page container (usually a &lt;div&gt;)--&gt;
+  &lt;div id="branding"&gt;&lt;!--Used for a header or banner to brand the site.--&gt;
+    &lt;img id="branding-logo"/&gt;&lt;!--Used for a site logo--&gt;
+    &lt;h1 id="branding-name"&gt;&lt;/h1&gt;&lt;!--Used for the sites name --&gt;
+    &lt;span id="branding-tagline"&gt;&lt;/span&gt;&lt;!--Used for a strapline or tagline to define the site's purpose--&gt;
+  &lt;/div&gt;
+
+  &lt;div id="content"&gt;&lt;!--Used for content rather than for another purpose such as navigation--&gt;
+    &lt;div id="content-main"&gt;&lt;!--The main content area --&gt;
+    &lt;/div&gt;
+    &lt;div id="content-news"&gt;&lt;!-- News related content  --&gt;
+    &lt;/div&gt;
+    &lt;div id="content-blog"&gt;&lt;!-- Blog content  --&gt;
+    &lt;/div&gt;
+    &lt;div id="content-events"&gt;&lt;!-- Event content  --&gt;
+    &lt;/div&gt; 
+    &lt;!-- #content-(whatever) Could include any form of content, including #content-related, #content-quote etc. Often referred to as "blocks"--&gt;
+    &lt;/div&gt;--&gt;
+  &lt;/div&gt;
+
+  &lt;div id="navigation"&gt;
+    &lt;ul id="nav-main"&gt;&lt;!--primary AND secondary menu navigation--&gt;
+      &lt;li&gt;nav 1&lt;/li&gt;
+      &lt;li&gt;nav 2&lt;/li&gt;
+      &lt;li&gt;nav 3&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;ul id="nav-section"&gt;&lt;!--Navigation to pages within the current site section--&gt;
+      &lt;li&gt;subnav 1&lt;/li&gt;
+      &lt;li&gt;subnav 2&lt;/li&gt;
+      &lt;li&gt;subnav 3&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;ul id="nav-external"&gt;&lt;!--Navigation to pages outside the site--&gt;
+      &lt;li&gt;subnav 1&lt;/li&gt;
+      &lt;li&gt;subnav 2&lt;/li&gt;
+      &lt;li&gt;subnav 3&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;ul id="nav-supplementary"&gt;&lt;!--A supplementary list of links, perhaps in a footer. This can replace the common, but presentational #footer--&gt;
+      &lt;li&gt;subnav 1&lt;/li&gt;
+      &lt;li&gt;subnav 2&lt;/li&gt;
+      &lt;li&gt;subnav 3&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;!-- #nav-(whatever) -A list of links named at a designer's discretion --&gt;
+  &lt;/div&gt;
+
+  &lt;div id="search"&gt;&lt;!-- Related to search interface and search results  --&gt;
+    &lt;form id="search-input"&gt;&lt;/form&gt;&lt;!--A search form --&gt;
+    &lt;dl id="search-output"&gt;&lt;!--Search results which could include a &lt;div&gt; or other markup including definition lists. For live search and so.--&gt;
+    &lt;/dl&gt;
+  &lt;/div&gt;
+
+  &lt;div id="siteinfo"&gt;&lt;!--Used for various site related information--&gt;
+    &lt;p id="siteinfo-legal"&gt;&lt;/p&gt; &lt;!--Copyright information etc.--&gt;
+    &lt;p id="siteinfo-credits"&gt;&lt;/p&gt; &lt;!-- Designer or other credits --&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+  </div>
+  <footer>
+    <p class="note">
+    
+      <em>This article was published on webschuur.com. And migrated to this blog. </em>
+    
+    </p>
+    <time datetime="2006-06-19T00:00:00+02:00"
+    pubdate="pubdate">
+      Posted on 19 June 2006
+    </time>
+    in
+    
+    
+      
+      
+
+
+  
+    
+      <a href="/tags.html#theming-ref" class="black radius label">theming<span class="size">25</span></a>
+    
+      <a href="/tags.html#css-ref" class="black radius label">css<span class="size">17</span></a>
+    
+      <a href="/tags.html#drupal-ref" class="black radius label">drupal<span class="size">212</span></a>
+    
+      <a href="/tags.html#whatsinitsname theme design blog-ref" class="black radius label">whatsinitsname theme design blog<span class="size">4</span></a>
+    
+  
+
+
+
+    
+  </footer>
+</article>
+
+<div id="author">
+  <p>
+  
+  
+    <strong>About  the author:</strong> Bèr Kessels is an experienced webdeveloper  with a great passion for
+    technology and Open Source. A golden combination to implement that technology in a good and efficient
+    way. Follow <a href="https://twitter.com/berkes">@berkes</a> on Twitter. Or read more <a href="/over.html">about Bèr</a>.
+  
+  </p>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'berkes'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </section>
+
+    <footer class="main row">
+      <div class="contact four columns">
+        <p>
+            Bèr ‘berkes’ Kessels<br />
+            Bèr Kessels is an Open Source Webdeveloper.<br />
+            <a href='mailto:ber@webschuur.com'>ber@webschuur.com</a>
+          </p>
+          <p>
+            <a href="http://github.com/berkes/">github.com/berkes</a><br />
+            <a href="http://twitter.com/berkes/">twitter.com/berkes</a><br />
+          </p>
+      </div>
+      <div class="four columns">
+        Copyright 2001-2012
+        with a
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Atrribute-Share-alike 3.0 Unported license</a>
+      </div>
+      <div class="four columns">
+        <a class="extra" href="/archive.html">Archive (All English articles)</a> <br />
+        <a class="extra" href="/archief.html">Archief (Alle Nederlandse artikelen)</a> <br />
+        <a class="extra" href="/tags.html">Tags</a> <br />
+        <a href="http://feeds.feedburner.com/berkes"> RSS </a> <br />
+      </div>
+    </footer>
+  </div>
+  <!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik.webschuur.com/" : "http://piwik.webschuur.com/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 9);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://piwik.webschuur.com/piwik.php?idsite=9" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</body>
+</html>

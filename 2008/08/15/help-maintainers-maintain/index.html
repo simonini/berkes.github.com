@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+  <link rel="openid.server" href="http://www.myopenid.com/server" />
+  <link rel="openid.delegate" href="http://berkes.myopenid.com/" />
+  <link rel="openid2.local_id" href="http://berkes.myopenid.com" />
+  <link rel="openid2.provider" href="http://www.myopenid.com/server" />
+  <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=berkes.myopenid.com" />
+
+   <title>Help maintainers maintain</title>
+   <meta name="author" content="Bèr ‘berkes’ Kessels" />
+   <link href="http://feeds.feedburner.com/berkes" rel="alternate" title="your title" type="application/atom+xml" />
+   <link rel="author" href="/humans.txt" type="text/plain" />
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+   <!-- Included CSS Files -->
+   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
+
+
+   <!--[if lt IE 9]>
+   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
+
+   <![endif]-->
+
+   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
+
+
+   <!-- IE Fix for HTML5 Tags -->
+   <!--[if lt IE 9]>
+   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
+
+   <![endif]-->
+</head>
+<body>
+	<!-- container -->
+	<div class="container">
+    <header>
+      <div class="row">
+        <a href="/" title="Home">
+          <img src="/assets//images/logo.png" alt="Logo" title="Bèr ‘berkes’ Kessels" />
+        </a>
+      </div>
+
+      <nav id="main" class="row">
+        <div class="onion">
+        <ul>
+          <li>
+          <a href="/about.html">EN / About</a>
+          </li>
+          <li>
+          <a href="/archive.html">EN / Articles</a>
+          </li>
+          <li>
+          <a href="/over.html">NL / Over</a>
+          </li>
+          <li>
+          <a href="/archief.html">NL / Artikelen</a>
+          </li>
+        </ul>
+        </div>
+      </nav>
+    </header>
+    <section id="main-content" class="row">
+      <article>
+  <header>
+    <h1>Help maintainers maintain</h1>
+  </header> 
+  <div class="body">
+    <p>So, there is a good thing you, as non-coder can do: clean up your mess :)Submitting issues is a good thing. Without that, there is hardly a way to improve a piece of software; after all: the only relevant test is real use.</p>
+
+<p>I have been maintaining many Drupal modules for years. And I tend to give out CVS access to other people I like, trust or think are good developers. Still maintaining a module is hard work. Today, after nearly four weeks, I went trough a backlog of open issues on various of my Drupal modules. And here are some rather disturbing numbers:<em> <strong>78</strong> issues in total had to be dealt with. They were issues on my projects (yes, I had little time, lately)</em> <strong>44</strong> were duplicates. Fourty Four people who did not search properly, or did not understand the nature of the other issues[1]. * From that: <strong>21</strong> were marked duplicate not by me, but by the authors or others who help maintaining. Thanks for that! * That leaves: <strong>23</strong> issues that I had to mark as duplicate.<em> <strong>12</strong> were solved, fixed or no longer relative according to the last comments, but not marked as fixed, closed or so. * <strong>4</strong> were re-opened because someone did not agree with me marking it as either "as built", "by design" or "fixed" (the latter because the fixe is not yet in a stable release-package but only in a -dev version)</em> <strong>18</strong> were relevant issues. Some with patches, po-files or good feedback, others with questions on how to achieve something and again others with ready-to-commit code. Thanks for that!But that score is really bad: 18 out of 78 issues that were relevant. 23%, less then a quarter. I spent, in total, 2:30hours on all these issues. So, if my calculations are correct, I could have spent just under 2 hours improving code, fixing issues, testing patches and so forth. If only people would have looked a bit better for duplicates and similar issues. If only people would have marked issues fixed when they had them solved. And so forth.</p>
+
+<p>So, a call to everyone: help the maintainer of your favorite module, and read some issues every week, and mark them properly, help the maintainer by trying to get the people involved to explain in more detail what happened (I had four issues with titles such as "error", "module not working") or to mark issues as duplicates.</p>
+
+<p>That is, if you don't feel able to test patches, commit code and/or improve a module yourself, because that, IMO is still the greatest help. Thanks!Note[1] I must admit that one issue, named "make tagadelic more modular" may be cryptic and fuzzy. But if you read the contents, you would have seen that many of your feature requests were actually mentioned in there.</p>
+
+  </div>
+  <footer>
+    <p class="note">
+    
+      <em>This article was published on webschuur.com. And migrated to this blog. </em>
+    
+    </p>
+    <time datetime="2008-08-15T00:00:00+02:00"
+    pubdate="pubdate">
+      Posted on 15 August 2008
+    </time>
+    in
+    
+    
+      
+      
+
+
+  
+    
+      <a href="/tags.html#project management-ref" class="black radius label">project management<span class="size">28</span></a>
+    
+      <a href="/tags.html#organisation management-ref" class="black radius label">organisation management<span class="size">6</span></a>
+    
+      <a href="/tags.html#drupal-ref" class="black radius label">drupal<span class="size">212</span></a>
+    
+      <a href="/tags.html#drupal-ref" class="black radius label">drupal<span class="size">212</span></a>
+    
+  
+
+
+
+    
+  </footer>
+</article>
+
+<div id="author">
+  <p>
+  
+  
+    <strong>About  the author:</strong> Bèr Kessels is an experienced webdeveloper  with a great passion for
+    technology and Open Source. A golden combination to implement that technology in a good and efficient
+    way. Follow <a href="https://twitter.com/berkes">@berkes</a> on Twitter. Or read more <a href="/over.html">about Bèr</a>.
+  
+  </p>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'berkes'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </section>
+
+    <footer class="main row">
+      <div class="contact four columns">
+        <p>
+            Bèr ‘berkes’ Kessels<br />
+            Bèr Kessels is an Open Source Webdeveloper.<br />
+            <a href='mailto:ber@webschuur.com'>ber@webschuur.com</a>
+          </p>
+          <p>
+            <a href="http://github.com/berkes/">github.com/berkes</a><br />
+            <a href="http://twitter.com/berkes/">twitter.com/berkes</a><br />
+          </p>
+      </div>
+      <div class="four columns">
+        Copyright 2001-2012
+        with a
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Atrribute-Share-alike 3.0 Unported license</a>
+      </div>
+      <div class="four columns">
+        <a class="extra" href="/archive.html">Archive (All English articles)</a> <br />
+        <a class="extra" href="/archief.html">Archief (Alle Nederlandse artikelen)</a> <br />
+        <a class="extra" href="/tags.html">Tags</a> <br />
+        <a href="http://feeds.feedburner.com/berkes"> RSS </a> <br />
+      </div>
+    </footer>
+  </div>
+  <!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik.webschuur.com/" : "http://piwik.webschuur.com/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 9);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://piwik.webschuur.com/piwik.php?idsite=9" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</body>
+</html>

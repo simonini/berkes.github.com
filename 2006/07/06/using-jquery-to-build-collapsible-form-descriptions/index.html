@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+  <link rel="openid.server" href="http://www.myopenid.com/server" />
+  <link rel="openid.delegate" href="http://berkes.myopenid.com/" />
+  <link rel="openid2.local_id" href="http://berkes.myopenid.com" />
+  <link rel="openid2.provider" href="http://www.myopenid.com/server" />
+  <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=berkes.myopenid.com" />
+
+   <title>Using jQuery to build 'collapsible form descriptions'.</title>
+   <meta name="author" content="Bèr ‘berkes’ Kessels" />
+   <link href="http://feeds.feedburner.com/berkes" rel="alternate" title="your title" type="application/atom+xml" />
+   <link rel="author" href="/humans.txt" type="text/plain" />
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+   <!-- Included CSS Files -->
+   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
+
+
+   <!--[if lt IE 9]>
+   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
+
+   <![endif]-->
+
+   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
+
+
+   <!-- IE Fix for HTML5 Tags -->
+   <!--[if lt IE 9]>
+   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
+
+   <![endif]-->
+</head>
+<body>
+	<!-- container -->
+	<div class="container">
+    <header>
+      <div class="row">
+        <a href="/" title="Home">
+          <img src="/assets//images/logo.png" alt="Logo" title="Bèr ‘berkes’ Kessels" />
+        </a>
+      </div>
+
+      <nav id="main" class="row">
+        <div class="onion">
+        <ul>
+          <li>
+          <a href="/about.html">EN / About</a>
+          </li>
+          <li>
+          <a href="/archive.html">EN / Articles</a>
+          </li>
+          <li>
+          <a href="/over.html">NL / Over</a>
+          </li>
+          <li>
+          <a href="/archief.html">NL / Artikelen</a>
+          </li>
+        </ul>
+        </div>
+      </nav>
+    </header>
+    <section id="main-content" class="row">
+      <article>
+  <header>
+    <h1>Using jQuery to build 'collapsible form descriptions'.</h1>
+  </header> 
+  <div class="body">
+    <p>In Joomla! one can have very nifty <a href="http://www.bosrup.com/web/overlib/">'floating' help balloons</a> with his/her forms. Its not built into core, but it's available as popular addon. After some investigation I chose to implement some jQuery implementation.</p>
+
+<p><img src="http://webschuur.com/sites/webschuur.com/files/collapsible_help_in.png" alt="Collapsed -default- state" />
+<em>Collapsed -default- state</em></p>
+
+<br style="clear:both" />
+
+
+<p><img src="http://webschuur.com/sites/webschuur.com/files/collapsible_help_out.png" alt="Expanded state" />
+<em>Expanded state</em></p>
+
+<br style="clear:both" />
+
+
+<!--break-->
+
+
+<p>Right, obviously a client who has worked with joomla! expects nothing less then such a friendly (though that is debatable) interface. Or at least something that is comparable. Bad news, is that using quite ordinary themes in combination with modules such as CCK or flexinode, it is very easy to create absolutely horrible interfaces. Every form item takes the whole width, nothing sits besides one-another, label, form-entry and description all take up at least one line of text, over the full width of your content-area, etc.
+The overlib proves one big problem: Drupal's descriptions can (and thus will, as Murphy states) contain link. It is impossible to click a link that sits in a tool-tip that follows your mouse. So we needed a more solid (and IMO) better solution.</p>
+
+<p>Don't get me wrong: I think the fact that you can make Drupals interface horrible by defining large node types, is a good thing. Not the fact that such interfaces are 'horrible', but because they actually are 'basic'. I don't want 'resizable' text-areas, when I didn't ask for them, let alone that I want Blogger-friendly interface when I am building a complex non-blogging-site. I think it is a good thing that Drupal does not offer floating, popping, swishing, and wooshing interfaces. Or that it has highly optimised interfaces for a single audience.</p>
+
+<p>I love it when Drupal leaves me the choice and the tools to implement something that fits my needs exactly, instead of providing something that does not exactly fit every-ones needs. Because I love making nifty interfaces, tailor-made, for myself (or my client) <em>only when <strong>I</strong> need them</em>.</p>
+
+<p>Right. So I made my form descriptions collapsible, using that really cool, buzz-compliant <a href="http://jquery.com/">jQuery</a> tool.</p>
+
+<p>I need to add (to proof how great a toolbox jQuery is), that ever since back-in-those-<a href="http://www.jalix.org/ressources/internet/dhtml/_dynduo/dynduo/">dynhtml</a>-ninetees, I hardly touched any javascript (JS), other then to wade trough broken JS to find some link I really need, in a site that only works in IE. So: I am not even a n00b. Lower-then-dummy-status. Have a negative amount of JS-kudos. etc.</p>
+
+<p>All I really had to do, was rebuild my form elements using my theme (and that is where such features <em>really</em> belong, IMO), so that I could add some more information, such as id's and classes, and a link to toggle the description on and off. Oh, <a href="http://nuovext.pwsp.net/">and add some icons</a>.</p>
+
+<pre><code>/**
+ * Theme a form item, add the collapses and that stuff
+ */
+function bc_theme_form_element($title, $value, $description = NULL, $id = NULL, $required = FALSE, $error = FALSE) {
+   $output  = '&lt;div class="form-item" id="form-item-'. form_clean_id($id) .'"&gt;'."\n";
+   $required = $required ? '&lt;span class="form-required" title="'. t('This field is required.') .'"&gt;*&lt;/span&gt;' : '';
+
+   if ($title) {
+     if ($id) {
+       $output .= ' &lt;label for="'. form_clean_id($id) .'"&gt;'. $title .":$required&lt;/label&gt;\n";
+     }
+     else {
+       $output .= ' &lt;label&gt;'. $title .":$required&lt;/label&gt;\n";
+     }
+   }
+
+   $output .= " $value\n";
+
+   if ($description) {
+//     $output .= '&lt;a href="#" rel="show-help" class="show-hide" id="showhide-'. form_clean_id($id) .'"&gt;help&lt;/a&gt; &lt;div class="description message help" id="description-'. form_clean_id($id) .'"&gt;'. $description ."&lt;/div&gt;\n";
+     $output .= '&lt;a href="#" rel="show-help" class="show-hide" id="showhide-'. form_clean_id($id) .'"&gt;&lt;img src="/themes/bc_theme/help16x16.png" alt="help" class="icon help" /&gt;&lt;/a&gt; &lt;div class="description message help" id="description-'. form_clean_id($id) .'"&gt;'. $description ."&lt;/div&gt;\n";
+   }
+
+   $output .= "&lt;/div&gt;\n";
+
+   return $output;
+}
+</code></pre>
+
+<p>Most important is the place where I added <code>id="showhide-'. form_clean_id($id) .'</code> and <code>id="showhide-'. form_clean_id($id) .'</code>, which I needed in my homebrewn JavaScrap later on.</p>
+
+<p>And add some jQuery JS in my header. Nothing much, if you follow the <a href="http://jquery.com/docs/Tutorial/">jQuery manual</a> closely.</p>
+
+<pre><code>&lt;!-- jQuery  http://jquery.com/  --&gt;
+&lt;script type="text/javascript"
+src="/themes/bc_theme/latest.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+$(document).ready(function() {
+  $('div.form-item').find('div.description').hide();
+  $('div.description').each(function(){
+    var idchunk = this.id.split(/-/);
+    idchunk.shift();
+    idchunk = idchunk.join('-');
+    $('a#showhide-' + idchunk).click(function() {
+      $('div#description-' + idchunk).toggle('fast');
+      return false;
+    });
+  });
+});
+&lt;/script&gt;
+</code></pre>
+
+<p>Note how I hide the descriptions with JS, and not with a CSS display:none. That way, people without JS, (or non working Js, or whatever) will always see the description. Or, far worse, added the descriptions using some document.write JS. (which results in descriptions not even available when the user has no JS)</p>
+
+<pre><code>$('div.form-item').find('div.description').hide();
+</code></pre>
+
+<p>Then I iterate over all my divs with class description (all-right, not very fail-safe) and extract the form-item Id (the one Drupal gave me). This is because I need to associate every 'show-hide link' with a div.</p>
+
+<pre><code>var idchunk = this.id.split(/-/);
+idchunk.shift();
+idchunk = idchunk.join('-');
+</code></pre>
+
+<p>To end: some TODOS are to make all this perform (much) better, by using a regexp instead of the ugly split-shift-merge to extract the Drupal form-item ID. And to toggle the class from 'on' to 'off', of the show-hide-icon, so that that little light-bulb can be 'on' (when help is displayed) and 'off' (when help is hidden). But I didn't find an easy way to toggle a class of an element, yet. Another todo, is actually a bug-fixing frenzy: For example the date form widget abuses the description by putting the label in that description. A description != a label. Even if that comes in handy when building container-inline forms such as that date-widget, it is not meant for it. And it breaks my cool collapse thingy :).</p>
+
+<p>I hope this short steel-this-code post, proved three things:</p>
+
+<ol>
+<li>Drupal's interface does not suck. It is merely 'basic', which means: 'ready for your creativity'.</li>
+<li>jQuery is the right tool.</li>
+<li>Drupal's theme layer is the right tool and place to build your own interface improvements for a specific need like this.</li>
+</ol>
+
+
+  </div>
+  <footer>
+    <p class="note">
+    
+      <em>This article was published on webschuur.com. And migrated to this blog. </em>
+    
+    </p>
+    <time datetime="2006-07-06T00:00:00+02:00"
+    pubdate="pubdate">
+      Posted on 06 July 2006
+    </time>
+    in
+    
+    
+      
+      
+
+
+  
+    
+      <a href="/tags.html#theming-ref" class="black radius label">theming<span class="size">25</span></a>
+    
+      <a href="/tags.html#drupal-ref" class="black radius label">drupal<span class="size">212</span></a>
+    
+  
+
+
+
+    
+  </footer>
+</article>
+
+<div id="author">
+  <p>
+  
+  
+    <strong>About  the author:</strong> Bèr Kessels is an experienced webdeveloper  with a great passion for
+    technology and Open Source. A golden combination to implement that technology in a good and efficient
+    way. Follow <a href="https://twitter.com/berkes">@berkes</a> on Twitter. Or read more <a href="/over.html">about Bèr</a>.
+  
+  </p>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'berkes'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </section>
+
+    <footer class="main row">
+      <div class="contact four columns">
+        <p>
+            Bèr ‘berkes’ Kessels<br />
+            Bèr Kessels is an Open Source Webdeveloper.<br />
+            <a href='mailto:ber@webschuur.com'>ber@webschuur.com</a>
+          </p>
+          <p>
+            <a href="http://github.com/berkes/">github.com/berkes</a><br />
+            <a href="http://twitter.com/berkes/">twitter.com/berkes</a><br />
+          </p>
+      </div>
+      <div class="four columns">
+        Copyright 2001-2012
+        with a
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Atrribute-Share-alike 3.0 Unported license</a>
+      </div>
+      <div class="four columns">
+        <a class="extra" href="/archive.html">Archive (All English articles)</a> <br />
+        <a class="extra" href="/archief.html">Archief (Alle Nederlandse artikelen)</a> <br />
+        <a class="extra" href="/tags.html">Tags</a> <br />
+        <a href="http://feeds.feedburner.com/berkes"> RSS </a> <br />
+      </div>
+    </footer>
+  </div>
+  <!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik.webschuur.com/" : "http://piwik.webschuur.com/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 9);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://piwik.webschuur.com/piwik.php?idsite=9" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="nl"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="nl"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="nl"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="nl"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+  <link rel="openid.server" href="http://www.myopenid.com/server" />
+  <link rel="openid.delegate" href="http://berkes.myopenid.com/" />
+  <link rel="openid2.local_id" href="http://berkes.myopenid.com" />
+  <link rel="openid2.provider" href="http://www.myopenid.com/server" />
+  <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=berkes.myopenid.com" />
+
+   <title>DrupalJam presentatie over Microframeworks</title>
+   <meta name="author" content="Bèr ‘berkes’ Kessels" />
+   <link href="http://feeds.feedburner.com/berkes" rel="alternate" title="your title" type="application/atom+xml" />
+   <link rel="author" href="/humans.txt" type="text/plain" />
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+   <!-- Included CSS Files -->
+   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
+
+
+   <!--[if lt IE 9]>
+   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
+
+   <![endif]-->
+
+   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
+
+
+   <!-- IE Fix for HTML5 Tags -->
+   <!--[if lt IE 9]>
+   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
+
+   <![endif]-->
+</head>
+<body>
+	<!-- container -->
+	<div class="container">
+    <header>
+      <div class="row">
+        <a href="/" title="Home">
+          <img src="/assets//images/logo.png" alt="Logo" title="Bèr ‘berkes’ Kessels" />
+        </a>
+      </div>
+
+      <nav id="main" class="row">
+        <div class="onion">
+        <ul>
+          <li>
+          <a href="/about.html">EN / About</a>
+          </li>
+          <li>
+          <a href="/archive.html">EN / Articles</a>
+          </li>
+          <li>
+          <a href="/over.html">NL / Over</a>
+          </li>
+          <li>
+          <a href="/archief.html">NL / Artikelen</a>
+          </li>
+        </ul>
+        </div>
+      </nav>
+    </header>
+    <section id="main-content" class="row">
+      <article>
+  <header>
+    <h1>DrupalJam presentatie over Microframeworks</h1>
+  </header> 
+  <div class="body row">
+    <div class="six columns">
+      
+      <figure>
+  <img src="/images//2012/05/25/drupaljam-presentatie-over-microframeworks.png" alt="Woodcut from Doré. Purely illustrative" />
+  
+    <figcaption>Doré Houtsnede. De enige functie hiervan is een mooiere layout. En de gravures zijn gewoon mooi</figcaption>
+  
+</figure>
+
+    </div>
+    <div class="six columns">
+      <p>Voor <a href="http://drupaljam.nl/">DrupalJam 2012</a> werd mij gevraagd een sessievoorstel in te
+dienen. Het leek me passend om een aan Drupal-gerelateerd onderwerp te
+zoeken; welke niet direct over Drupal zélf gaat.</p>
+
+<p>Vandaar: <a href="http://drupaljam.nl/sessie/microframeworks-queen-drupal-en-haar-onderdanen">Microframeworks</a>. En hoe je deze in een Drupalomgeving of -project kunt inzetten.</p>
+
+<h2>Update: resources</h2>
+
+<ul>
+<li><a href="http://berk.es/microframeworks/#/this-qr">De presentatie</a> (<a href="https://github.com/berkes/microframeworks/tree/develop">source</a>)</li>
+<li><a href="https://github.com/berkes/microframeworks-questions">De voorbeeld applicatie, "questions"</a></li>
+<li><a href="http://berk.es/microframeworks/#/voorbeelden">Overzicht van frameworks voor PHP, Python en Ruby</a>.</li>
+</ul>
+
+
+<h1>Microframenworks: Queen Drupal en haar onderdanen</h1>
+
+<blockquote><p>"MobileFooWizards heeft voor ons een iphone-app gemaakt, of we op de
+Drupalsite even een JSON-feed kunnen aanbieden van de nieuwsberichten
+met de data zoals in dit mailtje staat"</p></blockquote>
+
+<p>Klinkt als een eitje. Toch? Beetje views klikken, klaar! Maar dan komt
+het: hoe bied je mobielvriendelijke plaatjes in die content aan? Hoe
+zorg je dat toekomstige versies van de app andere JSON kunnen lezen? Hoe
+scherm je het af? Schaalt het wel? Voor je het weet is het een enorm
+project, met allerhande afhankelijkheden, deployments enzovoort.</p>
+
+<h2>Het microframework: eenvoud</h2>
+
+<blockquote><p>Een goede ontwikkelaar kan niet zozeer alle problemen oplossen, maar kan
+ieder probleem opdelen in makkelijk oplosbare, kleine probleempjes.
+ - Ik, zojuist</p></blockquote>
+
+<p>Microframeworks zijn gereedschappen waarmee je enorm simpele, piepkleine
+webapplicaties bouwt.</p>
+
+<p>Zo een web-applicatie kan perfect met Drupal samenwerken: Het kan Drupal
+werk uit handen nemen, voorgekauwde informatie aanbieden enzovoort. Een
+ideale onderdaan voor je Drupalsite.</p>
+
+<p>Door een piepkleine website te bouwen naast Drupal dat bijvoorbeeld één
+enkele JSON-feed aanbied kun je Drupal veel werk uit handen nemen. Je
+verdeelt je project in onafhankelijke, losse componenten, die allemaal één ding doen en
+dat heel goed kunnen.</p>
+
+<h2>Sessie</h2>
+
+<p>In deze sessie laat ik verschillende scenario's zien waar een
+microframework samen met Drupal een gouden combinatie blijkt.</p>
+
+<p>We kijken naar het iPhone-app-probleem, maar ook naar hoe we informatie
+Drupal ín kunnen krijgen. En we kijken hoe we Drupal kunnen koppelen aan
+externe informatie en diensten door er een microframework tussen te
+plaatsen.</p>
+
+<p>In de sessie zal hier en daar wat code voorbijkomen, maar dat is slechts ter illustratie. Uiteraard zul je moeten
+programmeren om een microframework in te kunnen gaan zetten; maar in
+deze sessie kijken we meer op een afstandje hiernaar.</p>
+
+    </div>
+  </div>
+  <footer>
+    <time datetime="2012-05-25T00:00:00+02:00"
+    pubdate="pubdate">
+      Posted on 25 May 2012
+    </time>
+    in
+    
+    
+      
+      
+
+
+  
+    
+      <a href="/tags.html#drupal-ref" class="black radius label">drupal<span class="size">212</span></a>
+    
+      <a href="/tags.html#microframeworks-ref" class="black radius label">microframeworks<span class="size">2</span></a>
+    
+      <a href="/tags.html#presentatie-ref" class="black radius label">presentatie<span class="size">1</span></a>
+    
+      <a href="/tags.html#sinatra-ref" class="black radius label">sinatra<span class="size">1</span></a>
+    
+  
+
+
+
+    
+  </footer>
+</article>
+
+<div id="author">
+  <p>
+  
+    <strong>Over de auteur:</strong> Bèr Kessels is een ervaren webdeveloper met een grote passie voor
+    techniek en Open Source. Een gouden combinatie om de techniek goed en
+    efficiënt toe te passen. Volg <a href="https://twitter.com/berkes">@berkes</a> op Twitter. Of lees meer <a href="/over.html">over Bèr</a>.
+  
+  
+  </p>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'berkes'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </section>
+
+    <footer class="main row">
+      <div class="contact four columns">
+        <p>
+            Bèr ‘berkes’ Kessels<br />
+            Bèr Kessels is an Open Source Webdeveloper.<br />
+            <a href='mailto:ber@webschuur.com'>ber@webschuur.com</a>
+          </p>
+          <p>
+            <a href="http://github.com/berkes/">github.com/berkes</a><br />
+            <a href="http://twitter.com/berkes/">twitter.com/berkes</a><br />
+          </p>
+      </div>
+      <div class="four columns">
+        Copyright 2001-2012
+        with a
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Atrribute-Share-alike 3.0 Unported license</a>
+      </div>
+      <div class="four columns">
+        <a class="extra" href="/archive.html">Archive (All English articles)</a> <br />
+        <a class="extra" href="/archief.html">Archief (Alle Nederlandse artikelen)</a> <br />
+        <a class="extra" href="/tags.html">Tags</a> <br />
+        <a href="http://feeds.feedburner.com/berkes"> RSS </a> <br />
+      </div>
+    </footer>
+  </div>
+  <!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik.webschuur.com/" : "http://piwik.webschuur.com/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 9);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://piwik.webschuur.com/piwik.php?idsite=9" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</body>
+</html>

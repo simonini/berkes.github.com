@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="nl"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="nl"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="nl"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="nl"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+  <link rel="openid.server" href="http://www.myopenid.com/server" />
+  <link rel="openid.delegate" href="http://berkes.myopenid.com/" />
+  <link rel="openid2.local_id" href="http://berkes.myopenid.com" />
+  <link rel="openid2.provider" href="http://www.myopenid.com/server" />
+  <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=berkes.myopenid.com" />
+
+   <title>servers weer plat</title>
+   <meta name="author" content="Bèr ‘berkes’ Kessels" />
+   <link href="http://feeds.feedburner.com/berkes" rel="alternate" title="your title" type="application/atom+xml" />
+   <link rel="author" href="/humans.txt" type="text/plain" />
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+   <!-- Included CSS Files -->
+   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
+
+
+   <!--[if lt IE 9]>
+   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
+
+   <![endif]-->
+
+   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
+
+
+   <!-- IE Fix for HTML5 Tags -->
+   <!--[if lt IE 9]>
+   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
+
+   <![endif]-->
+</head>
+<body>
+	<!-- container -->
+	<div class="container">
+    <header>
+      <div class="row">
+        <a href="/" title="Home">
+          <img src="/assets//images/logo.png" alt="Logo" title="Bèr ‘berkes’ Kessels" />
+        </a>
+      </div>
+
+      <nav id="main" class="row">
+        <div class="onion">
+        <ul>
+          <li>
+          <a href="/about.html">EN / About</a>
+          </li>
+          <li>
+          <a href="/archive.html">EN / Articles</a>
+          </li>
+          <li>
+          <a href="/over.html">NL / Over</a>
+          </li>
+          <li>
+          <a href="/archief.html">NL / Artikelen</a>
+          </li>
+        </ul>
+        </div>
+      </nav>
+    </header>
+    <section id="main-content" class="row">
+      <article>
+  <header>
+    <h1>servers weer plat</h1>
+  </header> 
+  <div class="body">
+    <p>Ongeveer een half jaar geleden besloot ik naar lycos VPS te verhuizen, nadat ik daar positieve verhalen over had gelezen op diverse webhosting fora. Het was toen nog heel nieuw. Lycos biedt goedkope virtuele servers aan. Servers waar je dus volledige root access had en ik alles dues zo kan indelen zoals ik het graag zie. Bovendien een uitermate leuke speeltuin en een leerschool. de hoofdreden waarom ik die flexibiliteit wilde was omdat ik dan aan de slag kon met multisite hosting. Dat is zoiets als heel veel sites die draaien op een codebase.</p>
+
+<p>Heerlijk makkelijk qua onderhoud, mits de goede server instellingen en dergelijke.</p>
+
+<p>Goed Lycos. Ik was aangemeld, het liep inderdaad als een tierelier. 15 sites zonder een eenkel probleem. Dus toen <a href="http://www.newmoon.nl/pip/index.php">we</a> aan newsphoto begonnen te developen, leek me dat een ideale opstart server. Toen begon gelijk de ellende. Om een of andere reden stond de server van newsphoto wel op een rammelserver, maar stond die blijkbar ook nog eens vooraan in de vuurlinie. De eerste weken ging de server ongeveer dagelijks plat omdat hackers met super brute kracht probeerden in te breken. Daar was gewoon niet tegenop te werken. Niet dat iemand is binnengekomen. Maar hun probeersels waren zo aggressief (vanuit supergrote computers waarschijnlijk) dat ze dat kleine servertje gewoon platwalsten door duizenden gebruikers/paswoorden per minuut te proberen!Toen dat na een tijd afnam, begonnen de problemen bij lycos. Die prutsers hadden maar klanten aangenomen, en aangenomen, en aangenomen, zonder te beseffen dat ze daarvoor ook wel plek hadden. resultaat was een bijna dagelijkse uitval. Nu is dat allemaal opgelost. Voor newsphoto.</p>
+
+<p>En dan begint mijn webschuur server te etteren. Een van de sites op webschuur werd opeens erg populair bij google images. Gevolg was dat heel veel (honderden) van die myspace prutsers een paar plaatjes als hun achtergronden gebruikten! Ik heb dat opgelost met een tijdelijke anti <a href="http://www.webschuur.com/misc/imagetheft.png">deeplink redirect</a>. Ook dat mocht niet baten, mijn bezoekers aantallen zijn in de spanne van twee weken verviervoudigd op de server. Dat trekt die server nu dus absoluut niet meer. Gevolg is dat ik weer bijna dagelijks de boel handmatig moet repareren en herstarten. Mijn excuses. Een <a href="http://sympal.nl" title="Eenvoudige kant en klare websites, met goed onderhoud en ondersteuning">betere Drupal server</a> komt er heel snel aan.</p>
+
+  </div>
+  <footer>
+    <p class="note">
+    
+      <em>Dit artikel verscheen op bler.webschuur.com. En is overgezet naar dit blog</em>
+    
+    </p>
+    <time datetime="2006-01-01T00:00:00+01:00"
+    pubdate="pubdate">
+      Posted on 01 January 2006
+    </time>
+    in
+    
+    
+  </footer>
+</article>
+
+<div id="author">
+  <p>
+  
+    <strong>Over de auteur:</strong> Bèr Kessels is een ervaren webdeveloper met een grote passie voor
+    techniek en Open Source. Een gouden combinatie om de techniek goed en
+    efficiënt toe te passen. Volg <a href="https://twitter.com/berkes">@berkes</a> op Twitter. Of lees meer <a href="/over.html">over Bèr</a>.
+  
+  
+  </p>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'berkes'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </section>
+
+    <footer class="main row">
+      <div class="contact four columns">
+        <p>
+            Bèr ‘berkes’ Kessels<br />
+            Bèr Kessels is an Open Source Webdeveloper.<br />
+            <a href='mailto:ber@webschuur.com'>ber@webschuur.com</a>
+          </p>
+          <p>
+            <a href="http://github.com/berkes/">github.com/berkes</a><br />
+            <a href="http://twitter.com/berkes/">twitter.com/berkes</a><br />
+          </p>
+      </div>
+      <div class="four columns">
+        Copyright 2001-2012
+        with a
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Atrribute-Share-alike 3.0 Unported license</a>
+      </div>
+      <div class="four columns">
+        <a class="extra" href="/archive.html">Archive (All English articles)</a> <br />
+        <a class="extra" href="/archief.html">Archief (Alle Nederlandse artikelen)</a> <br />
+        <a class="extra" href="/tags.html">Tags</a> <br />
+        <a href="http://feeds.feedburner.com/berkes"> RSS </a> <br />
+      </div>
+    </footer>
+  </div>
+  <!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik.webschuur.com/" : "http://piwik.webschuur.com/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 9);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://piwik.webschuur.com/piwik.php?idsite=9" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</body>
+</html>

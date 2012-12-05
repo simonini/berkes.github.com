@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+
+
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+  <link rel="openid.server" href="http://www.myopenid.com/server" />
+  <link rel="openid.delegate" href="http://berkes.myopenid.com/" />
+  <link rel="openid2.local_id" href="http://berkes.myopenid.com" />
+  <link rel="openid2.provider" href="http://www.myopenid.com/server" />
+  <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=berkes.myopenid.com" />
+
+   <title>A better way to variable_get() and t() in Drupal.</title>
+   <meta name="author" content="Bèr ‘berkes’ Kessels" />
+   <link href="http://feeds.feedburner.com/berkes" rel="alternate" title="your title" type="application/atom+xml" />
+   <link rel="author" href="/humans.txt" type="text/plain" />
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+   <!-- Included CSS Files -->
+   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
+
+
+   <!--[if lt IE 9]>
+   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
+
+   <![endif]-->
+
+   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
+
+
+   <!-- IE Fix for HTML5 Tags -->
+   <!--[if lt IE 9]>
+   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
+
+   <![endif]-->
+</head>
+<body>
+	<!-- container -->
+	<div class="container">
+    <header>
+      <div class="row">
+        <a href="/" title="Home">
+          <img src="/assets//images/logo.png" alt="Logo" title="Bèr ‘berkes’ Kessels" />
+        </a>
+      </div>
+
+      <nav id="main" class="row">
+        <div class="onion">
+        <ul>
+          <li>
+          <a href="/about.html">EN / About</a>
+          </li>
+          <li>
+          <a href="/archive.html">EN / Articles</a>
+          </li>
+          <li>
+          <a href="/over.html">NL / Over</a>
+          </li>
+          <li>
+          <a href="/archief.html">NL / Artikelen</a>
+          </li>
+        </ul>
+        </div>
+      </nav>
+    </header>
+    <section id="main-content" class="row">
+      <article>
+  <header>
+    <h1>A better way to variable_get() and t() in Drupal.</h1>
+  </header> 
+  <div class="body">
+    <p>When programming in Drupal, <a href="http://drupal.stackexchange.com/questions/23162/using-variable-get-in-multiple-places-without-duplicating-default">repeating default values in variable_get</a> and repeating strings in translations, all over the place, is a very strong <a href="http://martinfowler.com/bliki/CodeSmell.html">codesmell</a>.</p>
+
+<p>I have been playing with solutions for this, and during my last project decided to take these attempts and make it into a very simple system. A pattern.</p>
+
+<p>But, first, let us identify the problems.</p>
+
+<h2>Persistent variables</h2>
+
+<div class="highlight"><pre><code class="php"><span class="nv">$html</span> <span class="o">.=</span> <span class="s2">&quot;Showing &quot;</span><span class="o">.</span> <span class="nx">variable_get</span><span class="p">(</span><span class="s2">&quot;mymodule_amount&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span> <span class="o">.</span><span class="s2">&quot;items&quot;</span><span class="p">;</span>
+<span class="nv">$html</span> <span class="o">.=</span> <span class="nx">pager_query</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM {mymodule_items}&quot;</span><span class="p">,</span> <span class="nx">variable_get</span><span class="p">(</span><span class="s2">&quot;mymodule_amount&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">));</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$total</span> <span class="o">&gt;</span> <span class="nx">variable_get</span><span class="p">(</span><span class="s2">&quot;mymodule_amount&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span> <span class="p">{</span>
+  <span class="nv">$html</span> <span class="o">.=</span> <span class="s2">&quot;there are more&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+
+<p>Not only is there the <em>magic number 20</em> all over the place, it is a DRY violation all over the place.
+In above example, that DRY violation is not very visible, yet, but imagine a module called <em>project_magician_message_center</em>:</p>
+
+<div class="highlight"><pre><code class="php"><span class="nx">variable_get</span><span class="p">(</span><span class="s2">&quot;project_magician_message_center_amount_for_&quot;</span><span class="o">.</span> <span class="nv">$node</span><span class="o">-&gt;</span><span class="na">type</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+<span class="nx">variable_get</span><span class="p">(</span><span class="s2">&quot;project_magician_message_center_request_limit&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+</code></pre>
+</div>
+
+
+<p>Just open up your average <em>variables</em> table in larger Drupalproject and look around. The horror! (And maybe you have been bitten by the length limit of 128 characters?). There is no pattern; just a list of unpredicable names.</p>
+
+<p>The <em>magic number</em> problem often gets solved by Drupal developers with constants. But as the name suggests,
+a constant is constant. And a variable is variable. It is very confusing to read this:</p>
+
+<div class="highlight"><pre><code class="php"><span class="nb">define</span><span class="p">(</span><span class="s2">&quot;MYMODULE_AMOUNT&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+<span class="nv">$items</span> <span class="o">=</span> <span class="nx">pager_query</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM {mymodule_items}&quot;</span><span class="p">,</span> <span class="nx">variable_get</span><span class="p">(</span><span class="s2">&quot;mymodule_amount&quot;</span><span class="p">,</span> <span class="nx">MYMODULE_AMOUNT</span><span class="p">));</span>
+</code></pre>
+</div>
+
+
+<p>Especially when you clearly get 30 items in some list. Which is what happens when a variable gets another value. Suddenly the constant is no longer
+used; it acts like a variable. Naming your constants <em>MYMODULE_AMOUNT_DEFAULT</em> is slightly better, but no real solution.</p>
+
+<h2>Translations, screentexts.</h2>
+
+<p>Translations, through <em>t()</em> act even worse. Some examples:</p>
+
+<div class="highlight"><pre><code class="php"><span class="nx">t</span><span class="p">(</span><span class="s2">&quot;Hello World, today is %date&quot;</span><span class="p">);</span>
+<span class="nx">t</span><span class="p">(</span><span class="s2">&quot;Hello world, today is %date&quot;</span><span class="p">);</span> <span class="c1">#note the intentional erronous lowercase world.</span>
+
+<span class="nv">$actor</span> <span class="o">=</span> <span class="s2">&quot;Marsellus&quot;</span><span class="p">;</span>
+<span class="nv">$subject</span> <span class="o">=</span> <span class="s2">&quot;Antwone&quot;</span><span class="p">;</span>
+<span class="nx">t</span><span class="p">(</span><span class="s2">&quot;Look, just because I don&#39;t be givin&#39; no man a foot massage don&#39;t make it right for %actor to throw %subject into a glass motherfuckin&#39; house, fuckin&#39; up the way the nigger talks. Motherfucker do that shit to me, he better paralyze my ass, &#39;cause I&#39;ll kill the motherfucker, know what I&#39;m sayin&#39;?&quot;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s2">&quot;%actor&quot;</span> <span class="o">=&gt;</span> <span class="nv">$actor</span><span class="p">,</span> <span class="s2">&quot;%subject&quot;</span> <span class="o">=&gt;</span> <span class="nv">$subject</span><span class="p">));</span>
+
+<span class="nv">$message</span> <span class="s">&lt;&lt;&lt;MESS</span>
+<span class="s">Well, the way they make shows is, they make one show. That show&#39;s called a pilot. </span>
+
+<span class="s">Then they show that show to the people who make shows, and on the strength of that one show they decide if they&#39;re going to make more shows. Some pilots get picked and become television programs.</span>
+
+<span class="s">Some don&#39;t, become nothing. She starred in one of the ones that became nothing.</span>
+<span class="s">MESS</span>
+<span class="nx">t</span><span class="p">(</span><span class="nv">$message</span><span class="p">);</span>
+
+<span class="nx">t</span><span class="p">(</span><span class="nx">_mymodule_message_contents</span><span class="p">());</span>
+</code></pre>
+</div>
+
+
+<p>First and foremost problem with this is that it is not prefixed, namespaced if you will. Your <em>t("Submit")</em> is the same as that other <em>t("Submit")</em>. Translate this once to "Create new" and suddenly all sorts of labels, tabs, titles and links show the text "Create new". We have all been, there, just admit it, already.</p>
+
+<p>But The first two examples pose an ever greater problem, too many such sentences are very alike. Strings like "A new %type was created" show up next to "New %type created!". Especially when there are many modules, built over time, by many different developers.</p>
+
+<p>Then the larger texts become an even bigger issue, they range from plain ugly to cluttering and convoluted.</p>
+
+<p>Mixing screentexts and logic, which is what we all do, is arguably as bad as mixing code and presentation.</p>
+
+<h2>Solution</h2>
+
+<p>Imagine you could say:</p>
+
+<div class="highlight"><pre><code class="php"><span class="s2">&quot;Showing &quot;</span><span class="o">.</span> <span class="nx">v</span><span class="p">(</span><span class="s2">&quot;amount&quot;</span><span class="p">);</span>
+<span class="s2">&quot;Showing &quot;</span><span class="o">.</span> <span class="nx">v</span><span class="p">(</span><span class="s2">&quot;core.amount_per_page&quot;</span><span class="p">);</span>
+
+<span class="nx">t</span><span class="p">(</span><span class="s2">&quot;core.hello_world&quot;</span><span class="p">);</span>
+<span class="nx">t</span><span class="p">(</span><span class="s2">&quot;ecommerce.payment.thank_you&quot;</span><span class="p">);</span>
+<span class="nx">t</span><span class="p">(</span><span class="s2">&quot;core.thank_you&quot;</span><span class="p">);</span>
+<span class="nx">t</span><span class="p">(</span><span class="s2">&quot;footmassage&quot;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s2">&quot;%actor&quot;</span> <span class="o">=&gt;</span> <span class="nv">$actor</span><span class="p">,</span> <span class="s2">&quot;%subject&quot;</span> <span class="o">=&gt;</span> <span class="nv">$subject</span><span class="p">));</span>
+</code></pre>
+</div>
+
+
+<p>Where all your defaults are nicely set in a central place, your screen-texts are in single place, or even file. And everything gets prefixed with your modulename, unless you define it differently.</p>
+
+<p>The solution is OOP. Just a little, don't fret, and nicely tuck away so that you won't need to program everything OOP suddenly. First a generic class, which we will built upon in our modules.</p>
+
+<div class="highlight"><pre><code class="php"><span class="k">class</span> <span class="nc">DrupalHelper</span> <span class="p">{</span>
+  <span class="k">protected</span> <span class="nv">$prefix</span> <span class="o">=</span> <span class="s2">&quot;core&quot;</span><span class="p">;</span>
+
+  <span class="k">public</span> <span class="k">function</span> <span class="nf">v</span><span class="p">(</span><span class="nv">$symbol</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">variable_get</span><span class="p">(</span><span class="nx">absolute_or_prefix</span><span class="p">(</span><span class="nv">$symbol</span><span class="p">),</span> <span class="nv">$$symbol</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">public</span> <span class="k">function</span> <span class="nf">t</span><span class="p">(</span><span class="nv">$symbol</span><span class="p">,</span> <span class="nv">$params</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$translated</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+    <span class="nv">$symbol</span> <span class="o">=</span> <span class="nx">absolute_or_prefix</span><span class="p">(</span><span class="nv">$symbol</span><span class="p">);</span>
+    <span class="nv">$function</span> <span class="o">=</span> <span class="nx">symbol_to_function</span><span class="p">(</span><span class="nv">$symbol</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nb">method_exists</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="nv">$function</span><span class="p">))</span> <span class="p">{</span>
+      <span class="nv">$untranslated</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nv">$function</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+      <span class="nv">$untranslated</span> <span class="o">=</span> <span class="nv">$symbol</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nx">t</span><span class="p">(</span><span class="nv">$untranslated</span><span class="p">,</span> <span class="nv">$params</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">private</span> <span class="k">function</span> <span class="nf">absolute_or_prefix</span><span class="p">(</span><span class="nv">$symbol</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">strstr</span><span class="p">(</span><span class="nv">$symbol</span><span class="p">,</span> <span class="s2">&quot;.&quot;</span><span class="p">))</span> <span class="p">{</span>
+      <span class="nv">$symbol</span> <span class="o">=</span> <span class="nv">$prefix</span> <span class="o">.</span><span class="s2">&quot;.&quot;</span><span class="o">.</span> <span class="nv">$symbol</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nv">$symbol</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">private</span> <span class="k">function</span> <span class="nf">symbol_to_function</span><span class="p">(</span><span class="nv">$symbol</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">&quot;t_&quot;</span><span class="o">.</span> <span class="nb">preg_replace</span><span class="p">(</span><span class="s2">&quot;/\./&quot;</span><span class="p">,</span> <span class="nv">$symbol</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+
+<p>With the module, I inherit this helper:</p>
+
+<div class="highlight"><pre><code class="php"><span class="k">class</span> <span class="nc">MyModuleHelper</span><span class="p">()</span> <span class="k">extends</span> <span class="nx">DrupalHelper</span> <span class="p">{</span>
+  <span class="k">protected</span> <span class="nv">$prefix</span> <span class="o">=</span> <span class="s2">&quot;mymodule&quot;</span><span class="p">;</span>
+
+  <span class="c1">#defaults:</span>
+  <span class="k">public</span> <span class="nv">$length</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+
+  <span class="c1">#translations:</span>
+  <span class="k">private</span> <span class="k">function</span> <span class="nf">t_hello_world</span><span class="p">()</span> <span class="p">{</span>
+    <span class="s2">&quot;Hello World&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+
+<p>In your module, you use this as follows:</p>
+
+<div class="highlight"><pre><code class="php"><span class="k">function</span> <span class="nf">mymodule_form_alter</span><span class="p">(</span><span class="nv">$form_id</span><span class="p">,</span> <span class="o">&amp;</span><span class="nv">$form</span><span class="p">,</span> <span class="o">&amp;</span><span class="nv">$form_values</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nv">$form_id</span> <span class="o">==</span> <span class="s2">&quot;foo&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$helper</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyModuleHelper</span><span class="p">();</span>
+
+    <span class="nv">$form</span><span class="p">[</span><span class="s2">&quot;field&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+      <span class="s2">&quot;#type&quot;</span>   <span class="o">=&gt;</span> <span class="s2">&quot;textfield&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;#title&quot;</span>  <span class="o">=&gt;</span> <span class="nv">$helper</span><span class="o">-&gt;</span><span class="na">t</span><span class="p">(</span><span class="s2">&quot;hello_world&quot;</span><span class="p">),</span>
+      <span class="s2">&quot;#length&quot;</span> <span class="o">=&gt;</span> <span class="nv">$helper</span><span class="o">-&gt;</span><span class="na">v</span><span class="p">(</span><span class="s2">&quot;length&quot;</span><span class="p">)</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+
+<p>The usage-example does not load the library files, but delegating code to separate files is not hard in Drupal, with helpers like <em>module_load_include()</em>. This example assumes the file is already loaded, or that some autoloader is in place.
+This example-code does not yet handle the variable_del and variable_set functionality for variables, but that is left to the reader to implement.</p>
+
+<p>Also note that I have simplified the code a little for readability. Like
+leaving out the variable_set and the very much simplified
+<code>symbol_to_function()</code>.</p>
+
+<p>Some other todo's on my list are:</p>
+
+<ul>
+<li>Introduce a fallback for core strings, we now have to either call <em>$helper->t("foo")</em> for our symbol based translations, or <em>t("foo")</em> for core or 3rd party module strings. Core messages need to be callable with symbols too.</li>
+<li>Allow passing variables into t() instead of an keyed array. Like <em>t("footmassage", $actor, $subject)</em>; parsing and cleaning should use sane defaults but would need to be overridable.</li>
+<li>Format_plural implementation. I hardly ever need it, but it should be callable like *plural("footmassage", $actor, $subject, $count);</li>
+<li>Make it easier to place all screen texts in a separate file.</li>
+<li>More consistency. Maybe defaults for variables should be defined just like texts, with a private <em>v_var_name()</em> function.</li>
+</ul>
+
+
+<p>A real simple pattern, which requires a little understanding of OOP, but has almost only benefits in usage. And as far as I can see only one downside: it is "Un-Drupal-ish"; but that is not a reason, in itself.</p>
+
+<p><em>comments on <a href="http://www.reddit.com/r/drupal/comments/qcuqa/a_better_way_to_variable_get_and_t_in_drupal/">Reddit</a></em></p>
+
+  </div>
+  <footer>
+    <p class="note">
+    
+      <em>This article was published on webschuur.com. And migrated to this blog. </em>
+    
+    </p>
+    <time datetime="2012-03-01T00:00:00+01:00"
+    pubdate="pubdate">
+      Posted on 01 March 2012
+    </time>
+    in
+    
+    
+      
+      
+
+
+  
+    
+      <a href="/tags.html#programming-ref" class="black radius label">programming<span class="size">53</span></a>
+    
+      <a href="/tags.html#tips and tricks-ref" class="black radius label">tips and tricks<span class="size">23</span></a>
+    
+      <a href="/tags.html#drupal-ref" class="black radius label">drupal<span class="size">212</span></a>
+    
+  
+
+
+
+    
+  </footer>
+</article>
+
+<div id="author">
+  <p>
+  
+  
+    <strong>About  the author:</strong> Bèr Kessels is an experienced webdeveloper  with a great passion for
+    technology and Open Source. A golden combination to implement that technology in a good and efficient
+    way. Follow <a href="https://twitter.com/berkes">@berkes</a> on Twitter. Or read more <a href="/over.html">about Bèr</a>.
+  
+  </p>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'berkes'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </section>
+
+    <footer class="main row">
+      <div class="contact four columns">
+        <p>
+            Bèr ‘berkes’ Kessels<br />
+            Bèr Kessels is an Open Source Webdeveloper.<br />
+            <a href='mailto:ber@webschuur.com'>ber@webschuur.com</a>
+          </p>
+          <p>
+            <a href="http://github.com/berkes/">github.com/berkes</a><br />
+            <a href="http://twitter.com/berkes/">twitter.com/berkes</a><br />
+          </p>
+      </div>
+      <div class="four columns">
+        Copyright 2001-2012
+        with a
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Atrribute-Share-alike 3.0 Unported license</a>
+      </div>
+      <div class="four columns">
+        <a class="extra" href="/archive.html">Archive (All English articles)</a> <br />
+        <a class="extra" href="/archief.html">Archief (Alle Nederlandse artikelen)</a> <br />
+        <a class="extra" href="/tags.html">Tags</a> <br />
+        <a href="http://feeds.feedburner.com/berkes"> RSS </a> <br />
+      </div>
+    </footer>
+  </div>
+  <!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik.webschuur.com/" : "http://piwik.webschuur.com/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 9);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://piwik.webschuur.com/piwik.php?idsite=9" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</body>
+</html>

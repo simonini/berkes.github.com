@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+  <link rel="openid.server" href="http://www.myopenid.com/server" />
+  <link rel="openid.delegate" href="http://berkes.myopenid.com/" />
+  <link rel="openid2.local_id" href="http://berkes.myopenid.com" />
+  <link rel="openid2.provider" href="http://www.myopenid.com/server" />
+  <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=berkes.myopenid.com" />
+
+   <title>Why outside in Webdevelopment is Better; why Designs should be Leading.</title>
+   <meta name="author" content="Bèr ‘berkes’ Kessels" />
+   <link href="http://feeds.feedburner.com/berkes" rel="alternate" title="your title" type="application/atom+xml" />
+   <link rel="author" href="/humans.txt" type="text/plain" />
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+   <!-- Included CSS Files -->
+   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
+
+
+   <!--[if lt IE 9]>
+   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
+
+   <![endif]-->
+
+   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
+
+
+   <!-- IE Fix for HTML5 Tags -->
+   <!--[if lt IE 9]>
+   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
+
+   <![endif]-->
+</head>
+<body>
+	<!-- container -->
+	<div class="container">
+    <header>
+      <div class="row">
+        <a href="/" title="Home">
+          <img src="/assets//images/logo.png" alt="Logo" title="Bèr ‘berkes’ Kessels" />
+        </a>
+      </div>
+
+      <nav id="main" class="row">
+        <div class="onion">
+        <ul>
+          <li>
+          <a href="/about.html">EN / About</a>
+          </li>
+          <li>
+          <a href="/archive.html">EN / Articles</a>
+          </li>
+          <li>
+          <a href="/over.html">NL / Over</a>
+          </li>
+          <li>
+          <a href="/archief.html">NL / Artikelen</a>
+          </li>
+        </ul>
+        </div>
+      </nav>
+    </header>
+    <section id="main-content" class="row">
+      <article>
+  <header>
+    <h1>Why outside in Webdevelopment is Better; why Designs should be Leading.</h1>
+  </header> 
+  <div class="body row">
+    <div class="six columns">
+      
+      <figure>
+  <img src="/images//2012/10/15/why-outside-in-webdevelopment-is-better-why-designs-should-be-leading.png" alt="Woodcut from Doré. Purely illustrative" />
+  
+    <figcaption>Doré Woodcut. Its only function is to make the layout look better. And these images are really nice themselves</figcaption>
+  
+</figure>
+
+    </div>
+    <div class="six columns">
+      <p>Designs should be leading when building a website or -application.
+There! I said it.</p>
+
+<p>Sure, form follows function; content is king and so on: a design should be a Good Design to begin
+with: it should carry the function, content and user-experience to a
+higher level. So, for the sake of the argument, let us assume you have the Perfect Design For Your Project,
+Audience and Branding. It is UX-tested. It is
+delivered as valid, clean HTML and CSS, backed with PSDs, Wireframes and looks stunning.
+It has passed numerous PR- and marketing sessions, and even the boss
+wants it implemented like this.</p>
+
+<p>Enter "the technical guys". People like me, a <em>backend-guy</em>. <strong>Sorry, but
+the CMS we are going to build it with, makes it really hard to implement
+this design.</strong>, sometimes followed with the really pragmatic solution to
+<strong>Have the CMS dicate the way the application works</strong>. To <strong>redo the
+wireframes according to how the CMS works, because that will save lots
+of time and budget</strong>. That last word, being the most important one:
+<strong>Budget</strong>.</p>
+
+<p>People think visual. People talk visual. And our delivery is mostly
+visual: people interact with our -technical- solutions through the "interface",
+that which was in "the Design".</p>
+
+<p>But most important: the design, that interface, is most prone to change;
+from small changes in wording in a footer, to a grand
+rebranding-overhaul: mostly interface changes. When I calculate the
+tickets in the projects I am now involved in, 80% of the tickets are
+"interface"- or "interface-related". First because this interface is
+where any problems below surface and second because this is what 80% of
+your and my clients care about: the interface.</p>
+
+<p>Yet, Even though most of the communications and deliveries are
+outside-in; we work inside out; starting with database-designs,
+CMS-configurations from which we work towards the interfaces.</p>
+
+<h2>But how?</h2>
+
+<p>You'll be developing the innards of the application (its models,
+controllers) and then, in the end, need a giant hammer to beat the
+views, glued to it, into shape to match as closely as possible to your
+designs.</p>
+
+<p>It gets worse when these innards are fixed, because you use a CMS that
+has them built in, for example. You'll be writing extensions, hacks and
+overrides all trough that CMS, just to make it output its interfaces as
+close as possible to designs.</p>
+
+<p>The solution lies in <strong>outside-in development</strong>. I encountered that term first in <a href="http://www.pragprog.com/titles/achbd/errata">The
+Rspec Book — A
+Comprehensive Handbook for Behaviour Driven Webdevelopment</a>. And I am loving it.</p>
+
+<p>The idea is as simple as pragmatic: <a href="http://teachmetocode.com/screencasts/introduction-to-outside-in-development-with-cucumber">you develop by making the views, the
+interface first</a>. Then fixate them in tests (specs), so that the
+interface, the HTML is fixed in your project. From there on, you develop
+the underlying application, whether those are modules for a CMS, models
+and controllers for an MVC-framework or configurations of a
+point-and-click-tool.</p>
+
+<p>Once the HTML (and thus the CSS and interaction) is fixed, a test will
+start to fail the moment someone touches that HTML. Developers can
+therefore develop, refactor, and rewrite the underlying application as
+often as they wish, without breaking the Designs. Sounds cool, not?</p>
+
+<h2>Flexibility.</h2>
+
+<p>Well, maybe not if that underlying application lacks the flexibility to
+be rewritten, altered and changed without making these views-tests fail.
+If, the moment you install an extension, all your tests turn Red (they fail),
+your tests, the fixed interfaces, become a burden. It is then near
+impossible to keep them passing, without all the hacks, extensions and
+configurations. That is probably the moment that you decide to rather
+change the view-specs (i.e. Divert from the original Designs) just to
+get forward.</p>
+
+<p>It means you have the wrong tool. It means you have a tool at hand where
+you'll simply never get 100% according to design. Where the tool
+dictates the designs and workflows of the application. If that works for
+you, then outside-in development makes little sense; but in that case,
+be very aware of this all trough the process; It really makes no sense
+to have a UX-lab test all the wireframes and mockups, if two weeks
+later, you find you cannot implement these wireframes and mockups
+anyway, due to the underlying inflexible tools.</p>
+
+<p>Most RAD frameworks like Rails, Django, and various or their PHP-clones,
+are flexible enough in this, because they don't (ever) assume anything
+about your wireframes and designs.
+Some, very few actually, CMSes allow this too.</p>
+
+<h2>An example?</h2>
+
+<p>In Rails many people test with Rspec; Views are (arguably) best
+described in cucumber features. The exact syntax and setup goes way
+beyond this post, so let's look at some pseudo-code:</p>
+
+<pre><code>Scenario: I want to log in
+  Given I am signed in
+  When I click on my name
+  Then I should see my profile-page
+</code></pre>
+
+<p>A simple feature, described in <a href="http://cukes.info">Gherkin</a> and fixates the actual views
+with so-called step-definitions:</p>
+
+<pre><code>Given /I am signed in/ do
+  @me ||= Factory(:valid_user)
+  When %(I go to the new user session page)
+  When %(I fill in "Username" with "#{@me.username}")
+  When %(I fill in "Password" with "#{@me.password}")
+  When %(I press "Sign in")
+end
+When /^I click on my name$/ do
+  click_link("#{@me.first_name} #{@me.last_name}")
+end
+Then /^I should see my profile-page$/ do
+  page.should have_xpath('//*/h1.name', :text =&gt; "#{@me.first_name} #{@me.last_name})
+end
+</code></pre>
+
+<p>This is a really simple test to ensure that a logged-in user, who clicks
+on a link with her name, gets to see the profile-edit page, containing
+an <em>H1-tag</em>, with class "name" and contents of the users' name. Real
+world tests, with more detail <a href="http://blog.carbonfive.com/2012/02/14/beginning-outside-in-rails-development-with-cucumber-and-rspec">over at Jared Carroll's blogpost on this</a>.</p>
+
+<h2>Downsides?</h2>
+
+<p>Certainly. As you can see, just to describe a login-form, a link with my
+<em>username</em>, and a generic <em>H1-tag</em>, I already need one entire <em>story</em>. Depending on your
+test-suite and your application, you may have to write far, far more test-code then "actual"
+code.</p>
+
+<p>But outside-in development is just one of many reasons why one
+might choose for test-driven development. Writing tests requires
+effort, time and dedication. Without tests you have no way to describe
+and fixate the interfaces. And without that, there is no outside-in
+development (And you'd best tell your designers and clients right-away
+that you are not going to get 100% pixel-perfect interfaces, within
+agreed budget and time... :) ).</p>
+
+<p>The upside, is that your application is tested, and can easily remain
+so. With each release, a few commands ensure you that your (ever
+growing) application works. That all the work by all your colleagues or
+contributors remains working. And that the interfaces, the one thing
+your users care most about, work and look the way they expect them to
+look.</p>
+
+    </div>
+  </div>
+  <footer>
+    <time datetime="2012-10-15T00:00:00+02:00"
+    pubdate="pubdate">
+      Posted on 15 October 2012
+    </time>
+    in
+    
+    
+      
+      
+
+
+  
+    
+      <a href="/tags.html#webdevelopment-ref" class="black radius label">webdevelopment<span class="size">17</span></a>
+    
+      <a href="/tags.html#webdesign-ref" class="black radius label">webdesign<span class="size">3</span></a>
+    
+      <a href="/tags.html#projectmanagement-ref" class="black radius label">projectmanagement<span class="size">7</span></a>
+    
+      <a href="/tags.html#TDD-ref" class="black radius label">TDD<span class="size">1</span></a>
+    
+      <a href="/tags.html#BDD-ref" class="black radius label">BDD<span class="size">1</span></a>
+    
+      <a href="/tags.html#outside-in-ref" class="black radius label">outside-in<span class="size">1</span></a>
+    
+  
+
+
+
+    
+  </footer>
+</article>
+
+<div id="author">
+  <p>
+  
+  
+    <strong>About  the author:</strong> Bèr Kessels is an experienced webdeveloper  with a great passion for
+    technology and Open Source. A golden combination to implement that technology in a good and efficient
+    way. Follow <a href="https://twitter.com/berkes">@berkes</a> on Twitter. Or read more <a href="/over.html">about Bèr</a>.
+  
+  </p>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'berkes'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </section>
+
+    <footer class="main row">
+      <div class="contact four columns">
+        <p>
+            Bèr ‘berkes’ Kessels<br />
+            Bèr Kessels is an Open Source Webdeveloper.<br />
+            <a href='mailto:ber@webschuur.com'>ber@webschuur.com</a>
+          </p>
+          <p>
+            <a href="http://github.com/berkes/">github.com/berkes</a><br />
+            <a href="http://twitter.com/berkes/">twitter.com/berkes</a><br />
+          </p>
+      </div>
+      <div class="four columns">
+        Copyright 2001-2012
+        with a
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Atrribute-Share-alike 3.0 Unported license</a>
+      </div>
+      <div class="four columns">
+        <a class="extra" href="/archive.html">Archive (All English articles)</a> <br />
+        <a class="extra" href="/archief.html">Archief (Alle Nederlandse artikelen)</a> <br />
+        <a class="extra" href="/tags.html">Tags</a> <br />
+        <a href="http://feeds.feedburner.com/berkes"> RSS </a> <br />
+      </div>
+    </footer>
+  </div>
+  <!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik.webschuur.com/" : "http://piwik.webschuur.com/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 9);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://piwik.webschuur.com/piwik.php?idsite=9" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</body>
+</html>

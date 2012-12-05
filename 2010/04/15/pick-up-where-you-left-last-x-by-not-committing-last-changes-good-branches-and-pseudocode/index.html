@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+  <link rel="openid.server" href="http://www.myopenid.com/server" />
+  <link rel="openid.delegate" href="http://berkes.myopenid.com/" />
+  <link rel="openid2.local_id" href="http://berkes.myopenid.com" />
+  <link rel="openid2.provider" href="http://www.myopenid.com/server" />
+  <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=berkes.myopenid.com" />
+
+   <title>"Pick up where you left last X" by not committing last changes, good branches and pseudocode.</title>
+   <meta name="author" content="Bèr ‘berkes’ Kessels" />
+   <link href="http://feeds.feedburner.com/berkes" rel="alternate" title="your title" type="application/atom+xml" />
+   <link rel="author" href="/humans.txt" type="text/plain" />
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+   <!-- Included CSS Files -->
+   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
+
+
+   <!--[if lt IE 9]>
+   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
+
+   <![endif]-->
+
+   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
+
+
+   <!-- IE Fix for HTML5 Tags -->
+   <!--[if lt IE 9]>
+   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
+
+   <![endif]-->
+</head>
+<body>
+	<!-- container -->
+	<div class="container">
+    <header>
+      <div class="row">
+        <a href="/" title="Home">
+          <img src="/assets//images/logo.png" alt="Logo" title="Bèr ‘berkes’ Kessels" />
+        </a>
+      </div>
+
+      <nav id="main" class="row">
+        <div class="onion">
+        <ul>
+          <li>
+          <a href="/about.html">EN / About</a>
+          </li>
+          <li>
+          <a href="/archive.html">EN / Articles</a>
+          </li>
+          <li>
+          <a href="/over.html">NL / Over</a>
+          </li>
+          <li>
+          <a href="/archief.html">NL / Artikelen</a>
+          </li>
+        </ul>
+        </div>
+      </nav>
+    </header>
+    <section id="main-content" class="row">
+      <article>
+  <header>
+    <h1>"Pick up where you left last X" by not committing last changes, good branches and pseudocode.</h1>
+  </header> 
+  <div class="body">
+    <p>When programming, you often need to carry a single task on to the next day, or till "after the meeting" and such. I experimented and found a good method, to pick up where I left. Working <a href="http://getontracks.org/" title="Tracks: an open source, webbased Getting Things Done application">the GTD way</a>, well documented code, a good software architecutre all help keeping a project in line, up to speed and manageble. But it does not solve one thing, though: "picking up where you left". I have many clients, did many projects and have lots of strings attached. Hence I get disturbed very often. Even when you can focus entirely on one single programming task (lucky you!) five o'clock is the end of the day (or, in my case, 18:30).  Going on for another half hour or so is perfectly fine, but most often I cannot finish a single task and need to carry it on to the next day. Or till after that meeting. Getting back in the flow then, requires quite some effort. What I do, is twofolded: <em>work with pseudocode</em> and <em>don't commit the last run</em>.</p>
+
+<p>First, I outline my project in the usual diagrams, documents and such. Then, when working on a more micro-level (the methods), I first write out the inner workings in comments. Steve McConnell, in Code Complete, calls this <a href="http://www.coderookie.com/2006/tutorial/the-pseudocode-programming-process/">Pseudo Programming Process</a>. When finished, I will commit this. When not finished, see below. You often see some meeting, break, or end-of-day coming closer, while working in several Classes, on several routines, or in the database, documenation and code all at once. You are in a certain flow, but really need to halt, because people are waiting, kids need to be picked up at school or your girlfriend needs attention. Valid enough to stop working for now. Most people I know, finish up hastily, and commit the work. I call these <em>five o'clock commits</em> not only are they horrible from a revisioncontrol point (a commit should always describe a complete change) but they offer an opportunity for you: to keep in the flow. Do not commit this. Leave it as it is. Even if you have your work in a commitable state, leave it! After your break, or next day, you open the code, and when you left it commitable, the first thing you must do, is commit the work.</p>
+
+<p>This forces you to read through the diff, describe the changes and then commit. I found this exercise more then enough to get me right into the flow, to pick up where I left. If you left it in an uncommitable state, then somewhat the same applies. You can read through the diff, describe what was going on and pick up the work right away.</p>
+
+<p>When combined with <a href="http://nvie.com/git-model">good branching practice</a> this "reading through the diff" takes less then ten minutes. And, as is my experience, even helps when picking up work after a few days other work, or a long weekend or any other situation where simply the diff does not ring a bell anymore. In fact, after finishing this blogpost, I am going to pick up where I left friday (six days ago) and I am confident that the commented pseudocode, good branchnames and the diff leave me more then enough hints to be on track in less then ten minutes.</p>
+
+  </div>
+  <footer>
+    <p class="note">
+    
+      <em>This article was published on webschuur.com. And migrated to this blog. </em>
+    
+    </p>
+    <time datetime="2010-04-15T00:00:00+02:00"
+    pubdate="pubdate">
+      Posted on 15 April 2010
+    </time>
+    in
+    
+    
+      
+      
+
+
+  
+    
+      <a href="/tags.html#project management-ref" class="black radius label">project management<span class="size">28</span></a>
+    
+  
+
+
+
+    
+  </footer>
+</article>
+
+<div id="author">
+  <p>
+  
+  
+    <strong>About  the author:</strong> Bèr Kessels is an experienced webdeveloper  with a great passion for
+    technology and Open Source. A golden combination to implement that technology in a good and efficient
+    way. Follow <a href="https://twitter.com/berkes">@berkes</a> on Twitter. Or read more <a href="/over.html">about Bèr</a>.
+  
+  </p>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'berkes'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </section>
+
+    <footer class="main row">
+      <div class="contact four columns">
+        <p>
+            Bèr ‘berkes’ Kessels<br />
+            Bèr Kessels is an Open Source Webdeveloper.<br />
+            <a href='mailto:ber@webschuur.com'>ber@webschuur.com</a>
+          </p>
+          <p>
+            <a href="http://github.com/berkes/">github.com/berkes</a><br />
+            <a href="http://twitter.com/berkes/">twitter.com/berkes</a><br />
+          </p>
+      </div>
+      <div class="four columns">
+        Copyright 2001-2012
+        with a
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Atrribute-Share-alike 3.0 Unported license</a>
+      </div>
+      <div class="four columns">
+        <a class="extra" href="/archive.html">Archive (All English articles)</a> <br />
+        <a class="extra" href="/archief.html">Archief (Alle Nederlandse artikelen)</a> <br />
+        <a class="extra" href="/tags.html">Tags</a> <br />
+        <a href="http://feeds.feedburner.com/berkes"> RSS </a> <br />
+      </div>
+    </footer>
+  </div>
+  <!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik.webschuur.com/" : "http://piwik.webschuur.com/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 9);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://piwik.webschuur.com/piwik.php?idsite=9" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</body>
+</html>

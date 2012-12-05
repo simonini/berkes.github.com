@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+  <link rel="openid.server" href="http://www.myopenid.com/server" />
+  <link rel="openid.delegate" href="http://berkes.myopenid.com/" />
+  <link rel="openid2.local_id" href="http://berkes.myopenid.com" />
+  <link rel="openid2.provider" href="http://www.myopenid.com/server" />
+  <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=berkes.myopenid.com" />
+
+   <title>Choosing your system architecture for large scale Dupal deployment.</title>
+   <meta name="author" content="Bèr ‘berkes’ Kessels" />
+   <link href="http://feeds.feedburner.com/berkes" rel="alternate" title="your title" type="application/atom+xml" />
+   <link rel="author" href="/humans.txt" type="text/plain" />
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+   <!-- Included CSS Files -->
+   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
+
+
+   <!--[if lt IE 9]>
+   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
+
+   <![endif]-->
+
+   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
+
+
+   <!-- IE Fix for HTML5 Tags -->
+   <!--[if lt IE 9]>
+   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
+
+   <![endif]-->
+</head>
+<body>
+	<!-- container -->
+	<div class="container">
+    <header>
+      <div class="row">
+        <a href="/" title="Home">
+          <img src="/assets//images/logo.png" alt="Logo" title="Bèr ‘berkes’ Kessels" />
+        </a>
+      </div>
+
+      <nav id="main" class="row">
+        <div class="onion">
+        <ul>
+          <li>
+          <a href="/about.html">EN / About</a>
+          </li>
+          <li>
+          <a href="/archive.html">EN / Articles</a>
+          </li>
+          <li>
+          <a href="/over.html">NL / Over</a>
+          </li>
+          <li>
+          <a href="/archief.html">NL / Artikelen</a>
+          </li>
+        </ul>
+        </div>
+      </nav>
+    </header>
+    <section id="main-content" class="row">
+      <article>
+  <header>
+    <h1>Choosing your system architecture for large scale Dupal deployment.</h1>
+  </header> 
+  <div class="body">
+    <p>This is a <a href="http://webschuur.com/sites/webschuur.com/files/vhost_admin_morpho.png">morphological overview</a>, to display all te options for deploying a Drupal (and/ or Joomla!! or any other CMS) hosting system.</p>
+
+<p><img src="http://webschuur.com/sites/webschuur.com/files/vhost_admin_morpho_lo_res.png" alt="morphological overview" /></p>
+
+<h2>The way one should read it</h2>
+
+<p>In the first vertical column all "tasks" we need to perform are listed, chopped up into the smallest possible unit. Then next to each of these we render all possible tools and solutions for each task, <strong>without taking in consideration how ill-suited these tools may be, nor how well they can, or will co-operate</strong>. By refusing to look at possible solutions yet, we can make sure that we actually list all options.
+Then we define possible solutions, by drawing lines to connect all the subsolutions. Example (not in the graph): Remote X for server management, Virtualmin for virtual-hosting management, FTP for installation, scripts for the user management. Only after we drew this line, we can give it a value. The abovementioned example makes little sense, since it has the bad sides of every option: complex, lots of overhead (a full KDE/Gnome for example) scripts that are none-existent, and a relatively insecure management system.
+If we draw all the lines we can see all the possible solutions and only <strong>then</strong> choose the best options. Since there is never <em>A</em> best one, this method is a simple, and very effective to make sure the choice you made is not done because of pre-occupation, or lack of knowledge. People tend to think in terms of complete solutions and therefore often rule out options that would have been the perfect match for their case!
+The background-color of the cell indicates the status or maturity of the option; The colors of lines are only used to be able to distiguish lines, they have nothing to do with the status/maturity!</p>
+
+<h2>Red line: Over SSH</h2>
+
+<p>All administration over SSH, the standard *nix way.</p>
+
+<ul>
+<li>Pro: Very secure, very clean (requires minimum applications), very mature, full control and freedom, lots of documentation available.</li>
+<li>Con: Complex, high learning curve, management of large client bases requires a lot of work.</li>
+</ul>
+
+
+<h2>Blue en pink lines: Inhouse scripts</h2>
+
+<p>This is additional to the 'red line' option. The scripts allow easier management of large client bases, and automate some of the more complex tasks.
+The blue line uses <a href="http://manuals.rubyonrails.com/read/book/17">capistrano</a>, the fastgrowing Ruby deployment platform.
+The pink line uses <a href="http://webschuur.com/node/637">Sympal scripts</a> the in-house deployment platform for Drupal, in PHP.</p>
+
+<ul>
+<li>Pro: Equal to the 'red line'. In addition, deployment of large client-bases becomes easier.</li>
+<li>Con: Still rather complex, with a steap learning curve. Far less documentation available. Many scripts are not released, not stable, or not compatible with Drupal or other tools yet.</li>
+</ul>
+
+
+<h2>Orange line</h2>
+
+<p>These lines represent the 6(or more?) virtual admin tool options. SSH for server administration, SSH and/or FTP for installation of the Drupal or Joomla! sites, and a dedicated application for virtual domain administration. This is the 'classic' Virtual hosting provider setup. I left out Plesk and Vhost for one reason: the lines would clutter the graph too much.</p>
+
+<ul>
+<li>Pro: Proven technology, GUIs for administration, GUIs for resellers.</li>
+<li>Con: Applications are not distributed trough Debian channels, security is harder to follow up, Installation and upgrade requires recompilation. Apps often require very specific (and none standard) server configurations or applications. Some applications require relative big investments for licences, are closed source or are limited in what they can offer.</li>
+</ul>
+
+
+<h2>Turquoise line</h2>
+
+<p>Webmin and virtualmin: full administration over the web, in the browser. Virtualmin is a plugin for webmin.</p>
+
+<ul>
+<li>Pro: GUIs for all tasks. Less error prone. All distributed trough Debian channels</li>
+<li>Con: Webmin knows <a href="http://webmin.com/security.html">many security issues</a> (<em>note:</em> other tools such as plesk are closed source, so they might be even more insecure, yet this is not testable). Virtualmin/webmin <a href="http://lists.debian.org/debian-devel/2005/12/msg00790.html">might not stay in the Debian repositories</a> much longer.</li>
+</ul>
+
+
+  </div>
+  <footer>
+    <p class="note">
+    
+      <em>This article was published on webschuur.com. And migrated to this blog. </em>
+    
+    </p>
+    <time datetime="2006-09-19T00:00:00+02:00"
+    pubdate="pubdate">
+      Posted on 19 September 2006
+    </time>
+    in
+    
+    
+      
+      
+
+
+  
+    
+      <a href="/tags.html#php-ref" class="black radius label">php<span class="size">41</span></a>
+    
+      <a href="/tags.html#drupal-ref" class="black radius label">drupal<span class="size">212</span></a>
+    
+      <a href="/tags.html#drupal hosting-ref" class="black radius label">drupal hosting<span class="size">11</span></a>
+    
+      <a href="/tags.html#sympal.nl-ref" class="black radius label">sympal.nl<span class="size">10</span></a>
+    
+      <a href="/tags.html#ruby-ref" class="black radius label">ruby<span class="size">22</span></a>
+    
+      <a href="/tags.html#ruby on rails-ref" class="black radius label">ruby on rails<span class="size">14</span></a>
+    
+      <a href="/tags.html#railfrog-ref" class="black radius label">railfrog<span class="size">3</span></a>
+    
+  
+
+
+
+    
+  </footer>
+</article>
+
+<div id="author">
+  <p>
+  
+  
+    <strong>About  the author:</strong> Bèr Kessels is an experienced webdeveloper  with a great passion for
+    technology and Open Source. A golden combination to implement that technology in a good and efficient
+    way. Follow <a href="https://twitter.com/berkes">@berkes</a> on Twitter. Or read more <a href="/over.html">about Bèr</a>.
+  
+  </p>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'berkes'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </section>
+
+    <footer class="main row">
+      <div class="contact four columns">
+        <p>
+            Bèr ‘berkes’ Kessels<br />
+            Bèr Kessels is an Open Source Webdeveloper.<br />
+            <a href='mailto:ber@webschuur.com'>ber@webschuur.com</a>
+          </p>
+          <p>
+            <a href="http://github.com/berkes/">github.com/berkes</a><br />
+            <a href="http://twitter.com/berkes/">twitter.com/berkes</a><br />
+          </p>
+      </div>
+      <div class="four columns">
+        Copyright 2001-2012
+        with a
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Atrribute-Share-alike 3.0 Unported license</a>
+      </div>
+      <div class="four columns">
+        <a class="extra" href="/archive.html">Archive (All English articles)</a> <br />
+        <a class="extra" href="/archief.html">Archief (Alle Nederlandse artikelen)</a> <br />
+        <a class="extra" href="/tags.html">Tags</a> <br />
+        <a href="http://feeds.feedburner.com/berkes"> RSS </a> <br />
+      </div>
+    </footer>
+  </div>
+  <!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik.webschuur.com/" : "http://piwik.webschuur.com/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 9);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://piwik.webschuur.com/piwik.php?idsite=9" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</body>
+</html>

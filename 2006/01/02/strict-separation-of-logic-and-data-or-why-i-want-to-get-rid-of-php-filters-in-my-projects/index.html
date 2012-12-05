@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+  <link rel="openid.server" href="http://www.myopenid.com/server" />
+  <link rel="openid.delegate" href="http://berkes.myopenid.com/" />
+  <link rel="openid2.local_id" href="http://berkes.myopenid.com" />
+  <link rel="openid2.provider" href="http://www.myopenid.com/server" />
+  <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=berkes.myopenid.com" />
+
+   <title>Strict separation of logic and data (or: why I want to get rid of PHP filters in my projects)</title>
+   <meta name="author" content="Bèr ‘berkes’ Kessels" />
+   <link href="http://feeds.feedburner.com/berkes" rel="alternate" title="your title" type="application/atom+xml" />
+   <link rel="author" href="/humans.txt" type="text/plain" />
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+   <!-- Included CSS Files -->
+   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
+
+
+   <!--[if lt IE 9]>
+   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
+
+   <![endif]-->
+
+   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
+
+
+   <!-- IE Fix for HTML5 Tags -->
+   <!--[if lt IE 9]>
+   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
+
+   <![endif]-->
+</head>
+<body>
+	<!-- container -->
+	<div class="container">
+    <header>
+      <div class="row">
+        <a href="/" title="Home">
+          <img src="/assets//images/logo.png" alt="Logo" title="Bèr ‘berkes’ Kessels" />
+        </a>
+      </div>
+
+      <nav id="main" class="row">
+        <div class="onion">
+        <ul>
+          <li>
+          <a href="/about.html">EN / About</a>
+          </li>
+          <li>
+          <a href="/archive.html">EN / Articles</a>
+          </li>
+          <li>
+          <a href="/over.html">NL / Over</a>
+          </li>
+          <li>
+          <a href="/archief.html">NL / Artikelen</a>
+          </li>
+        </ul>
+        </div>
+      </nav>
+    </header>
+    <section id="main-content" class="row">
+      <article>
+  <header>
+    <h1>Strict separation of logic and data (or: why I want to get rid of PHP filters in my projects)</h1>
+  </header> 
+  <div class="body">
+    <p>We all know the mantra "logic and design must be separated". and we all agree with that, or so I assume. Drupal does this quit well,separating them, in structured and layered templating system.</p>
+
+<p>What is lesser known and more often violated is a strict separation between logic and data. In Drupal we all know the so called <a href="http://drupal.org/node/23220">PHP blocks and pages</a>.and while I too abuse these very often, they made me think a lot. As of today I decided that I dislike them. And that I will seek for a better alternative to replace them with.</p>
+
+<p>I dislike them for two reasons. The most obvious is security. One must keep a very very close eye on the site that has php pages. On a few of my sites I found out a bit late that I gave certain people the ability to create php blocks (in older drupal versions it was harder to change that, then in 4.7). I know of one mayor site where I suddenly saw the filter option "PHP code" appear in my node creation forms (yet I was only a moderator). Just examples of how easy this security hole is opened up. The way to avoid this from happening is just to pay attention. Something one should do anyway. But still: switching it all off, is the most secure thing to do. Especially in a multisite hosting environment.</p>
+
+<p>The other reason is less obvious, but seen from the angle of a developer maybe even more important. I found that, for reasons of maintainability, backwards compatibility, and just plain old management of a project, I should keep three things very well separated:Code (logic), design (themes), and data (content).</p>
+
+<p>Those three items, should, in my opinion stay in their own place. And never ever get mixed up. About the separation of logic and design people have said too much already. No need to say more here. But about the separation of our data and the logic I have not read that much. Most probably because not many projects and CMSes allow people to add code in a web interface. So I would like to explain it a little, with a focus on Drupal.</p>
+
+<p>When I need an exotic block, or a more complex page, in Drupal, I often decide not to make a complete module just for that page or block, but I decide to just create some PHP and to paste that in the filtered content and set the filter to PHP filter. Drupal will then get the code from the database and evaluate it, then run it as any-ol' PHP. Drupal.org itself has even a big <a href="http://drupal.org/node/23220">library of such custom pages</a> and <a href="http://drupal.org/node/21867">blocks</a>. And they become more and more posular, because its just a tad easier to use and share as a module.so, why I dislike this then? First of all let me say that anyone can make mistakes. And that anyone will make them. In that case you have a chance of breaking something in your site. I have helped quite some people in the mailinglists who could no longer access their site, and thus could no longer fix the error they made in their block.</p>
+
+<p>Secondly, it must be known that Drupal is, by no means, backwards compatible. Too often did I have to hunt trough the content, to fix a block that called an old deprecated API, or a page that referenced a no longer existing database table.</p>
+
+<p>And last, the most important part: It is very hard to maintain the code. As the second point already proved, we must maintain our code. Not only with upgrades, but also on various sites, or in various runtime environments (dev.mysite.com, staging.mysite.com and www.mysite.com, production) The more sites one has in his or her portfolio, the harder it gets to maintain all that custom code. The faster one needs to develop the harder it gets to keep various databases in sync. You cannot track it in a revision control system, nor in your private code database. You cannot copy over all the new files, and then release that. It is very hard to develop more complex code in a webform, other then by copy-pasting it from your favorite PHP editor.</p>
+
+<p>So.... While we are there anyway, in that favorite phpeditor, why then, do we want to keep our code in our database, amongst our artworks, recipes, reviews, blog entries, or other content? Why do we not just maintain the logic together with all the other logic: as PHP files. As modules. Or themes?For me the answer to that is only "laziness". Developing a module requires defining a few more functions, help texts and some other required code, not to forget the code comments. While the PHP inside the database does not need all that (in fact, one cannot use functions in there, because of technical limitations).</p>
+
+<p>But as with all these things that we do out of laziness, we find after a little while that we would have saved a lot of work and time, had we not been lazy. Had we just developed a small custom mysitename_com.module then we would have saved time.</p>
+
+<p>I have to add, finally, that while I here only talk about PHP filters, this in fact goes for a lot more, like the new views.module configuration, or our carefull crafted flexinode configuration. For this, I beleive I should find better alternatives too. So that I can keep logic and data truly separated.</p>
+
+<p>So, to conclude: for me, my future projects, for <a href="http://sympal.nl">sympal</a> and for DrupalCOM, PHPfilters will no longer be active. Instead I will develop more module-creation scripts to scaffold new modules faster. Just like I already decided not to use flexinode anymore, but instead go for small node modules, to define new node types, instead. This also fits better in my model, i envision, where a Drupal site is build by a developer and used by a user. That user should never (have to) have access to any logic, but should only have to bother about the content. The developer is the one building the logic; And that developer has access to the codebase anyway.</p>
+
+  </div>
+  <footer>
+    <p class="note">
+    
+      <em>This article was published on webschuur.com. And migrated to this blog. </em>
+    
+    </p>
+    <time datetime="2006-01-02T00:00:00+01:00"
+    pubdate="pubdate">
+      Posted on 02 January 2006
+    </time>
+    in
+    
+    
+      
+      
+
+
+  
+    
+      <a href="/tags.html#php-ref" class="black radius label">php<span class="size">41</span></a>
+    
+      <a href="/tags.html#drupal-ref" class="black radius label">drupal<span class="size">212</span></a>
+    
+      <a href="/tags.html#usability-ref" class="black radius label">usability<span class="size">14</span></a>
+    
+      <a href="/tags.html#sympal.nl-ref" class="black radius label">sympal.nl<span class="size">10</span></a>
+    
+  
+
+
+
+    
+  </footer>
+</article>
+
+<div id="author">
+  <p>
+  
+  
+    <strong>About  the author:</strong> Bèr Kessels is an experienced webdeveloper  with a great passion for
+    technology and Open Source. A golden combination to implement that technology in a good and efficient
+    way. Follow <a href="https://twitter.com/berkes">@berkes</a> on Twitter. Or read more <a href="/over.html">about Bèr</a>.
+  
+  </p>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'berkes'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </section>
+
+    <footer class="main row">
+      <div class="contact four columns">
+        <p>
+            Bèr ‘berkes’ Kessels<br />
+            Bèr Kessels is an Open Source Webdeveloper.<br />
+            <a href='mailto:ber@webschuur.com'>ber@webschuur.com</a>
+          </p>
+          <p>
+            <a href="http://github.com/berkes/">github.com/berkes</a><br />
+            <a href="http://twitter.com/berkes/">twitter.com/berkes</a><br />
+          </p>
+      </div>
+      <div class="four columns">
+        Copyright 2001-2012
+        with a
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Atrribute-Share-alike 3.0 Unported license</a>
+      </div>
+      <div class="four columns">
+        <a class="extra" href="/archive.html">Archive (All English articles)</a> <br />
+        <a class="extra" href="/archief.html">Archief (Alle Nederlandse artikelen)</a> <br />
+        <a class="extra" href="/tags.html">Tags</a> <br />
+        <a href="http://feeds.feedburner.com/berkes"> RSS </a> <br />
+      </div>
+    </footer>
+  </div>
+  <!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik.webschuur.com/" : "http://piwik.webschuur.com/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 9);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://piwik.webschuur.com/piwik.php?idsite=9" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</body>
+</html>

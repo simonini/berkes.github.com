@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="nl"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="nl"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="nl"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="nl"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+  <link rel="openid.server" href="http://www.myopenid.com/server" />
+  <link rel="openid.delegate" href="http://berkes.myopenid.com/" />
+  <link rel="openid2.local_id" href="http://berkes.myopenid.com" />
+  <link rel="openid2.provider" href="http://www.myopenid.com/server" />
+  <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=berkes.myopenid.com" />
+
+   <title>HOWTO Piratebay in Nederland bezoeken met TOR (op ubuntu)</title>
+   <meta name="author" content="Bèr ‘berkes’ Kessels" />
+   <link href="http://feeds.feedburner.com/berkes" rel="alternate" title="your title" type="application/atom+xml" />
+   <link rel="author" href="/humans.txt" type="text/plain" />
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+   <!-- Included CSS Files -->
+   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
+
+
+   <!--[if lt IE 9]>
+   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
+
+   <![endif]-->
+
+   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
+
+
+   <!-- IE Fix for HTML5 Tags -->
+   <!--[if lt IE 9]>
+   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
+
+   <![endif]-->
+</head>
+<body>
+	<!-- container -->
+	<div class="container">
+    <header>
+      <div class="row">
+        <a href="/" title="Home">
+          <img src="/assets//images/logo.png" alt="Logo" title="Bèr ‘berkes’ Kessels" />
+        </a>
+      </div>
+
+      <nav id="main" class="row">
+        <div class="onion">
+        <ul>
+          <li>
+          <a href="/about.html">EN / About</a>
+          </li>
+          <li>
+          <a href="/archive.html">EN / Articles</a>
+          </li>
+          <li>
+          <a href="/over.html">NL / Over</a>
+          </li>
+          <li>
+          <a href="/archief.html">NL / Artikelen</a>
+          </li>
+        </ul>
+        </div>
+      </nav>
+    </header>
+    <section id="main-content" class="row">
+      <article>
+  <header>
+    <h1>HOWTO Piratebay in Nederland bezoeken met TOR (op ubuntu)</h1>
+  </header> 
+  <div class="body">
+    <p><strong>LET OP!</strong> dit is een oud artikel. Op deze manier browsen met Tor is
+niet meer aangeraden; Ik raad nu de <a href="https://www.torproject.org/projects/torbrowser.html.en">Tor Browser Bundle</a> aan.</p>
+
+<p>Wanneer <a href="http://www.scribd.com/doc/17846197/Vonnis-rechter-The-Pirate-Bay">piratebay in Nederland verboden word</a> blijven er genoeg mogelijkheden om de site toch te bezoeken. Hieronder leg ik uit hoe je met TOR en privoxy straks de Piratebay nog gewoon vanuit Nederland kunt bezoeken.</p>
+
+<p>Naast de tips op <a href="http://www.nrcnext.nl/blog/tag/proxy/">NRC next</a>, kunt
+je ook "gewoon" een <a href="http://torproject.org">TOR</a> proxy gebruiken.</p>
+
+<p>Maar voordat we TOR installeren eerst een beetje achtergrondinformatie.
+Wat Piratebay doet, is niets meer dan verwijzingen naar een download plaatsen.</p>
+
+<p>Je download de bestanden niet van de piratebay, maar van "peers", mensen zoals jij en ik. Die een film downloaden. Tijdens dat downloaden upload je ook altijd. Naar mensen zoals jij en ik. Jij upload de stukje die je al hebt. Ik kan die dan downloaden. En ze dan weer uploaden naar mensen die ze nog niet hebben. Dat blijft gewoon mogelijk. Wat de rechter verbood, is die verwijzing naar jou en mij en alle andere up- en downloaders vanaf Piratebay.org op te halen. Je hoeft dus alleen maar bij piratebay te komen, daarna gaat alles als vanouds. En dat kan met TOR. Meer informatie over wat TOR doet en is heb ik <a href="http://berk.es/2007/01/11/websites-veiliger-maken-met-privoxy/">al eerder beschreven</a>.</p>
+
+<h1>TOR instellen op Ubuntu</h1>
+
+<h3>1. Voeg TOR-repositories toe aan je installatieomgeving.</h3>
+
+<p>Ga naar Systeem >> Beheer >> Softwarebronnen. Voeg daar in de tab "software van derden" een nieuwe repository toe, gebruik onderstaande regel</p>
+
+<div class="highlight"><pre><code class="bash">deb     http://mirror.noreply.org/pub/tor jaunty main
+</code></pre>
+</div>
+
+
+<p>Sla op en sluit af. Bij de vraag herladen? kies, "Sluiten". <a href="http://www.avuc.nl/2009/05/04/tor-on-ubuntu-904/">AVUC heeft de sleutels en meer informatie</a>.</p>
+
+<h3>2. Voeg de keys toe:</h3>
+
+<div class="highlight"><pre><code class="bash">gpg --keyserver subkeys.pgp.net --recv 94C09C7Fgpg --fingerprint 94C09C7Fgpg --export 94C09C7F | sudo apt-key add -
+</code></pre>
+</div>
+
+
+<h3>3. Installeer TOR en <a href="http://nl.wikipedia.org/wiki/Privoxy">Privoxy</a>.</h3>
+
+<div class="highlight"><pre><code class="bash">sudo apt-get updatesudo apt-get install tor privoxy
+</code></pre>
+</div>
+
+
+<h3>4. Voeg een regel toe aan de configuratie van privoxy. Open het bestand /etc/privoxy/config:</h3>
+
+<div class="highlight"><pre><code class="bash">sudo gedit /etc/privoxy/configEn plaats de regel ergens bovenaan <span class="o">(</span>vergeet de afsluitende punt niet!<span class="o">)</span>forward-socks4a / localhost:9050 . 
+</code></pre>
+</div>
+
+
+<h3>5. Start tor en privoxy.</h3>
+
+<div class="highlight"><pre><code class="bash">sudo /etc/init.d/tor startsudo /etc/init.d/privoxy start
+</code></pre>
+</div>
+
+
+<h3>6. Voeg aan je browser <a href="http://localhost:8118">localhost:8118</a> als proxy in. vanaf waar je naar the piratebay kunt surfen.</h3>
+
+<p>In Firefox doe je dat met: Bewerken >> Voorkeuren >> Geavanceerd. Knop "instellingen" bij Verbinding. Kies daar "Handmatige proxyconfiguratie" en kies als HTTP-Proxy:localhost en poort 8118 in.</p>
+
+<h3>7. Optioneel kun je de firefox addon <a href="https://addons.mozilla.org/nl/firefox/addon/2275">TOR Button</a> installeren. Daarmee kun je heel snel en makkelijk in firefox schakelen tussen anoniem (TOR) en gewoon internetten.</h3>
+
+<p>Heb je betere tips? Of makkelijkere manieren? Weet je een goede HOWTO voor windows of Mac? Laat het achter in de reachties.</p>
+
+  </div>
+  <footer>
+    <p class="note">
+    
+      <em>Dit artikel verscheen op bler.webschuur.com. En is overgezet naar dit blog</em>
+    
+    </p>
+    <time datetime="2009-07-30T00:00:00+02:00"
+    pubdate="pubdate">
+      Posted on 30 July 2009
+    </time>
+    in
+    
+    
+      
+      
+
+
+  
+    
+      <a href="/tags.html#tor-ref" class="black radius label">tor<span class="size">2</span></a>
+    
+      <a href="/tags.html#proxy-ref" class="black radius label">proxy<span class="size">3</span></a>
+    
+      <a href="/tags.html#piratebay-ref" class="black radius label">piratebay<span class="size">2</span></a>
+    
+  
+
+
+
+    
+  </footer>
+</article>
+
+<div id="author">
+  <p>
+  
+    <strong>Over de auteur:</strong> Bèr Kessels is een ervaren webdeveloper met een grote passie voor
+    techniek en Open Source. Een gouden combinatie om de techniek goed en
+    efficiënt toe te passen. Volg <a href="https://twitter.com/berkes">@berkes</a> op Twitter. Of lees meer <a href="/over.html">over Bèr</a>.
+  
+  
+  </p>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'berkes'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </section>
+
+    <footer class="main row">
+      <div class="contact four columns">
+        <p>
+            Bèr ‘berkes’ Kessels<br />
+            Bèr Kessels is an Open Source Webdeveloper.<br />
+            <a href='mailto:ber@webschuur.com'>ber@webschuur.com</a>
+          </p>
+          <p>
+            <a href="http://github.com/berkes/">github.com/berkes</a><br />
+            <a href="http://twitter.com/berkes/">twitter.com/berkes</a><br />
+          </p>
+      </div>
+      <div class="four columns">
+        Copyright 2001-2012
+        with a
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Atrribute-Share-alike 3.0 Unported license</a>
+      </div>
+      <div class="four columns">
+        <a class="extra" href="/archive.html">Archive (All English articles)</a> <br />
+        <a class="extra" href="/archief.html">Archief (Alle Nederlandse artikelen)</a> <br />
+        <a class="extra" href="/tags.html">Tags</a> <br />
+        <a href="http://feeds.feedburner.com/berkes"> RSS </a> <br />
+      </div>
+    </footer>
+  </div>
+  <!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik.webschuur.com/" : "http://piwik.webschuur.com/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 9);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://piwik.webschuur.com/piwik.php?idsite=9" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</body>
+</html>

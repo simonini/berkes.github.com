@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+  <link rel="openid.server" href="http://www.myopenid.com/server" />
+  <link rel="openid.delegate" href="http://berkes.myopenid.com/" />
+  <link rel="openid2.local_id" href="http://berkes.myopenid.com" />
+  <link rel="openid2.provider" href="http://www.myopenid.com/server" />
+  <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=berkes.myopenid.com" />
+
+   <title>Drupal and i18n, the holy grail?</title>
+   <meta name="author" content="Bèr ‘berkes’ Kessels" />
+   <link href="http://feeds.feedburner.com/berkes" rel="alternate" title="your title" type="application/atom+xml" />
+   <link rel="author" href="/humans.txt" type="text/plain" />
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+   <!-- Included CSS Files -->
+   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
+
+
+   <!--[if lt IE 9]>
+   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
+
+   <![endif]-->
+
+   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
+
+
+   <!-- IE Fix for HTML5 Tags -->
+   <!--[if lt IE 9]>
+   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
+
+   <![endif]-->
+</head>
+<body>
+	<!-- container -->
+	<div class="container">
+    <header>
+      <div class="row">
+        <a href="/" title="Home">
+          <img src="/assets//images/logo.png" alt="Logo" title="Bèr ‘berkes’ Kessels" />
+        </a>
+      </div>
+
+      <nav id="main" class="row">
+        <div class="onion">
+        <ul>
+          <li>
+          <a href="/about.html">EN / About</a>
+          </li>
+          <li>
+          <a href="/archive.html">EN / Articles</a>
+          </li>
+          <li>
+          <a href="/over.html">NL / Over</a>
+          </li>
+          <li>
+          <a href="/archief.html">NL / Artikelen</a>
+          </li>
+        </ul>
+        </div>
+      </nav>
+    </header>
+    <section id="main-content" class="row">
+      <article>
+  <header>
+    <h1>Drupal and i18n, the holy grail?</h1>
+  </header> 
+  <div class="body">
+    <p>Or, how to get the project rolling.</p>
+
+<p>First of all we need to recognise that there is no Ultimate i18n solution. There are many, all depending on the needs, cases and implementations.
+So, I really do not believe in a single i18n module. Or in a holy grail. Therefore I torn the problem apart, and made Lego blocks out of it. That way the problem becomes rather clear.</p>
+
+<!--break-->
+
+
+<p>On the top level there are a few types of i18n sites:</p>
+
+<ol>
+<li>Mixed content. Sometimes I blog in English, sometimes in Dutch.</li>
+<li>Mirrored translations. For *every single item* in a "normal" site, you now need X amount (X being amount of active languages). this can be reduced by saying 'I need admin areas only in language A, admin is defined as  Foo and Bar'</li>
+<li>Growing translations. For every piece of content there may, or may not, be a translation. Think about freetagging (a tag beer and a tag bier). Or about community efforts to get pages translated.  interlingual connections (read this in langB) lay, or may not be required.</li>
+<li>A few pages in langA to explain what its about. Simple, just maintain a few pages in another language.[1]</li>
+<li>Inline translations. Only certain elements of content have to be translated. Example: <a href="http://www.newsphoto.nl/node/1456">a photogallery (yes, badly implemented!)</a> with only English and Dutch "descriptions". They may appear on one page even. Or wrapped in a &lt;span class=lang en"&gt; Other elements may not be translated like the title, that can be the same for both languages.</li>
+</ol>
+
+
+<p>We can also differentiate some other translations areas. The clear difference being:</p>
+
+<ol>
+<li>content (day-to-day content like terms, nodes, comments, profiles. oh if only they all were *cough* :))</li>
+<li>interfaces (PO file import export)</li>
+<li>admin submitted configuration (think menu-titles, or user roles, or flexinode types, or profile fields)</li>
+</ol>
+
+
+<p>The good news, is that all the types have one common denominator: language switching. Except maybe for site type 4.</p>
+
+<p>The bad news is that both workflow and interfaces differ a <em>lot</em> between the various types.</p>
+
+<p>So here is what I propose:</p>
+
+<ul>
+<li>locale.module+locale.inc, current implementation MINUS language choosing/switching interface and code! handles "translate area 2".</li>
+<li>lang_switcher.module. A *simple* API/library module containing only APIs and a block to select languages. No editing interfaces or forms should be in there. Should also contain the three methods of storing the language in APIs. $SESSION, url prefix /en/node/12 /fr/node/12  and url postfix ?lang=en.</li>
+<li>config_translation.inc. the toughest part: a contrib that allows us to translate missions, blocks, menu-items etc. handles "translate area 3". I have a fuzzy vision of some form_alter, combined with table prefixing (ugh!) and variable_get/_set prefixing. Needs clear thought.</li>
+<li>Loads of modules and or themes using these APIs and systems to allow a variety of cases and workflows. Node_translator.module, comment_lang_switchers (yes, ever thought of how to avoid EN comments appearing under the DE version, heh?). oh and, off course a contrib user_profile_lang.module, containing the part from locale.module, where you store your language preference in your profile.</li>
+</ul>
+
+
+<p>And now? Fists in the air and <em>ffoooorwaaaaaaard</em> :)</p>
+
+<p>Serious: if we think these Lego blocks are well defined, we only need to make them, the blocks. Most of this is ripping stuff from existing modules, putting that in other modules and finetune that. Oh, and occasionally we need to build non-existing stuff, like config_translation.inc/.module.</p>
+
+<p>Starting here, IMO is better then writing down that the industry needs i18n, not? Or developing yet another module for translating the 60% your specific case needs translated (and no-one else will ever need).</p>
+
+<p>BZR? CVS? bright SVN? Drupal.org issues? where to start?</p>
+
+<p>Bèr</p>
+
+<p>[1] unfortunately not /that/ simple, because if you want to have poor SEO and so, you need to add the lang="" entity to the surrounding XHTML.</p>
+
+  </div>
+  <footer>
+    <p class="note">
+    
+      <em>This article was published on webschuur.com. And migrated to this blog. </em>
+    
+    </p>
+    <time datetime="2006-02-25T00:00:00+01:00"
+    pubdate="pubdate">
+      Posted on 25 February 2006
+    </time>
+    in
+    
+    
+      
+      
+
+
+  
+    
+      <a href="/tags.html#drupal-ref" class="black radius label">drupal<span class="size">212</span></a>
+    
+      <a href="/tags.html#newsphoto eu-ref" class="black radius label">newsphoto eu<span class="size">2</span></a>
+    
+      <a href="/tags.html#sympal.nl-ref" class="black radius label">sympal.nl<span class="size">10</span></a>
+    
+  
+
+
+
+    
+  </footer>
+</article>
+
+<div id="author">
+  <p>
+  
+  
+    <strong>About  the author:</strong> Bèr Kessels is an experienced webdeveloper  with a great passion for
+    technology and Open Source. A golden combination to implement that technology in a good and efficient
+    way. Follow <a href="https://twitter.com/berkes">@berkes</a> on Twitter. Or read more <a href="/over.html">about Bèr</a>.
+  
+  </p>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'berkes'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </section>
+
+    <footer class="main row">
+      <div class="contact four columns">
+        <p>
+            Bèr ‘berkes’ Kessels<br />
+            Bèr Kessels is an Open Source Webdeveloper.<br />
+            <a href='mailto:ber@webschuur.com'>ber@webschuur.com</a>
+          </p>
+          <p>
+            <a href="http://github.com/berkes/">github.com/berkes</a><br />
+            <a href="http://twitter.com/berkes/">twitter.com/berkes</a><br />
+          </p>
+      </div>
+      <div class="four columns">
+        Copyright 2001-2012
+        with a
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Atrribute-Share-alike 3.0 Unported license</a>
+      </div>
+      <div class="four columns">
+        <a class="extra" href="/archive.html">Archive (All English articles)</a> <br />
+        <a class="extra" href="/archief.html">Archief (Alle Nederlandse artikelen)</a> <br />
+        <a class="extra" href="/tags.html">Tags</a> <br />
+        <a href="http://feeds.feedburner.com/berkes"> RSS </a> <br />
+      </div>
+    </footer>
+  </div>
+  <!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik.webschuur.com/" : "http://piwik.webschuur.com/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 9);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://piwik.webschuur.com/piwik.php?idsite=9" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</body>
+</html>

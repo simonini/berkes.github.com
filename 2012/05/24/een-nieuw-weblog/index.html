@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="nl"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="nl"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="nl"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="nl"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+  <link rel="openid.server" href="http://www.myopenid.com/server" />
+  <link rel="openid.delegate" href="http://berkes.myopenid.com/" />
+  <link rel="openid2.local_id" href="http://berkes.myopenid.com" />
+  <link rel="openid2.provider" href="http://www.myopenid.com/server" />
+  <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=berkes.myopenid.com" />
+
+   <title>Een nieuw weblog</title>
+   <meta name="author" content="Bèr ‘berkes’ Kessels" />
+   <link href="http://feeds.feedburner.com/berkes" rel="alternate" title="your title" type="application/atom+xml" />
+   <link rel="author" href="/humans.txt" type="text/plain" />
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+   <!-- Included CSS Files -->
+   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
+
+
+   <!--[if lt IE 9]>
+   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
+
+   <![endif]-->
+
+   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
+
+
+   <!-- IE Fix for HTML5 Tags -->
+   <!--[if lt IE 9]>
+   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
+
+   <![endif]-->
+</head>
+<body>
+	<!-- container -->
+	<div class="container">
+    <header>
+      <div class="row">
+        <a href="/" title="Home">
+          <img src="/assets//images/logo.png" alt="Logo" title="Bèr ‘berkes’ Kessels" />
+        </a>
+      </div>
+
+      <nav id="main" class="row">
+        <div class="onion">
+        <ul>
+          <li>
+          <a href="/about.html">EN / About</a>
+          </li>
+          <li>
+          <a href="/archive.html">EN / Articles</a>
+          </li>
+          <li>
+          <a href="/over.html">NL / Over</a>
+          </li>
+          <li>
+          <a href="/archief.html">NL / Artikelen</a>
+          </li>
+        </ul>
+        </div>
+      </nav>
+    </header>
+    <section id="main-content" class="row">
+      <article>
+  <header>
+    <h1>Een nieuw weblog</h1>
+  </header> 
+  <div class="body">
+    <figure>
+  <img src="/images//2012/05/24/een-nieuw-weblog.png" alt="Woodcut from Doré. Purely illustrative" />
+  
+    <figcaption>Doré Houtsnede. De enige functie hiervan is een mooiere layout. En de gravures zijn gewoon mooi</figcaption>
+  
+</figure>
+
+    <div class="content">
+      <p>Zo. Eindelijk. Een nieuw weblog. Mijn oude blog stond op
+<em>bler.webschuur.com</em> en op <em>webschuur.com</em>. Zo heet ook mijn bedrijf:
+<em>webschuur.com</em>.</p>
+
+<p>Al diverse malen heb ik geprobeerd om alles om te gooien, om na 80% van
+het werk erachter te komen dat ik verkeerd bezig was.</p>
+
+<blockquote><p>'t is bij de loodgieter dat het kraantje lekt.</p></blockquote>
+
+<p>Mijn blogs <em>bler</em> en <em>webschuur.com</em>, respectievelijk mijn persoonlijke,
+Nederlandse en zakelijke Engelse blog, moesten samengevoegd. Waar ze op
+draaiden, Drupal moest geheel vernieuwd. En het design moest hoognodig
+op de schop. Oh. En ik had een veel cooler domein: berk.es.</p>
+
+<p>Alle content is gemigreerd, maar nog niet alles is gerepareerd: er
+zitten duizenden artikelen die teruggaan tot 2001 in de database. In
+allerhande formats, met allerhande extra content, en veel artikelen
+bleken al jaren kapot. Dat moet met de hand aangepast gaan worden. Dat
+is een klus voor de komende weken.
+Alle reacties zijn nog niet gemigreerd. De spam moet er eerst helemaal
+uitgefilterd worden en dan moet alles geconverteerd en gemigreerd worden
+naar <a href="https://disqus.com/admin/moderate/">disqus</a>. Een hels karwij,
+ook voor de komende weken.</p>
+
+<h2>Jekyll</h2>
+
+<p>Deze blog draait op <a href="http://jekyllrb.com/">Jekyll</a>. Jekyll is
+supereenvoudig: het gebruikt een tekstbestandje per artikel en genereert
+van al deze bestandjes een site. Die upload je dan. Klinkt ouderwets,
+maar is vooral supereffectief: geen CMS, geen database, geen complexe
+serversoftware, geen veiligheidsupgrades, mogelijke inbraken in je CMS,
+enzovoort. Sneller dan zo een site kun je niet krijgen; veiliger dan zo
+een CMS bestaat zelfs in theorie niet; en de eenvoud is onvoorstelbaar.
+En het hosten is zelfs op een professionele omgeving zo goed als
+gratis.</p>
+
+<p>Althans, als je tekstbestandjes bewerken makkelijk vind.
+Wat technischer: je schrijft de tekst in HTML of in markdown. Dat wordt
+dan omgezet naar schone HTML. Je beheert alle tekstbestandjes met een
+revisiebeheersysteem (git, in mijn geval) en dat revisiebeheersysteem
+zorgt ook voor de deployment; het genereren en uploaden van de site.</p>
+
+<h2>Waarom geen Drupal?</h2>
+
+<p>Allebei de sites draaiden Drupal. Beide waren FUBAR: totall loss.
+Upgraden ging niet (meer) en oplossen van problemen leverde alleen nog
+maar meer problemen op:</p>
+
+<ul>
+<li>Spam: Ik heb alle spam-oplossingen voor Drupal geprobeerd, maar met
+soms miljoenen (!) spam-posts per dag slippen er altijd een paar
+doorheen. 1% van 1miljoen is nog altijd 10000. Als ik soms een weekje
+niet keek, had ik honderduizenden spams die toch doorgesijpeld waren:
+een versterkend effect: want gepubliceerde spam trekt spammers aan.
+<strong>Oplossing</strong>: een nieuw commentsysteem: Disqus. Dat vergt een
+moeilijke migratie.</li>
+<li>Oude modules, oude content: In de loop van de tijd heb ik Drupal
+honderden keren geüpdate en iets van zeven keer geüpgrade. Altijd ging
+er wel iets kleins mis, of was er voor een module geen upgrade. Het
+resultaat is een kapotte database, veel kapotte content en enorm veel
+achtergebleven puin. De <strong>oplossing</strong> is een volledige herbouw. En een
+volledige export en import van alle oude artikelen.</li>
+<li>Drupal is enorm zwaar geworden. Veel te zwaar voor een klein blogje.
+Dat merk je extra goed als je een miljoen hits van spammers krijgt.
+Maar dat merk je ook als het heel eventjes wat drukker is. Mijn
+<a href="https://www.linode.com/">servertje</a> kan vijf drupalsitejes aan. Echt
+niet meer. Dat is belachelijk: één dedicated VPS voor vijf piepkleine
+sites. Upgraden naar Drupal7 van alle vijf zou betekenen dat ik een
+grotere of tweede VPS erbij moet bestellen: belachelijk. Of dat ik met
+proxies, memcache enzovoort in de weer moet. Voor vijf kleine sites:
+belachelijk.
+<strong>Oplossing</strong> bij de oude, beter performende Drupal blijven, of een
+ander CMS.</li>
+</ul>
+
+
+<p>Bovendien had ik wat kleine, simpele eisen aan een nieuw Blog:</p>
+
+<ul>
+<li>HTML5 (en CSS3) voor de layout.</li>
+<li>Mobielvriendelijk.</li>
+<li>Schone HTML.</li>
+<li>Geen/nauwelijks beheer en veiligheidupdates.</li>
+<li>Tweetalige content.</li>
+</ul>
+
+
+<p>Drupal7 kan met veel pijn en moeite enigszins schone HTML5 uitserveren.
+Maar na 80% van mijn design geïmplementeerd te hebben (en daarvoor een
+heel nieuwe theme engine geschreven te hebben) besloot ik dat dit
+onzinnig is. Ik kon beter naar iets op zoek dat mij meer controle over
+de layout enzo gaf.</p>
+
+<h2>Rails?</h2>
+
+<p>Ik heb mijn hele site omgebouwd naar <a href="http://rubyonrails.org/">Ruby on Rails</a>.
+De content-migratie was klaar, een mooi spamveilig commenting systeem
+was af. En het zat vol met leuke gadgets (zoals een twitter, reddit en
+facebook scraper: plaatst reacties aldaar op mijn blog). En het performde bijna net zo
+goed als Drupal7. Met wat tweaken zelfs nog beter. Nog even de laatste
+20% afronden en klaar.</p>
+
+<p>Totdat ik wat stappen achteruit deed en nog eens goed naar het project
+keek: een vrij groot, zelfgeschreven CMS, op Rails, om een supersimpel
+blogje te publiceren. Ik ben gek ook: zelfs die laatste 20% is
+waarschijnlijk nog meer werk dan even wat aan Jekyll hacken.</p>
+
+<h2>Vandaar. Jekyll.</h2>
+
+<p>En nu weer wat vaker bloggen.</p>
+
+    </div>
+  </div>
+  <footer>
+    <time datetime="2012-05-24T00:00:00+02:00"
+    pubdate="pubdate">
+      Posted on 24 May 2012
+    </time>
+    in
+    
+    
+      
+      
+
+
+  
+    
+      <a href="/tags.html#drupal-ref" class="black radius label">drupal<span class="size">212</span></a>
+    
+      <a href="/tags.html#jekyll-ref" class="black radius label">jekyll<span class="size">3</span></a>
+    
+  
+
+
+
+    
+  </footer>
+</article>
+
+<div id="author">
+  <p>
+  
+    <strong>Over de auteur:</strong> Bèr Kessels is een ervaren webdeveloper met een grote passie voor
+    techniek en Open Source. Een gouden combinatie om de techniek goed en
+    efficiënt toe te passen. Volg <a href="https://twitter.com/berkes">@berkes</a> op Twitter. Of lees meer <a href="/over.html">over Bèr</a>.
+  
+  
+  </p>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'berkes'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </section>
+
+    <footer class="main row">
+      <div class="contact four columns">
+        <p>
+            Bèr ‘berkes’ Kessels<br />
+            Bèr Kessels is an Open Source Webdeveloper.<br />
+            <a href='mailto:ber@webschuur.com'>ber@webschuur.com</a>
+          </p>
+          <p>
+            <a href="http://github.com/berkes/">github.com/berkes</a><br />
+            <a href="http://twitter.com/berkes/">twitter.com/berkes</a><br />
+          </p>
+      </div>
+      <div class="four columns">
+        Copyright 2001-2012
+        with a
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Atrribute-Share-alike 3.0 Unported license</a>
+      </div>
+      <div class="four columns">
+        <a class="extra" href="/archive.html">Archive (All English articles)</a> <br />
+        <a class="extra" href="/archief.html">Archief (Alle Nederlandse artikelen)</a> <br />
+        <a class="extra" href="/tags.html">Tags</a> <br />
+        <a href="http://feeds.feedburner.com/berkes"> RSS </a> <br />
+      </div>
+    </footer>
+  </div>
+  <!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik.webschuur.com/" : "http://piwik.webschuur.com/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 9);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://piwik.webschuur.com/piwik.php?idsite=9" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</body>
+</html>

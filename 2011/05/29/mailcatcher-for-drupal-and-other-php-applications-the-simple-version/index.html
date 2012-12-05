@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+  <link rel="openid.server" href="http://www.myopenid.com/server" />
+  <link rel="openid.delegate" href="http://berkes.myopenid.com/" />
+  <link rel="openid2.local_id" href="http://berkes.myopenid.com" />
+  <link rel="openid2.provider" href="http://www.myopenid.com/server" />
+  <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=berkes.myopenid.com" />
+
+   <title>Mailcatcher for Drupal and other PHP-applications - The simple version</title>
+   <meta name="author" content="Bèr ‘berkes’ Kessels" />
+   <link href="http://feeds.feedburner.com/berkes" rel="alternate" title="your title" type="application/atom+xml" />
+   <link rel="author" href="/humans.txt" type="text/plain" />
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+   <!-- Included CSS Files -->
+   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
+
+
+   <!--[if lt IE 9]>
+   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
+
+   <![endif]-->
+
+   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
+
+
+   <!-- IE Fix for HTML5 Tags -->
+   <!--[if lt IE 9]>
+   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
+
+   <![endif]-->
+</head>
+<body>
+	<!-- container -->
+	<div class="container">
+    <header>
+      <div class="row">
+        <a href="/" title="Home">
+          <img src="/assets//images/logo.png" alt="Logo" title="Bèr ‘berkes’ Kessels" />
+        </a>
+      </div>
+
+      <nav id="main" class="row">
+        <div class="onion">
+        <ul>
+          <li>
+          <a href="/about.html">EN / About</a>
+          </li>
+          <li>
+          <a href="/archive.html">EN / Articles</a>
+          </li>
+          <li>
+          <a href="/over.html">NL / Over</a>
+          </li>
+          <li>
+          <a href="/archief.html">NL / Artikelen</a>
+          </li>
+        </ul>
+        </div>
+      </nav>
+    </header>
+    <section id="main-content" class="row">
+      <article>
+  <header>
+    <h1>Mailcatcher for Drupal and other PHP-applications - The simple version</h1>
+  </header> 
+  <div class="body">
+    <p>This is an updated version of my <a href="http://berk.es/2011/05/28/mailcatcher-for-drupal-and-other-php-applications/">earlier post</a>. Since msmtp is no longer needed, things are a lot simpler, hence the new article.</p>
+
+<p><strong>Problem:</strong> on development (and test) you don't want to send out mail. But you <em>do</em> want to test it. You certainly don't want to be in my shoes when a client called me, telling she recieved dozens of confused and angry mails from users on her site, after I fired up cron on my local development machine. And sent out approximately 3000 notification mails to users, with stuff like "new post for you: "W000t, fieldz0rz developmentz in CCK is workinggggg!" (I am making this up now. Allthough.... ;) )</p>
+
+<p><strong>Problem:</strong> when debugging mail, you want to inspect the headers and often (in case of multipart or HTML mail) the source too. Most emailclients are crap for that (and right so: who other then the odd mail/webdeveloper needs to inspect the source of a mail. ever?)</p>
+
+<p><strong>Solution:</strong> the brilliant Ruby application named <a href="https://github.com/sj26/mailcatcher">mailcatcher</a>. This is a simple SMTP server and sendmail replacement that shows the mails sent to it in a handy webapplication. The webapplication features debug-tools such as headers, and source displaying.</p>
+
+<p><img src="/images/inline/mailcatcher_031.png" alt="Screenshot of a Drupal password recorvery mail in Mailcatcher" /></p>
+
+<p>Aside: Windows. It is probably possible, but since using even the most basic proper commandline on there requires lots of hassle, all this is far from as trivial as Mac and Linux. I am sorry, but please use the comments if you go mailcatcher running with PHP on Windows.</p>
+
+<h2>Installation</h2>
+
+<p>Mac comes with ruby installed. On Ubuntu Linux you may need to install it still:</p>
+
+<div class="highlight"><pre><code class="bash">sudo apt-get install ruby rubygems
+</code></pre>
+</div>
+
+
+<p>Install mailcatcher (Use sudo for installing systemwide).</p>
+
+<div class="highlight"><pre><code class="bash">gem install mailcatcher
+</code></pre>
+</div>
+
+
+<p>Configure PHP to use mailcatcher for delivering mail:</p>
+
+<ul>
+<li>Edit <code>php.ini</code> (Depending on your installation where this lives, but on Ubuntu this is <code>/etc/php4/apache2/php.ini</code>)</li>
+<li>Under <code>[mail function]</code>, if available, change the <a href="http://php.net/manual/en/mail.configuration.php#ini.sendmail-path">sendmail_path</a> to <code>/usr/bin/env catchmail</code> and you're set.</li>
+</ul>
+
+
+<div class="highlight"><pre><code class="ini"><span class="na">sendmail_path</span> <span class="o">=</span> <span class="s">&quot;/usr/bin/env /var/lib/gems/1.8/bin/catchmail &quot;</span>
+</code></pre>
+</div>
+
+
+<p>Find out where catchmail lives by invoking <code>$ which catchmail</code>. On Ubuntu it was installed at <em>/var/lib/gems/1.8/bin/catchmail</em>. Make sure you have the gems installed system wide, else apache (or the user running the webserver) does not have access to catcmail and the required libraries.</p>
+
+<p>And restart apache.</p>
+
+<div class="highlight"><pre><code class="bash">sudo service apache2 restart
+</code></pre>
+</div>
+
+
+<p>Start up mailcatcher.</p>
+
+<div class="highlight"><pre><code class="bash">mailcatcher
+</code></pre>
+</div>
+
+
+<p>Open your browser and visit <a href="http://localhost:1080">http://localhost:1080</a></p>
+
+<h2>Mailcatcher gotcha's and tips</h2>
+
+<ul>
+<li>Just terminate (<code>^C-c</code>) mailcatcher and restart it to flush the recieved mail.</li>
+<li>Don´t forget to start up mailcatcher before you start hacking along on your site, If you forget it, mail will not be sent out, but will fail and PHP (Drupal) will give errors on mailing.</li>
+</ul>
+
+
+<p><strong> Happy Mailing on your development machine! </strong></p>
+
+  </div>
+  <footer>
+    <p class="note">
+    
+      <em>This article was published on webschuur.com. And migrated to this blog. </em>
+    
+    </p>
+    <time datetime="2011-05-29T00:00:00+02:00"
+    pubdate="pubdate">
+      Posted on 29 May 2011
+    </time>
+    in
+    
+    
+      
+      
+
+
+  
+    
+      <a href="/tags.html#php-ref" class="black radius label">php<span class="size">41</span></a>
+    
+      <a href="/tags.html#drupal-ref" class="black radius label">drupal<span class="size">212</span></a>
+    
+      <a href="/tags.html#drupal-ref" class="black radius label">drupal<span class="size">212</span></a>
+    
+      <a href="/tags.html#drupal blog-ref" class="black radius label">drupal blog<span class="size">11</span></a>
+    
+      <a href="/tags.html#ruby-ref" class="black radius label">ruby<span class="size">22</span></a>
+    
+      <a href="/tags.html#ruby on rails-ref" class="black radius label">ruby on rails<span class="size">14</span></a>
+    
+  
+
+
+
+    
+  </footer>
+</article>
+
+<div id="author">
+  <p>
+  
+  
+    <strong>About  the author:</strong> Bèr Kessels is an experienced webdeveloper  with a great passion for
+    technology and Open Source. A golden combination to implement that technology in a good and efficient
+    way. Follow <a href="https://twitter.com/berkes">@berkes</a> on Twitter. Or read more <a href="/over.html">about Bèr</a>.
+  
+  </p>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'berkes'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </section>
+
+    <footer class="main row">
+      <div class="contact four columns">
+        <p>
+            Bèr ‘berkes’ Kessels<br />
+            Bèr Kessels is an Open Source Webdeveloper.<br />
+            <a href='mailto:ber@webschuur.com'>ber@webschuur.com</a>
+          </p>
+          <p>
+            <a href="http://github.com/berkes/">github.com/berkes</a><br />
+            <a href="http://twitter.com/berkes/">twitter.com/berkes</a><br />
+          </p>
+      </div>
+      <div class="four columns">
+        Copyright 2001-2012
+        with a
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Atrribute-Share-alike 3.0 Unported license</a>
+      </div>
+      <div class="four columns">
+        <a class="extra" href="/archive.html">Archive (All English articles)</a> <br />
+        <a class="extra" href="/archief.html">Archief (Alle Nederlandse artikelen)</a> <br />
+        <a class="extra" href="/tags.html">Tags</a> <br />
+        <a href="http://feeds.feedburner.com/berkes"> RSS </a> <br />
+      </div>
+    </footer>
+  </div>
+  <!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik.webschuur.com/" : "http://piwik.webschuur.com/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 9);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://piwik.webschuur.com/piwik.php?idsite=9" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</body>
+</html>
