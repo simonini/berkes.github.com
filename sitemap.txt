@@ -8,6 +8,7 @@ http://berk.es/archive.html
 http://berk.es/sitemap.txt
 http://berk.es/about.html
 
+http://berk.es/2013/01/08/make-cucumber-open-the-browser-with-the-current-page
 http://berk.es/2012/11/19/developing-a-tiny-ecommerce-site-using-microframework-slim
 http://berk.es/2012/11/12/statische-websites-beheren-anno-2012
 http://berk.es/2012/10/23/fix-segv-for-vims-command-t-on-ubuntu-1210

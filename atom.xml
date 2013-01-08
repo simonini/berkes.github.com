@@ -4,13 +4,83 @@
  <title>Bèr ‘berkes’ Kessels</title>
  <link href="http://berk.es/atom.xml" rel="self"/>
  <link href="http://berk.es"/>
- <updated>2012-12-05T16:25:37+01:00</updated>
+ <updated>2013-01-08T11:25:17+01:00</updated>
  <id>http://berk.es</id>
  <author>
    <name>Bèr ‘berkes’ Kessels</name>
    <email>ber@webschuur.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Make cucumber open the browser with the current page</title>
+   <link href="http://berk.es/2013/01/08/make-cucumber-open-the-browser-with-the-current-page"/>
+   <updated>2013-01-08T00:00:00+01:00</updated>
+   <id>http://berk.es/2013/01/08/make-cucumber-open-the-browser-with-the-current-page</id>
+   <content type="html">&lt;p&gt;&lt;a href=&quot;http://pragprog.com/book/hwcuc/the-cucumber-book&quot;&gt;The Cucumber Book&lt;/a&gt;
+describes a really nifty trick when testing web-pages: open the browser
+when a step fails. This is a feature provided by cucumber itself.&lt;/p&gt;
+
+&lt;p&gt;Add a support file &lt;code&gt;features/support/debugging.rb&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;After&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scenario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;save_and_open_page&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scenario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;failed?&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;And add &lt;a href=&quot;https://github.com/copiousfreetime/launchy&quot;&gt;launchy&lt;/a&gt; to your gemfile, and &lt;code&gt;bundle install&lt;/code&gt;. (or install it with whatever else
+you use).&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:test&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+   &lt;span class=&quot;c1&quot;&gt;#...&lt;/span&gt;
+   &lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;launchy&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;~&amp;gt; 2.1.2&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;This will save the page that cucumber is looking at, then open it in
+your browser. Works fine, untill you have a large suite of features and
+some refactoring breaks many features. Having to close twenty tabs in
+your browser after each run is counterproductive and often really
+frustrating.&lt;/p&gt;
+
+&lt;p&gt;I solved this with a flag that allows me to fire this debugging-trick
+only when I need it.
+When I have a failing scenario, and I want to investigate it by
+inspecting the page, I run my cucumber with an additional
+environment-variable:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cucumber &lt;span class=&quot;nv&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;open
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;After&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scenario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;save_and_open_page&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scenario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;failed?&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;ENV&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;debug&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;open&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;The &lt;code&gt;debug=&lt;/code&gt; syntax allows for more simple tricks too. Like &lt;code&gt;debug=pp&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;pp&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;After&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scenario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;save_and_open_page&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scenario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;failed?&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;ENV&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;debug&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;open&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;pp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ENV&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;debug&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;pp&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;Simple trick, works like a charm.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Developing a tiny ecommerce site using microframework Slim</title>
@@ -5140,15 +5210,6 @@ Ik ben me zeker bewust van de googel advertenties hierboven en hoe dit in contra
    <content type="html">&lt;p&gt;&lt;a href=&quot;http://dabr.nl&quot;&gt;Dabr.nl&lt;/a&gt; is gereleased! Dabr is een &lt;a href=&quot;http://code.google.com/p/dabr/&quot;&gt;Open Source&lt;/a&gt; mobiele omgeving voor Twitter. Het is beter dan m.twitter.com, kan zelf gehost worden, en is open source&lt;img src=&quot;http://davidcarrington.co.uk/&quot; alt=&quot;David Carrington&quot; /&gt; bedacht en bouwde het, ik heb het enkel geïnstalleerd en geconfigureerd voor mijn Nederlandse servers. Zodoende ben ik een Nederlandse mirror voor Dabr!Meer over &lt;a href=&quot;http://dabr.nl/about&quot;&gt;Dabr.nl op de &lt;em&gt;about&lt;/em&gt; pagina&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;De reden waarom ik dit wilde releasen, is overigens mijn rotsvaste geloof in distributie, verspreiding. Ik geloof dat de kracht van de (democratie van) het internet ligt, in het niet steunen op één punt. Twitter.com is slechts één bedrijf, dat volgens de grillen van hun eigen doelstellingen werkt. Duizenden twitters werken amorph en zijn daarom als geheel veel minder fout-, kapitaal-, of politiekgevoelig. Ik geloof daarom dat we zaken zelf in onze handen moeten houden. Of tenminste zij die dat (technisch) kunnen. In nabije toekomst hook ik dabr te kunnen uitbreiden met &lt;a href=&quot;http://status.net/&quot;&gt;status.net, het echte verspreiden en Open Source twitter&lt;/a&gt;.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Getting Tagadelic ready for Drupal 7 (and on github, wohoo!)</title>
-   <link href="http://berk.es/2009/09/06/getting-tagadelic-ready-for-drupal-7-and-on-github-wohoo"/>
-   <updated>2009-09-06T00:00:00+02:00</updated>
-   <id>http://berk.es/2009/09/06/getting-tagadelic-ready-for-drupal-7-and-on-github-wohoo</id>
-   <content type="html">&lt;p&gt;In order to get &lt;a href=&quot;http://drupal.org/project/tagadelic&quot;&gt;tagadelic&lt;/a&gt; ready for D7, before the release, I copied the source into &lt;a href=&quot;http://github.com/berkes/tagadelic&quot;&gt;git&lt;/a&gt;. I also committed a few importand fixes and improvements to the Drupal-6 branch today, and merged them into HEAD (aka master). From now on, I want to focus on Drupal 7 stuff only:  * Improvements and bugfixes for DRupal 6 will have to wait.  * New features are all ignored. However: * Conceptual and infrastructual changes to the code, caching and so on, will get in, if they imrpove the Drupal 7 compatibility.  * Important bugfixes and/or improvements that will make conversion to Drupal-7 easier will be looked at. So, if you have patches for Tagadelic that you feel should get into 7, or if you need Tagadelic on your Drupal 7 project, please chime in and post patches into the &lt;a href=&quot;http://drupal.org/project/issues/tagadelic?categories=All&quot;&gt;issuequeue&lt;/a&gt; (help in that queue, in the form of closing and testing is also very welcome!)And since it is now on Git: please fork the code! Forking is cool! Hack away on it, and present me your cool additions, if you feel they add something to the project.&lt;/p&gt;
 </content>
  </entry>
  
