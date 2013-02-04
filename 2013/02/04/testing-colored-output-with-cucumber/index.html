@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+  <link rel="openid.server" href="http://www.myopenid.com/server" />
+  <link rel="openid.delegate" href="http://berkes.myopenid.com/" />
+  <link rel="openid2.local_id" href="http://berkes.myopenid.com" />
+  <link rel="openid2.provider" href="http://www.myopenid.com/server" />
+  <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=berkes.myopenid.com" />
+
+   <title>Testing colored output with Cucumber</title>
+   <meta name="author" content="Bèr ‘berkes’ Kessels" />
+   <link href="http://feeds.feedburner.com/berkes" rel="alternate" title="Testing colored output with Cucumber Feed" type="application/atom+xml" />
+   <link rel="author" href="/humans.txt" type="text/plain" />
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+   <!-- Included CSS Files -->
+   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
+
+
+   <!--[if lt IE 9]>
+   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
+
+   <![endif]-->
+
+   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
+
+
+   <!-- IE Fix for HTML5 Tags -->
+   <!--[if lt IE 9]>
+   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
+
+   <![endif]-->
+</head>
+<body>
+	<!-- container -->
+	<div class="container">
+    <header>
+      <div class="row">
+        <a href="/" title="Home">
+          <img src="/assets//images/logo.png" alt="Logo" title="Bèr ‘berkes’ Kessels" />
+        </a>
+      </div>
+
+      <nav id="main" class="row">
+        <div class="onion">
+        <ul>
+          <li>
+          <a href="/about.html">EN / About</a>
+          </li>
+          <li>
+          <a href="/archive.html">EN / Articles</a>
+          </li>
+          <li>
+          <a href="/over.html">NL / Over</a>
+          </li>
+          <li>
+          <a href="/archief.html">NL / Artikelen</a>
+          </li>
+        </ul>
+        </div>
+      </nav>
+    </header>
+    <section id="main-content" class="row">
+      <article>
+  <header>
+    <h1>Testing colored output with Cucumber</h1>
+  </header> 
+  <div class="body row">
+    <div class="six columns">
+      
+      <figure>
+  <img src="/images//2013/02/04/testing-colored-output-with-cucumber.png" alt="Woodcut from Doré. Purely illustrative" />
+  
+    <figcaption>Doré Woodcut. Its only function is to make the layout look better. And these images are really nice themselves</figcaption>
+  
+</figure>
+
+    </div>
+    <div class="six columns">
+      <p>Included file 'JB/setup' not found in _includes directory</p>
+
+<p>I am improving a Command line app to <a href="https://github.com/berkes/todotxt">manage my todos</a>. I am developing it entirely 'Behaviour Driven', using <a href="https://github.com/cucumber/aruba">Cucumber and Aruba</a>.</p>
+
+<p>All is pretty straightforward, but I had a hard time testing the colors in
+the output. Colors are made with
+<a href="http://rubydoc.info/gems/rainbow/1.1.4/frames">Rainbow</a>; which is
+really neat, but sometimes a little too smart. Rainbow detects when it
+outputs to something that cannot handle colors and turns them off. The
+solution turned out to be really simple though.</p>
+
+<p>Lets start with a simple script that outputs some Rastafari</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="c1">#!/usr/bin/env ruby</span>
+
+<span class="nb">require</span> <span class="s2">&quot;thor&quot;</span>
+<span class="nb">require</span> <span class="s2">&quot;rainbow&quot;</span>
+
+<span class="k">class</span> <span class="nc">Example</span> <span class="o">&lt;</span> <span class="no">Thor</span>
+  <span class="n">desc</span> <span class="s2">&quot;example&quot;</span><span class="p">,</span> <span class="s2">&quot;an example task&quot;</span>
+  <span class="k">def</span> <span class="nf">example</span>
+    <span class="nb">puts</span> <span class="s2">&quot;Yah!&quot;</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="ss">:red</span><span class="p">)</span>
+    <span class="nb">puts</span> <span class="s2">&quot;...&quot;</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="ss">:black</span><span class="p">)</span><span class="o">.</span><span class="n">bright</span>
+    <span class="nb">puts</span> <span class="s2">&quot;Rasta-&quot;</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="ss">:yellow</span><span class="p">)</span>
+    <span class="nb">puts</span> <span class="s2">&quot;fari&quot;</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="ss">:green</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+<span class="no">Example</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</code></pre>
+</div>
+
+
+<p>Running this, results in:</p>
+
+<p><img src="/images/inline/rasta_cli.png" alt="Example output" /></p>
+
+<p>But piping this into a file, or for example less, shows no colors;
+This is a useful feature built into Rainbow.
+When testing with cucumber, the colors are gone too:</p>
+
+<div class="highlight"><pre><code class="cucumber"><span class="k">Feature:</span><span class="nf"> Example</span>
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Yah!</span>
+<span class="k">    When </span><span class="nf">I run `example example`</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">it should pass with:</span>
+<span class="nf">      </span><span class="k">&quot;&quot;&quot;</span><span class="s"></span>
+<span class="s">      Yah!</span>
+<span class="s">      ...</span>
+<span class="s">      </span><span class="k">&quot;&quot;&quot;</span><span class="nf"></span>
+</code></pre>
+</div>
+
+
+<p>This passes, but does not test any colors. First thing is to tell
+Aruba/Cucumber to not strip the colors, ansi-codes, with an <code>@ansi</code> tag.</p>
+
+<p>Next thing is to tell Rainbow to output colors regardless of where it
+outputs to. We need to do do this in the application itself, by making
+the application a little more testable. However, Aruba strips the colors
+for a reason: it is really hard to test when all your output is littered
+with ANSI escape codes. You really only want to force Rainbow to output
+them when you are testing for colors.</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="c1">#...</span>
+<span class="k">class</span> <span class="nc">Example</span> <span class="o">&lt;</span> <span class="no">Thor</span>
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+    <span class="k">super</span>
+    <span class="no">Sickill</span><span class="o">::</span><span class="no">Rainbow</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="kp">true</span> <span class="k">if</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;FORCE_COLORS&quot;</span><span class="o">]</span> <span class="o">==</span> <span class="s2">&quot;TRUE&quot;</span>
+  <span class="k">end</span>
+  <span class="c1">#....</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+
+<p>This allows you to force coloring when testing or running by setting the
+variable, like so <code>export FORCE_COLORS=TRUE; ./bin/example example</code>. A step could
+them look like "When I run <code>export FORCE_COLORS=TRUE; ./bin/example example</code>".</p>
+
+<p>More usefull however, is that we can set this variable in cucumber for
+all the <code>@ansi</code>-tagged scenario's. In a support-file
+<code>features/support/ansi.rb</code>:</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="no">Before</span><span class="p">(</span><span class="s1">&#39;@ansi&#39;</span><span class="p">)</span> <span class="k">do</span>
+  <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;FORCE_COLORS&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;TRUE&quot;</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+
+<p>With the scenario tagged @ansi, it fails: <code>expected
+"\e[31mYah!\e[0m\n\e[30m\e[1m...\e[0m\n\e[33mRasta-\e[0m\n\e[32mfari\e[0m\n"
+to include "Yah! ...</code>. Good.</p>
+
+<p>Testing against strings like "\e[31m", however, is both error-prone and
+unreadable. A simple new step definition, in which we add the
+ansi-escape codes, using Rainbow, to the to-be-tested string. Which allows us to test colors really
+easy.</p>
+
+<p>The <code>features/support/ansi.rb</code> should include "rainbow".</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="no">Then</span> <span class="sr">/^it should output &quot;([^&quot;]*)&quot; in &quot;([^&quot;]*)&quot;$/</span> <span class="k">do</span> <span class="o">|</span><span class="n">string</span><span class="p">,</span> <span class="n">color</span><span class="o">|</span>
+  <span class="n">assert_partial_output</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="n">color</span><span class="o">.</span><span class="n">to_sym</span><span class="p">),</span> <span class="n">all_output</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+
+
+
+<div class="highlight"><pre><code class="cucumber"><span class="k">Feature:</span><span class="nf"> Example</span>
+
+<span class="nf">  @ansi</span>
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Yah!</span>
+<span class="k">    When </span><span class="nf">I run `example example`</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">it should output &quot;</span><span class="s">Yah!</span><span class="nf">&quot; in &quot;</span><span class="s">red</span><span class="nf">&quot;</span>
+</code></pre>
+</div>
+
+
+<p>Readable, easy testing of your colored output!</p>
+
+    </div>
+  </div>
+  <footer>
+    <time datetime="2013-02-04T00:00:00+01:00"
+    pubdate="pubdate">
+      Posted on 04 February 2013
+    </time>
+    in
+    
+    
+      
+      
+
+
+  
+    
+      <a href="/tags.html#cucumber-ref" class="black radius label">cucumber<span class="size">2</span></a>
+    
+      <a href="/tags.html#BDD-ref" class="black radius label">BDD<span class="size">2</span></a>
+    
+      <a href="/tags.html#Aruba-ref" class="black radius label">Aruba<span class="size">1</span></a>
+    
+      <a href="/tags.html#Rainbow-ref" class="black radius label">Rainbow<span class="size">1</span></a>
+    
+      <a href="/tags.html#Thor-ref" class="black radius label">Thor<span class="size">1</span></a>
+    
+  
+
+
+
+    
+  </footer>
+</article>
+
+<div id="author">
+  <p>
+  
+  
+    <strong>About  the author:</strong> Bèr Kessels is an experienced webdeveloper  with a great passion for
+    technology and Open Source. A golden combination to implement that technology in a good and efficient
+    way. Follow <a href="https://twitter.com/berkes">@berkes</a> on Twitter. Or read more <a href="/over.html">about Bèr</a>.
+  
+  </p>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'berkes'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </section>
+
+    <footer class="main row">
+      <div class="contact four columns">
+        <p>
+            Bèr ‘berkes’ Kessels<br />
+            Bèr Kessels is an Open Source Webdeveloper.<br />
+            <a href='mailto:ber@webschuur.com'>ber@webschuur.com</a>
+          </p>
+          <p>
+            <a href="http://github.com/berkes/">github.com/berkes</a><br />
+            <a href="http://twitter.com/berkes/">twitter.com/berkes</a><br />
+          </p>
+      </div>
+      <div class="four columns">
+        Copyright 2001-2013
+        with a
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Atrribute-Share-alike 3.0 Unported license</a>
+      </div>
+      <div class="four columns">
+        <a class="extra" href="/archive.html">Archive (All English articles)</a> <br />
+        <a class="extra" href="/archief.html">Archief (Alle Nederlandse artikelen)</a> <br />
+        <a class="extra" href="/tags.html">Tags</a> <br />
+        <a href="http://feeds.feedburner.com/berkes"> RSS </a> <br />
+      </div>
+    </footer>
+  </div>
+  <!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik.webschuur.com/" : "http://piwik.webschuur.com/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 9);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://piwik.webschuur.com/piwik.php?idsite=9" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</body>
+</html>

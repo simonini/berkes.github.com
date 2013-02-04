@@ -4,13 +4,141 @@
  <title>Bèr ‘berkes’ Kessels</title>
  <link href="http://berk.es/atom.xml" rel="self"/>
  <link href="http://berk.es"/>
- <updated>2013-01-30T20:55:11+01:00</updated>
+ <updated>2013-02-04T19:37:33+01:00</updated>
  <id>http://berk.es</id>
  <author>
    <name>Bèr ‘berkes’ Kessels</name>
    <email>ber@webschuur.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Testing colored output with Cucumber</title>
+   <link href="http://berk.es/2013/02/04/testing-colored-output-with-cucumber"/>
+   <updated>2013-02-04T00:00:00+01:00</updated>
+   <id>http://berk.es/2013/02/04/testing-colored-output-with-cucumber</id>
+   <content type="html">&lt;p&gt;Included file 'JB/setup' not found in _includes directory&lt;/p&gt;
+
+&lt;p&gt;I am improving a Command line app to &lt;a href=&quot;https://github.com/berkes/todotxt&quot;&gt;manage my todos&lt;/a&gt;. I am developing it entirely 'Behaviour Driven', using &lt;a href=&quot;https://github.com/cucumber/aruba&quot;&gt;Cucumber and Aruba&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;All is pretty straightforward, but I had a hard time testing the colors in
+the output. Colors are made with
+&lt;a href=&quot;http://rubydoc.info/gems/rainbow/1.1.4/frames&quot;&gt;Rainbow&lt;/a&gt;; which is
+really neat, but sometimes a little too smart. Rainbow detects when it
+outputs to something that cannot handle colors and turns them off. The
+solution turned out to be really simple though.&lt;/p&gt;
+
+&lt;p&gt;Lets start with a simple script that outputs some Rastafari&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;#!/usr/bin/env ruby&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;thor&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;rainbow&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Example&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Thor&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;desc&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;example&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;an example task&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;example&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Yah!&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:red&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;...&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:black&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bright&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Rasta-&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:yellow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;fari&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:green&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Example&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;Running this, results in:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/inline/rasta_cli.png&quot; alt=&quot;Example output&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;But piping this into a file, or for example less, shows no colors;
+This is a useful feature built into Rainbow.
+When testing with cucumber, the colors are gone too:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;cucumber&quot;&gt;&lt;span class=&quot;k&quot;&gt;Feature:&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt; Example&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;Scenario:&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt; Yah!&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;    When &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;I run `example example`&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;Then &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;it should pass with:&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;      Yah!&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;      ...&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;This passes, but does not test any colors. First thing is to tell
+Aruba/Cucumber to not strip the colors, ansi-codes, with an &lt;code&gt;@ansi&lt;/code&gt; tag.&lt;/p&gt;
+
+&lt;p&gt;Next thing is to tell Rainbow to output colors regardless of where it
+outputs to. We need to do do this in the application itself, by making
+the application a little more testable. However, Aruba strips the colors
+for a reason: it is really hard to test when all your output is littered
+with ANSI escape codes. You really only want to force Rainbow to output
+them when you are testing for colors.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;#...&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Example&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Thor&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;initialize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;super&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;Sickill&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Rainbow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;enabled&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ENV&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;FORCE_COLORS&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;TRUE&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;#....&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;This allows you to force coloring when testing or running by setting the
+variable, like so &lt;code&gt;export FORCE_COLORS=TRUE; ./bin/example example&lt;/code&gt;. A step could
+them look like &quot;When I run &lt;code&gt;export FORCE_COLORS=TRUE; ./bin/example example&lt;/code&gt;&quot;.&lt;/p&gt;
+
+&lt;p&gt;More usefull however, is that we can set this variable in cucumber for
+all the &lt;code&gt;@ansi&lt;/code&gt;-tagged scenario's. In a support-file
+&lt;code&gt;features/support/ansi.rb&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;Before&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;@ansi&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;no&quot;&gt;ENV&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;FORCE_COLORS&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;TRUE&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;With the scenario tagged @ansi, it fails: &lt;code&gt;expected
+&quot;\e[31mYah!\e[0m\n\e[30m\e[1m...\e[0m\n\e[33mRasta-\e[0m\n\e[32mfari\e[0m\n&quot;
+to include &quot;Yah! ...&lt;/code&gt;. Good.&lt;/p&gt;
+
+&lt;p&gt;Testing against strings like &quot;\e[31m&quot;, however, is both error-prone and
+unreadable. A simple new step definition, in which we add the
+ansi-escape codes, using Rainbow, to the to-be-tested string. Which allows us to test colors really
+easy.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;features/support/ansi.rb&lt;/code&gt; should include &quot;rainbow&quot;.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;Then&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^it should output &amp;quot;([^&amp;quot;]*)&amp;quot; in &amp;quot;([^&amp;quot;]*)&amp;quot;$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;assert_partial_output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_sym&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;all_output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;cucumber&quot;&gt;&lt;span class=&quot;k&quot;&gt;Feature:&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt; Example&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt;  @ansi&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;Scenario:&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt; Yah!&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;    When &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;I run `example example`&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;Then &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;it should output &amp;quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Yah!&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&amp;quot; in &amp;quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;red&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;Readable, easy testing of your colored output!&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Make cucumber open the browser with the current page</title>
@@ -5199,17 +5327,6 @@ Ik ben me zeker bewust van de googel advertenties hierboven en hoe dit in contra
    <content type="html">&lt;p&gt;&lt;a href=&quot;http://dabr.nl&quot;&gt;Dabr.nl&lt;/a&gt; is released! Dabr is an &lt;a href=&quot;http://code.google.com/p/dabr/&quot;&gt;Open Source&lt;/a&gt; mobile frontend to twitter. It is better then m.twitter.com, self-hosted, and it is open source&lt;img src=&quot;http://davidcarrington.co.uk/&quot; alt=&quot;David Carrington&quot; /&gt; invented and built it. I merely installed and configured it for my Dutch servers. So to become a Dutch mirror for dabr!More about &lt;a href=&quot;http://dabr.nl/&quot;&gt;Dabr.nl on the about page&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;My reason for releasing and installing it, is that I believe in distribution. I believe the Power of the (Democracy of) internet lies in not depending on a single point of failure. I believe we should keep matters in our own hands (whenever and whoever can) and therefore run our own twitters. In due time, I plan integration with &lt;a href=&quot;http://status.net/&quot;&gt;status.net, the true distributed Twitter&lt;/a&gt;.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Dabr.nl: mobiele twitter frontend gereleased</title>
-   <link href="http://berk.es/2009/09/12/dabr-nl-mobiele-twitter-frontend-gereleased"/>
-   <updated>2009-09-12T00:00:00+02:00</updated>
-   <id>http://berk.es/2009/09/12/dabr-nl-mobiele-twitter-frontend-gereleased</id>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;http://dabr.nl&quot;&gt;Dabr.nl&lt;/a&gt; is gereleased! Dabr is een &lt;a href=&quot;http://code.google.com/p/dabr/&quot;&gt;Open Source&lt;/a&gt; mobiele omgeving voor Twitter. Het is beter dan m.twitter.com, kan zelf gehost worden, en is open source&lt;img src=&quot;http://davidcarrington.co.uk/&quot; alt=&quot;David Carrington&quot; /&gt; bedacht en bouwde het, ik heb het enkel geïnstalleerd en geconfigureerd voor mijn Nederlandse servers. Zodoende ben ik een Nederlandse mirror voor Dabr!Meer over &lt;a href=&quot;http://dabr.nl/about&quot;&gt;Dabr.nl op de &lt;em&gt;about&lt;/em&gt; pagina&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;De reden waarom ik dit wilde releasen, is overigens mijn rotsvaste geloof in distributie, verspreiding. Ik geloof dat de kracht van de (democratie van) het internet ligt, in het niet steunen op één punt. Twitter.com is slechts één bedrijf, dat volgens de grillen van hun eigen doelstellingen werkt. Duizenden twitters werken amorph en zijn daarom als geheel veel minder fout-, kapitaal-, of politiekgevoelig. Ik geloof daarom dat we zaken zelf in onze handen moeten houden. Of tenminste zij die dat (technisch) kunnen. In nabije toekomst hook ik dabr te kunnen uitbreiden met &lt;a href=&quot;http://status.net/&quot;&gt;status.net, het echte verspreiden en Open Source twitter&lt;/a&gt;.&lt;/p&gt;
 </content>
  </entry>
  
