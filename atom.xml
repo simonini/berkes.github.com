@@ -4,7 +4,7 @@
  <title>Bèr ‘berkes’ Kessels</title>
  <link href="http://berk.es/atom.xml" rel="self"/>
  <link href="http://berk.es"/>
- <updated>2013-02-04T19:37:33+01:00</updated>
+ <updated>2013-02-04T19:44:11+01:00</updated>
  <id>http://berk.es</id>
  <author>
    <name>Bèr ‘berkes’ Kessels</name>
@@ -17,9 +17,7 @@
    <link href="http://berk.es/2013/02/04/testing-colored-output-with-cucumber"/>
    <updated>2013-02-04T00:00:00+01:00</updated>
    <id>http://berk.es/2013/02/04/testing-colored-output-with-cucumber</id>
-   <content type="html">&lt;p&gt;Included file 'JB/setup' not found in _includes directory&lt;/p&gt;
-
-&lt;p&gt;I am improving a Command line app to &lt;a href=&quot;https://github.com/berkes/todotxt&quot;&gt;manage my todos&lt;/a&gt;. I am developing it entirely 'Behaviour Driven', using &lt;a href=&quot;https://github.com/cucumber/aruba&quot;&gt;Cucumber and Aruba&lt;/a&gt;.&lt;/p&gt;
+   <content type="html">&lt;p&gt;I am improving a Command line app to &lt;a href=&quot;https://github.com/berkes/todotxt&quot;&gt;manage my todos&lt;/a&gt;. I am developing it entirely 'Behaviour Driven', using &lt;a href=&quot;https://github.com/cucumber/aruba&quot;&gt;Cucumber and Aruba&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;All is pretty straightforward, but I had a hard time testing the colors in
 the output. Colors are made with
