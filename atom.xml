@@ -4,13 +4,119 @@
  <title>Bèr ‘berkes’ Kessels</title>
  <link href="http://berk.es/atom.xml" rel="self"/>
  <link href="http://berk.es"/>
- <updated>2013-02-04T19:44:11+01:00</updated>
+ <updated>2013-02-10T18:33:33+01:00</updated>
  <id>http://berk.es</id>
  <author>
    <name>Bèr ‘berkes’ Kessels</name>
    <email>ber@webschuur.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Tagadelic: TDD, OOP and seeking maintainer</title>
+   <link href="http://berk.es/2013/02/10/tagadelic-tdd-oop-and-seeking-maintainer"/>
+   <updated>2013-02-10T00:00:00+01:00</updated>
+   <id>http://berk.es/2013/02/10/tagadelic-tdd-oop-and-seeking-maintainer</id>
+   <content type="html">&lt;p&gt;&lt;strong&gt;TL;DR&lt;/strong&gt;: &lt;a href=&quot;http://drupal.org/project/tagadelic&quot;&gt;Tagadelic&lt;/a&gt; is close to a Drupal 7 release, with an easy upgrade
+path to Drupal 8. It is completely rewritten, Object Oriented and Test
+Driven. Since I don't do any Drupal anymore, I am looking for someone who can maintain
+a clean, OOP and TDD-module, to take it over from me.&lt;/p&gt;
+
+&lt;p&gt;There is just so much you can do when porting an age-old module again
+and again. Tagadelic has been around since mid-2005, has been ported
+over and over again. Mind you: not upgraded but ported. Quick, dirty and
+&quot;works-for-me&quot; ports. Like most other modules, actually. There never was
+a stable release for Drupal7, because the module never was really stable
+in the first place. Yes, it might work (for you), but that is far from
+&lt;em&gt;stable&lt;/em&gt; and releasable.&lt;/p&gt;
+
+&lt;p&gt;Between 2005 and now, I learned programming properly. I mean, OOP,
+unit-testing, patterns and all that (This also lead to me, &lt;a href=&quot;http://berk.es/2012/10/01/farewell-drupal/&quot;&gt;abandoning all
+my Drupal work, mostly&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;None of my publicly released Drupal-modules ever
+resembled that progress I made; mainly because Drupal itself is not OOP. Has poor
+testing abilities (please read on, I will explain later) and applies
+quite a few anti-patterns. This makes writing really clean and pretty code,
+somewhat discouraging. Most of its examples, best practices and defaults
+go straight against what is in general considered best practice.&lt;/p&gt;
+
+&lt;p&gt;But since Tagadelic is used by a lot of people, I wanted to create a
+&lt;em&gt;proper&lt;/em&gt; replacement. A module with pretty code, easy to implement APIs
+and some additional, turnkey modules for those who cannot or will not write these
+few lines of PHP. A module that resembles what I now consider good code
+and properly developed. As a replacement for what I thought proper 8
+years ago.&lt;/p&gt;
+
+&lt;p&gt;I coded for several months and today released the first alpha.&lt;/p&gt;
+
+&lt;p&gt;In the long run, I can conclude three things:&lt;/p&gt;
+
+&lt;p&gt;Drupal is not really ready for OOP development. The interfacing between my module and Drupal
+required me to write wrappers (so that Tagadelic classes access
+Drupal-functions in an OOP-manner) and to write the modules themselves
+with global functions, since that is how Drupal expects the hooks and
+implementations.&lt;/p&gt;
+
+&lt;p&gt;DrupalWebTest is way, way too slow and feature-poor for Test Driven
+Development (TDD). Tagadelic only has about 150 DrupalWebTests, but running
+them all takes over 5 minutes (on my machine: quad-core Intel 2.67GHz, SSD drives
+only). Note that in a typical Rails (being -rightfully- known for being very
+slow) with cucumber suite of over 600 tests takes under 30 seconds;
+that includes selenium opening Firefox and clicking around in a few
+tests. 30 seconds is considered unacceptably slow there.&lt;/p&gt;
+
+&lt;p&gt;When developing test-driven (or Behaviour Driven) you typically
+run the isolated tests five, six times. And the entire suite of tests at
+least once. So aside from the actual coding, the testing alone takes 30
+minutes. This is both discouraging (meh, I'll just assume everything is
+still green, will test in next iteration) and very hard for your &quot;flow&quot;
+and concentration.
+It is feature-poor in a sense that I ended up writing most assertions
+and several set-up functions myself. assertXpath()? Nope. assertHasId()?
+Nope. assertIdenticalArrays()? Nope. And worse is that it breaks a very
+important rule for testing: isolation. If you want to test whether some
+admin-setting can be saved and creates the proper variable, you are also
+testing whether a Drupal is installed properly, user can log in, is admin,
+can access a page, has nodes, has access to creating these nodes and so
+on. I ended up poking into the database (not even &quot;my&quot; tables) because
+somewhere in the clutter of setup-tasks stuff was created but it failed.&lt;/p&gt;
+
+&lt;p&gt;It is really fun to write unit-tests with &lt;a href=&quot;https://github.com/sebastianbergmann/phpunit/&quot;&gt;phpUnit&lt;/a&gt;. I was very much
+positively impressed by that test-environment and by using it. The
+biggest adventure was how to stub out Drupal. Drupal, using global
+functions for stuff like &lt;code&gt;check_plain()&lt;/code&gt; is nearly impossible to mock
+and stub. I solved this by extending my &lt;a href=&quot;https://github.com/berkes/tagadelic/blob/7.x-2.x/tests/TagadelicCloudTest.php#L106&quot;&gt;DrupalWrapper&lt;/a&gt; and
+stubbing that. After all: I don't care whether &lt;code&gt;check_plain()&lt;/code&gt; itself
+works and clears out XSS, I only care whether or not my classes call
+that function in proper places to ensure clean output. Testing whether
+&lt;code&gt;check_plain()&lt;/code&gt; works is not my concern, here. I chose phpUnit over
+DrupalUnit, because the latter is pretty much &lt;a href=&quot;http://stackoverflow.com/questions/6045241/unit-testing-drupal-with-drupalunittestcase-fails-on-database-setup/6046100#6046100&quot;&gt;unusable for
+unit-testing of arbitrary classes&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;And now it is time for someone, or several someones to slowly take over the module. Together
+we will release a Drupal7 2.0 version and then I can carry over all
+project rights on my last Drupalproject.&lt;/p&gt;
+
+&lt;p&gt;Interested? You should be:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Familiar with PHP OOP development. You should probably feel that the
+usual way of Developing Drupal modules in a none-OOP manner is not
+a very good way.&lt;/li&gt;
+&lt;li&gt;Familiar with PHPunit and Drupal Tests. You should feel strongly for
+TDD and good test-coverage. You should probably feel that even though
+writing Drupal Web Tests is not (yet) perfect and requires time and
+effort, it always should happen.&lt;/li&gt;
+&lt;li&gt;Able to maintain such a module for a substantial time. It being TDD
+and all, means that it won't take you a lot of effort or time. But it
+would be a shame if three months after a release you abandon it
+altogether because you like Node.js better. Or so.&lt;/li&gt;
+&lt;li&gt;Wanting to develop on Github. At least until the 2.0 release.&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>Testing colored output with Cucumber</title>
@@ -5314,17 +5420,6 @@ Er zijn een heel aantal redenen om dat te doen.
 . - Het is open source. Met de juiste kennis is het dus heel makkelijk mogelijk om zelf aanpassingen te maken of uitbreidingen te schrijven. Bij Google kun je dat vragen, maar of je het krijgt is maar de vraag.
 Kortom. Probeer Piwik eens uit. En test het eens uit binnen je organisatie of op je eigen site, of sites. Het kost je een klein uurtje om uit te rollen en ik ben er zeker van dat velen zullen blijven hangen. Of je nu SEO-expert bent, auteur, blogger, webhoster of webdeveloper: piwik is een heel mooi stuk gereedschap om in je portfolio op te nemen.
 Ik ben me zeker bewust van de googel advertenties hierboven en hoe dit in contrast staat met mijn betoog voor privacy. Zoals ik zei ben ik pragmatisch en &lt;a href=&quot;http://webschuur.com/why_advertisements&quot;&gt;heb ik duidelijke redenen en doelen voor advertenties&lt;/a&gt;&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Dabr.nl released. Mobile frontend for Twitter</title>
-   <link href="http://berk.es/2009/09/12/dabr-nl-released-mobile-frontend-for-twitter"/>
-   <updated>2009-09-12T00:00:00+02:00</updated>
-   <id>http://berk.es/2009/09/12/dabr-nl-released-mobile-frontend-for-twitter</id>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;http://dabr.nl&quot;&gt;Dabr.nl&lt;/a&gt; is released! Dabr is an &lt;a href=&quot;http://code.google.com/p/dabr/&quot;&gt;Open Source&lt;/a&gt; mobile frontend to twitter. It is better then m.twitter.com, self-hosted, and it is open source&lt;img src=&quot;http://davidcarrington.co.uk/&quot; alt=&quot;David Carrington&quot; /&gt; invented and built it. I merely installed and configured it for my Dutch servers. So to become a Dutch mirror for dabr!More about &lt;a href=&quot;http://dabr.nl/&quot;&gt;Dabr.nl on the about page&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;My reason for releasing and installing it, is that I believe in distribution. I believe the Power of the (Democracy of) internet lies in not depending on a single point of failure. I believe we should keep matters in our own hands (whenever and whoever can) and therefore run our own twitters. In due time, I plan integration with &lt;a href=&quot;http://status.net/&quot;&gt;status.net, the true distributed Twitter&lt;/a&gt;.&lt;/p&gt;
 </content>
  </entry>
  
