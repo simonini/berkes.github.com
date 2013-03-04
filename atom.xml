@@ -4,13 +4,210 @@
  <title>Bèr ‘berkes’ Kessels</title>
  <link href="http://berk.es/atom.xml" rel="self"/>
  <link href="http://berk.es"/>
- <updated>2013-02-10T18:33:33+01:00</updated>
+ <updated>2013-03-04T14:02:58+01:00</updated>
  <id>http://berk.es</id>
  <author>
    <name>Bèr ‘berkes’ Kessels</name>
    <email>ber@webschuur.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Drupal Imagecache security vulnarability with DDOS attack explained</title>
+   <link href="http://berk.es/2013/03/04/drupal-imagecache-security-vulnarability-with-ddos-attack-explained"/>
+   <updated>2013-03-04T00:00:00+01:00</updated>
+   <id>http://berk.es/2013/03/04/drupal-imagecache-security-vulnarability-with-ddos-attack-explained</id>
+   <content type="html">&lt;p&gt;Nearly a year ago, long before I decided to move out of &lt;a href=&quot;http://berk.es/2012/10/01/farewell-drupal/&quot;&gt;Drupalwork
+entirely&lt;/a&gt;, I reported a security vulnarability in Drupal 7 core
+in imagecache. Since imagecache is used on most Drupal6 instances this
+problem occurs there too. I had the draft for this poste, tucked away on
+an offline disk (security-details should not live &quot;online&quot; or in &quot;the
+cloud&quot;, ever); and, obviously, the day I arrive in Thailand for a
+vacation, Drupal released the CVE.&lt;/p&gt;
+
+&lt;p&gt;I made a proof of concept, and a tool to test it. A screencast explaining the issue is found below:&lt;/p&gt;
+
+&lt;iframe width=&quot;420&quot; height=&quot;315&quot; src=&quot;http://www.youtube.com/embed/JP7Q4co0shk&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
+
+
+&lt;p&gt;The issue itself is really simple, the solution is hard; because
+Imagecache was designed &quot;wrong&quot; in the first place. Let me explain.&lt;/p&gt;
+
+&lt;p&gt;You have really basic Drupal7-site on http://example.com, with content-type story that has an image-field. Using three
+imagecache-styles: &quot;medium&quot;, &quot;large&quot; and &quot;thumbnail&quot;.&lt;/p&gt;
+
+&lt;p&gt;Imagecache works by creating new images from an original, on demand,
+when a particular url is requested:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;amp;lt;img src=&quot;http://example.com/sites/default/files/styles/medium/public/field/image/news.jpg&quot; /&amp;amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Dissecting that url, we see:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;http://example.com/sites/default/files/ is where uploaded files are
+stored. This can also be something like http://acme.com/sites/acme-is-evil.org/files/ in case of multisite.&lt;/li&gt;
+&lt;li&gt;/styles/ is the directory where imageges are cahed under.&lt;/li&gt;
+&lt;li&gt;/medium/ is the style applied to this image&lt;/li&gt;
+&lt;li&gt;/public/ the &quot;driver&quot;, usually either &quot;private&quot; or &quot;public&quot;.&lt;/li&gt;
+&lt;li&gt;/field/image/news.jpg where the image is stored. The original can
+therefore be found at http://example.com/sites/default/files/field/image/news.jpg&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;In this case, a &lt;em&gt;derivative&lt;/em&gt; called &lt;em&gt;medium&lt;/em&gt; is created. Because creating images
+is heavy, they are stored on disk, so a next time, the webserver can
+serve this image right-away.&lt;/p&gt;
+
+&lt;p&gt;Let me repeat that: Because &lt;em&gt;creating images is heavy&lt;/em&gt;, they are &lt;em&gt;stored
+on disk&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;The idea is as simple as it is wrong: The first time (when the image is created) a full Drupal is booted up,
+that Drupal-instance applies the various image-manipulations you have configured
+for that style, and then serves and saves the image.&lt;/p&gt;
+
+&lt;p&gt;&quot;But why is that Wrong?&quot;, you ask?&lt;/p&gt;
+
+&lt;p&gt;Because you never know when the &lt;em&gt;heavy stuff&lt;/em&gt; will be invoked. It is
+unpredictable.&lt;/p&gt;
+
+&lt;p&gt;And because the &lt;em&gt;heavy stuff&lt;/em&gt; is initialized by your visitors. People from
+the evil, outside world. They can fire up your image-creating just by
+visiting urls.&lt;/p&gt;
+
+&lt;h2&gt;DDOS&lt;/h2&gt;
+
+&lt;p&gt;This is a typical DDOS vector: making a server do heavy stuff by
+throwing something at it from outside. Typically in an orchestrated
+attack that involves many people from many places throwing stuff at it.&lt;/p&gt;
+
+&lt;h2&gt;The actual issues: mixing images and styles&lt;/h2&gt;
+
+&lt;p&gt;Everything above is not a large problem, because 90%, or more, of the
+images used in img-tags on your site, are already created and cached on
+disk. An attacker will need to find the last 10% and request these urls.
+This is limited.&lt;/p&gt;
+
+&lt;p&gt;But, there are more, far more, possible images then those you use in the
+img-tags.&lt;/p&gt;
+
+&lt;p&gt;We have two images. A frontpage-banner and a user-avatar. They are
+&lt;em&gt;usually&lt;/em&gt; used with two imagecache styles:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;http://example.com/sites/default/files/styles/avatar-thumb/public/users/123.jpg
+http://example.com/sites/default/files/styles/front-banner/public/field/image/fancy_banner.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I could just swap the styles and create a front-banner from the user-avatar,
+and an avatar from the banner, like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;http://example.com/sites/default/files/styles/front-banner/public/users/user_123.jpg
+http://example.com/sites/default/files/styles/avatar-thumb/public/field/image/fancy_banner.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And what is worse, you can pull any image in your &lt;em&gt;files&lt;/em&gt; directory through imagecache. Including that huge 7MB hi-res upload you forgot there. And if you consider the fact the tool imagemagick (often used as engine to convert the images) can actually handle pdfs, html and many other files you probaly have lying around in your &lt;em&gt;files&lt;/em&gt; directory, you know how much your system can be hurt.&lt;/p&gt;
+
+&lt;p&gt;This all gets worse with the size of the images that can be abused and
+the heavyness of the imagecache-styles you have defined. Adding
+watermarks, smartcropping, overlays, rounded corners and whatnot make
+the generation of a derivative much heavier then merely resizing an image.&lt;/p&gt;
+
+&lt;h2&gt;The other issue: recursiveness&lt;/h2&gt;
+
+&lt;p&gt;When we look above, we can see that imagecache will gladly pick up any
+file, pull it trough the image-profiles you have defined, using the toolkits at hand and then &lt;em&gt;write out a file to disk&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Guess where? Yup, in the &lt;em&gt;files&lt;/em&gt; directory. Adding another file that can
+be pulled trough imagecache. So, you can imagecache-already-imagecached
+files. [insert inception jokes here].&lt;/p&gt;
+
+&lt;p&gt;This is where the attackers have the opportunity to fill up your
+servers' harddrive. By simply generating image-styles by mixing up
+images and styles, you can create a huge amount of unexpected images.
+You them pull these trough imagecache again, to duplicate that huge
+amount. And again. And again. Untill urls grow so large that the
+webserver refuses them. Apache's limit lies around 4000 characters.&lt;/p&gt;
+
+&lt;p&gt;A site with only one, 0.1MB image image and two styles can gain several thousand
+directories, nearly fivehundred copies of imagecache derivatives making
+a total of ~50MB of new images. All an attacker needs to do, is send 500
+HEAD requests to your server, doable in a fraction of a second.&lt;/p&gt;
+
+&lt;p&gt;A site with thousands of images and five imagecache styles will get
+terabytes of new images in mere minutes. Obviously depending on the
+speed of the server and how many (HEAD) requests the server allows simultaniously.
+Or in days. Doing only a few-hundred requests each day, yet filling up
+your disk slowly but surely, after which your average server will either
+start crashing, or your hoster will send you large bills for extra
+storage and so on.&lt;/p&gt;
+
+&lt;p&gt;Also note that one does not need to download the to-be-generated file. Just requesting it,
+with a HEAD is enough.&lt;/p&gt;
+
+&lt;h2&gt;The proof of concept tool&lt;/h2&gt;
+
+&lt;p&gt;Find it &lt;a href=&quot;https://github.com/berkes/canhaz&quot;&gt;on github&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Please note that the tool is made for investigative use only; but be
+aware that others might not heed this notice and either build such a
+tool themselves (it is really simple) or use it to bring down your site.&lt;/p&gt;
+
+&lt;p&gt;Because of this, I chose to cripple it a little. The tool cannot detect wether you have applied the
+security patch or not, or if you have different measures in place.
+Because of this, I have removed the crawling and parrallel part too, limiting it to
+images and imagecache-styles found on the page you insert manually.&lt;/p&gt;
+
+&lt;p&gt;The tool was made to investigate when and how a system would crash or
+choke using these attacks. Please investigate and learn about the CMS
+and the modules you are you are using.&lt;/p&gt;
+
+&lt;p&gt;Prepare your system for Ruby.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo apt-get install ruby rubygems #OSX and most Linuxes already have these
+$ sudo gem install bundle
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Clone the tool and install the dependencies.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git clone https://github.com/berkes/canhaz.git
+$ cd canhaz
+$ bundle install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Run!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ./canhaz # Shows all tasks
+$ canhaz hit http://example.com 20 # generates max 20 imagecache
+                                   # derivatives, by investigating
+                                   # example.com
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;Lessons learned&lt;/h2&gt;
+
+&lt;p&gt;Don't do on-demand generation of things that require heavy work. In this
+case, derivatives needed for a user-avatar should be created when a user
+uploads that avatar. Even better is to let a &lt;a href=&quot;http://en.wikipedia.org/wiki/Thread_pool_pattern&quot;&gt;worker queue&lt;/a&gt; deal with the actual generation, that way dedicated machines can deal with the heavy lifting,
+and users don't have to wait in front of a loading page while you are
+making images. For PHP the standard tool
+&lt;a href=&quot;http://www.php.net/manual/en/book.gearman.php&quot;&gt;Gearman&lt;/a&gt;, has worked
+well for me; just don't expect it to be like resqueue, sidekiq or pythons RQ (yet).&lt;/p&gt;
+
+&lt;p&gt;Magic &quot;handyness&quot; like allowing any image to be &quot;imagecached&quot; is
+usefull in development, but not in production. So, on your development
+environment, you may want imagecached images to be generated on the fly (and probably not
+cached, damn you, drush cc-all), you certainly don't want this
+flexibility on a production server. You probably want to call some build
+task while deploying to re-generated all your images there. Once. Before
+deploying.&lt;/p&gt;
+
+&lt;p&gt;And for Drupal8: get rid of imagecache and implement a much simpler
+on-submit image-builder. It should create the derivatives for when
+a File is created and passes validations. This not only solves any such &quot;unpredictable load&quot;
+issues, it allows for much easier CDNs, static-file-servers, caching and
+more. The on-demand architecture has too much downsides to warrant the
+only upside: flexibility.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Tagadelic: TDD, OOP and seeking maintainer</title>
@@ -5395,31 +5592,6 @@ meer op &lt;a href=&quot;http://www.dubistterrorist.de&quot;&gt;dubistterrorist.
    <id>http://berk.es/2009/10/06/aftellen-naar-de-nieuwe-ubuntu-9-10</id>
    <content type="html">&lt;script type=&quot;text/javascript&quot; src=&quot;http://www.ubuntu.com/files/countdown/display.js&quot;&gt;&lt;/script&gt;
 
-</content>
- </entry>
- 
- <entry>
-   <title>Piwik: open source web analytics: alternatief voor Google Analytics</title>
-   <link href="http://berk.es/2009/09/17/piwik-open-source-web-analytics-alternatief-voor-google-analytics"/>
-   <updated>2009-09-17T00:00:00+02:00</updated>
-   <id>http://berk.es/2009/09/17/piwik-open-source-web-analytics-alternatief-voor-google-analytics</id>
-   <content type="html">&lt;p&gt;Een kleine week geleden installeerde ik &lt;a href=&quot;http://piwik.org/&quot;&gt;piwik&lt;/a&gt;. Piwik is een open source applicatie waarmee je web statistieken kunt bijhouden en weergeven. Daar zijn er velen van, maar geen enkele kon tot vandaag aan het gemak en de volledigheid van Google Analytics tippen. Tot Piwik.&lt;/p&gt;
-
-&lt;!--break--&gt;
-
-
-&lt;p&gt;Piwik is heel eenvoudig te installeren. Bijna iedere (betaalbare) webhost ondersteunt de benodigde PHP en bijbehorende MySQL database.&lt;/p&gt;
-
-&lt;p&gt;Eigenlijk kan iedereen die zelf een site kan installeren ook piwik aan de praat kijgen. Wat betekent dat eigenlijk iedereen google analytics zou kunnen vervangen voor piwik.
-&lt;a href=&quot;http://flickr.webschuur.com//moblog/#piwik_example.png&quot;&gt;&lt;img src=&quot;http://flickr.webschuur.com//data/moblog/web/piwik_example.png&quot; title=&quot;piwik_example&quot; alt=&quot;piwik_example&quot; /&gt;&lt;/a&gt;
-Er zijn een heel aantal redenen om dat te doen.
- - Piwik kent een heleboel &lt;a href=&quot;http://piwik.org/faq/plugins/&quot;&gt;plugins&lt;/a&gt; waarmee de functionaliteit uitgebreid kan worden. Qua features is het nu al rijker dan analytics. En dit zal alleen maar meer worden. Zo is er al een heatmap plugin te vinden, waarmee je precies kunt zien waar mensen op je pagina klikten en met hun muis over bewogen.
- - Google slaat alle data zelf op. Jou data. En die van je bezoekers. Hierdoor verzamelt Google data van enorm veel gebruikers, verspreid over enorm veel websites. Ik ben al een paar maal google statistieken trackers tegen gekomen op medische sites. Het gaat Google geen ene F*ck aan naar welke ziektes ik eventueel blader. Met piwik hou jij je data zelf in je eigen database. En geef je het niet aan een groot, commerciëel bedrijf weg.
- - Jij bepaalt je voorwaarden. Je mag je data vrijgeven, weggeven, als je de privacy van je bezoekers minder belangijk vind. Bij Google mag en kan dat niet. Je mag ook meerdere trackers naast elkaar draaien. Google staat niet toe dat je andere tellers naast die van hun voert.
- - Integratie in veel CMSen is mogelijk. Je hoeft (je beheerders) niet meer naar een andere pagina of site te leiden, maar kunt ze de statistieken direct binnen hun CMS aanbieden
-. - Het is open source. Met de juiste kennis is het dus heel makkelijk mogelijk om zelf aanpassingen te maken of uitbreidingen te schrijven. Bij Google kun je dat vragen, maar of je het krijgt is maar de vraag.
-Kortom. Probeer Piwik eens uit. En test het eens uit binnen je organisatie of op je eigen site, of sites. Het kost je een klein uurtje om uit te rollen en ik ben er zeker van dat velen zullen blijven hangen. Of je nu SEO-expert bent, auteur, blogger, webhoster of webdeveloper: piwik is een heel mooi stuk gereedschap om in je portfolio op te nemen.
-Ik ben me zeker bewust van de googel advertenties hierboven en hoe dit in contrast staat met mijn betoog voor privacy. Zoals ik zei ben ik pragmatisch en &lt;a href=&quot;http://webschuur.com/why_advertisements&quot;&gt;heb ik duidelijke redenen en doelen voor advertenties&lt;/a&gt;&lt;/p&gt;
 </content>
  </entry>
  
