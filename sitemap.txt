@@ -8,6 +8,7 @@ http://berk.es/archive.html
 http://berk.es/sitemap.txt
 http://berk.es/about.html
 
+http://berk.es/2013/03/21/please-ruby-devs-join-your-paths
 http://berk.es/2013/03/04/drupal-imagecache-security-vulnarability-with-ddos-attack-explained
 http://berk.es/2013/02/10/tagadelic-tdd-oop-and-seeking-maintainer
 http://berk.es/2013/02/04/testing-colored-output-with-cucumber
