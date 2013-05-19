@@ -93,7 +93,7 @@
 <p>First, we introduce a basic authenticate method, that can be used troughout our controllers.
 This method uses the Rails/Rack helper <a href="http://apidock.com/rails/ActionController/HttpAuthentication/Basic/ControllerMethods/authenticate_or_request_with_http_basic">authenticate_or_request_with_http_basic</a>.</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&lt;</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">Base</span>
+<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&lt;</span> <span class="ss">ActionController</span><span class="p">:</span><span class="ss">:Base</span>
   <span class="n">protect_from_forgery</span>
 
   <span class="kp">protected</span>
@@ -213,7 +213,7 @@ This method uses the Rails/Rack helper <a href="http://apidock.com/rails/ActionC
         <p>
             Bèr ‘berkes’ Kessels<br />
             Bèr Kessels is an Open Source Webdeveloper.<br />
-            <a href='mailto:ber@webschuur.com'>ber@webschuur.com</a>
+            <a href='mailto:ber@berk.es'>ber@berk.es</a>
           </p>
           <p>
             <a href="http://github.com/berkes/">github.com/berkes</a><br />
