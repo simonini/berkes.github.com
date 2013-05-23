@@ -18,9 +18,9 @@
   <link rel="openid2.provider" href="http://www.myopenid.com/server" />
   <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=berkes.myopenid.com" />
 
-   <title>Wij treden uw privacy met voeten, en zijn er nog trots op ook!</title>
+   <title>Over de anonimiteit van Bitcoin</title>
    <meta name="author" content="Bèr ‘berkes’ Kessels" />
-   <link href="http://feeds.feedburner.com/berkes" rel="alternate" title="Wij treden uw privacy met voeten, en zijn er nog trots op ook! Feed" type="application/atom+xml" />
+   <link href="http://feeds.feedburner.com/berkes" rel="alternate" title="Over de anonimiteit van Bitcoin Feed" type="application/atom+xml" />
    <link rel="author" href="/humans.txt" type="text/plain" />
    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
    <!-- Included CSS Files -->
@@ -73,23 +73,84 @@
     <section id="main-content" class="row">
       <article>
   <header>
-    <h1>Wij treden uw privacy met voeten, en zijn er nog trots op ook!</h1>
+    <h1>Over de anonimiteit van Bitcoin</h1>
   </header> 
   <div class="body">
-    <p>Het <a href="https://www.rdc.nl/Portal/nl-NL/Home.htm">RDC</a>, de grootste privacy-gevoelige-gevevens-boer van Nederland, roept van de daken dat hun <a href="https://www.rdc.nl/Portal/nl-NL/Nieuws/Productnieuws/Adressenverkoop+RDC+op+recordhoogte.htm">adressenverkoop een recordhoogte bereikt</a>.</p>
+    <figure>
+  <img src="/images//2013/05/23/over-de-anonimiteit-van-bitcoin.png" alt="Woodcut from Doré. Purely illustrative" />
+  
+    <figcaption>Doré Houtsnede. De enige functie hiervan is een mooiere layout. En de gravures zijn gewoon mooi</figcaption>
+  
+</figure>
 
-<p>In het verleden kreeg het RDC <a href="http://www.sargasso.nl/archief/2007/01/23/het-is-maar-wat-u-privacy-gevoelig-noemt/">de (adres)gegevens van alle autobezitters van de Staat</a>. Vanaf begin dit jaar is dat achter niet meer zo. Maar volgens hunzelf maakt dat geen fluit uit. Ze kopen gewoon wat adreswijzigingen in bij andere data-boeren, mixen dat met wat eigen informatie en voila: ze weten weer alles over u. En zijn daar vervolgens nog trots op ook:<!--break-->> <a href="https://www.rdc.nl/Portal/nl-NL/Nieuws/Productnieuws/Adressenverkoop+RDC+op+recordhoogte.htm">En waarom niet?</a> Adressen van voertuigbezitters zijn nog altijd op grote schaal verkrijgbaar bij RDC. Zo lang een voertuig na 1 maart 2007 geen nieuwe particuliere eigenaar heeft gekregen, zijn de naw-gegevens immers nog gewoon beschikbaar in de vertrouwde RDC-kwaliteit. En voor het wegvallen van de adressen van particulieren die wel na 1 maart 2007 eigenaar zijn geworden van een nieuwe of tweedehands voertuig, heeft RDC diverse maatregelen getroffen. De inkoop van verhuismutaties, nieuwe producten zoals klantvalidatie en het naw-platform INDI zijn hiervan goede voorbeelden</p>
+    <div class="content">
+      <p>Het bedrijf dat in Nederland pintransacties verwerkt, <em>Equence</em>,
+<a href="">kondigde aan om ons pingedrag te verkopen</a> aan geïnterresseerde
+marketeers en bedrijven. Ze beweren dat deze transacties anoniem zijn.
+Dat is onzin, pintransacties (Of iDeal, creditcard, Paypal of eender
+welke digitale transactie) kán eenvoudigweg niet anoniem zijn; je
+rekeningnummer is immers direct gekoppeld aan je, geïdentificeerde,
+persoon. Ooit een bankrekening proberen te openen op naam van Jelle Snikkelsma, Kerkstraat 14 te Grashuizen?</p>
 
+<p><strong>Bitcoin</strong>, hoor je vaak, <strong>is wél anoniem</strong>. Bitcoin-betalingen, zijn,
+inderdaad, niet tot een persoon terug te herleiden als je dat niet wilt. Vrijwel
+vergelijkbaar met betalen met contant geld. Als ik jou een briefje van vijf euro geef en
+daarna mijn hele levensverhaal vertel, is de betaling niet anoniem.
+Maar als ik je vijf euro per post opstuur, dan is (bijna) niet te
+achterhalen dat dit van mij afkomt.</p>
+
+<p>Deze anonimiteit bij bitcoin is vrij uitzonderlijk
+voor een digitaal systeem. Wanneer je dan bedenkt dat Bitcoin in feite
+een enorm, publiek kasboek is, waarin iedere transactie wordt
+weggeschreven, klinkt dit al helemaal vreemd.</p>
+
+<p>Bitcoin werkt namelijk met pseudoniemen. Cryptografische pseudoniemen;
+je rekening is niet meer dan een public en private keypair, je
+<em>portemonee</em>. En bitcoin werkt daarom niet met registratie:
+iedereen die een public en private (geheime) keypair kan aanmaken, heeft onmiddellijk een werkende bitcoin-rekening.
+In analogie
+met een bankrekening zou dat zijn: iedereen die een unieke bankrekening en
+bijbehorende pincode kan verzinnen en die kan onthouden, heeft een
+bankrekening; zonder dat het banksysteem daar ooit vanaf hoeft te weten.
+De cryptografie garandeert dat enkel jijzelf toegang hebt tot die
+bankrekening. En zorgt ervoor dat er nooit (in de praktische zin van "nooit": niet in
+theoretische) twee mensen dezelfde bankrekening verzinnen.</p>
+
+<p>De portemonnee, en dan met name je public-key, moet echter niet naar jou
+te herleiden zijn. Je moet, in de praktijk, dus niet je publieke sleutel versturen vanaf
+een IP-adres wat naar jou persoon terugleidt. En dat versturen ervan, doe
+je bij iedere transactie.  En daarbij kun je heel eenvoudig een (of meer) nieuwe portemonnee aanmaken en
+al je geld daarheen overmaken. Als jij je pseudoniem geheim wilt houden
+kan dat. En is die rekening verder op geen enkele manier te herleiden
+tot jou.</p>
+
+<p>Daarbij heeft je portemonnee oneindig veel bankrekeningnummers, <em>Bitcoin
+addresses</em> genoemd, waarmee je geld naar je portemonnee kunt overmaken. En
+van waaraf je geld kunt overmaken. In de praktijk zul je dus voor iedere
+transactie een nieuw, wegwerp-adres aanmaken. Dus zelfs als één zo'n
+adres wel terug naar jou te herleiden is (omdat je bijvoorbeeld een boek
+bestelde en dat thuis laat bezorgen), dan nóg staat een volgende betaling
+daar vrijwel los van. Wanneer dus de éne betaling die je binnenkrijgt voor
+een factuur is waar je met naam en toenaam op genoemd staat, is alléén
+dat adres naar jou terug te leiden en niet te koppelen aan alle andere
+betalingen die je ontvangt.</p>
+
+<p>Ook hier hangt het dus vooral af van hoeveel privacy je wílt; maar je
+hebt, in tegenstelling tot dat bankpasje in je broekzak, tenminste de
+mógelijkheid om je identiteit verborgen te houden bij bestellingen,
+betalingen en zelfs bij het ontvangen van geld.</p>
+
+<p>Dát beste mijnheer Rietveld van Equens, is privacy. Het verkopen van
+cijfers aan Ohra, over hoe vaak een groepje rekeninghouders op Station
+Utrecht een blikje Grolsch koopt (en de volgende ochtend op Station
+Nijmegen bij de DA een pakje Aspirine), is dat niet!</p>
+
+    </div>
   </div>
   <footer>
-    <p class="note">
-    
-      <em>Dit artikel verscheen op bler.webschuur.com. En is overgezet naar dit blog</em>
-    
-    </p>
-    <time datetime="2007-08-07T00:00:00+02:00"
+    <time datetime="2013-05-23T00:00:00+02:00"
     pubdate="pubdate">
-      Posted on 07 August 2007
+      Posted on 23 May 2013
     </time>
     in
     
@@ -100,11 +161,9 @@
 
   
     
+      <a href="/tags.html#bitcoin-ref" class="black radius label">bitcoin<span class="size">5</span></a>
+    
       <a href="/tags.html#privacy-ref" class="black radius label">privacy<span class="size">17</span></a>
-    
-      <a href="/tags.html#rdc-ref" class="black radius label">rdc<span class="size">1</span></a>
-    
-      <a href="/tags.html#adressenverkoop-ref" class="black radius label">adressenverkoop<span class="size">1</span></a>
     
   
 

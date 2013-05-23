@@ -4,13 +4,81 @@
  <title>Bèr ‘berkes’ Kessels</title>
  <link href="http://berk.es/atom.xml" rel="self"/>
  <link href="http://berk.es"/>
- <updated>2013-05-19T17:58:52+02:00</updated>
+ <updated>2013-05-23T19:45:38+02:00</updated>
  <id>http://berk.es</id>
  <author>
    <name>Bèr ‘berkes’ Kessels</name>
    <email>ber@berk.es</email>
  </author>
 
+ 
+ <entry>
+   <title>Over de anonimiteit van Bitcoin</title>
+   <link href="http://berk.es/2013/05/23/over-de-anonimiteit-van-bitcoin"/>
+   <updated>2013-05-23T00:00:00+02:00</updated>
+   <id>http://berk.es/2013/05/23/over-de-anonimiteit-van-bitcoin</id>
+   <content type="html">&lt;p&gt;Het bedrijf dat in Nederland pintransacties verwerkt, &lt;em&gt;Equence&lt;/em&gt;,
+&lt;a href=&quot;&quot;&gt;kondigde aan om ons pingedrag te verkopen&lt;/a&gt; aan geïnterresseerde
+marketeers en bedrijven. Ze beweren dat deze transacties anoniem zijn.
+Dat is onzin, pintransacties (Of iDeal, creditcard, Paypal of eender
+welke digitale transactie) kán eenvoudigweg niet anoniem zijn; je
+rekeningnummer is immers direct gekoppeld aan je, geïdentificeerde,
+persoon. Ooit een bankrekening proberen te openen op naam van Jelle Snikkelsma, Kerkstraat 14 te Grashuizen?&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Bitcoin&lt;/strong&gt;, hoor je vaak, &lt;strong&gt;is wél anoniem&lt;/strong&gt;. Bitcoin-betalingen, zijn,
+inderdaad, niet tot een persoon terug te herleiden als je dat niet wilt. Vrijwel
+vergelijkbaar met betalen met contant geld. Als ik jou een briefje van vijf euro geef en
+daarna mijn hele levensverhaal vertel, is de betaling niet anoniem.
+Maar als ik je vijf euro per post opstuur, dan is (bijna) niet te
+achterhalen dat dit van mij afkomt.&lt;/p&gt;
+
+&lt;p&gt;Deze anonimiteit bij bitcoin is vrij uitzonderlijk
+voor een digitaal systeem. Wanneer je dan bedenkt dat Bitcoin in feite
+een enorm, publiek kasboek is, waarin iedere transactie wordt
+weggeschreven, klinkt dit al helemaal vreemd.&lt;/p&gt;
+
+&lt;p&gt;Bitcoin werkt namelijk met pseudoniemen. Cryptografische pseudoniemen;
+je rekening is niet meer dan een public en private keypair, je
+&lt;em&gt;portemonee&lt;/em&gt;. En bitcoin werkt daarom niet met registratie:
+iedereen die een public en private (geheime) keypair kan aanmaken, heeft onmiddellijk een werkende bitcoin-rekening.
+In analogie
+met een bankrekening zou dat zijn: iedereen die een unieke bankrekening en
+bijbehorende pincode kan verzinnen en die kan onthouden, heeft een
+bankrekening; zonder dat het banksysteem daar ooit vanaf hoeft te weten.
+De cryptografie garandeert dat enkel jijzelf toegang hebt tot die
+bankrekening. En zorgt ervoor dat er nooit (in de praktische zin van &quot;nooit&quot;: niet in
+theoretische) twee mensen dezelfde bankrekening verzinnen.&lt;/p&gt;
+
+&lt;p&gt;De portemonnee, en dan met name je public-key, moet echter niet naar jou
+te herleiden zijn. Je moet, in de praktijk, dus niet je publieke sleutel versturen vanaf
+een IP-adres wat naar jou persoon terugleidt. En dat versturen ervan, doe
+je bij iedere transactie.  En daarbij kun je heel eenvoudig een (of meer) nieuwe portemonnee aanmaken en
+al je geld daarheen overmaken. Als jij je pseudoniem geheim wilt houden
+kan dat. En is die rekening verder op geen enkele manier te herleiden
+tot jou.&lt;/p&gt;
+
+&lt;p&gt;Daarbij heeft je portemonnee oneindig veel bankrekeningnummers, &lt;em&gt;Bitcoin
+addresses&lt;/em&gt; genoemd, waarmee je geld naar je portemonnee kunt overmaken. En
+van waaraf je geld kunt overmaken. In de praktijk zul je dus voor iedere
+transactie een nieuw, wegwerp-adres aanmaken. Dus zelfs als één zo'n
+adres wel terug naar jou te herleiden is (omdat je bijvoorbeeld een boek
+bestelde en dat thuis laat bezorgen), dan nóg staat een volgende betaling
+daar vrijwel los van. Wanneer dus de éne betaling die je binnenkrijgt voor
+een factuur is waar je met naam en toenaam op genoemd staat, is alléén
+dat adres naar jou terug te leiden en niet te koppelen aan alle andere
+betalingen die je ontvangt.&lt;/p&gt;
+
+&lt;p&gt;Ook hier hangt het dus vooral af van hoeveel privacy je wílt; maar je
+hebt, in tegenstelling tot dat bankpasje in je broekzak, tenminste de
+mógelijkheid om je identiteit verborgen te houden bij bestellingen,
+betalingen en zelfs bij het ontvangen van geld.&lt;/p&gt;
+
+&lt;p&gt;Dát beste mijnheer Rietveld van Equens, is privacy. Het verkopen van
+cijfers aan Ohra, over hoe vaak een groepje rekeninghouders op Station
+Utrecht een blikje Grolsch koopt (en de volgende ochtend op Station
+Nijmegen bij de DA een pakje Aspirine), is dat niet!&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Bitcoins kopen? Weet wat je doet.</title>
@@ -5712,23 +5780,6 @@ meer op &lt;a href=&quot;http://www.dubistterrorist.de&quot;&gt;dubistterrorist.
    <content type="html">&lt;p&gt;Gisteren heb ik Dabr.nl overgezet naar &lt;a href=&quot;http://twa.sh/user/berkes&quot;&gt;twa.sh&lt;/a&gt;. Dabr, nu twa.sh dus, is een mobiele twitter-client. Veel lichter, en toch functioneler dan de officiële mobiele twitter-site m.twitter.com. Je gaat hier gewoon met je browser op je mobiel naartoe, logt in en kunt vanaf twa.sh twitteren met je mobiel.&lt;/p&gt;
 
 &lt;p&gt;Twa.sh wordt vooral veel door Chinezen gebruikt; sinds gisteren al 7000 unieke gebruikers, die met elkaar ruim 80.000 hits op twa.sh genereerden. Druk dus. Chinezen mogen veelal niet op twitter.com komen, die wordt door de &lt;a href=&quot;http://nl.wikipedia.org/wiki/The_Great_Firewall&quot;&gt;The Great Firewall&lt;/a&gt; tegengehouden. Heb je dus wat serverruimte over en gaat vrijheid van meningsuiting je aan het hart, installeer dan &lt;a href=&quot;http://code.google.com/p/dabr/&quot;&gt;een dabr op je eigen server&lt;/a&gt; (&lt;a href=&quot;http://github.com/berkes/dabr&quot;&gt;git hier&lt;/a&gt;). Bovendien kun je met de versie die ik op twa.sh installeerde ook twitteren via &lt;a href=&quot;http://status.net&quot;&gt;status.net&lt;/a&gt;, &lt;a href=&quot;http://identi.ca/berkes&quot;&gt;identi.ca&lt;/a&gt; en andere alternatieve twitters. In de planning zit nu het inbouwen van meerdere accounts: zodat je op twa.sh meer dan 1 twitter account kunt uitlezen, posten en dergelijke. Maar dat is voor later.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Youtube - het grootste muziekarchief allertijden</title>
-   <link href="http://berk.es/2009/10/06/youtube-het-grootste-muziekarchief-allertijden"/>
-   <updated>2009-10-06T00:00:00+02:00</updated>
-   <id>http://berk.es/2009/10/06/youtube-het-grootste-muziekarchief-allertijden</id>
-   <content type="html">&lt;p&gt;Al een tijdje probeer ik voor blij &lt;a href=&quot;http://twitter.com/berkes&quot;&gt;twitter&lt;/a&gt; en &lt;a href=&quot;http://blip.fm/berkes&quot;&gt;blip&lt;/a&gt; geïnteresseerden een beetje van mijn muziekliefde over te dragen. Die is breed, maar de rode lijnen zijn Ska (rocksteady) en &lt;a href=&quot;http://www.stubru.be/programmas/duyster&quot;&gt;duyster&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Voor mijn dagelijkse blip moet ik op zoek, echt gaan graven, naar muziek. Helaas niet in muffige platezaken of duistere tweedehandsadvertenties, maar online. Op blogs, archieven, open Dirretjes enzovoort. Maar igenlijk kom ik bijna alles ook op Youtube tegen. De meerderheid in elk geval.&lt;/p&gt;
-
-&lt;p&gt;Of het nu het prille begin van Reggae (en dus veel Jazz, bijna alle Hip-hop, Dance en wat daaruit voortspon) is,&lt;object width=&quot;425&quot; height=&quot;344&quot;&gt;&lt;param name=&quot;movie&quot; value=&quot;http://www.youtube.com/v/o4r5C6MUqO4&amp;hl=nl&amp;fs=1&amp;&quot; /&gt;&lt;param name=&quot;allowFullScreen&quot; value=&quot;true&quot; /&gt;&lt;param name=&quot;allowscriptaccess&quot; value=&quot;always&quot; /&gt;&lt;embed src=&quot;http://www.youtube.com/v/o4r5C6MUqO4&amp;hl=nl&amp;fs=1&amp;&quot; type=&quot;application/x-shockwave-flash&quot; allowscriptaccess=&quot;always&quot; allowfullscreen=&quot;true&quot; width=&quot;425&quot; height=&quot;344&quot;&gt;&lt;/embed&gt;&lt;/object&gt;of een project van Erlend Øye. &lt;object width=&quot;425&quot; height=&quot;344&quot;&gt;&lt;param name=&quot;movie&quot; value=&quot;http://www.youtube.com/v/LEdpyphqjL0&amp;hl=nl&amp;fs=1&amp;&quot; /&gt;&lt;param name=&quot;allowFullScreen&quot; value=&quot;true&quot; /&gt;&lt;param name=&quot;allowscriptaccess&quot; value=&quot;always&quot; /&gt;&lt;embed src=&quot;http://www.youtube.com/v/LEdpyphqjL0&amp;hl=nl&amp;fs=1&amp;&quot; type=&quot;application/x-shockwave-flash&quot; allowscriptaccess=&quot;always&quot; allowfullscreen=&quot;true&quot; width=&quot;425&quot; height=&quot;344&quot;&gt;&lt;/embed&gt;&lt;/object&gt;het is op youtube te vinden. Stiekum is Youtube in een Alexandriaanse Bibliotheek voor muziek aan het veranderen. Ons globale muzikale geweten. Ik kan het niet onderbouwen, maar vermoed dat Wij. De Mens. Nog nooit zoveel muziek, of eender welke culturele uitingen, bijeen hebben weten te brengen. Ever.&lt;/p&gt;
-
-&lt;p&gt;En daarmee zou Youtube dus meer waard zijn dan eender welk museum, kunstarchief, of bibliotheek. Cultureel gezien, dan.&lt;/p&gt;
-
-&lt;p&gt;En dan wil precies de club die zich als (financiële) beschermer van die cultuur opwerpt, Buma/Stemra, het gebruik van dit enorme culturele verzamelvat gaan belasten. Met als enige doel dat we dat niet meer doen: gebruiken. Dat is alsof je eindelijk je Bibliotheek Van Alles bijelkaar hebt en dan gaat verbieden dat iemand ooit nog boeken daaruit leest, door een paarhonder Euro per leesbeurt te vragen.&lt;/p&gt;
 </content>
  </entry>
  
