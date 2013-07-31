@@ -4,13 +4,82 @@
  <title>Bèr ‘berkes’ Kessels</title>
  <link href="http://berk.es/atom.xml" rel="self"/>
  <link href="http://berk.es"/>
- <updated>2013-05-23T19:48:39+02:00</updated>
+ <updated>2013-07-31T12:30:49+02:00</updated>
  <id>http://berk.es</id>
  <author>
    <name>Bèr ‘berkes’ Kessels</name>
    <email>ber@berk.es</email>
  </author>
 
+ 
+ <entry>
+   <title>So, I am starting as Ruby Developer at Savvii</title>
+   <link href="http://berk.es/2013/07/31/starting-as-ruby-developer-at-savvii"/>
+   <updated>2013-07-31T00:00:00+02:00</updated>
+   <id>http://berk.es/2013/07/31/starting-as-ruby-developer-at-savvii</id>
+   <content type="html">&lt;p&gt;Monday (5th of Juli) I am starting at the startup &lt;a href=&quot;http://savvii.nl&quot;&gt;Savvii&lt;/a&gt;. To
+be part of the team that wants to bring you the very best WordPress
+hosting in the Netherlands.&lt;/p&gt;
+
+&lt;p&gt;I am going to develop the software for the back end: program the robots that
+do all the magic behind-the-scenes work.&lt;/p&gt;
+
+&lt;p&gt;Because I am a Ruby-developer, I'll do this in Ruby. We
+needs some technical things like long-running threads and asynchronous
+workers and stuff, which makes Ruby (and Rails) one of the best
+candidates. I'll be blogging more about the technical stuff on our yet-to-go-online blog. And probably here too.&lt;/p&gt;
+
+&lt;p&gt;WordPress, for those who are not too much into this stuff, is the most used, of &lt;a href=&quot;http://trends.builtwith.com/cms&quot;&gt;the
+three most popular CMSes&lt;/a&gt;. It is the
+software &lt;a href=&quot;http://en.wordpress.com/notable-users/&quot;&gt;behind many famous and popular
+websites&lt;/a&gt; and is commonly known
+as a Blogging-system, rather then a generic CMS.&lt;/p&gt;
+
+&lt;h2&gt;WAT!? You be doing WordPress-development?&lt;/h2&gt;
+
+&lt;p&gt;Probably a little, but my task is
+to get the back end-software running, which is building stuff like CRMs, billing gateways, provisioning APIs and whatnot.
+My &lt;a href=&quot;https://twitter.com/fuegas&quot;&gt;fellow-programmer&lt;/a&gt; is the main PHP-and WordPress-developer. But I will certainly dive into WordPress now
+and again to make it play nicely with all the Ruby back ends.&lt;/p&gt;
+
+&lt;h2&gt;But didn't you say you hate WordPress, Drupal and all that other PHP-stuff?&lt;/h2&gt;
+
+&lt;p&gt;Nope. Apparently a lot of people seem to think that I am &quot;against&quot;
+Drupal, WordPress or even PHP in general. On contrary: I like them a
+lot. And very often advise people to use this software for their
+websites.&lt;/p&gt;
+
+&lt;p&gt;I merely think that such CMSes have their place and cases, but are often abused
+in cases (and projects) where they fit poorly: the right tool for the
+job. Apparently many people read that as &quot;haters gonna hate&quot;. I don't.
+Hate.&lt;/p&gt;
+
+&lt;h2&gt;What about your own company?&lt;/h2&gt;
+
+&lt;p&gt;I'll be putting my all my focus on Savvii, on making it
+a great hoster. But I expect to go back to some small side-projects once we are
+moving. Not sure how it will combine, but time will learn.
+&lt;a href=&quot;http://berk.es/about.html&quot;&gt;Berk.es&lt;/a&gt; will continue to exist, albeit
+dormant for a while.&lt;/p&gt;
+
+&lt;h2&gt;Savvii? WordPress hoster?&lt;/h2&gt;
+
+&lt;p&gt;We are just starting, so all the details are still unclear.
+But in short, translated from &lt;a href=&quot;http://savvii.nl&quot;&gt;the placeholder
+website&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;Savvii is the new managed WordPress platform for the Netherlands.
+That means speed (caching, CDNs, tweaks), security (scans, free fixes,
+automatic updates) and service!&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;Savvii is part of the family of companies around &lt;a href=&quot;http://www.blixem.nl&quot;&gt;bliXem
+internet&lt;/a&gt;, which is where I'll be working. Yes,
+that is Nijmegen, so I can go to work on my bike.&lt;/p&gt;
+
+&lt;p&gt;I am really grateful to become part of such a good team and to be able
+to get the opportunity to help such a promising startup going!&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Over de anonimiteit van Bitcoin</title>
@@ -42,11 +111,11 @@ je rekening is niet meer dan een public en private keypair, je
 &lt;em&gt;portemonee&lt;/em&gt;. En bitcoin werkt daarom niet met registratie:
 iedereen die een public en private (geheime) keypair kan aanmaken, heeft onmiddellijk een werkende bitcoin-rekening.
 In analogie
-met een bankrekening zou dat zijn: iedereen die een unieke bankrekening en
+met een bankrekening zou dat zijn: iedereen die een uniek bankrekeningnummer en
 bijbehorende pincode kan verzinnen en die kan onthouden, heeft een
 bankrekening; zonder dat het banksysteem daar ooit vanaf hoeft te weten.
 De cryptografie garandeert dat enkel jijzelf toegang hebt tot die
-bankrekening. En zorgt ervoor dat er nooit (in de praktische zin van &quot;nooit&quot;: niet in
+bankrekening (dat de pincode precies de goede is om geld mee van de rekening over te maken). En zorgt ervoor dat er nooit (in de praktische zin van &quot;nooit&quot;: niet in
 theoretische) twee mensen dezelfde bankrekening verzinnen.&lt;/p&gt;
 
 &lt;p&gt;De portemonnee, en dan met name je public-key, moet echter niet naar jou
@@ -5769,17 +5838,6 @@ Een proxy is, heel eenvoudig gesteld, een computer dis tussen mij en het eindpun
    <content type="html">&lt;p&gt;Via &lt;a href=&quot;http://www.zeepvrij.nl/2009/12/14/du-bist-ein-terrorist&quot;&gt;Zeepvrij&lt;/a&gt;.&lt;object width=&quot;400&quot; height=&quot;225&quot;&gt;&lt;param name=&quot;allowfullscreen&quot; value=&quot;true&quot; /&gt;&lt;param name=&quot;allowscriptaccess&quot; value=&quot;always&quot; /&gt;&lt;param name=&quot;movie&quot; value=&quot;http://vimeo.com/moogaloop.swf?clip_id=4631958&amp;amp;server=vimeo.com&amp;amp;show_title=1&amp;amp;show_byline=1&amp;amp;show_portrait=0&amp;amp;color=&amp;amp;fullscreen=1&quot; /&gt;&lt;embed src=&quot;http://vimeo.com/moogaloop.swf?clip_id=4631958&amp;amp;server=vimeo.com&amp;amp;show_title=1&amp;amp;show_byline=1&amp;amp;show_portrait=0&amp;amp;color=&amp;amp;fullscreen=1&quot; type=&quot;application/x-shockwave-flash&quot; allowfullscreen=&quot;true&quot; allowscriptaccess=&quot;always&quot; width=&quot;400&quot; height=&quot;225&quot;&gt;&lt;/embed&gt;&lt;/object&gt;
 &lt;a href=&quot;http://vimeo.com/4631958&quot;&gt;Du bist Terrorist&lt;/a&gt; from &lt;a href=&quot;http://vimeo.com/user221974&quot;&gt;alexanderlehmann&lt;/a&gt; on &lt;a href=&quot;http://vimeo.com&quot;&gt;Vimeo&lt;/a&gt;.
 meer op &lt;a href=&quot;http://www.dubistterrorist.de&quot;&gt;dubistterrorist.de&lt;/a&gt; (ik las eerst Dub Is Terrorist.de, maar dat terzijde)&lt;!--break--&gt;&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Dabr.nl naar Twa.sh</title>
-   <link href="http://berk.es/2009/12/20/dabr-nl-naar-twa-sh"/>
-   <updated>2009-12-20T00:00:00+01:00</updated>
-   <id>http://berk.es/2009/12/20/dabr-nl-naar-twa-sh</id>
-   <content type="html">&lt;p&gt;Gisteren heb ik Dabr.nl overgezet naar &lt;a href=&quot;http://twa.sh/user/berkes&quot;&gt;twa.sh&lt;/a&gt;. Dabr, nu twa.sh dus, is een mobiele twitter-client. Veel lichter, en toch functioneler dan de officiële mobiele twitter-site m.twitter.com. Je gaat hier gewoon met je browser op je mobiel naartoe, logt in en kunt vanaf twa.sh twitteren met je mobiel.&lt;/p&gt;
-
-&lt;p&gt;Twa.sh wordt vooral veel door Chinezen gebruikt; sinds gisteren al 7000 unieke gebruikers, die met elkaar ruim 80.000 hits op twa.sh genereerden. Druk dus. Chinezen mogen veelal niet op twitter.com komen, die wordt door de &lt;a href=&quot;http://nl.wikipedia.org/wiki/The_Great_Firewall&quot;&gt;The Great Firewall&lt;/a&gt; tegengehouden. Heb je dus wat serverruimte over en gaat vrijheid van meningsuiting je aan het hart, installeer dan &lt;a href=&quot;http://code.google.com/p/dabr/&quot;&gt;een dabr op je eigen server&lt;/a&gt; (&lt;a href=&quot;http://github.com/berkes/dabr&quot;&gt;git hier&lt;/a&gt;). Bovendien kun je met de versie die ik op twa.sh installeerde ook twitteren via &lt;a href=&quot;http://status.net&quot;&gt;status.net&lt;/a&gt;, &lt;a href=&quot;http://identi.ca/berkes&quot;&gt;identi.ca&lt;/a&gt; en andere alternatieve twitters. In de planning zit nu het inbouwen van meerdere accounts: zodat je op twa.sh meer dan 1 twitter account kunt uitlezen, posten en dergelijke. Maar dat is voor later.&lt;/p&gt;
 </content>
  </entry>
  

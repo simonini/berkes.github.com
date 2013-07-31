@@ -18,9 +18,9 @@
   <link rel="openid2.provider" href="http://www.myopenid.com/server" />
   <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=berkes.myopenid.com" />
 
-   <title>webalizer.conf</title>
+   <title>So, I am starting as Ruby Developer at Savvii</title>
    <meta name="author" content="Bèr ‘berkes’ Kessels" />
-   <link href="http://feeds.feedburner.com/berkes" rel="alternate" title="webalizer.conf Feed" type="application/atom+xml" />
+   <link href="http://feeds.feedburner.com/berkes" rel="alternate" title="So, I am starting as Ruby Developer at Savvii Feed" type="application/atom+xml" />
    <link rel="author" href="/humans.txt" type="text/plain" />
    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
    <!-- Included CSS Files -->
@@ -73,78 +73,88 @@
     <section id="main-content" class="row">
       <article>
   <header>
-    <h1>webalizer.conf</h1>
+    <h1>So, I am starting as Ruby Developer at Savvii</h1>
   </header> 
-  <div class="body">
-    <p>This slightly modified webalizr.conf does DNS lookups. The modifcations were made using the &lt;a href="ftp://ftp.mrunix.net/pub/webalizer/DNS.</p>
+  <div class="body row">
+    <div class="six columns">
+      
+      <figure>
+  <img src="/images//2013/07/31/starting-as-ruby-developer-at-savvii.png" alt="Woodcut from Doré. Purely illustrative" />
+  
+    <figcaption>Doré Woodcut. Its only function is to make the layout look better. And these images are really nice themselves</figcaption>
+  
+</figure>
 
-<p>README">webalizer DNS readme</a>.</p>
+    </div>
+    <div class="six columns">
+      <p>Monday (5th of Juli) I am starting at the startup <a href="http://savvii.nl">Savvii</a>. To
+be part of the team that wants to bring you the very best WordPress
+hosting in the Netherlands.</p>
 
-<p><code></p>
+<p>I am going to develop the software for the back end: program the robots that
+do all the magic behind-the-scenes work.</p>
 
-<h1>!/bin/sh</h1>
+<p>Because I am a Ruby-developer, I'll do this in Ruby. We
+needs some technical things like long-running threads and asynchronous
+workers and stuff, which makes Ruby (and Rails) one of the best
+candidates. I'll be blogging more about the technical stuff on our yet-to-go-online blog. And probably here too.</p>
 
-<h1>/etc/cron.daily/webalizer: webalizer daily maintenance script</h1>
+<p>WordPress, for those who are not too much into this stuff, is the most used, of <a href="http://trends.builtwith.com/cms">the
+three most popular CMSes</a>. It is the
+software <a href="http://en.wordpress.com/notable-users/">behind many famous and popular
+websites</a> and is commonly known
+as a Blogging-system, rather then a generic CMS.</p>
 
-<h1>Written by Remco van de Meent <a href="&#x6d;&#97;&#105;&#108;&#x74;&#111;&#58;&#x72;&#x65;&#109;&#x63;&#x6f;&#64;&#100;&#101;&#98;&#x69;&#x61;&#110;&#x2e;&#x6f;&#x72;&#x67;">&#x72;&#101;&#109;&#99;&#111;&#64;&#x64;&#x65;&#x62;&#x69;&#x61;&#x6e;&#46;&#111;&#x72;&#103;</a></h1>
+<h2>WAT!? You be doing WordPress-development?</h2>
 
-<p>WEBALIZER_BIN=/usr/bin/webalizer
-WEBALIZER_CONF=/etc/webalizer.conf
-WEBALIZER_DNS=/var/lib/dns_cache.db</p>
+<p>Probably a little, but my task is
+to get the back end-software running, which is building stuff like CRMs, billing gateways, provisioning APIs and whatnot.
+My <a href="https://twitter.com/fuegas">fellow-programmer</a> is the main PHP-and WordPress-developer. But I will certainly dive into WordPress now
+and again to make it play nicely with all the Ruby back ends.</p>
 
-<h1>See if the webalizer binary and config file exists</h1>
+<h2>But didn't you say you hate WordPress, Drupal and all that other PHP-stuff?</h2>
 
-<h1>if not, exit without warning to prevent daily mails</h1>
+<p>Nope. Apparently a lot of people seem to think that I am "against"
+Drupal, WordPress or even PHP in general. On contrary: I like them a
+lot. And very often advise people to use this software for their
+websites.</p>
 
-<p>[ -f ${WEBALIZER_BIN} ] || exit 0
-[ -f ${WEBALIZER_CONF} ] || exit 0</p>
+<p>I merely think that such CMSes have their place and cases, but are often abused
+in cases (and projects) where they fit poorly: the right tool for the
+job. Apparently many people read that as "haters gonna hate". I don't.
+Hate.</p>
 
-<h1>Figure out non-rotated logfile</h1>
+<h2>What about your own company?</h2>
 
-<p>nonrotatedlog=`egrep '<sup>LogFile'</sup> $WEBALIZER_CONF | \</p>
+<p>I'll be putting my all my focus on Savvii, on making it
+a great hoster. But I expect to go back to some small side-projects once we are
+moving. Not sure how it will combine, but time will learn.
+<a href="http://berk.es/about.html">Berk.es</a> will continue to exist, albeit
+dormant for a while.</p>
 
-<pre><code>           sed -e 's/[[:space:]]\+/ /' | \
-           cut -d ' ' -f2 | \
-           sed -e  's/\.[[:digit:]][\.gz]*$//'`
-</code></pre>
+<h2>Savvii? WordPress hoster?</h2>
 
-<h1>Can we read it?</h1>
+<p>We are just starting, so all the details are still unclear.
+But in short, translated from <a href="http://savvii.nl">the placeholder
+website</a>:</p>
 
-<p>[ -r "${nonrotatedlog}" ] || exit 0</p>
+<blockquote><p>Savvii is the new managed WordPress platform for the Netherlands.
+That means speed (caching, CDNs, tweaks), security (scans, free fixes,
+automatic updates) and service!</p></blockquote>
 
-<h1>Check for empty logfile</h1>
+<p>Savvii is part of the family of companies around <a href="http://www.blixem.nl">bliXem
+internet</a>, which is where I'll be working. Yes,
+that is Nijmegen, so I can go to work on my bike.</p>
 
-<p>logsz=`echo ${nonrotatedlog} | \</p>
+<p>I am really grateful to become part of such a good team and to be able
+to get the opportunity to help such a promising startup going!</p>
 
-<pre><code>   sed -e 's/[[:space:]]\+/ /' | \
-   cut -d ' ' -f2 | \
-   xargs ls -l | \
-   sed -e 's/[[:space:]]\+/ /g' | \
-   cut -d ' ' -f5`
-</code></pre>
-
-<p>[ $logsz -gt 0 ] || exit 0</p>
-
-<h1>Run webalizer quietly</h1>
-
-<p>${WEBALIZER_BIN} -D ${WEBALIZER_DNS} -N 5 -c ${WEBALIZER_CONF} -q
-${WEBALIZER_BIN} -D ${WEBALIZER_DNS} -N 5 -c ${WEBALIZER_CONF} -q ${nonrotatedlog}</p>
-
-<h1>Exit with webalizer's exit code</h1>
-
-<p>exit $?
-</code></p>
-
+    </div>
   </div>
   <footer>
-    <p class="note">
-    
-      <em>This article was published on webschuur.com. And migrated to this blog. </em>
-    
-    </p>
-    <time datetime="2005-06-18T00:00:00+02:00"
+    <time datetime="2013-07-31T00:00:00+02:00"
     pubdate="pubdate">
-      Posted on 18 June 2005
+      Posted on 31 July 2013
     </time>
     in
     
@@ -155,7 +165,9 @@ ${WEBALIZER_BIN} -D ${WEBALIZER_DNS} -N 5 -c ${WEBALIZER_CONF} -q ${nonrotatedlo
 
   
     
-      <a href="/tags.html#server-ref" class="black radius label">server<span class="size">17</span></a>
+      <a href="/tags.html#savvi-ref" class="black radius label">savvi<span class="size">1</span></a>
+    
+      <a href="/tags.html#wordpress-ref" class="black radius label">wordpress<span class="size">1</span></a>
     
   
 
