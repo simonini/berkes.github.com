@@ -4,13 +4,81 @@
  <title>Bèr ‘berkes’ Kessels</title>
  <link href="http://berk.es/atom.xml" rel="self"/>
  <link href="http://berk.es"/>
- <updated>2013-08-01T15:46:45+02:00</updated>
+ <updated>2013-10-03T22:28:48+02:00</updated>
  <id>http://berk.es</id>
  <author>
    <name>Bèr ‘berkes’ Kessels</name>
    <email>ber@berk.es</email>
  </author>
 
+ 
+ <entry>
+   <title>Doe één ding en doe dat goed</title>
+   <link href="http://berk.es/2013/10/03/doe-n-ding-en-doe-dat-goed"/>
+   <updated>2013-10-03T00:00:00+02:00</updated>
+   <id>http://berk.es/2013/10/03/doe-n-ding-en-doe-dat-goed</id>
+   <content type="html">&lt;p&gt;&lt;strong&gt;Dit artikel verscheen eerder op de &lt;a href=&quot;http://www.savvii.nl/blog/savvii-systeem-architectuur/&quot;&gt;blog van Savvii&lt;/a&gt;, de Wordpreshoster waar ik momenteel werk.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Als hoster willen we natuurlijk zoveel mogelijk automatiseren, hiervoor moeten we allerhande onderdelen ontwikkelen: van het afhandelen van bestellingen tot het updaten van de wordpress-sites.
+Voor ons is dan van belang dat dit &lt;em&gt;backend&lt;/em&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+    &lt;li&gt;snel aan te passen is aan nieuwe eisen, wensen en inzichten&lt;/li&gt;
+    &lt;li&gt;goed overweg kan met fouten en storingen&lt;/li&gt;
+    &lt;li&gt;heel veilig is&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;We hebben er daarom al heel vroeg voor gekozen om alles als heel kleine, gefocuste, losse onderdelen te maken. Waarbij we veel inspiratie halen bij &lt;a href=&quot;http://www.faqs.org/docs/artu/ch01s06.html&quot;&gt;the Unix Philosophy&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote cite=&quot;http://www.faqs.org/docs/artu/ch01s06.html&quot;&gt;This is the Unix philosophy: Write programs that do one thing and do it well. Write programs to work together. Write programs to handle text streams, because that is a universal interface.&lt;/blockquote&gt;
+
+
+&lt;!--more--&gt;
+
+
+&lt;h3&gt;Rule of Modularity: Write simple parts connected by clean interfaces.&lt;/h3&gt;
+
+
+&lt;p&gt;In ons geval willen we daarbij ook volledig onafhankelijk zijn van de locatie waarop iets draait. We kiezen ervoor om alle communicatie tussen alle componenten met &lt;a href=&quot;https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm&quot;&gt;RESTfull&lt;/a&gt; JSON te laten communiceren. Dat betekent dat we alle communicatie over HTTP doen, waarbij we JSON rondsturen.&lt;/p&gt;
+
+&lt;h3&gt;Rule of Extensibility: Design for the future, because it will be here sooner than you think.&lt;/h3&gt;
+
+
+&lt;p&gt;We hebben een paar concrete uitgangspunten:
+* Alle componenten zullen doorontwikkeld of vervangen worden.
+* Alle componenten zullen op een moment falen, uitgaan of fouten vertonen.
+* De markt en de community rondom WordPress is heel veranderlijk.&lt;/p&gt;
+
+&lt;p&gt;Het mooie aan een modulair ontwerp met een standaard-communicatie, is dat we iedere component ten alle tijden kunnen vervangen door een andere. Als bijvoorbeeld de backup-oplossing niet meer meeschaalt, vervangen we het door een andere zonder dat het hele systeem daarvoor plat hoeft te gaan!&lt;/p&gt;
+
+&lt;p&gt;Omdat alle componenten ook onafhankelijk zijn van elkaars beschikbaarheid kunnen ze ten alle tijden falen of kapot gaan, zonder dat de rest van het systeem daardoor mee omvalt. Als bijvoorbeeld de facturatieomgeving plat-gaat (vanwege een upgrade, bijvoorbeeld), heeft dat geen enkel effect op het waar bijvoorbeeld de backups gemaakt worden. Bij een zogenaamd &lt;em&gt;monolithische&lt;/em&gt; opzet zit alles in één grote applicatie en valt bij een storing altijd de hele applicatie uit.&lt;/p&gt;
+
+&lt;p&gt;En omdat we parallel aan de verschillende onderdelen kunnen werken, kunnen we veel sneller anticiperen op veranderingen of nieuwe inzichten: wanneer bijvoorbeeld een nieuwe WordPress-versie een heel nieuw upgrade-mechanisme heeft, schakelen we eenvoudigweg een nieuwe update-robot in!&lt;/p&gt;
+
+&lt;p&gt;Hoe we zorgen dat we continu en supersnel kunnen releasen, is voor een volgende blogpost.&lt;/p&gt;
+
+&lt;h3&gt;Rule of Simplicity: Design for simplicity; add complexity only where you must.&lt;/h3&gt;
+
+
+&lt;p&gt;Om alle componenten zo dom en simpel mogelijk te kunnen houden zit in het &quot;midden&quot; &lt;em&gt;Evvii,&lt;/em&gt; onze API. Dit is een applicatie die opdrachten en informatieverzoeken ontvangt (over RESTful HTTP, dus), en deze informatie weer teruggeeft in JSON.&lt;/p&gt;
+
+&lt;p&gt;De buitenwereld kan niet bij Evvii, maar bijvoorbeeld de &lt;em&gt;admin-omgeving&lt;/em&gt; waarin jij onder meer je sites beheert, kan er wel bij. Deze admin-omgeving (we noemen hem Wallii), kan dus communiceren met Evvii, maar hoeft zelf helemaal niets aan business-logic te hebben: Dat doet Evvii.&lt;/p&gt;
+
+&lt;p&gt;Een bijkomend voordeel is dat de veiligheid hierdoor verhoogd wordt: de diensten die &quot;publiek&quot; op het internet draaien zijn héél simpel en alleen daardoor al makkelijker te beveiligen. Maar deze webdiensten kunnen zelf helemaal nergens bij, behalve dan bij Evvii. Waardoor we als het ware een tussenlaag hebben die ook weer extra te beveiligen is. Uiteraard is beveiliging veel meer dan dit, en zullen we ook hieraan nog uitgebreid aandacht besteden in toekomstige blogposts.&lt;/p&gt;
+
+&lt;p&gt;Evvii stuurt alle losse componenten aan en voorziet in alle informatieverzoeken. De losse componenten weten verder niets af van de andere componenten. Dit maakt het makkelijker voor ons om componenten te vervangen, verwijderen of aan te passen. Evvii is daarmee wel het kritieke deel: de bottleneck. Hoe we dat oplossen is voor een volgende blogpost.&lt;/p&gt;
+
+&lt;p&gt;Evvii is daarmee wel het meest complexe deel, maar op zich nog altijd vrij eenvoudig: Evvii weet niet &lt;strong&gt;hoe&lt;/strong&gt; een backup gemaakt wordt, enkel &lt;strong&gt;wie&lt;/strong&gt; ze de opdracht kan geven dat te doen! Daarmee kan Evvii nog altijd vrij simpel gehouden worden: ze hoeft enkel te weten wanneer ze wie welke vraag hoeft te stellen, niets meer. Hoe we al deze taken uitvoeren en alles schaalbaar én snel proberen te houden is ook voor een latere blogpost.&lt;/p&gt;
+
+&lt;h3&gt;Rule of Composition: Design programs to be connected with other programs.&lt;/h3&gt;
+
+
+&lt;p&gt;Een ander voordeel van het op deze manier opbouwen is dat we allerhande &lt;em&gt;tools&lt;/em&gt; en programmeertalen kunnen inzetten. Ze communiceren immers over een protocol in een formaat dat vrijwel iedere taal en heel veel diensten gewoon begrijpen. De gereedschappen die dat niet doen krijgen een eenvoudige wrapper waardoor ze via een webservice bediend kunnen worden. Jullie WordPress sites, bijvoorbeeld, zijn niet altijd over het web met JSON te besturen: dat zou ook onveilig zijn. Dus besturen we ze op de server met &lt;a href=&quot;http://wp-cli.org/&quot;&gt;wp-cli&lt;/a&gt;. Maar dat is ook een commandline tool en geen webservice: we moeten daar dus een webservice voor maken. Wanneer we die stabiel en veilig hebben, zullen we deze uiteraard releasen als Open Source Software.&lt;/p&gt;
+
+&lt;p&gt;We bouwen dus overal kleine webservices omheen. En we doen dat vooral in &lt;a href=&quot;http://rubyonrails.org/&quot;&gt;Rails&lt;/a&gt;, &lt;a href=&quot;http://www.sinatrarb.com/&quot;&gt;Sinatra&lt;/a&gt; en &lt;a href=&quot;http://slimframework.com/&quot;&gt;Slim&lt;/a&gt;. En de tools die we zelf bouwen zijn al allemaal webservices vanaf het begin.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>So, I am starting as Ruby Developer at Savvii</title>
@@ -5827,17 +5895,6 @@ Als we internetbankieren (of gewoon inloggen op een site met privégegevens) doe
 Een proxy is, heel eenvoudig gesteld, een computer dis tussen mij en het eindpunt zit. Als ik een verbinding maak met http://example.com zitten daar allerhande servers en computers tussen. Dat zijn in zekere zin allemaal proxies. Het internet draait bij de gratie van proxies; die zijn het belangrijkste ingrediënt van het Internet.&lt;/p&gt;
 
 &lt;p&gt;Maar proxies kunnen ook heel makkelijk ingezet worden om verkeer om te leiden. Of te verbergen. Het eenvoudigste voorbeeld is een grote proxy die, laten we zeggen, in Keulen staat. Vanuit mijn computer in Nijmegen, verbind ik -over een beveiligde verbinding, kom ik later op terug-  met die proxy in Keulen. Gewoon op mijn ADSL-verbinding van XS4all. En dan bezoek ik http://thepiratebay.org. Mijn verbinding ziet er dan als volgt uit:  &gt; Laptop » Modem » XS4all » Keulen » The Pirate BayMaar de nederlandse overheid, die mij bewaakt vanuit de servers van XS4all (of servers net ervoor of net erachter), ziet dan alleen &gt; Modem » XS4all » KeulenDe enige die weet hoe het verkeer ná de proxy loopt, is de proxy zelf. En aangezien de verbinding beveiligd is, kan ook niemand aan de aard van de inhoud achterhalen waar ik surf. Proxies zijn er in vele soorten en maten. Van eenvoudig te installeren software, via (simpele) hardware, tot enorme enterprise systemen. &lt;a href=&quot;http://www.torproject.org/&quot;&gt;Tor&lt;/a&gt; bijvoorbeeld; gemaakt om alle verkeer te anonimiseren. Maar de meeste routers ne modems die je bij Ziggo enzo krijgt, kunnen heel makkelijk ingesteld worden dat ze via een proxy internet aanbieden. En dan moet de Nederlandse overheid niet alleen de sites (en computers) die muziek of film aanbieden afsluiten. Ze moeten ook nog álle open en anonieme proxies in de hele wereld blokkeren. Miljoenen sites verbieden, waar ook nog eens een énorme doorloop in zit, is technisch onhaalbaar. De Chinezen lukt het niet en die hebben hier heel veel voor over, dus waarom zou dat onze overheid wél lukken?Een downloadverbod? Wassen neus. Onhaalbaar. Politici die dit als serieuze optie opperen, moet je per direct hun portefeulle 'internet' afpakken, want ze zijn met open ogen in een mooi verkooppraatje van een Brein-gladjakker, of spionage-systemen-verkoper getrapt. Men staat op het punt enorm dure en ingrijpende beslissingen te nemen, maar die het downloaden simpelweg niet kúnnen verbieden, en zeer waarschijnlijn niet zúllen verminderen.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Du bist Terrorist!</title>
-   <link href="http://berk.es/2009/12/21/du-bist-terrorist"/>
-   <updated>2009-12-21T00:00:00+01:00</updated>
-   <id>http://berk.es/2009/12/21/du-bist-terrorist</id>
-   <content type="html">&lt;p&gt;Via &lt;a href=&quot;http://www.zeepvrij.nl/2009/12/14/du-bist-ein-terrorist&quot;&gt;Zeepvrij&lt;/a&gt;.&lt;object width=&quot;400&quot; height=&quot;225&quot;&gt;&lt;param name=&quot;allowfullscreen&quot; value=&quot;true&quot; /&gt;&lt;param name=&quot;allowscriptaccess&quot; value=&quot;always&quot; /&gt;&lt;param name=&quot;movie&quot; value=&quot;http://vimeo.com/moogaloop.swf?clip_id=4631958&amp;amp;server=vimeo.com&amp;amp;show_title=1&amp;amp;show_byline=1&amp;amp;show_portrait=0&amp;amp;color=&amp;amp;fullscreen=1&quot; /&gt;&lt;embed src=&quot;http://vimeo.com/moogaloop.swf?clip_id=4631958&amp;amp;server=vimeo.com&amp;amp;show_title=1&amp;amp;show_byline=1&amp;amp;show_portrait=0&amp;amp;color=&amp;amp;fullscreen=1&quot; type=&quot;application/x-shockwave-flash&quot; allowfullscreen=&quot;true&quot; allowscriptaccess=&quot;always&quot; width=&quot;400&quot; height=&quot;225&quot;&gt;&lt;/embed&gt;&lt;/object&gt;
-&lt;a href=&quot;http://vimeo.com/4631958&quot;&gt;Du bist Terrorist&lt;/a&gt; from &lt;a href=&quot;http://vimeo.com/user221974&quot;&gt;alexanderlehmann&lt;/a&gt; on &lt;a href=&quot;http://vimeo.com&quot;&gt;Vimeo&lt;/a&gt;.
-meer op &lt;a href=&quot;http://www.dubistterrorist.de&quot;&gt;dubistterrorist.de&lt;/a&gt; (ik las eerst Dub Is Terrorist.de, maar dat terzijde)&lt;!--break--&gt;&lt;/p&gt;
 </content>
  </entry>
  
