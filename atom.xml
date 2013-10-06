@@ -4,13 +4,58 @@
  <title>Bèr ‘berkes’ Kessels</title>
  <link href="http://berk.es/atom.xml" rel="self"/>
  <link href="http://berk.es"/>
- <updated>2013-10-03T22:32:26+02:00</updated>
+ <updated>2013-10-06T16:28:34+02:00</updated>
  <id>http://berk.es</id>
  <author>
    <name>Bèr ‘berkes’ Kessels</name>
    <email>ber@berk.es</email>
  </author>
 
+ 
+ <entry>
+   <title>I am a webdeveloper (using Ruby, Rails and other Open Source)</title>
+   <link href="http://berk.es/2013/10/06/i-am-a-webdeveloper-using-ruby-rails-and-other-open-source"/>
+   <updated>2013-10-06T00:00:00+02:00</updated>
+   <id>http://berk.es/2013/10/06/i-am-a-webdeveloper-using-ruby-rails-and-other-open-source</id>
+   <content type="html">&lt;p&gt;Last few weeks, I had to explain quite a few times what it is I am doing
+now. Time for a summary.&lt;/p&gt;
+
+&lt;h1&gt;I am not a WordPress Developer.&lt;/h1&gt;
+
+&lt;p&gt;Source of the confusion is &lt;a href=&quot;http://www.savvii.nl&quot;&gt;Savvii&lt;/a&gt;, a brand-new
+WordPress hoster where I work. Although Floor Drees &lt;a href=&quot;http://arrrrcamp.be/talks#floor-drees&quot;&gt;forbade me to use
+the word &lt;em&gt;Senior&lt;/em&gt;&lt;/a&gt;, I am the Senior Developer at Savvii.&lt;/p&gt;
+
+&lt;p&gt;And I develop in Ruby. And Rails. And then some more.&lt;/p&gt;
+
+&lt;h1&gt;I also don't develop with or for Drupal.&lt;/h1&gt;
+
+&lt;p&gt;After my decision to stop all &lt;a href=&quot;http://berk.es/2012/10/01/farewell-drupal/&quot;&gt;Drupal Work&lt;/a&gt; I've honed my Rails skills. Improved my understanding of OO patterns, software architecture. Got to love TDD and BDD, and hardly ever regretted my decision.&lt;/p&gt;
+
+&lt;h1&gt;I am a webdeveloper. Developing in Ruby, Rails. And using other tools.&lt;/h1&gt;
+
+&lt;p&gt;And then, an offer to help set-up a startup in my own town, a WordPress hoster, came along. Last Wednesday we launched our &lt;a href=&quot;http://www.startuplessonslearned.com/2009/03/minimum-viable-product.html&quot;&gt;MVP&lt;/a&gt; (yay, we launched!). And the custom parts of our infra are &lt;a href=&quot;http://translate.google.com/translate?sl=nl&amp;amp;tl=en&amp;amp;js=n&amp;amp;prev=_t&amp;amp;hl=nl&amp;amp;ie=UTF-8&amp;amp;u=http%3A%2F%2Fwww.savvii.nl%2Fblog%2Fsavvii-systeem-architectuur%2F&amp;amp;act=url&quot;&gt;mostly Ruby&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;We do dissect our WordPress sites. To find why the heck something is
+(still) slow. And I oversee some WordPress plugin development: our
+Hosting plugin that makes WordPress talk to our, yes, Ruby backends. But
+I am not a WordPress Developer. And neither did I leave Drupal for
+WordPress as some seem to think.&lt;/p&gt;
+
+&lt;p&gt;A webdeveloper at an online bookstore needs to know about the world of
+selling books. And when you're a developer for an online
+3D-printing-service you will visit many 3D-printing conferences. That is
+what confused some folks: suddenly they see me tweeting about WordCamp
+and assume I'm now building WordPress sites. It's merely one of the best
+sides of being a software-developer: that you've get to know so many
+diverse industries, because you need to capture that industry in
+software. I've now been given the chance to capture the industry of
+managing many, varying WordPress-sites in a fine piece of software.
+Which is about all the WordPress development I'll be doing.&lt;/p&gt;
+
+&lt;p&gt;(And next up, are &lt;a href=&quot;http://docs.opscode.com/chef/chef_overview.html&quot;&gt;Chef&lt;/a&gt;, fine-tuning our Sinatra, Slim and Rails apps, building a nifty logging-platform, A RESTFull (probably composer-based) update-system for plugins, core and themes, a RESTFull Backup-service and a giant load of other infrastructural projects).&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Doe één ding en doe dat goed</title>
@@ -5885,20 +5930,6 @@ $ git submodule update
 &lt;p&gt;Als dan veel sneeuw wordt aangekondigd, kun je dagen vantevoren persberichten rondsturen dat op donderdag 17 december nauwelijks treinen zullen gaan rijden. Naar verwachting. Wel zo fijn om te weten waar je aan toe bent.&lt;/p&gt;
 
 &lt;p&gt;Prorail lijkt echter volledig verrast. Dat geeft aan dat ze óf hun risicomanagement helemaal niet op orde hebben, óf dat ze liegen over dat verrast zijn. In allebei de gevallen moet daar eens goed de bezem erdoorheen. Want liegen, stilhouden en daarmee vele duizenden reizigers in grote moeilijkheden brengen, is grove nalatigheid. Op zijn minst. En je risicomanagement of onderhoudsmanagement nog steeds niet op orde hebben, na vele jaren, is een grove schande voor een miljoenenbedrijf.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Een downloadverbod is technisch onhaalbaar en bij voorbaat al een mislukt, geldverslindende, ontvrichtende onderneming</title>
-   <link href="http://berk.es/2009/12/21/een-downloadverbod-is-technisch-onhaalbaar-en-bij-voorbaat-al-een-mislukt-geldverslindende-ontvrichtende-onderneming"/>
-   <updated>2009-12-21T00:00:00+01:00</updated>
-   <id>http://berk.es/2009/12/21/een-downloadverbod-is-technisch-onhaalbaar-en-bij-voorbaat-al-een-mislukt-geldverslindende-ontvrichtende-onderneming</id>
-   <content type="html">&lt;p&gt;Een downloadverbod in Nederland instellen om daarmee auteursrechten- en royalty-organisaties tegemoet te komen is technisch onhaalbaar. Zonder al te diep in te gaan op alle technische details, kan iedereen -dus ook de politici die hierover gaan beslissen- begrijpen dat het technisch onmogelijk is om downloads te verbieden. En dat een miljoenen-kostende infrastructuur hiervoor door iedereen zonder énige moeite is te omzeilen. Weggegooid geld, onzinnig geleuter en een gegarandeerd tegenvallend resultaat.&lt;!--break--&gt;### Transparantie en diversiteit
-Muziek zit onder andere ín filmpjes, audi-bestanden (mp3tjes), of streams. Films zitten in DVD-kopiën, videobestanden (divx, mpeg enzovoort), flash-bestanden enzovoort. &quot;De muziek&quot; is dus niet aan te wijzen. Je kunt niet simpelweg alles dat de vorm heeft van muziek  tegenhouden. Daarvoor is het aanbod te divers. Een DVD-kopie bijvoorbeeld, komt in de vorm van een .iso, vaak. Dat is een formaat waarin ook linux-DVDs of andere legale DVDs worden verspreid. Maar het is ook niet erg moelijk om mp3 als een gewone webpagina te vermommen. De enige manier om zonder een enórme foutmarge video en muziek te vinden, is door ál het internetverkeer te bekijken en op &lt;em&gt;inhoud&lt;/em&gt; te analyseren. Dat kan deels automatisch, maar eerder moet je dit voorstellen als enorme hallen met rijen mensen die naar schermen zitten te staren en bekijken, beluisteren en catagoriseren wat alle Nederlanders op dat moment doen. Het is dus onmogelijk om &quot;muziek&quot; of &quot;film&quot; uit al het andere internetverkeer te filteren en daarop verboden, censuur, of belastingen te leggen of te heffen. Bovendien is het doodeenvoudig om dit nog makkelijker te verbergen met beveiligde verbindingen.### Inhoud van verkeer verbergen
-Als we internetbankieren (of gewoon inloggen op een site met privégegevens) doen we dat over https. Beveiligde HTTP. De idee van die S in https, is dat tussen jou computer en die van de uiteindelijke ontvanger (de bank) niemand de inhoud kan lezen. Die is versleuteld en dus voor alle &quot;luisteraars&quot; tussendoor slechts en heleboel willekeurige ééntjes en nulletjes. Het enige dat de personen, computers (servers van bijvoorbeeld je provider, ziggo) kunnen zien is dát jij aan het internetbankieren bent, bij de Rabobank (of andere bank). Tussendoor is aléén te zien dat een hele zooi willekeurige eentjes en nulletjes van jou computer naar die van de bank gaat en terug. In het geval van downloads, is dus door de overheden, of Brein, wél te zien dat jij een verbinding hebt met bijvoorbeeld &quot;https://thepiratebay.org/search/Avatar&quot; maar niet wát uiteindelijk van die pagina terugkomt. En ook niet wat in de (zoek, plaats-nieuwe-film, of comment) formulieren als inhoud zit. Brein is niet stom, dus als jij de URL &quot;https://piratebay.com/search/Avatar&quot; bezoekt, is de kans groot dat jij die film zoekt en wilt downloaden. Maar https gaat verder. Want wat ik download, bijvoorbeeld van &quot;http://legalmusic.com&quot; is niet te zien. Of nog moeilijker, met peer2peer-programma's zoals torrent, kan iemand alléén zien dát ik een verbinding met iemand in de buurstad heb, en dat we &quot;iets&quot; uitwisselen. Maar nooit wát. Het is dus onmogelijk om dataverkeer te filteren op muziek, video of andere /inhoud/. Hoogstends kan verboden worden om met bepaalde sites te verbinden. Of om bepaalde /soorten/ verbindingen te maken. Kortom, de ene manier om downloaden van muziek en film te verbieden is om bepaalde protocollen (bijvoobeeld peer2peer) helemaal te verbieden, maar dat heeft funeste gevolgen voor de economie, omdat heel veel kritieke systemen draaien op (afgeleiden van) deze protocollen. De andere manier is om heel veel sites te blokkeren. Wat ze in China doen, zeg maar.### Proxies: gewoon vanuit Duitsland (of de VS) downloaden
-Een proxy is, heel eenvoudig gesteld, een computer dis tussen mij en het eindpunt zit. Als ik een verbinding maak met http://example.com zitten daar allerhande servers en computers tussen. Dat zijn in zekere zin allemaal proxies. Het internet draait bij de gratie van proxies; die zijn het belangrijkste ingrediënt van het Internet.&lt;/p&gt;
-
-&lt;p&gt;Maar proxies kunnen ook heel makkelijk ingezet worden om verkeer om te leiden. Of te verbergen. Het eenvoudigste voorbeeld is een grote proxy die, laten we zeggen, in Keulen staat. Vanuit mijn computer in Nijmegen, verbind ik -over een beveiligde verbinding, kom ik later op terug-  met die proxy in Keulen. Gewoon op mijn ADSL-verbinding van XS4all. En dan bezoek ik http://thepiratebay.org. Mijn verbinding ziet er dan als volgt uit:  &gt; Laptop » Modem » XS4all » Keulen » The Pirate BayMaar de nederlandse overheid, die mij bewaakt vanuit de servers van XS4all (of servers net ervoor of net erachter), ziet dan alleen &gt; Modem » XS4all » KeulenDe enige die weet hoe het verkeer ná de proxy loopt, is de proxy zelf. En aangezien de verbinding beveiligd is, kan ook niemand aan de aard van de inhoud achterhalen waar ik surf. Proxies zijn er in vele soorten en maten. Van eenvoudig te installeren software, via (simpele) hardware, tot enorme enterprise systemen. &lt;a href=&quot;http://www.torproject.org/&quot;&gt;Tor&lt;/a&gt; bijvoorbeeld; gemaakt om alle verkeer te anonimiseren. Maar de meeste routers ne modems die je bij Ziggo enzo krijgt, kunnen heel makkelijk ingesteld worden dat ze via een proxy internet aanbieden. En dan moet de Nederlandse overheid niet alleen de sites (en computers) die muziek of film aanbieden afsluiten. Ze moeten ook nog álle open en anonieme proxies in de hele wereld blokkeren. Miljoenen sites verbieden, waar ook nog eens een énorme doorloop in zit, is technisch onhaalbaar. De Chinezen lukt het niet en die hebben hier heel veel voor over, dus waarom zou dat onze overheid wél lukken?Een downloadverbod? Wassen neus. Onhaalbaar. Politici die dit als serieuze optie opperen, moet je per direct hun portefeulle 'internet' afpakken, want ze zijn met open ogen in een mooi verkooppraatje van een Brein-gladjakker, of spionage-systemen-verkoper getrapt. Men staat op het punt enorm dure en ingrijpende beslissingen te nemen, maar die het downloaden simpelweg niet kúnnen verbieden, en zeer waarschijnlijn niet zúllen verminderen.&lt;/p&gt;
 </content>
  </entry>
  

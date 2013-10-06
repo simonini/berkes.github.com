@@ -18,9 +18,9 @@
   <link rel="openid2.provider" href="http://www.myopenid.com/server" />
   <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=berkes.myopenid.com" />
 
-   <title>webalizer.conf</title>
+   <title>I am a webdeveloper (using Ruby, Rails and other Open Source)</title>
    <meta name="author" content="Bèr ‘berkes’ Kessels" />
-   <link href="http://feeds.feedburner.com/berkes" rel="alternate" title="webalizer.conf Feed" type="application/atom+xml" />
+   <link href="http://feeds.feedburner.com/berkes" rel="alternate" title="I am a webdeveloper (using Ruby, Rails and other Open Source) Feed" type="application/atom+xml" />
    <link rel="author" href="/humans.txt" type="text/plain" />
    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
    <!-- Included CSS Files -->
@@ -73,78 +73,64 @@
     <section id="main-content" class="row">
       <article>
   <header>
-    <h1>webalizer.conf</h1>
+    <h1>I am a webdeveloper (using Ruby, Rails and other Open Source)</h1>
   </header> 
-  <div class="body">
-    <p>This slightly modified webalizr.conf does DNS lookups. The modifcations were made using the &lt;a href="ftp://ftp.mrunix.net/pub/webalizer/DNS.</p>
+  <div class="body row">
+    <div class="six columns">
+      
+      <figure>
+  <img src="/images//2013/10/06/i-am-a-webdeveloper-using-ruby-rails-and-other-open-source.png" alt="Woodcut from Doré. Purely illustrative" />
+  
+    <figcaption>Doré Woodcut. Its only function is to make the layout look better. And these images are really nice themselves</figcaption>
+  
+</figure>
 
-<p>README">webalizer DNS readme</a>.</p>
+    </div>
+    <div class="six columns">
+      <p>Last few weeks, I had to explain quite a few times what it is I am doing
+now. Time for a summary.</p>
 
-<p><code></p>
+<h1>I am not a WordPress Developer.</h1>
 
-<h1>!/bin/sh</h1>
+<p>Source of the confusion is <a href="http://www.savvii.nl">Savvii</a>, a brand-new
+WordPress hoster where I work. Although Floor Drees <a href="http://arrrrcamp.be/talks#floor-drees">forbade me to use
+the word <em>Senior</em></a>, I am the Senior Developer at Savvii.</p>
 
-<h1>/etc/cron.daily/webalizer: webalizer daily maintenance script</h1>
+<p>And I develop in Ruby. And Rails. And then some more.</p>
 
-<h1>Written by Remco van de Meent <a href="&#x6d;&#x61;&#105;&#108;&#116;&#111;&#x3a;&#114;&#101;&#109;&#x63;&#111;&#x40;&#100;&#x65;&#98;&#x69;&#x61;&#110;&#46;&#111;&#x72;&#x67;">&#x72;&#x65;&#109;&#x63;&#x6f;&#64;&#100;&#x65;&#x62;&#105;&#x61;&#x6e;&#46;&#111;&#114;&#103;</a></h1>
+<h1>I also don't develop with or for Drupal.</h1>
 
-<p>WEBALIZER_BIN=/usr/bin/webalizer
-WEBALIZER_CONF=/etc/webalizer.conf
-WEBALIZER_DNS=/var/lib/dns_cache.db</p>
+<p>After my decision to stop all <a href="http://berk.es/2012/10/01/farewell-drupal/">Drupal Work</a> I've honed my Rails skills. Improved my understanding of OO patterns, software architecture. Got to love TDD and BDD, and hardly ever regretted my decision.</p>
 
-<h1>See if the webalizer binary and config file exists</h1>
+<h1>I am a webdeveloper. Developing in Ruby, Rails. And using other tools.</h1>
 
-<h1>if not, exit without warning to prevent daily mails</h1>
+<p>And then, an offer to help set-up a startup in my own town, a WordPress hoster, came along. Last Wednesday we launched our <a href="http://www.startuplessonslearned.com/2009/03/minimum-viable-product.html">MVP</a> (yay, we launched!). And the custom parts of our infra are <a href="http://translate.google.com/translate?sl=nl&amp;tl=en&amp;js=n&amp;prev=_t&amp;hl=nl&amp;ie=UTF-8&amp;u=http%3A%2F%2Fwww.savvii.nl%2Fblog%2Fsavvii-systeem-architectuur%2F&amp;act=url">mostly Ruby</a>.</p>
 
-<p>[ -f ${WEBALIZER_BIN} ] || exit 0
-[ -f ${WEBALIZER_CONF} ] || exit 0</p>
+<p>We do dissect our WordPress sites. To find why the heck something is
+(still) slow. And I oversee some WordPress plugin development: our
+Hosting plugin that makes WordPress talk to our, yes, Ruby backends. But
+I am not a WordPress Developer. And neither did I leave Drupal for
+WordPress as some seem to think.</p>
 
-<h1>Figure out non-rotated logfile</h1>
+<p>A webdeveloper at an online bookstore needs to know about the world of
+selling books. And when you're a developer for an online
+3D-printing-service you will visit many 3D-printing conferences. That is
+what confused some folks: suddenly they see me tweeting about WordCamp
+and assume I'm now building WordPress sites. It's merely one of the best
+sides of being a software-developer: that you've get to know so many
+diverse industries, because you need to capture that industry in
+software. I've now been given the chance to capture the industry of
+managing many, varying WordPress-sites in a fine piece of software.
+Which is about all the WordPress development I'll be doing.</p>
 
-<p>nonrotatedlog=`egrep '<sup>LogFile'</sup> $WEBALIZER_CONF | \</p>
+<p>(And next up, are <a href="http://docs.opscode.com/chef/chef_overview.html">Chef</a>, fine-tuning our Sinatra, Slim and Rails apps, building a nifty logging-platform, A RESTFull (probably composer-based) update-system for plugins, core and themes, a RESTFull Backup-service and a giant load of other infrastructural projects).</p>
 
-<pre><code>           sed -e 's/[[:space:]]\+/ /' | \
-           cut -d ' ' -f2 | \
-           sed -e  's/\.[[:digit:]][\.gz]*$//'`
-</code></pre>
-
-<h1>Can we read it?</h1>
-
-<p>[ -r "${nonrotatedlog}" ] || exit 0</p>
-
-<h1>Check for empty logfile</h1>
-
-<p>logsz=`echo ${nonrotatedlog} | \</p>
-
-<pre><code>   sed -e 's/[[:space:]]\+/ /' | \
-   cut -d ' ' -f2 | \
-   xargs ls -l | \
-   sed -e 's/[[:space:]]\+/ /g' | \
-   cut -d ' ' -f5`
-</code></pre>
-
-<p>[ $logsz -gt 0 ] || exit 0</p>
-
-<h1>Run webalizer quietly</h1>
-
-<p>${WEBALIZER_BIN} -D ${WEBALIZER_DNS} -N 5 -c ${WEBALIZER_CONF} -q
-${WEBALIZER_BIN} -D ${WEBALIZER_DNS} -N 5 -c ${WEBALIZER_CONF} -q ${nonrotatedlog}</p>
-
-<h1>Exit with webalizer's exit code</h1>
-
-<p>exit $?
-</code></p>
-
+    </div>
   </div>
   <footer>
-    <p class="note">
-    
-      <em>This article was published on webschuur.com. And migrated to this blog. </em>
-    
-    </p>
-    <time datetime="2005-06-18T00:00:00+02:00"
+    <time datetime="2013-10-06T00:00:00+02:00"
     pubdate="pubdate">
-      Posted on 18 June 2005
+      Posted on 06 October 2013
     </time>
     in
     
@@ -155,7 +141,15 @@ ${WEBALIZER_BIN} -D ${WEBALIZER_DNS} -N 5 -c ${WEBALIZER_CONF} -q ${nonrotatedlo
 
   
     
-      <a href="/tags.html#server-ref" class="black radius label">server<span class="size">17</span></a>
+      <a href="/tags.html#savvii-ref" class="black radius label">savvii<span class="size">2</span></a>
+    
+      <a href="/tags.html#WordPress-ref" class="black radius label">WordPress<span class="size">1</span></a>
+    
+      <a href="/tags.html#Drupal-ref" class="black radius label">Drupal<span class="size">2</span></a>
+    
+      <a href="/tags.html#Ruby-ref" class="black radius label">Ruby<span class="size">1</span></a>
+    
+      <a href="/tags.html#Rails-ref" class="black radius label">Rails<span class="size">1</span></a>
     
   
 
