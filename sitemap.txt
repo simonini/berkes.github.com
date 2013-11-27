@@ -8,6 +8,7 @@ http://berk.es/archive.html
 http://berk.es/sitemap.txt
 http://berk.es/about.html
 
+http://berk.es/2013/11/27/hoe-kom-ik-aan-bitcoin-en-een-bitcoin-rekening
 http://berk.es/2013/10/06/i-am-a-webdeveloper-using-ruby-rails-and-other-open-source
 http://berk.es/2013/10/03/doe-n-ding-en-doe-dat-goed
 http://berk.es/2013/07/31/starting-as-ruby-developer-at-savvii
