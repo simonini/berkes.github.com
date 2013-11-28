@@ -4,13 +4,73 @@
  <title>Bèr ‘berkes’ Kessels</title>
  <link href="http://berk.es/atom.xml" rel="self"/>
  <link href="http://berk.es"/>
- <updated>2013-11-27T18:56:00+01:00</updated>
+ <updated>2013-11-28T22:21:57+01:00</updated>
  <id>http://berk.es</id>
  <author>
    <name>Bèr ‘berkes’ Kessels</name>
    <email>ber@berk.es</email>
  </author>
 
+ 
+ <entry>
+   <title>Olaf van den Heuvel is een maximum flapdrol</title>
+   <link href="http://berk.es/2013/11/28/olaf-van-den-heuvel-is-een-maximum-flapdrol"/>
+   <updated>2013-11-28T00:00:00+01:00</updated>
+   <id>http://berk.es/2013/11/28/olaf-van-den-heuvel-is-een-maximum-flapdrol</id>
+   <content type="html">&lt;p&gt;Een van de mooie dingen van een verstorend concept als Bitcoin, is dat
+&quot;de gevestigde orde&quot; zich er geen raad mee weet. Dat is niet erg, voor
+een deel heeft dat tijd nodig, voor een ander deel, zorgt het voor
+marktvernieuwing (als in: diegenen die blijven vasthouden dat paard en
+wagen echt een beter vervoermiddel is dan een auto of fiets, gaan
+failliet).&lt;/p&gt;
+
+&lt;p&gt;Maar mooier is, om te zien hoe de &lt;a href=&quot;https://www.youtube.com/watch?v=SG5jw3FWArE&quot;&gt;Dr. Clavans&lt;/a&gt; hun onkunde ten toon spreiden.&lt;/p&gt;
+
+&lt;p&gt;Vandaag &lt;strong&gt;Olaf van den Heuvel&lt;/strong&gt;. Op zijn stelling &lt;a href=&quot;http://www.rtlnieuws.nl/economie/home/bitcoin-zal-niet-lang-onder-ons-blijven&quot;&gt;&quot;Bitcoin zal niet lang onder ons blijven&quot;&lt;/a&gt; is niet veel aan te merken: het is zijn mening en een goede waarschuwing. Pas op: risico, bubble-gedrag!&lt;/p&gt;
+
+&lt;p&gt;Maar dan &quot;onderbouwt&quot; hij zijn stelling. En toont aan dat hij eigenlijk
+geen enkel benul heeft waarover hij praat.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;zolang ik niet meer transparantie heb, over wat bepaalt de schaarste van Bitcoin, vind ik het heel lastig om dat als betrouwbaar betaalmiddel te zien».&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;Hij begint zijn verhaal hiermee, bovenstaande transcriptie is wanneer
+hij dit herhaalt. Bitcoin. Geen transparantie.&lt;/p&gt;
+
+&lt;p&gt;Als er &lt;em&gt;iets&lt;/em&gt; is dat bij Bitcoin anders is dan alle betaalsystemen en
+economieën die we tot nog toe kennen, is het wel die transparantie!&lt;/p&gt;
+
+&lt;p&gt;Ten eerste is er het volledig open protocol. De papers, alle
+(academische) discussie daarover, alle economische modellen en wat dies
+meer zij, is zo transparant als maar zijn kan. Iedereen die meer dan
+vijf minuten besteed aan het lezen over Bitcoin weet dat er nooit meer
+dan 21 miljoen kunnen zijn, dat dit mathematisch is vastgelegd. Iedereen
+die meer dan twintig minuten doorleest snapt dat alle economische
+modellen van niet alleen het protocol maar van alle randeffecten tot in
+den treuren in alle transparantie bediscussieerd worden.&lt;/p&gt;
+
+&lt;p&gt;Dan is het er het bijna
+religieuze open source mantra: het staat de werkgever van heer van der
+Heuvel vrij om een eigen Bitcoin-programma, app, of site te ontwikkelen.
+Sterker nog, dat zou de hele gemeenschap ten zeerste toejuichen. Ik heb
+geen flauw benul van wat er precies in mijn randomreader zit, waarmee ik al mijn betalingen bevestig.
+Maar ik weet vrij nauwkeurig hoe iedere Bitcoin gemaakt, verdeeld, bevestigd en beveiligd wordt, door het lezen van specs, whitepapers en broncode. Dat kan, omdat
+alle software &lt;strong&gt;transparant&lt;/strong&gt; is: open source.&lt;/p&gt;
+
+&lt;p&gt;En dan is er de blockchain: Als je weet wie of wat er &lt;a href=&quot;http://www.piratenpartij.nl/blog/dirk-poot/hartelijk-dank-voor-de-bitcoins&quot;&gt;achter een
+rekeningnummer
+zit&lt;/a&gt;
+kan iedereen nagaan waar het heengaat. Het kán eenvoudigweg niet
+transparanter.&lt;/p&gt;
+
+&lt;p&gt;Mijnheer van der Heuvel, u bent een econoom met een goede aanstelling. U
+wordt door economieredacties gebeld voor uw kennis en mening over
+technische zaken.
+Ik verwacht dan ook dat u weet waarover u praat. Wanneer u echter
+(het gebrek aan) &lt;em&gt;transparantie&lt;/em&gt; opvoert als argument waarom Bitcoin een
+slecht idee is, geeft u niet alleen aan dat u geen flauw benul heeft
+waarover u praat, u erkent daarmee vooral dat u een flapdrol bent.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Hoe kom ik aan Bitcoin, en een Bitcoin rekening?</title>
@@ -6000,15 +6060,6 @@ $ git submodule update
 &lt;p&gt;The module is now available and, fixated on the revision where we committed the submodule!&lt;/p&gt;
 
 &lt;p&gt;The &lt;a href=&quot;http://www.kernel.org/pub/software/scm/git/docs/git-submodule.html&quot;&gt;official git-submodule documentation&lt;/a&gt; as well as the &lt;a href=&quot;http://progit.org/book/ch6-6.html&quot;&gt;pro-git book&lt;/a&gt; have in-depth reading on how to maintain your code from here. And describe some pithfalls. &lt;a href=&quot;http://gitcasts.com/posts/git-submodules&quot;&gt;Gitcast&lt;/a&gt; has a good screencast on this matter, if you want to sit back and watch a good explanation.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Service Links: Nederlandse Versie</title>
-   <link href="http://berk.es/2009/12/29/service-links-nederlandse-versie"/>
-   <updated>2009-12-29T00:00:00+01:00</updated>
-   <id>http://berk.es/2009/12/29/service-links-nederlandse-versie</id>
-   <content type="html">&lt;p&gt;De &lt;a href=&quot;http://drupal.org/project/service_links&quot;&gt;Service Links&lt;/a&gt; module voor Drupal is dom opgezet. Het laat je namelijk niet toe, om zonder de originele module te hacken, eigen service-links toe te voegen. Service links zijn de bekende knopjes als &quot;voeg toe aan je del.icio.us bookmarks&quot; of &quot;plaats op twitter&quot;. In Nederland willen we bij de bekende Amerikaans/Engelse diensten, ook meestal ekudos, nujij, msn-reporter opgenomen hebben. Ik beheerde -net als ongeveer iedere Nederlanse Drupalshop- een anagepaste versie hiervan. En in het kader van &quot;kerstvakantieklusjes&quot; heb ik deze zojuist even in git gezet zodat ik de doorontwikkeling (en bugfixes) van de originele makkelijk kan bijhouden en op mijn fork kan toepassen. En zodat anderzijds jullie, Nederlandse Drupalgebruikers, deze module ook kunnen gaan gebruiken. Het staat tussen mijn &lt;a href=&quot;http://github.com/berkes/Unmaintained-Drupal-modules/&quot;&gt;unmaintained Drupal modules&lt;/a&gt; in het &lt;a href=&quot;http://github.com/berkes/Unmaintained-Drupal-modules/tree/master/service_links/&quot;&gt;mapje Servicelinks&lt;/a&gt;. Snel downloaden kan &lt;a href=&quot;http://github.com/berkes/Unmaintained-Drupal-modules/downloads&quot;&gt;vanaf de download-pagina&lt;/a&gt;. Ik zie uit naar jullie &lt;a href=&quot;http://help.github.com/forking/&quot;&gt;forks&lt;/a&gt;&lt;/p&gt;
 </content>
  </entry>
  
