@@ -2,6 +2,7 @@
 http://berk.es/archief.html
 http://berk.es/index.html
 http://berk.es/atom.xml
+http://berk.es/berkes_pub.gpg
 http://berk.es/over.html
 http://berk.es/tags.html
 http://berk.es/archive.html
