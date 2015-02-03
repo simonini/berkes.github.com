@@ -21,22 +21,24 @@
    <link rel="author" href="/humans.txt" type="text/plain" />
    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
    <!-- Included CSS Files -->
-   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
-
+   <link rel="stylesheet" href="/assets//stylesheets/foundation.css">
+   <link rel="stylesheet" href="/assets//stylesheets/pygments.css">
+   <link rel="stylesheet" href="/assets//stylesheets/app.css">
 
    <!--[if lt IE 9]>
-   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
-
+   <link rel="stylesheet" href="/assets//stylesheets/ie.css">
    <![endif]-->
 
-   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
-
+   <script src="/assets//javascripts/modernizr.foundation.js"></script>
 
    <!-- IE Fix for HTML5 Tags -->
    <!--[if lt IE 9]>
-   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
-
+     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
    <![endif]-->
+
+   <!-- Fonts -->
+   <link href='http://fonts.googleapis.com/css?family=Arvo:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=OFL+Sorts+Mill+Goudy+TT" media="screen, projection, print">
 </head>
 <body>
 	<!-- container -->
@@ -95,7 +97,7 @@ solution turned out to be really simple though.</p>
 
 <p>Lets start with a simple script that outputs some Rastafari</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="c1">#!/usr/bin/env ruby</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1">#!/usr/bin/env ruby</span>
 
 <span class="nb">require</span> <span class="s2">&quot;thor&quot;</span>
 <span class="nb">require</span> <span class="s2">&quot;rainbow&quot;</span>
@@ -109,9 +111,7 @@ solution turned out to be really simple though.</p>
     <span class="nb">puts</span> <span class="s2">&quot;fari&quot;</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="ss">:green</span><span class="p">)</span>
   <span class="k">end</span>
 <span class="k">end</span>
-<span class="no">Example</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-</code></pre>
-</div>
+<span class="no">Example</span><span class="o">.</span><span class="n">start</span><span class="p">()</span></code></pre></div>
 
 
 <p>Running this, results in:</p>
@@ -122,16 +122,14 @@ solution turned out to be really simple though.</p>
 This is a useful feature built into Rainbow.
 When testing with cucumber, the colors are gone too:</p>
 
-<div class="highlight"><pre><code class="cucumber"><span class="k">Feature:</span><span class="nf"> Example</span>
+<div class="highlight"><pre><code class="language-cucumber" data-lang="cucumber"><span class="k">Feature:</span><span class="nf"> Example</span>
 <span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Yah!</span>
 <span class="k">    When </span><span class="nf">I run `example example`</span>
 <span class="nf">    </span><span class="k">Then </span><span class="nf">it should pass with:</span>
 <span class="nf">      </span><span class="k">&quot;&quot;&quot;</span><span class="s"></span>
 <span class="s">      Yah!</span>
 <span class="s">      ...</span>
-<span class="s">      </span><span class="k">&quot;&quot;&quot;</span><span class="nf"></span>
-</code></pre>
-</div>
+<span class="s">      </span><span class="k">&quot;&quot;&quot;</span><span class="nf"></span></code></pre></div>
 
 
 <p>This passes, but does not test any colors. First thing is to tell
@@ -144,16 +142,14 @@ for a reason: it is really hard to test when all your output is littered
 with ANSI escape codes. You really only want to force Rainbow to output
 them when you are testing for colors.</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="c1">#...</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1">#...</span>
 <span class="k">class</span> <span class="nc">Example</span> <span class="o">&lt;</span> <span class="no">Thor</span>
   <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
     <span class="k">super</span>
-    <span class="ss">Sickill</span><span class="p">:</span><span class="ss">:Rainbow</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="kp">true</span> <span class="k">if</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;FORCE_COLORS&quot;</span><span class="o">]</span> <span class="o">==</span> <span class="s2">&quot;TRUE&quot;</span>
+    <span class="no">Sickill</span><span class="o">::</span><span class="no">Rainbow</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="kp">true</span> <span class="k">if</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;FORCE_COLORS&quot;</span><span class="o">]</span> <span class="o">==</span> <span class="s2">&quot;TRUE&quot;</span>
   <span class="k">end</span>
   <span class="c1">#....</span>
-<span class="k">end</span>
-</code></pre>
-</div>
+<span class="k">end</span></code></pre></div>
 
 
 <p>This allows you to force coloring when testing or running by setting the
@@ -164,11 +160,9 @@ them look like "When I run <code>export FORCE_COLORS=TRUE; ./bin/example example
 all the <code>@ansi</code>-tagged scenario's. In a support-file
 <code>features/support/ansi.rb</code>:</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="no">Before</span><span class="p">(</span><span class="s1">&#39;@ansi&#39;</span><span class="p">)</span> <span class="k">do</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Before</span><span class="p">(</span><span class="s1">&#39;@ansi&#39;</span><span class="p">)</span> <span class="k">do</span>
   <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;FORCE_COLORS&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;TRUE&quot;</span>
-<span class="k">end</span>
-</code></pre>
-</div>
+<span class="k">end</span></code></pre></div>
 
 
 <p>With the scenario tagged @ansi, it fails: <code>expected
@@ -182,23 +176,19 @@ easy.</p>
 
 <p>The <code>features/support/ansi.rb</code> should include "rainbow".</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="no">Then</span> <span class="sr">/^it should output &quot;([^&quot;]*)&quot; in &quot;([^&quot;]*)&quot;$/</span> <span class="k">do</span> <span class="o">|</span><span class="n">string</span><span class="p">,</span> <span class="n">color</span><span class="o">|</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Then</span> <span class="sr">/^it should output &quot;([^&quot;]*)&quot; in &quot;([^&quot;]*)&quot;$/</span> <span class="k">do</span> <span class="o">|</span><span class="n">string</span><span class="p">,</span> <span class="n">color</span><span class="o">|</span>
   <span class="n">assert_partial_output</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="n">color</span><span class="o">.</span><span class="n">to_sym</span><span class="p">),</span> <span class="n">all_output</span><span class="p">)</span>
-<span class="k">end</span>
-</code></pre>
-</div>
+<span class="k">end</span></code></pre></div>
 
 
 
 
-<div class="highlight"><pre><code class="cucumber"><span class="k">Feature:</span><span class="nf"> Example</span>
+<div class="highlight"><pre><code class="language-cucumber" data-lang="cucumber"><span class="k">Feature:</span><span class="nf"> Example</span>
 
 <span class="nf">  @ansi</span>
 <span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Yah!</span>
 <span class="k">    When </span><span class="nf">I run `example example`</span>
-<span class="nf">    </span><span class="k">Then </span><span class="nf">it should output &quot;</span><span class="s">Yah!</span><span class="nf">&quot; in &quot;</span><span class="s">red</span><span class="nf">&quot;</span>
-</code></pre>
-</div>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">it should output &quot;</span><span class="s">Yah!</span><span class="nf">&quot; in &quot;</span><span class="s">red</span><span class="nf">&quot;</span></code></pre></div>
 
 
 <p>Readable, easy testing of your colored output!</p>
@@ -271,13 +261,13 @@ easy.</p>
   
   <ul>
     
+      <li><span>February  3, 2015</span> &raquo; <a href="/2015/02/03/selecting-a-good-wysiwyg-for-rails-its-all-about-usecases">Selecting A Good Wysiwyg For Rails Its All About Usecases</a></li>
+
+    
       <li><span>February  4, 2014</span> &raquo; <a href="/2014/02/04/new-post">Uitgevers, geef mij niet de schuld, wanneer ik mijn ebooks niet van jullie koop!</a></li>
 
     
       <li><span>November 28, 2013</span> &raquo; <a href="/2013/11/28/olaf-van-den-heuvel-is-een-maximum-flapdrol">Olaf van den Heuvel is een maximum flapdrol</a></li>
-
-    
-      <li><span>November 27, 2013</span> &raquo; <a href="/2013/11/27/hoe-kom-ik-aan-bitcoin-en-een-bitcoin-rekening">Hoe kom ik aan Bitcoin, en een Bitcoin rekening?</a></li>
 
     
   </ul>
@@ -299,7 +289,7 @@ easy.</p>
           </p>
       </div>
       <div class="four columns">
-        Copyright 2001-2014
+        Copyright 2001-2015
         with a
         <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Attribute-Share-alike 3.0 Unported license</a>
       </div>

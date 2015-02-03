@@ -21,22 +21,24 @@
    <link rel="author" href="/humans.txt" type="text/plain" />
    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
    <!-- Included CSS Files -->
-   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
-
+   <link rel="stylesheet" href="/assets//stylesheets/foundation.css">
+   <link rel="stylesheet" href="/assets//stylesheets/pygments.css">
+   <link rel="stylesheet" href="/assets//stylesheets/app.css">
 
    <!--[if lt IE 9]>
-   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
-
+   <link rel="stylesheet" href="/assets//stylesheets/ie.css">
    <![endif]-->
 
-   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
-
+   <script src="/assets//javascripts/modernizr.foundation.js"></script>
 
    <!-- IE Fix for HTML5 Tags -->
    <!--[if lt IE 9]>
-   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
-
+     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
    <![endif]-->
+
+   <!-- Fonts -->
+   <link href='http://fonts.googleapis.com/css?family=Arvo:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=OFL+Sorts+Mill+Goudy+TT" media="screen, projection, print">
 </head>
 <body>
 	<!-- container -->
@@ -122,15 +124,13 @@ it as it is?</p>
 
 <p>For example:</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="k">def</span> <span class="nf">by_ranking</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">by_ranking</span>
   <span class="c1"># @INK: the rank attribute is not updated or filled</span>
   <span class="c1">#       in the database, it seems. @TODO: make a </span>
   <span class="c1">#       migration to add this field to the database,</span>
   <span class="c1">#       then an after_update hook to actually fill this value.</span>
   <span class="n">sort</span> <span class="p">{</span><span class="o">|</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">|</span> <span class="n">a</span><span class="o">.</span><span class="n">rank</span><span class="o">.</span><span class="n">to_f</span> <span class="o">&lt;</span> <span class="n">b</span><span class="o">.</span><span class="n">rank</span><span class="o">.</span><span class="n">to_f</span><span class="p">}</span>
-<span class="k">end</span>
-</code></pre>
-</div>
+<span class="k">end</span></code></pre></div>
 
 
 <p>A simple '@INK' with a comment. <code>@INK</code> is a different marker then
@@ -158,15 +158,13 @@ either remove it, replace it with a TODO or start where you left.</li>
 
 <p>And with a simple script, you can find your ink in the well:</p>
 
-<div class="highlight"><pre><code class="bash"><span class="c">#!/bin/bash</span>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/bin/bash</span>
 <span class="nb">echo</span> <span class="s2">&quot;-- Last four commits --&quot;</span>
 git log --graph --pretty<span class="o">=</span>format:<span class="s1">&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39;</span> --abbrev-commit --date<span class="o">=</span>relative -n4
 <span class="nb">echo</span> <span class="s2">&quot;-- Git status --&quot;</span>
 git status -s
 <span class="nb">echo</span> <span class="s2">&quot;-- The INK --&quot;</span>
-ack-grep -C 4 <span class="s2">&quot;@INK&quot;</span> --all
-</code></pre>
-</div>
+ack-grep -C <span class="m">4</span> <span class="s2">&quot;@INK&quot;</span> --all</code></pre></div>
 
 
 <p>It gets some context with two git commands, one to render a short,
@@ -251,13 +249,13 @@ parameters.</p>
   
   <ul>
     
+      <li><span>February  3, 2015</span> &raquo; <a href="/2015/02/03/selecting-a-good-wysiwyg-for-rails-its-all-about-usecases">Selecting A Good Wysiwyg For Rails Its All About Usecases</a></li>
+
+    
       <li><span>February  4, 2014</span> &raquo; <a href="/2014/02/04/new-post">Uitgevers, geef mij niet de schuld, wanneer ik mijn ebooks niet van jullie koop!</a></li>
 
     
       <li><span>November 28, 2013</span> &raquo; <a href="/2013/11/28/olaf-van-den-heuvel-is-een-maximum-flapdrol">Olaf van den Heuvel is een maximum flapdrol</a></li>
-
-    
-      <li><span>November 27, 2013</span> &raquo; <a href="/2013/11/27/hoe-kom-ik-aan-bitcoin-en-een-bitcoin-rekening">Hoe kom ik aan Bitcoin, en een Bitcoin rekening?</a></li>
 
     
   </ul>
@@ -279,7 +277,7 @@ parameters.</p>
           </p>
       </div>
       <div class="four columns">
-        Copyright 2001-2014
+        Copyright 2001-2015
         with a
         <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Attribute-Share-alike 3.0 Unported license</a>
       </div>

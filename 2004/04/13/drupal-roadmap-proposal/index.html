@@ -21,22 +21,24 @@
    <link rel="author" href="/humans.txt" type="text/plain" />
    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
    <!-- Included CSS Files -->
-   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
-
+   <link rel="stylesheet" href="/assets//stylesheets/foundation.css">
+   <link rel="stylesheet" href="/assets//stylesheets/pygments.css">
+   <link rel="stylesheet" href="/assets//stylesheets/app.css">
 
    <!--[if lt IE 9]>
-   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
-
+   <link rel="stylesheet" href="/assets//stylesheets/ie.css">
    <![endif]-->
 
-   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
-
+   <script src="/assets//javascripts/modernizr.foundation.js"></script>
 
    <!-- IE Fix for HTML5 Tags -->
    <!--[if lt IE 9]>
-   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
-
+     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
    <![endif]-->
+
+   <!-- Fonts -->
+   <link href='http://fonts.googleapis.com/css?family=Arvo:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=OFL+Sorts+Mill+Goudy+TT" media="screen, projection, print">
 </head>
 <body>
 	<!-- container -->
@@ -76,116 +78,70 @@
     <p>  This is a summarised and ordered version of the thread on drupal.org "battle plans".<!--break-->        - Usability improvements [Dries, Chris Johnson]            <br/>
  - Change all browser-visible references to "node" to        something that might make sense to someone who is not a        computer geek. [Chris Johnson]      <br/>
  - Create a node zero feature that allows to create a        custom node to be displayed to someone who visits and has        no other access at all. [Chris Johnson]      <br/>
- - Make it possible to rename things like nodes and blogs        without incurring the high overhead that locale.module        incurs to do so. [Chris Johnson]</p>
-
-<pre><code>- Core (modules)
-- Theme system improvements. [MegaGrunt, adrian]
-- apart from my phptemplate based theme for 4.4.0 , i want to    enable drupal to use generic templating engines (ex: smarty,    xtemplate, php templates and phptal) without any problem, as    well as syndication of themes/templates using the install    subsystem. [adrian]
-- Extend xTemplate to make it possible to customised sections    of a site through multiple CSS style-sheets. [MegaGrunt]
-- Profile module improvements [Dries, adrian]              
-</code></pre>
-
-<ul>
-<li>make the new profile module adapt to user->user        relationships [adrian]</li>
-<li>integrate buddylist module [Adrian]
-
-<ul>
-<li>Forum module improvements [Dries]</li>
-<li>Aggregator module improvements [Dries]</li>
-<li>User system imporovements [javanaut]</li>
-<li>Have user_access() take an additional optional parameter of    which uid to compare against the given access type.    [javanaut]</li>
-<li>Navigation or Configurable menus [Dries, anarcat,    Bèr, JonBob]</li>
-</ul>
-</li>
-<li>order the _link() hooks [anarcat]</li>
-<li>getting a unified navigation method into drupal.        [Bèr]</li>
-<li>Get some other navigation methods deprecated by The One        Navigation [Bèr]</li>
-<li>Make menusystem be able to be presented in different        ways by the theme [JonBob]
-
-<ul>
-<li>Internationalisation [matteo, B&egrave;r, jareyero, Jose A    Reyero]</li>
-<li>Combine l18n, translate_node and localisation [matteo,    Bèr, Jose A Reyero]</li>
-</ul>
-</li>
-<li>improving translate_node.module [Bèr]</li>
-<li>Vocabulary and term I18n (terms and vocabularies are        translated in locale) [matteo]
-
-<ul>
-<li>Extend it to have any table translated, not only the node    table [jareyero, Jose A Reyero]</li>
-<li>Permission System [JonBob]</li>
-</ul>
-</li>
-<li>Node based access [Chris Johnson]
-
-<ul>
-<li>Multiple roles per user [irwin]</li>
-<li>User-defined custom groups [irwin]</li>
-</ul>
-</li>
-<li>Simple per-node privacy control [irwin]
-
-<ul>
-<li>Search Improvements [davidm]</li>
-</ul>
-</li>
-<li>Taxonomy search [davidm]
-
-<ul>
-<li>Attachements/files [nedjo]</li>
-<li>Get image handling and display into the core for 4.5, a    priority mentioned by others. [nedjo]</li>
-<li>Filter system improvements [matteo]</li>
-</ul>
-</li>
-<li>Node type filtering (more than one node type can be        specified as a filter) [matteo]
-
-<ul>
-<li>Introduce Locking [Jeremy@kerneltrap.org]</li>
-<li>Install System. Which will hopefully be used to install the    base system, contrib modules and possibly even themes by the    next version [adrian]</li>
-<li></li>
-</ul>
-</li>
-<li>Wizard system , for creating multi page submissions ..        to be primarily used in the Install system [adrian]</li>
-<li>Make drupal more fault tolerant, for example allowing        it to start up completely without needing a database        connection.[adrian]</li>
-<li>Multisite configuration patch .. atleast pushing for it        to be made through, as this opens up a lot of interesting        possibilities for the install system [adrian]
-
-<ul>
-<li>Reimplement, create and upgrade contributed modules    [TheLibrarian, JonBob, eap1935, javanaut]</li>
-<li></li>
-</ul>
-</li>
-<li>bibliography.module [TheLibrarian]</li>
-<li>importpage.module [TheLibrarian]</li>
-<li>pdfview.module [TheLibrarian]</li>
-<li>htmltidy.module [TheLibrarian]</li>
-<li>thumb modules [eap1935]</li>
-<li>extending and promoting flexinode.module [JonBob]</li>
-<li>Get the mailhandler module to handle attachments in a        more elegant way [javanaut]</li>
-<li>Finishing Movable Type import script [Junyor]</li>
-<li>Possibly creating a Blogger import script [Junyor]</li>
-<li>Cleaning up comment validation and saving in        comment.module [Junyor]</li>
-<li>User Accounts stored in LDAP [tfiske]
-
-<ul>
-<li>Reimplement and upgrade contributed themes [javanaut,    kika]</li>
-<li></li>
-</ul>
-</li>
-<li>Dtheme [javanaut]</li>
-<li>improving core themes and adding additional CSS files        for Chameleon theme [kika]
-
-<ul>
-<li>Various</li>
-<li></li>
-</ul>
-</li>
-<li>raising a drupal website with the ecommerce module to        let people bid for new functionality [bertboerland]</li>
-<li>Reimplementing hooks [Jose A Reyero]</li>
-<li>Drupal.org improvements [kika, Junyor]</li>
-<li>help re-architecting Drupal.org site (track the project        "Drupal.org maintenance") [kika]</li>
-<li>improve visual presentation, usability and        accessibility on everything Drupal [kika]</li>
-<li>Help with documentation updates [Junyor]</li>
-</ul>
-
+ - Make it possible to rename things like nodes and blogs        without incurring the high overhead that locale.module        incurs to do so. [Chris Johnson]        <br/>
+    - Core (modules)
+    - Theme system improvements. [MegaGrunt, adrian]
+    - apart from my phptemplate based theme for 4.4.0 , i want to    enable drupal to use generic templating engines (ex: smarty,    xtemplate, php templates and phptal) without any problem, as    well as syndication of themes/templates using the install    subsystem. [adrian]
+    - Extend xTemplate to make it possible to customised sections    of a site through multiple CSS style-sheets. [MegaGrunt]
+    - Profile module improvements [Dries, adrian]            <br/>
+ - make the new profile module adapt to user->user        relationships [adrian]      <br/>
+ - integrate buddylist module [Adrian]        <br/>
+    - Forum module improvements [Dries]
+    - Aggregator module improvements [Dries]
+    - User system imporovements [javanaut]
+    - Have user_access() take an additional optional parameter of    which uid to compare against the given access type.    [javanaut]
+    - Navigation or Configurable menus [Dries, anarcat,    Bèr, JonBob]            <br/>
+ - order the _link() hooks [anarcat]      <br/>
+ - getting a unified navigation method into drupal.        [Bèr]      <br/>
+ - Get some other navigation methods deprecated by The One        Navigation [Bèr]      <br/>
+ - Make menusystem be able to be presented in different        ways by the theme [JonBob]        <br/>
+    - Internationalisation [matteo, B&egrave;r, jareyero, Jose A    Reyero]
+    - Combine l18n, translate_node and localisation [matteo,    Bèr, Jose A Reyero]            <br/>
+ - improving translate_node.module [Bèr]      <br/>
+ - Vocabulary and term I18n (terms and vocabularies are        translated in locale) [matteo]        <br/>
+    - Extend it to have any table translated, not only the node    table [jareyero, Jose A Reyero]
+    - Permission System [JonBob]            <br/>
+ - Node based access [Chris Johnson]        <br/>
+    - Multiple roles per user [irwin]
+    - User-defined custom groups [irwin]            <br/>
+ - Simple per-node privacy control [irwin]        <br/>
+    - Search Improvements [davidm]            <br/>
+ - Taxonomy search [davidm]        <br/>
+    - Attachements/files [nedjo]
+    - Get image handling and display into the core for 4.5, a    priority mentioned by others. [nedjo]
+    - Filter system improvements [matteo]            <br/>
+ - Node type filtering (more than one node type can be        specified as a filter) [matteo]        <br/>
+    - Introduce Locking [Jeremy@kerneltrap.org]
+    - Install System. Which will hopefully be used to install the    base system, contrib modules and possibly even themes by the    next version [adrian]
+    -             <br/>
+ - Wizard system , for creating multi page submissions ..        to be primarily used in the Install system [adrian]      <br/>
+ - Make drupal more fault tolerant, for example allowing        it to start up completely without needing a database        connection.[adrian]      <br/>
+ - Multisite configuration patch .. atleast pushing for it        to be made through, as this opens up a lot of interesting        possibilities for the install system [adrian]        <br/>
+    - Reimplement, create and upgrade contributed modules    [TheLibrarian, JonBob, eap1935, javanaut]
+    -             <br/>
+ - bibliography.module [TheLibrarian]      <br/>
+ - importpage.module [TheLibrarian]      <br/>
+ - pdfview.module [TheLibrarian]      <br/>
+ - htmltidy.module [TheLibrarian]      <br/>
+ - thumb modules [eap1935]      <br/>
+ - extending and promoting flexinode.module [JonBob]      <br/>
+ - Get the mailhandler module to handle attachments in a        more elegant way [javanaut]      <br/>
+ - Finishing Movable Type import script [Junyor]      <br/>
+ - Possibly creating a Blogger import script [Junyor]      <br/>
+ - Cleaning up comment validation and saving in        comment.module [Junyor]      <br/>
+ - User Accounts stored in LDAP [tfiske]        <br/>
+    - Reimplement and upgrade contributed themes [javanaut,    kika]
+    -             <br/>
+ - Dtheme [javanaut]      <br/>
+ - improving core themes and adding additional CSS files        for Chameleon theme [kika]        <br/>
+    - Various
+    -             <br/>
+ - raising a drupal website with the ecommerce module to        let people bid for new functionality [bertboerland]      <br/>
+ - Reimplementing hooks [Jose A Reyero]      <br/>
+ - Drupal.org improvements [kika, Junyor]      <br/>
+ - help re-architecting Drupal.org site (track the project        "Drupal.org maintenance") [kika]      <br/>
+ - improve visual presentation, usability and        accessibility on everything Drupal [kika]      <br/>
+ - Help with documentation updates [Junyor]</p>
 
   </div>
   <footer>
@@ -251,13 +207,13 @@
   
   <ul>
     
+      <li><span>February  3, 2015</span> &raquo; <a href="/2015/02/03/selecting-a-good-wysiwyg-for-rails-its-all-about-usecases">Selecting A Good Wysiwyg For Rails Its All About Usecases</a></li>
+
+    
       <li><span>February  4, 2014</span> &raquo; <a href="/2014/02/04/new-post">Uitgevers, geef mij niet de schuld, wanneer ik mijn ebooks niet van jullie koop!</a></li>
 
     
       <li><span>November 28, 2013</span> &raquo; <a href="/2013/11/28/olaf-van-den-heuvel-is-een-maximum-flapdrol">Olaf van den Heuvel is een maximum flapdrol</a></li>
-
-    
-      <li><span>November 27, 2013</span> &raquo; <a href="/2013/11/27/hoe-kom-ik-aan-bitcoin-en-een-bitcoin-rekening">Hoe kom ik aan Bitcoin, en een Bitcoin rekening?</a></li>
 
     
   </ul>
@@ -279,7 +235,7 @@
           </p>
       </div>
       <div class="four columns">
-        Copyright 2001-2014
+        Copyright 2001-2015
         with a
         <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Attribute-Share-alike 3.0 Unported license</a>
       </div>

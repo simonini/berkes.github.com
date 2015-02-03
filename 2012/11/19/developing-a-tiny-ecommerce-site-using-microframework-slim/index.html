@@ -21,22 +21,24 @@
    <link rel="author" href="/humans.txt" type="text/plain" />
    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
    <!-- Included CSS Files -->
-   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
-
+   <link rel="stylesheet" href="/assets//stylesheets/foundation.css">
+   <link rel="stylesheet" href="/assets//stylesheets/pygments.css">
+   <link rel="stylesheet" href="/assets//stylesheets/app.css">
 
    <!--[if lt IE 9]>
-   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
-
+   <link rel="stylesheet" href="/assets//stylesheets/ie.css">
    <![endif]-->
 
-   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
-
+   <script src="/assets//javascripts/modernizr.foundation.js"></script>
 
    <!-- IE Fix for HTML5 Tags -->
    <!--[if lt IE 9]>
-   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
-
+     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
    <![endif]-->
+
+   <!-- Fonts -->
+   <link href='http://fonts.googleapis.com/css?family=Arvo:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=OFL+Sorts+Mill+Goudy+TT" media="screen, projection, print">
 </head>
 <body>
 	<!-- container -->
@@ -155,14 +157,12 @@ deploy</strong></a>.</p>
 <p>The <a href="https://github.com/piratenpartij/lidworden">code</a> consists of a few
 directories and a very few files.</p>
 
-<div class="highlight"><pre><code class="php"><span class="err">├</span> <span class="nx">Slim</span>        <span class="c1"># Contains the Slim Framework Library (classes)</span>
-<span class="err">├</span> <span class="nx">templates</span>   <span class="c1"># Contains snippets and PHP-files to render the actual HTML</span>
-<span class="err">├</span> <span class="nx">config</span><span class="o">.</span><span class="nx">inc</span>  <span class="c1"># A few settings and globals</span>
-<span class="err">├</span> <span class="nx">ideal</span><span class="o">.</span><span class="nx">inc</span>   <span class="c1"># Class/lib to handle the payment processor</span>
-<span class="err">├</span> <span class="nx">index</span><span class="o">.</span><span class="nx">php</span>   <span class="c1"># The actual application</span>
-<span class="err">└</span> <span class="nx">secrets</span><span class="o">.</span><span class="nx">inc</span> <span class="c1"># file which is excluded from the public git and from the docroot.</span>
-</code></pre>
-</div>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="nx">├</span> <span class="nx">Slim</span>        <span class="c1"># Contains the Slim Framework Library (classes)</span>
+<span class="nx">├</span> <span class="nx">templates</span>   <span class="c1"># Contains snippets and PHP-files to render the actual HTML</span>
+<span class="nx">├</span> <span class="nx">config</span><span class="o">.</span><span class="nx">inc</span>  <span class="c1"># A few settings and globals</span>
+<span class="nx">├</span> <span class="nx">ideal</span><span class="o">.</span><span class="nx">inc</span>   <span class="c1"># Class/lib to handle the payment processor</span>
+<span class="nx">├</span> <span class="nx">index</span><span class="o">.</span><span class="nx">php</span>   <span class="c1"># The actual application</span>
+<span class="nx">└</span> <span class="nx">secrets</span><span class="o">.</span><span class="nx">inc</span> <span class="c1"># file which is excluded from the public git and from the docroot.</span></code></pre></div>
 
 
 <h3>Template</h3>
@@ -188,7 +188,7 @@ practical.</p>
 <p>In a Slim application, you set up routes that react to a HTTP-request,
 do stuff, and then return other stuff. Like so</p>
 
-<div class="highlight"><pre><code class="php"><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
   <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;_head.inc&#39;</span><span class="p">);</span>
   <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span>
     <span class="s1">&#39;landing.php&#39;</span><span class="p">,</span>
@@ -198,9 +198,7 @@ do stuff, and then return other stuff. Like so</p>
     <span class="p">)</span>
   <span class="p">);</span>
   <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;_footer.inc&#39;</span><span class="p">);</span>
-  <span class="p">});</span>
-</code></pre>
-</div>
+  <span class="p">});</span></code></pre></div>
 
 
 <p>This is a PHP5 syntax, where you can create
@@ -220,7 +218,7 @@ requested. PHP5 supports <a href="http://www.php.net/manual/en/functions.anonymo
 <p>When you post this form, a slightly more complex function is called, the
 simplified version of that is:</p>
 
-<div class="highlight"><pre><code class="php"><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;/pirate&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;/pirate&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
   <span class="nv">$pirate</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">params</span><span class="p">();</span>
   <span class="c1">//... more preparing of the $pirate that will be stored in the database</span>
 
@@ -244,9 +242,7 @@ simplified version of that is:</p>
     <span class="p">)</span>
   <span class="p">);</span>
   <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;_footer.inc&#39;</span><span class="p">);</span>
-  <span class="p">});</span>
-</code></pre>
-</div>
+  <span class="p">});</span></code></pre></div>
 
 
 <p>The values you posted are validated, then written to the database, and
@@ -266,15 +262,13 @@ values and present the customer with a payment-workflow.</p>
 chance they end on <code>/error</code>. Because this is by no means a confirmation,
 we simply render a success or error page there; but take no actions.</p>
 
-<div class="highlight"><pre><code class="php"><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/error&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/error&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
  <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;_head.inc&#39;</span><span class="p">);</span>
  <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span>
     <span class="s1">&#39;error.php&#39;</span>
   <span class="p">);</span>
   <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;_footer.inc&#39;</span><span class="p">);</span>
-<span class="p">});</span>
-</code></pre>
-</div>
+<span class="p">});</span></code></pre></div>
 
 
 <p>Other ideal-versions have a Post-back system, where their server
@@ -282,7 +276,7 @@ confirms the payment; one of the earlier version of this application had
 that, since we did not know exactly what iDeal-version we'd go with. A
 confirm would be really simple to implement here:</p>
 
-<div class="highlight"><pre><code class="php"><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;/confirm&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;/confirm&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
   <span class="nv">$payment</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">params</span><span class="p">();</span>
   <span class="nv">$db</span> <span class="o">=</span> <span class="nx">get_connection</span><span class="p">();</span>
   <span class="nv">$stmt</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">prepare</span><span class="p">(</span><span class="s2">&quot;UPDATE pirates SET status = :status WHERE id =</span>
@@ -290,9 +284,7 @@ confirm would be really simple to implement here:</p>
   <span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">bindParam</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="nv">$payment</span><span class="p">[</span><span class="s2">&quot;paymentStatus&quot;</span><span class="p">]);</span>
   <span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">bindParam</span><span class="p">(</span><span class="s2">&quot;pirate_id&quot;</span><span class="p">,</span> <span class="nv">$payment</span><span class="p">[</span><span class="s2">&quot;purchaseID&quot;</span><span class="p">]);</span>
   <span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">();</span>
-<span class="p">});</span>
-</code></pre>
-</div>
+<span class="p">});</span></code></pre></div>
 
 
 <p>Obviously, in reality you'd probably need to parse the $payment to
@@ -415,13 +407,13 @@ alone built with Zend, Rails or Whatever other framework.</p>
   
   <ul>
     
+      <li><span>February  3, 2015</span> &raquo; <a href="/2015/02/03/selecting-a-good-wysiwyg-for-rails-its-all-about-usecases">Selecting A Good Wysiwyg For Rails Its All About Usecases</a></li>
+
+    
       <li><span>February  4, 2014</span> &raquo; <a href="/2014/02/04/new-post">Uitgevers, geef mij niet de schuld, wanneer ik mijn ebooks niet van jullie koop!</a></li>
 
     
       <li><span>November 28, 2013</span> &raquo; <a href="/2013/11/28/olaf-van-den-heuvel-is-een-maximum-flapdrol">Olaf van den Heuvel is een maximum flapdrol</a></li>
-
-    
-      <li><span>November 27, 2013</span> &raquo; <a href="/2013/11/27/hoe-kom-ik-aan-bitcoin-en-een-bitcoin-rekening">Hoe kom ik aan Bitcoin, en een Bitcoin rekening?</a></li>
 
     
   </ul>
@@ -443,7 +435,7 @@ alone built with Zend, Rails or Whatever other framework.</p>
           </p>
       </div>
       <div class="four columns">
-        Copyright 2001-2014
+        Copyright 2001-2015
         with a
         <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Attribute-Share-alike 3.0 Unported license</a>
       </div>

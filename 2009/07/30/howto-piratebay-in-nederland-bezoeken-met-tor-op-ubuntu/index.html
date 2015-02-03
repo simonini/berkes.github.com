@@ -21,22 +21,24 @@
    <link rel="author" href="/humans.txt" type="text/plain" />
    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
    <!-- Included CSS Files -->
-   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
-
+   <link rel="stylesheet" href="/assets//stylesheets/foundation.css">
+   <link rel="stylesheet" href="/assets//stylesheets/pygments.css">
+   <link rel="stylesheet" href="/assets//stylesheets/app.css">
 
    <!--[if lt IE 9]>
-   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
-
+   <link rel="stylesheet" href="/assets//stylesheets/ie.css">
    <![endif]-->
 
-   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
-
+   <script src="/assets//javascripts/modernizr.foundation.js"></script>
 
    <!-- IE Fix for HTML5 Tags -->
    <!--[if lt IE 9]>
-   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
-
+     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
    <![endif]-->
+
+   <!-- Fonts -->
+   <link href='http://fonts.googleapis.com/css?family=Arvo:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=OFL+Sorts+Mill+Goudy+TT" media="screen, projection, print">
 </head>
 <body>
 	<!-- container -->
@@ -92,39 +94,29 @@ Wat Piratebay doet, is niets meer dan verwijzingen naar een download plaatsen.</
 
 <p>Ga naar Systeem >> Beheer >> Softwarebronnen. Voeg daar in de tab "software van derden" een nieuwe repository toe, gebruik onderstaande regel</p>
 
-<div class="highlight"><pre><code class="bash">deb     http://mirror.noreply.org/pub/tor jaunty main
-</code></pre>
-</div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">deb     http://mirror.noreply.org/pub/tor jaunty main</code></pre></div>
 
 
 <p>Sla op en sluit af. Bij de vraag herladen? kies, "Sluiten". <a href="http://www.avuc.nl/2009/05/04/tor-on-ubuntu-904/">AVUC heeft de sleutels en meer informatie</a>.</p>
 
 <h3>2. Voeg de keys toe:</h3>
 
-<div class="highlight"><pre><code class="bash">gpg --keyserver subkeys.pgp.net --recv 94C09C7Fgpg --fingerprint 94C09C7Fgpg --export 94C09C7F | sudo apt-key add -
-</code></pre>
-</div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">gpg --keyserver subkeys.pgp.net --recv 94C09C7Fgpg --fingerprint 94C09C7Fgpg --export 94C09C7F <span class="p">|</span> sudo apt-key add -</code></pre></div>
 
 
 <h3>3. Installeer TOR en <a href="http://nl.wikipedia.org/wiki/Privoxy">Privoxy</a>.</h3>
 
-<div class="highlight"><pre><code class="bash">sudo apt-get updatesudo apt-get install tor privoxy
-</code></pre>
-</div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo apt-get updatesudo apt-get install tor privoxy</code></pre></div>
 
 
 <h3>4. Voeg een regel toe aan de configuratie van privoxy. Open het bestand /etc/privoxy/config:</h3>
 
-<div class="highlight"><pre><code class="bash">sudo gedit /etc/privoxy/configEn plaats de regel ergens bovenaan <span class="o">(</span>vergeet de afsluitende punt niet!<span class="o">)</span>forward-socks4a / localhost:9050 . 
-</code></pre>
-</div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo gedit /etc/privoxy/configEn plaats de regel ergens bovenaan <span class="o">(</span>vergeet de afsluitende punt niet!<span class="o">)</span>forward-socks4a / localhost:9050 .</code></pre></div>
 
 
 <h3>5. Start tor en privoxy.</h3>
 
-<div class="highlight"><pre><code class="bash">sudo /etc/init.d/tor startsudo /etc/init.d/privoxy start
-</code></pre>
-</div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo /etc/init.d/tor startsudo /etc/init.d/privoxy start</code></pre></div>
 
 
 <h3>6. Voeg aan je browser <a href="http://localhost:8118">localhost:8118</a> als proxy in. vanaf waar je naar the piratebay kunt surfen.</h3>
@@ -203,13 +195,13 @@ Wat Piratebay doet, is niets meer dan verwijzingen naar een download plaatsen.</
   
   <ul>
     
+      <li><span>February  3, 2015</span> &raquo; <a href="/2015/02/03/selecting-a-good-wysiwyg-for-rails-its-all-about-usecases">Selecting A Good Wysiwyg For Rails Its All About Usecases</a></li>
+
+    
       <li><span>February  4, 2014</span> &raquo; <a href="/2014/02/04/new-post">Uitgevers, geef mij niet de schuld, wanneer ik mijn ebooks niet van jullie koop!</a></li>
 
     
       <li><span>November 28, 2013</span> &raquo; <a href="/2013/11/28/olaf-van-den-heuvel-is-een-maximum-flapdrol">Olaf van den Heuvel is een maximum flapdrol</a></li>
-
-    
-      <li><span>November 27, 2013</span> &raquo; <a href="/2013/11/27/hoe-kom-ik-aan-bitcoin-en-een-bitcoin-rekening">Hoe kom ik aan Bitcoin, en een Bitcoin rekening?</a></li>
 
     
   </ul>
@@ -231,7 +223,7 @@ Wat Piratebay doet, is niets meer dan verwijzingen naar een download plaatsen.</
           </p>
       </div>
       <div class="four columns">
-        Copyright 2001-2014
+        Copyright 2001-2015
         with a
         <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Attribute-Share-alike 3.0 Unported license</a>
       </div>

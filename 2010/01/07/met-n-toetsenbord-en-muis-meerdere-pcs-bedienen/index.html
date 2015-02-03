@@ -21,22 +21,24 @@
    <link rel="author" href="/humans.txt" type="text/plain" />
    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
    <!-- Included CSS Files -->
-   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
-
+   <link rel="stylesheet" href="/assets//stylesheets/foundation.css">
+   <link rel="stylesheet" href="/assets//stylesheets/pygments.css">
+   <link rel="stylesheet" href="/assets//stylesheets/app.css">
 
    <!--[if lt IE 9]>
-   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
-
+   <link rel="stylesheet" href="/assets//stylesheets/ie.css">
    <![endif]-->
 
-   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
-
+   <script src="/assets//javascripts/modernizr.foundation.js"></script>
 
    <!-- IE Fix for HTML5 Tags -->
    <!--[if lt IE 9]>
-   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
-
+     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
    <![endif]-->
+
+   <!-- Fonts -->
+   <link href='http://fonts.googleapis.com/css?family=Arvo:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=OFL+Sorts+Mill+Goudy+TT" media="screen, projection, print">
 </head>
 <body>
 	<!-- container -->
@@ -81,7 +83,10 @@
 
 <p>Het enige dat nodig is, is <a href="http://doc.nl.linux.org/HOWTO/Ssh-Getting-Started-NL.html">SSH</a>. Op de PC waarop de muis en toetsenborden zijn aangesloten moet een ssh-client staan. Op de PC die je wilt gaan bedienen, moet een ssh-server draaien en moet het programma X2X geïnstalleerd zijn. Ik ga uit van Ubuntu, op beide machines, maar met OSX (mac) moet het ook heel makkelijk kunnen. Eerst moet je op de computer waarmee je wilt verbinden, ssh en x2x installeren. Die eerste is meestal al voorgeïnstalleerd op ubuntu, maar voor de zekerheid (geen ervaring met commando's? kijk <a href="https://help.ubuntu.com/community/UsingTheTerminal">in deze handleiding</a>) <code>sudo apt-get install ssh x2x</code>Ga nu terug naar de computer van waaruit je zometeen wilt verbinden. En typ op een terminal of commandline het volgende in:   <code>ssh -X _remote_machinename_or_ip_address_ x2x _-direction_of_the_remote_display_ -to :0</code>hierin is:  - <em>remote_machinename_or_ip_address</em> het IP-adres of de netwerknaam van de andere machine. In een intern (thuis)netwerk vaak iets als 192.168.</p>
 
-<p>X.</p>
+<ol type="a">
+<li></li>
+</ol>
+
 
 <p>Y
   - <em>-direction_of_the_remote_display</em> de positie waar het scherm staat ten opzichte van je hoofdssyteem. -west plaatst het nieuwe scherm rechts, -east links
@@ -163,13 +168,13 @@
   
   <ul>
     
+      <li><span>February  3, 2015</span> &raquo; <a href="/2015/02/03/selecting-a-good-wysiwyg-for-rails-its-all-about-usecases">Selecting A Good Wysiwyg For Rails Its All About Usecases</a></li>
+
+    
       <li><span>February  4, 2014</span> &raquo; <a href="/2014/02/04/new-post">Uitgevers, geef mij niet de schuld, wanneer ik mijn ebooks niet van jullie koop!</a></li>
 
     
       <li><span>November 28, 2013</span> &raquo; <a href="/2013/11/28/olaf-van-den-heuvel-is-een-maximum-flapdrol">Olaf van den Heuvel is een maximum flapdrol</a></li>
-
-    
-      <li><span>November 27, 2013</span> &raquo; <a href="/2013/11/27/hoe-kom-ik-aan-bitcoin-en-een-bitcoin-rekening">Hoe kom ik aan Bitcoin, en een Bitcoin rekening?</a></li>
 
     
   </ul>
@@ -191,7 +196,7 @@
           </p>
       </div>
       <div class="four columns">
-        Copyright 2001-2014
+        Copyright 2001-2015
         with a
         <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Attribute-Share-alike 3.0 Unported license</a>
       </div>

@@ -21,22 +21,24 @@
    <link rel="author" href="/humans.txt" type="text/plain" />
    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
    <!-- Included CSS Files -->
-   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
-
+   <link rel="stylesheet" href="/assets//stylesheets/foundation.css">
+   <link rel="stylesheet" href="/assets//stylesheets/pygments.css">
+   <link rel="stylesheet" href="/assets//stylesheets/app.css">
 
    <!--[if lt IE 9]>
-   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
-
+   <link rel="stylesheet" href="/assets//stylesheets/ie.css">
    <![endif]-->
 
-   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
-
+   <script src="/assets//javascripts/modernizr.foundation.js"></script>
 
    <!-- IE Fix for HTML5 Tags -->
    <!--[if lt IE 9]>
-   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
-
+     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
    <![endif]-->
+
+   <!-- Fonts -->
+   <link href='http://fonts.googleapis.com/css?family=Arvo:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=OFL+Sorts+Mill+Goudy+TT" media="screen, projection, print">
 </head>
 <body>
 	<!-- container -->
@@ -89,16 +91,12 @@
 
 <p>Mac comes with ruby installed. On Ubuntu Linux you may need to install it still:</p>
 
-<div class="highlight"><pre><code class="bash">sudo apt-get install ruby rubygems
-</code></pre>
-</div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo apt-get install ruby rubygems</code></pre></div>
 
 
 <p>Install mailcatcher (Use sudo for installing systemwide).</p>
 
-<div class="highlight"><pre><code class="bash">gem install mailcatcher
-</code></pre>
-</div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">gem install mailcatcher</code></pre></div>
 
 
 <p>Configure PHP to use mailcatcher for delivering mail:</p>
@@ -109,25 +107,19 @@
 </ul>
 
 
-<div class="highlight"><pre><code class="ini"><span class="na">sendmail_path</span> <span class="o">=</span> <span class="s">&quot;/usr/bin/env /var/lib/gems/1.8/bin/catchmail &quot;</span>
-</code></pre>
-</div>
+<div class="highlight"><pre><code class="language-ini" data-lang="ini"><span class="na">sendmail_path</span> <span class="o">=</span> <span class="s">&quot;/usr/bin/env /var/lib/gems/1.8/bin/catchmail &quot;</span></code></pre></div>
 
 
 <p>Find out where catchmail lives by invoking <code>$ which catchmail</code>. On Ubuntu it was installed at <em>/var/lib/gems/1.8/bin/catchmail</em>. Make sure you have the gems installed system wide, else apache (or the user running the webserver) does not have access to catcmail and the required libraries.</p>
 
 <p>And restart apache.</p>
 
-<div class="highlight"><pre><code class="bash">sudo service apache2 restart
-</code></pre>
-</div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo service apache2 restart</code></pre></div>
 
 
 <p>Start up mailcatcher.</p>
 
-<div class="highlight"><pre><code class="bash">mailcatcher
-</code></pre>
-</div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">mailcatcher</code></pre></div>
 
 
 <p>Open your browser and visit <a href="http://localhost:1080">http://localhost:1080</a></p>
@@ -216,13 +208,13 @@
   
   <ul>
     
+      <li><span>February  3, 2015</span> &raquo; <a href="/2015/02/03/selecting-a-good-wysiwyg-for-rails-its-all-about-usecases">Selecting A Good Wysiwyg For Rails Its All About Usecases</a></li>
+
+    
       <li><span>February  4, 2014</span> &raquo; <a href="/2014/02/04/new-post">Uitgevers, geef mij niet de schuld, wanneer ik mijn ebooks niet van jullie koop!</a></li>
 
     
       <li><span>November 28, 2013</span> &raquo; <a href="/2013/11/28/olaf-van-den-heuvel-is-een-maximum-flapdrol">Olaf van den Heuvel is een maximum flapdrol</a></li>
-
-    
-      <li><span>November 27, 2013</span> &raquo; <a href="/2013/11/27/hoe-kom-ik-aan-bitcoin-en-een-bitcoin-rekening">Hoe kom ik aan Bitcoin, en een Bitcoin rekening?</a></li>
 
     
   </ul>
@@ -244,7 +236,7 @@
           </p>
       </div>
       <div class="four columns">
-        Copyright 2001-2014
+        Copyright 2001-2015
         with a
         <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Attribute-Share-alike 3.0 Unported license</a>
       </div>

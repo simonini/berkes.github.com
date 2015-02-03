@@ -21,22 +21,24 @@
    <link rel="author" href="/humans.txt" type="text/plain" />
    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
    <!-- Included CSS Files -->
-   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
-
+   <link rel="stylesheet" href="/assets//stylesheets/foundation.css">
+   <link rel="stylesheet" href="/assets//stylesheets/pygments.css">
+   <link rel="stylesheet" href="/assets//stylesheets/app.css">
 
    <!--[if lt IE 9]>
-   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
-
+   <link rel="stylesheet" href="/assets//stylesheets/ie.css">
    <![endif]-->
 
-   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
-
+   <script src="/assets//javascripts/modernizr.foundation.js"></script>
 
    <!-- IE Fix for HTML5 Tags -->
    <!--[if lt IE 9]>
-   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
-
+     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
    <![endif]-->
+
+   <!-- Fonts -->
+   <link href='http://fonts.googleapis.com/css?family=Arvo:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=OFL+Sorts+Mill+Goudy+TT" media="screen, projection, print">
 </head>
 <body>
 	<!-- container -->
@@ -81,22 +83,18 @@
 
 <h2>Persistent variables</h2>
 
-<div class="highlight"><pre><code class="php"><span class="nv">$html</span> <span class="o">.=</span> <span class="s2">&quot;Showing &quot;</span><span class="o">.</span> <span class="nx">variable_get</span><span class="p">(</span><span class="s2">&quot;mymodule_amount&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span> <span class="o">.</span><span class="s2">&quot;items&quot;</span><span class="p">;</span>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="nv">$html</span> <span class="o">.=</span> <span class="s2">&quot;Showing &quot;</span><span class="o">.</span> <span class="nx">variable_get</span><span class="p">(</span><span class="s2">&quot;mymodule_amount&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span> <span class="o">.</span><span class="s2">&quot;items&quot;</span><span class="p">;</span>
 <span class="nv">$html</span> <span class="o">.=</span> <span class="nx">pager_query</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM {mymodule_items}&quot;</span><span class="p">,</span> <span class="nx">variable_get</span><span class="p">(</span><span class="s2">&quot;mymodule_amount&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">));</span>
 <span class="k">if</span> <span class="p">(</span><span class="nv">$total</span> <span class="o">&gt;</span> <span class="nx">variable_get</span><span class="p">(</span><span class="s2">&quot;mymodule_amount&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span> <span class="p">{</span>
   <span class="nv">$html</span> <span class="o">.=</span> <span class="s2">&quot;there are more&quot;</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre>
-</div>
+<span class="p">}</span></code></pre></div>
 
 
 <p>Not only is there the <em>magic number 20</em> all over the place, it is a DRY violation all over the place.
 In above example, that DRY violation is not very visible, yet, but imagine a module called <em>project_magician_message_center</em>:</p>
 
-<div class="highlight"><pre><code class="php"><span class="nx">variable_get</span><span class="p">(</span><span class="s2">&quot;project_magician_message_center_amount_for_&quot;</span><span class="o">.</span> <span class="nv">$node</span><span class="o">-&gt;</span><span class="na">type</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
-<span class="nx">variable_get</span><span class="p">(</span><span class="s2">&quot;project_magician_message_center_request_limit&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
-</code></pre>
-</div>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="nx">variable_get</span><span class="p">(</span><span class="s2">&quot;project_magician_message_center_amount_for_&quot;</span><span class="o">.</span> <span class="nv">$node</span><span class="o">-&gt;</span><span class="na">type</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+<span class="nx">variable_get</span><span class="p">(</span><span class="s2">&quot;project_magician_message_center_request_limit&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span></code></pre></div>
 
 
 <p>Just open up your average <em>variables</em> table in larger Drupalproject and look around. The horror! (And maybe you have been bitten by the length limit of 128 characters?). There is no pattern; just a list of unpredicable names.</p>
@@ -104,10 +102,8 @@ In above example, that DRY violation is not very visible, yet, but imagine a mod
 <p>The <em>magic number</em> problem often gets solved by Drupal developers with constants. But as the name suggests,
 a constant is constant. And a variable is variable. It is very confusing to read this:</p>
 
-<div class="highlight"><pre><code class="php"><span class="nb">define</span><span class="p">(</span><span class="s2">&quot;MYMODULE_AMOUNT&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
-<span class="nv">$items</span> <span class="o">=</span> <span class="nx">pager_query</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM {mymodule_items}&quot;</span><span class="p">,</span> <span class="nx">variable_get</span><span class="p">(</span><span class="s2">&quot;mymodule_amount&quot;</span><span class="p">,</span> <span class="nx">MYMODULE_AMOUNT</span><span class="p">));</span>
-</code></pre>
-</div>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="nb">define</span><span class="p">(</span><span class="s2">&quot;MYMODULE_AMOUNT&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+<span class="nv">$items</span> <span class="o">=</span> <span class="nx">pager_query</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM {mymodule_items}&quot;</span><span class="p">,</span> <span class="nx">variable_get</span><span class="p">(</span><span class="s2">&quot;mymodule_amount&quot;</span><span class="p">,</span> <span class="nx">MYMODULE_AMOUNT</span><span class="p">));</span></code></pre></div>
 
 
 <p>Especially when you clearly get 30 items in some list. Which is what happens when a variable gets another value. Suddenly the constant is no longer
@@ -117,25 +113,23 @@ used; it acts like a variable. Naming your constants <em>MYMODULE_AMOUNT_DEFAULT
 
 <p>Translations, through <em>t()</em> act even worse. Some examples:</p>
 
-<div class="highlight"><pre><code class="php"><span class="nx">t</span><span class="p">(</span><span class="s2">&quot;Hello World, today is %date&quot;</span><span class="p">);</span>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="nx">t</span><span class="p">(</span><span class="s2">&quot;Hello World, today is %date&quot;</span><span class="p">);</span>
 <span class="nx">t</span><span class="p">(</span><span class="s2">&quot;Hello world, today is %date&quot;</span><span class="p">);</span> <span class="c1">#note the intentional erronous lowercase world.</span>
 
 <span class="nv">$actor</span> <span class="o">=</span> <span class="s2">&quot;Marsellus&quot;</span><span class="p">;</span>
 <span class="nv">$subject</span> <span class="o">=</span> <span class="s2">&quot;Antwone&quot;</span><span class="p">;</span>
 <span class="nx">t</span><span class="p">(</span><span class="s2">&quot;Look, just because I don&#39;t be givin&#39; no man a foot massage don&#39;t make it right for %actor to throw %subject into a glass motherfuckin&#39; house, fuckin&#39; up the way the nigger talks. Motherfucker do that shit to me, he better paralyze my ass, &#39;cause I&#39;ll kill the motherfucker, know what I&#39;m sayin&#39;?&quot;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s2">&quot;%actor&quot;</span> <span class="o">=&gt;</span> <span class="nv">$actor</span><span class="p">,</span> <span class="s2">&quot;%subject&quot;</span> <span class="o">=&gt;</span> <span class="nv">$subject</span><span class="p">));</span>
 
-<span class="nv">$message</span> <span class="s">&lt;&lt;&lt;MESS</span>
-<span class="s">Well, the way they make shows is, they make one show. That show&#39;s called a pilot. </span>
+<span class="nv">$message</span> <span class="o">&lt;&lt;&lt;</span><span class="nx">MESS</span>
+<span class="nx">Well</span><span class="p">,</span> <span class="nx">the</span> <span class="nx">way</span> <span class="nx">they</span> <span class="nx">make</span> <span class="nx">shows</span> <span class="nx">is</span><span class="p">,</span> <span class="nx">they</span> <span class="nx">make</span> <span class="nx">one</span> <span class="nx">show</span><span class="o">.</span> <span class="nx">That</span> <span class="nx">show</span><span class="s1">&#39;s called a pilot. </span>
 
-<span class="s">Then they show that show to the people who make shows, and on the strength of that one show they decide if they&#39;re going to make more shows. Some pilots get picked and become television programs.</span>
+<span class="s1">Then they show that show to the people who make shows, and on the strength of that one show they decide if they&#39;</span><span class="nx">re</span> <span class="nx">going</span> <span class="nx">to</span> <span class="nx">make</span> <span class="nx">more</span> <span class="nx">shows</span><span class="o">.</span> <span class="nx">Some</span> <span class="nx">pilots</span> <span class="nx">get</span> <span class="nx">picked</span> <span class="k">and</span> <span class="nx">become</span> <span class="nx">television</span> <span class="nx">programs</span><span class="o">.</span>
 
-<span class="s">Some don&#39;t, become nothing. She starred in one of the ones that became nothing.</span>
-<span class="s">MESS</span>
+<span class="nx">Some</span> <span class="nx">don</span><span class="err">&#39;</span><span class="nx">t</span><span class="p">,</span> <span class="nx">become</span> <span class="nx">nothing</span><span class="o">.</span> <span class="nx">She</span> <span class="nx">starred</span> <span class="nx">in</span> <span class="nx">one</span> <span class="nx">of</span> <span class="nx">the</span> <span class="nx">ones</span> <span class="nx">that</span> <span class="nx">became</span> <span class="nx">nothing</span><span class="o">.</span>
+<span class="nx">MESS</span>
 <span class="nx">t</span><span class="p">(</span><span class="nv">$message</span><span class="p">);</span>
 
-<span class="nx">t</span><span class="p">(</span><span class="nx">_mymodule_message_contents</span><span class="p">());</span>
-</code></pre>
-</div>
+<span class="nx">t</span><span class="p">(</span><span class="nx">_mymodule_message_contents</span><span class="p">());</span></code></pre></div>
 
 
 <p>First and foremost problem with this is that it is not prefixed, namespaced if you will. Your <em>t("Submit")</em> is the same as that other <em>t("Submit")</em>. Translate this once to "Create new" and suddenly all sorts of labels, tabs, titles and links show the text "Create new". We have all been, there, just admit it, already.</p>
@@ -150,22 +144,20 @@ used; it acts like a variable. Naming your constants <em>MYMODULE_AMOUNT_DEFAULT
 
 <p>Imagine you could say:</p>
 
-<div class="highlight"><pre><code class="php"><span class="s2">&quot;Showing &quot;</span><span class="o">.</span> <span class="nx">v</span><span class="p">(</span><span class="s2">&quot;amount&quot;</span><span class="p">);</span>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="s2">&quot;Showing &quot;</span><span class="o">.</span> <span class="nx">v</span><span class="p">(</span><span class="s2">&quot;amount&quot;</span><span class="p">);</span>
 <span class="s2">&quot;Showing &quot;</span><span class="o">.</span> <span class="nx">v</span><span class="p">(</span><span class="s2">&quot;core.amount_per_page&quot;</span><span class="p">);</span>
 
 <span class="nx">t</span><span class="p">(</span><span class="s2">&quot;core.hello_world&quot;</span><span class="p">);</span>
 <span class="nx">t</span><span class="p">(</span><span class="s2">&quot;ecommerce.payment.thank_you&quot;</span><span class="p">);</span>
 <span class="nx">t</span><span class="p">(</span><span class="s2">&quot;core.thank_you&quot;</span><span class="p">);</span>
-<span class="nx">t</span><span class="p">(</span><span class="s2">&quot;footmassage&quot;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s2">&quot;%actor&quot;</span> <span class="o">=&gt;</span> <span class="nv">$actor</span><span class="p">,</span> <span class="s2">&quot;%subject&quot;</span> <span class="o">=&gt;</span> <span class="nv">$subject</span><span class="p">));</span>
-</code></pre>
-</div>
+<span class="nx">t</span><span class="p">(</span><span class="s2">&quot;footmassage&quot;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s2">&quot;%actor&quot;</span> <span class="o">=&gt;</span> <span class="nv">$actor</span><span class="p">,</span> <span class="s2">&quot;%subject&quot;</span> <span class="o">=&gt;</span> <span class="nv">$subject</span><span class="p">));</span></code></pre></div>
 
 
 <p>Where all your defaults are nicely set in a central place, your screen-texts are in single place, or even file. And everything gets prefixed with your modulename, unless you define it differently.</p>
 
 <p>The solution is OOP. Just a little, don't fret, and nicely tuck away so that you won't need to program everything OOP suddenly. First a generic class, which we will built upon in our modules.</p>
 
-<div class="highlight"><pre><code class="php"><span class="k">class</span> <span class="nc">DrupalHelper</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">class</span> <span class="nc">DrupalHelper</span> <span class="p">{</span>
   <span class="k">protected</span> <span class="nv">$prefix</span> <span class="o">=</span> <span class="s2">&quot;core&quot;</span><span class="p">;</span>
 
   <span class="k">public</span> <span class="k">function</span> <span class="nf">v</span><span class="p">(</span><span class="nv">$symbol</span><span class="p">)</span> <span class="p">{</span>
@@ -188,7 +180,7 @@ used; it acts like a variable. Naming your constants <em>MYMODULE_AMOUNT_DEFAULT
   <span class="p">}</span>
 
   <span class="k">private</span> <span class="k">function</span> <span class="nf">absolute_or_prefix</span><span class="p">(</span><span class="nv">$symbol</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">strstr</span><span class="p">(</span><span class="nv">$symbol</span><span class="p">,</span> <span class="s2">&quot;.&quot;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">strstr</span><span class="p">(</span><span class="nv">$symbol</span><span class="p">,</span> <span class="s2">&quot;.&quot;</span><span class="p">))</span> <span class="p">{</span>
       <span class="nv">$symbol</span> <span class="o">=</span> <span class="nv">$prefix</span> <span class="o">.</span><span class="s2">&quot;.&quot;</span><span class="o">.</span> <span class="nv">$symbol</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="k">return</span> <span class="nv">$symbol</span><span class="p">;</span>
@@ -196,14 +188,12 @@ used; it acts like a variable. Naming your constants <em>MYMODULE_AMOUNT_DEFAULT
   <span class="k">private</span> <span class="k">function</span> <span class="nf">symbol_to_function</span><span class="p">(</span><span class="nv">$symbol</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="s2">&quot;t_&quot;</span><span class="o">.</span> <span class="nb">preg_replace</span><span class="p">(</span><span class="s2">&quot;/\./&quot;</span><span class="p">,</span> <span class="nv">$symbol</span><span class="p">);</span>
   <span class="p">}</span>
-<span class="p">}</span>
-</code></pre>
-</div>
+<span class="p">}</span></code></pre></div>
 
 
 <p>With the module, I inherit this helper:</p>
 
-<div class="highlight"><pre><code class="php"><span class="k">class</span> <span class="nc">MyModuleHelper</span><span class="p">()</span> <span class="k">extends</span> <span class="nx">DrupalHelper</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">class</span> <span class="nc">MyModuleHelper</span><span class="p">()</span> <span class="k">extends</span> <span class="nx">DrupalHelper</span> <span class="p">{</span>
   <span class="k">protected</span> <span class="nv">$prefix</span> <span class="o">=</span> <span class="s2">&quot;mymodule&quot;</span><span class="p">;</span>
 
   <span class="c1">#defaults:</span>
@@ -213,14 +203,12 @@ used; it acts like a variable. Naming your constants <em>MYMODULE_AMOUNT_DEFAULT
   <span class="k">private</span> <span class="k">function</span> <span class="nf">t_hello_world</span><span class="p">()</span> <span class="p">{</span>
     <span class="s2">&quot;Hello World&quot;</span><span class="p">;</span>
   <span class="p">}</span>
-<span class="p">}</span>
-</code></pre>
-</div>
+<span class="p">}</span></code></pre></div>
 
 
 <p>In your module, you use this as follows:</p>
 
-<div class="highlight"><pre><code class="php"><span class="k">function</span> <span class="nf">mymodule_form_alter</span><span class="p">(</span><span class="nv">$form_id</span><span class="p">,</span> <span class="o">&amp;</span><span class="nv">$form</span><span class="p">,</span> <span class="o">&amp;</span><span class="nv">$form_values</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">mymodule_form_alter</span><span class="p">(</span><span class="nv">$form_id</span><span class="p">,</span> <span class="o">&amp;</span><span class="nv">$form</span><span class="p">,</span> <span class="o">&amp;</span><span class="nv">$form_values</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="nv">$form_id</span> <span class="o">==</span> <span class="s2">&quot;foo&quot;</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$helper</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyModuleHelper</span><span class="p">();</span>
 
@@ -230,9 +218,7 @@ used; it acts like a variable. Naming your constants <em>MYMODULE_AMOUNT_DEFAULT
       <span class="s2">&quot;#length&quot;</span> <span class="o">=&gt;</span> <span class="nv">$helper</span><span class="o">-&gt;</span><span class="na">v</span><span class="p">(</span><span class="s2">&quot;length&quot;</span><span class="p">)</span>
     <span class="p">);</span>
   <span class="p">}</span>
-<span class="p">}</span>
-</code></pre>
-</div>
+<span class="p">}</span></code></pre></div>
 
 
 <p>The usage-example does not load the library files, but delegating code to separate files is not hard in Drupal, with helpers like <em>module_load_include()</em>. This example assumes the file is already loaded, or that some autoloader is in place.
@@ -325,13 +311,13 @@ leaving out the variable_set and the very much simplified
   
   <ul>
     
+      <li><span>February  3, 2015</span> &raquo; <a href="/2015/02/03/selecting-a-good-wysiwyg-for-rails-its-all-about-usecases">Selecting A Good Wysiwyg For Rails Its All About Usecases</a></li>
+
+    
       <li><span>February  4, 2014</span> &raquo; <a href="/2014/02/04/new-post">Uitgevers, geef mij niet de schuld, wanneer ik mijn ebooks niet van jullie koop!</a></li>
 
     
       <li><span>November 28, 2013</span> &raquo; <a href="/2013/11/28/olaf-van-den-heuvel-is-een-maximum-flapdrol">Olaf van den Heuvel is een maximum flapdrol</a></li>
-
-    
-      <li><span>November 27, 2013</span> &raquo; <a href="/2013/11/27/hoe-kom-ik-aan-bitcoin-en-een-bitcoin-rekening">Hoe kom ik aan Bitcoin, en een Bitcoin rekening?</a></li>
 
     
   </ul>
@@ -353,7 +339,7 @@ leaving out the variable_set and the very much simplified
           </p>
       </div>
       <div class="four columns">
-        Copyright 2001-2014
+        Copyright 2001-2015
         with a
         <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Attribute-Share-alike 3.0 Unported license</a>
       </div>

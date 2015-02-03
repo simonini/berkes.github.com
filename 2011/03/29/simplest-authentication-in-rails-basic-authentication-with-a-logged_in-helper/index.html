@@ -21,22 +21,24 @@
    <link rel="author" href="/humans.txt" type="text/plain" />
    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
    <!-- Included CSS Files -->
-   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
-
+   <link rel="stylesheet" href="/assets//stylesheets/foundation.css">
+   <link rel="stylesheet" href="/assets//stylesheets/pygments.css">
+   <link rel="stylesheet" href="/assets//stylesheets/app.css">
 
    <!--[if lt IE 9]>
-   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
-
+   <link rel="stylesheet" href="/assets//stylesheets/ie.css">
    <![endif]-->
 
-   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
-
+   <script src="/assets//javascripts/modernizr.foundation.js"></script>
 
    <!-- IE Fix for HTML5 Tags -->
    <!--[if lt IE 9]>
-   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
-
+     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
    <![endif]-->
+
+   <!-- Fonts -->
+   <link href='http://fonts.googleapis.com/css?family=Arvo:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=OFL+Sorts+Mill+Goudy+TT" media="screen, projection, print">
 </head>
 <body>
 	<!-- container -->
@@ -90,7 +92,7 @@
 <p>First, we introduce a basic authenticate method, that can be used troughout our controllers.
 This method uses the Rails/Rack helper <a href="http://apidock.com/rails/ActionController/HttpAuthentication/Basic/ControllerMethods/authenticate_or_request_with_http_basic">authenticate_or_request_with_http_basic</a>.</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&lt;</span> <span class="ss">ActionController</span><span class="p">:</span><span class="ss">:Base</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&lt;</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">Base</span>
   <span class="n">protect_from_forgery</span>
 
   <span class="kp">protected</span>
@@ -99,47 +101,37 @@ This method uses the Rails/Rack helper <a href="http://apidock.com/rails/ActionC
         <span class="n">username</span> <span class="o">==</span> <span class="no">USER_ID</span> <span class="o">&amp;&amp;</span> <span class="n">password</span> <span class="o">==</span> <span class="no">PASSWORD</span>
       <span class="k">end</span>
     <span class="k">end</span>
-<span class="k">end</span>
-</code></pre>
-</div>
+<span class="k">end</span></code></pre></div>
 
 
 <p>In a controller, we can then add a <a href="http://guides.rubyonrails.org/getting_started.html#security">before_filter</a> to require authentication for all methods but the <em>index</em> and the <em>show</em>.</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">ImagesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">ImagesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="n">before_filter</span> <span class="ss">:authenticate</span><span class="p">,</span> <span class="ss">:except</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:index</span><span class="p">,</span> <span class="ss">:show</span><span class="o">]</span>
   <span class="c1">#...</span>
-<span class="k">end</span>
-</code></pre>
-</div>
+<span class="k">end</span></code></pre></div>
 
 
 <p>A new file under <em>config/initializers</em>, named <em>user.rb</em> or anything else you want, contains the hardcoded username or password. Putting it in a separate file allows you to leave it out of your version-control, for example.</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="no">USER_ID</span>   <span class="o">=</span> <span class="s2">&quot;Sauron&quot;</span>
-<span class="no">PASSWORD</span>  <span class="o">=</span> <span class="s2">&quot;s3cr3t&quot;</span>
-</code></pre>
-</div>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">USER_ID</span>   <span class="o">=</span> <span class="s2">&quot;Sauron&quot;</span>
+<span class="no">PASSWORD</span>  <span class="o">=</span> <span class="s2">&quot;s3cr3t&quot;</span></code></pre></div>
 
 
 <p>Furhtermore, we define a <em>logged_in?</em> helper, usefull in our views. This checks if the authorization is a string (it is set) or <em>nil</em> (user is not authorized):</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="k">module</span> <span class="nn">ApplicationHelper</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">ApplicationHelper</span>
  <span class="k">def</span> <span class="nf">logged_in?</span>
    <span class="ow">not</span> <span class="n">request</span><span class="o">.</span><span class="n">authorization</span><span class="o">.</span><span class="n">nil?</span>
  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre>
-</div>
+<span class="k">end</span></code></pre></div>
 
 
 <p>Using that helper is simple too. E.g. <em>show.html.erb</em>:</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="o">&lt;</span><span class="sx">% if </span><span class="n">logged_in?</span> <span class="sx">%&gt;</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">&lt;</span><span class="sx">% if </span><span class="n">logged_in?</span> <span class="sx">%&gt;</span>
 <span class="sx">  &lt;li&gt;</span><span class="o">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Edit&#39;</span><span class="p">,</span> <span class="n">edit_image_path</span><span class="p">(</span><span class="vi">@image</span><span class="p">)</span> <span class="sx">%&gt;&lt;/li&gt;</span>
-<span class="o">&lt;</span><span class="sx">% end </span><span class="o">%&gt;</span>
-</code></pre>
-</div>
+<span class="o">&lt;</span><span class="sx">% end </span><span class="o">%&gt;</span></code></pre></div>
 
 
 <p>I am not certain if this evaluation of <em>request.authorization.nil?</em> performs all that well, but I would say, it being simple as possible, that the overhead is minimal.</p>
@@ -210,13 +202,13 @@ This method uses the Rails/Rack helper <a href="http://apidock.com/rails/ActionC
   
   <ul>
     
+      <li><span>February  3, 2015</span> &raquo; <a href="/2015/02/03/selecting-a-good-wysiwyg-for-rails-its-all-about-usecases">Selecting A Good Wysiwyg For Rails Its All About Usecases</a></li>
+
+    
       <li><span>February  4, 2014</span> &raquo; <a href="/2014/02/04/new-post">Uitgevers, geef mij niet de schuld, wanneer ik mijn ebooks niet van jullie koop!</a></li>
 
     
       <li><span>November 28, 2013</span> &raquo; <a href="/2013/11/28/olaf-van-den-heuvel-is-een-maximum-flapdrol">Olaf van den Heuvel is een maximum flapdrol</a></li>
-
-    
-      <li><span>November 27, 2013</span> &raquo; <a href="/2013/11/27/hoe-kom-ik-aan-bitcoin-en-een-bitcoin-rekening">Hoe kom ik aan Bitcoin, en een Bitcoin rekening?</a></li>
 
     
   </ul>
@@ -238,7 +230,7 @@ This method uses the Rails/Rack helper <a href="http://apidock.com/rails/ActionC
           </p>
       </div>
       <div class="four columns">
-        Copyright 2001-2014
+        Copyright 2001-2015
         with a
         <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Attribute-Share-alike 3.0 Unported license</a>
       </div>

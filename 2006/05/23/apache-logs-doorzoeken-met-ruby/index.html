@@ -21,22 +21,24 @@
    <link rel="author" href="/humans.txt" type="text/plain" />
    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
    <!-- Included CSS Files -->
-   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
-
+   <link rel="stylesheet" href="/assets//stylesheets/foundation.css">
+   <link rel="stylesheet" href="/assets//stylesheets/pygments.css">
+   <link rel="stylesheet" href="/assets//stylesheets/app.css">
 
    <!--[if lt IE 9]>
-   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
-
+   <link rel="stylesheet" href="/assets//stylesheets/ie.css">
    <![endif]-->
 
-   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
-
+   <script src="/assets//javascripts/modernizr.foundation.js"></script>
 
    <!-- IE Fix for HTML5 Tags -->
    <!--[if lt IE 9]>
-   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
-
+     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
    <![endif]-->
+
+   <!-- Fonts -->
+   <link href='http://fonts.googleapis.com/css?family=Arvo:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=OFL+Sorts+Mill+Goudy+TT" media="screen, projection, print">
 </head>
 <body>
 	<!-- container -->
@@ -73,7 +75,7 @@
     <h1>Apache logs doorzoeken met Ruby</h1>
   </header> 
   <div class="body">
-    <p>Op mijn pad naar het <a href="http://nl.wikipedia.org/wiki/Ruby_(programmeertaal">Ruby</a>) Meesterschap moet ik vele bergen overwinnen. Een van de eerste is uiteraard om <a href="http://nl.wikipedia.org/wiki/Regular_expression">reguliere expressies</a> onder de knie te krijgen. En wat is beter daarvoor dan de webserverlogs?En  eens de reguliere expressie goed is, is het een eitje met Ruby. <pre>#!/usr/bin/rubydatafile = open(ARGV[0])reg = Regexp.new('<sup>([<sup>\s]<em>).</em>]</sup></sup> "GET<a href="/[\S]*">\s</a>[\s]HTTP/[\d].[\d]"[\s]404[\s][\d]{3,3}.*$')datafile.readlines.each {|line|  if line =~ reg then    puts "#$1 could not find #$2"  end}</pre>Als er een 404 gevonden wordt, dan wordt er een regeltje afgedrukt met de host of het IP adres van de bezoeker en de pagina die niet werd gevonden.</p>
+    <p>Op mijn pad naar het <a href="http://nl.wikipedia.org/wiki/Ruby_(programmeertaal">Ruby</a>) Meesterschap moet ik vele bergen overwinnen. Een van de eerste is uiteraard om <a href="http://nl.wikipedia.org/wiki/Regular_expression">reguliere expressies</a> onder de knie te krijgen. En wat is beter daarvoor dan de webserverlogs?En  eens de reguliere expressie goed is, is het een eitje met Ruby. <pre>#!/usr/bin/rubydatafile = open(ARGV[0])reg = Regexp.new('^([^\s]<em>).</em>] "GET<a href="/[\S]*">\s</a>[\s]HTTP/[\d].[\d]"[\s]404[\s][\d]{3,3}.*$')datafile.readlines.each {|line|  if line =~ reg then    puts "#$1 could not find #$2"  end}</pre>Als er een 404 gevonden wordt, dan wordt er een regeltje afgedrukt met de host of het IP adres van de bezoeker en de pagina die niet werd gevonden.</p>
 
   </div>
   <footer>
@@ -141,13 +143,13 @@
   
   <ul>
     
+      <li><span>February  3, 2015</span> &raquo; <a href="/2015/02/03/selecting-a-good-wysiwyg-for-rails-its-all-about-usecases">Selecting A Good Wysiwyg For Rails Its All About Usecases</a></li>
+
+    
       <li><span>February  4, 2014</span> &raquo; <a href="/2014/02/04/new-post">Uitgevers, geef mij niet de schuld, wanneer ik mijn ebooks niet van jullie koop!</a></li>
 
     
       <li><span>November 28, 2013</span> &raquo; <a href="/2013/11/28/olaf-van-den-heuvel-is-een-maximum-flapdrol">Olaf van den Heuvel is een maximum flapdrol</a></li>
-
-    
-      <li><span>November 27, 2013</span> &raquo; <a href="/2013/11/27/hoe-kom-ik-aan-bitcoin-en-een-bitcoin-rekening">Hoe kom ik aan Bitcoin, en een Bitcoin rekening?</a></li>
 
     
   </ul>
@@ -169,7 +171,7 @@
           </p>
       </div>
       <div class="four columns">
-        Copyright 2001-2014
+        Copyright 2001-2015
         with a
         <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Attribute-Share-alike 3.0 Unported license</a>
       </div>

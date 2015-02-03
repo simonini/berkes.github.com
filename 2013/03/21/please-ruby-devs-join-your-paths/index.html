@@ -21,22 +21,24 @@
    <link rel="author" href="/humans.txt" type="text/plain" />
    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
    <!-- Included CSS Files -->
-   <link rel='stylesheet' type='text/css' href='/bundles/66bfe58a92310a729441d3ebeed7faf2.css' />
-
+   <link rel="stylesheet" href="/assets//stylesheets/foundation.css">
+   <link rel="stylesheet" href="/assets//stylesheets/pygments.css">
+   <link rel="stylesheet" href="/assets//stylesheets/app.css">
 
    <!--[if lt IE 9]>
-   <link rel='stylesheet' type='text/css' href='/bundles/5bf927c3c4faac96d17903f7ba5b378a.css' />
-
+   <link rel="stylesheet" href="/assets//stylesheets/ie.css">
    <![endif]-->
 
-   <script type='text/javascript' src='/bundles/2f42e0e43641f260414dd4eb0161fb9d.js'></script>
-
+   <script src="/assets//javascripts/modernizr.foundation.js"></script>
 
    <!-- IE Fix for HTML5 Tags -->
    <!--[if lt IE 9]>
-   <script type='text/javascript' src='/bundles/69431f1ec831bacf31013dff2872cba0.js'></script>
-
+     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
    <![endif]-->
+
+   <!-- Fonts -->
+   <link href='http://fonts.googleapis.com/css?family=Arvo:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=OFL+Sorts+Mill+Goudy+TT" media="screen, projection, print">
 </head>
 <body>
 	<!-- container -->
@@ -86,10 +88,8 @@
     <div class="six columns">
       <p>Like in most programming languages, when you write paths in ruby, e.g. to open a file you pass in a string:</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;bar.txt&quot;</span>
-<span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;/home/foo/&quot;</span><span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
-</code></pre>
-</div>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;bar.txt&quot;</span>
+<span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;/home/foo/&quot;</span><span class="o">+</span> <span class="n">filename</span><span class="p">)</span></code></pre></div>
 
 
 <p>This is a serious smell for several reasons. Not, as people often
@@ -99,36 +99,30 @@ believe, just to cater the few Ruby developers on Windows (Windows knows how to 
 <p>But mostly because this does not scale, gets convoluted real quick. Like
 so:</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="n">config_dir</span> <span class="o">=</span> <span class="s2">&quot;config/&quot;</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">config_dir</span> <span class="o">=</span> <span class="s2">&quot;config/&quot;</span>
 <span class="no">File</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">__FILE__</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;/../&quot;</span> <span class="o">+</span> <span class="n">config_dir</span> <span class="o">+</span> <span class="s2">&quot;/environment.rb&quot;</span>
-<span class="c1">#=&gt; ./../config//environment.rb</span>
-</code></pre>
-</div>
+<span class="c1">#=&gt; ./../config//environment.rb</span></code></pre></div>
 
 
 <p>Ruby offers a great <a href="http://apidock.com/ruby/File/join/class?q=file.join"><code>File.join()</code></a> class method, for this. This simply uses the <code>File::SEPARATOR</code> to join a string.</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="n">config_dir</span> <span class="o">=</span> <span class="s2">&quot;config/&quot;</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">config_dir</span> <span class="o">=</span> <span class="s2">&quot;config/&quot;</span>
 <span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">__FILE__</span><span class="p">),</span> <span class="s2">&quot;..&quot;</span><span class="p">,</span> <span class="n">config_dir</span><span class="p">,</span> <span class="s2">&quot;environment.rb&quot;</span><span class="p">)</span>
-<span class="c1">#=&gt; ./../config/environment.rb</span>
-</code></pre>
-</div>
+<span class="c1">#=&gt; ./../config/environment.rb</span></code></pre></div>
 
 
 <p>As you may notice, double slashes are eliminated.</p>
 
 <p>Also, you can inherit this behaviour from <a href="http://www.ruby-doc.org/stdlib-1.9.3/libdoc/pathname/rdoc/Pathname.html"><code>Pathname</code></a>, like <code>Rails.root</code> does.</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="n">config_dir</span> <span class="o">=</span> <span class="s2">&quot;config/&quot;</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">config_dir</span> <span class="o">=</span> <span class="s2">&quot;config/&quot;</span>
 <span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">config_dir</span><span class="p">,</span> <span class="s2">&quot;environment.rb&quot;</span><span class="p">)</span>
-<span class="c1">#=&gt; /path/to/rails/project/config/environment.rb</span>
-</code></pre>
-</div>
+<span class="c1">#=&gt; /path/to/rails/project/config/environment.rb</span></code></pre></div>
 
 
 <p>Rolling your own, is very beneficial, and simple too.</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">MyConfig</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">MyConfig</span>
   <span class="k">def</span> <span class="nf">dir</span>
     <span class="no">Pathname</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;etc&quot;</span><span class="p">,</span> <span class="s2">&quot;myapp&quot;</span><span class="p">))</span>
   <span class="k">end</span>
@@ -136,9 +130,7 @@ so:</p>
 
 <span class="n">mc</span> <span class="o">=</span> <span class="no">MyConfig</span><span class="o">.</span><span class="n">new</span>
 <span class="n">mc</span><span class="o">.</span><span class="n">dir</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;templates&quot;</span><span class="p">,</span> <span class="s2">&quot;example.html&quot;</span><span class="p">)</span>
-<span class="c1">#=&gt; &quot;/etc/myapp/templates/example.html&quot;</span>
-</code></pre>
-</div>
+<span class="c1">#=&gt; &quot;/etc/myapp/templates/example.html&quot;</span></code></pre></div>
 
 
 <p>There really is no reason to fiddle with strings, concatenate slashes
@@ -205,13 +197,13 @@ above all, cleaner and more portable.</p>
   
   <ul>
     
+      <li><span>February  3, 2015</span> &raquo; <a href="/2015/02/03/selecting-a-good-wysiwyg-for-rails-its-all-about-usecases">Selecting A Good Wysiwyg For Rails Its All About Usecases</a></li>
+
+    
       <li><span>February  4, 2014</span> &raquo; <a href="/2014/02/04/new-post">Uitgevers, geef mij niet de schuld, wanneer ik mijn ebooks niet van jullie koop!</a></li>
 
     
       <li><span>November 28, 2013</span> &raquo; <a href="/2013/11/28/olaf-van-den-heuvel-is-een-maximum-flapdrol">Olaf van den Heuvel is een maximum flapdrol</a></li>
-
-    
-      <li><span>November 27, 2013</span> &raquo; <a href="/2013/11/27/hoe-kom-ik-aan-bitcoin-en-een-bitcoin-rekening">Hoe kom ik aan Bitcoin, en een Bitcoin rekening?</a></li>
 
     
   </ul>
@@ -233,7 +225,7 @@ above all, cleaner and more portable.</p>
           </p>
       </div>
       <div class="four columns">
-        Copyright 2001-2014
+        Copyright 2001-2015
         with a
         <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Attribute-Share-alike 3.0 Unported license</a>
       </div>
