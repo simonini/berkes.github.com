@@ -4,7 +4,7 @@
  <title>Bèr ‘berkes’ Kessels</title>
  <link href="http://berk.es/atom.xml" rel="self"/>
  <link href="http://berk.es"/>
- <updated>2015-02-03T23:13:46+01:00</updated>
+ <updated>2015-02-03T23:17:56+01:00</updated>
  <id>http://berk.es</id>
  <author>
    <name>Bèr ‘berkes’ Kessels</name>
@@ -13,18 +13,11 @@
 
  
  <entry>
-   <title>Selecting A Good Wysiwyg For Rails Its All About Usecases</title>
+   <title>Selecting a Good WYSIWYG for Rails: it's all about use-cases</title>
    <link href="http://berk.es/2015/02/03/selecting-a-good-wysiwyg-for-rails-its-all-about-usecases"/>
    <updated>2015-02-03T00:00:00+01:00</updated>
    <id>http://berk.es/2015/02/03/selecting-a-good-wysiwyg-for-rails-its-all-about-usecases</id>
-   <content type="html">&lt;p&gt;--
-layout: post_short
-title: &quot;Selecting a Good WYSIWYG for Rails: it's all about use-cases&quot;
-tags: [rails, wysiwyg]&lt;/p&gt;
-
-&lt;h2&gt;lang: en&lt;/h2&gt;
-
-&lt;p&gt;There is no such thing as &quot;a good WYSIWYG&quot; without looking closely at the case you are trying to solve and the preconditions you want to set. WYSIWYG, is, unfortunately, a label that is applied to far too many solutions for varying problems.&lt;/p&gt;
+   <content type="html">&lt;p&gt;There is no such thing as &quot;a good WYSIWYG&quot; without looking closely at the case you are trying to solve and the preconditions you want to set. WYSIWYG, is, unfortunately, a label that is applied to far too many solutions for varying problems.&lt;/p&gt;
 
 &lt;p&gt;When people ask for &quot;A WYSIWYG-editor&quot; they are often asking for a solution to one of the following three problems:&lt;/p&gt;
 
