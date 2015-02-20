@@ -8,6 +8,7 @@ http://berk.es/over.html
 http://berk.es/sitemap.txt
 http://berk.es/tags.html
 
+http://berk.es/2015/02/19/when-factorygirl-leads-to-bad-habits
 http://berk.es/2015/02/03/selecting-a-good-wysiwyg-for-rails-its-all-about-usecases
 http://berk.es/2014/02/04/new-post
 http://berk.es/2013/11/28/olaf-van-den-heuvel-is-een-maximum-flapdrol
