@@ -4,7 +4,7 @@
  <title>Bèr ‘berkes’ Kessels</title>
  <link href="http://berk.es/atom.xml" rel="self"/>
  <link href="http://berk.es"/>
- <updated>2015-02-20T12:10:39+01:00</updated>
+ <updated>2015-02-20T12:13:03+01:00</updated>
  <id>http://berk.es</id>
  <author>
    <name>Bèr ‘berkes’ Kessels</name>
@@ -18,8 +18,11 @@
    <updated>2015-02-19T00:00:00+01:00</updated>
    <id>http://berk.es/2015/02/19/when-factorygirl-leads-to-bad-habits</id>
    <content type="html">&lt;p&gt;&lt;a href=&quot;https://github.com/thoughtbot/factory_girl&quot;&gt;FactoryGirl&lt;/a&gt; is a solution for cleaning up the repetitive task of
-setting up test data, used in many Rails projects I think FactoryGirl encourages bad design by hiding design problems.
-The need for repetitive or complex test-data is an indication that your code and its API need improvement. Instead of improving the application, FactoryGirl enables you to only improve this in your test suite: that is not fixing at all, it is hiding the problem.&lt;/p&gt;
+setting up test data, used in many Rails projects.&lt;/p&gt;
+
+&lt;p&gt;I think FactoryGirl encourages bad design by hiding design problems.&lt;/p&gt;
+
+&lt;p&gt;The need for repetitive or complex test-data is an indication that your code and its API need improvement. Instead of improving the application, FactoryGirl enables you to only improve this in your test suite: that is not fixing at all, it is hiding the problem.&lt;/p&gt;
 
 &lt;h2&gt;Building up a state before we can test&lt;/h2&gt;
 
