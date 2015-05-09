@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+  <link rel="openid.server" href="http://openid.yubico.com/server.php" />
+  <link rel="openid.delegate" href="http://openid.yubico.com/server.php/idpage?user=vvbdkthjbecc" />
+
+   <title>Add sorting to your product page in Spree</title>
+   <meta name="author" content="Bèr ‘berkes’ Kessels" />
+   <link href="http://feeds.feedburner.com/berkes" rel="alternate" title="Add sorting to your product page in Spree Feed" type="application/atom+xml" />
+   <link rel="author" href="/humans.txt" type="text/plain" />
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+   <!-- Included CSS Files -->
+   <link rel="stylesheet" href="/assets//stylesheets/foundation.css">
+   <link rel="stylesheet" href="/assets//stylesheets/pygments.css">
+   <link rel="stylesheet" href="/assets//stylesheets/app.css">
+
+   <!--[if lt IE 9]>
+   <link rel="stylesheet" href="/assets//stylesheets/ie.css">
+   <![endif]-->
+
+   <script src="/assets//javascripts/modernizr.foundation.js"></script>
+
+   <!-- IE Fix for HTML5 Tags -->
+   <!--[if lt IE 9]>
+     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+   <![endif]-->
+
+   <!-- Fonts -->
+   <link href='http://fonts.googleapis.com/css?family=Arvo:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=OFL+Sorts+Mill+Goudy+TT" media="screen, projection, print">
+</head>
+<body>
+	<!-- container -->
+	<div class="container">
+    <header>
+      <div class="row">
+        <a href="/" title="Home">
+          <img src="/assets//images/logo.png" alt="Logo" title="Bèr ‘berkes’ Kessels" />
+        </a>
+      </div>
+
+      <nav id="main" class="row">
+        <div class="onion">
+        <ul>
+          <li>
+          <a href="/about.html">EN / About</a>
+          </li>
+          <li>
+          <a href="/archive.html">EN / Articles</a>
+          </li>
+          <li>
+          <a href="/over.html">NL / Over</a>
+          </li>
+          <li>
+          <a href="/archief.html">NL / Artikelen</a>
+          </li>
+        </ul>
+        </div>
+      </nav>
+    </header>
+    <section id="main-content" class="row">
+      <article>
+  <header>
+    <h1>Add sorting to your product page in Spree</h1>
+  </header> 
+  <div class="body row">
+    <div class="eight columns">
+      <p>For a <a href="https://shop.annatreurniet.nl">crafts e-commerce shop</a>, built with <a href="http://spreecommerce.com">Spree</a>, I wanted to add an option to sort the products on the products page.</p>
+
+<p>In this blogpost, I'll describe how one can build such a feature, more to create some understanding of how in Spree such customisations can be developed.
+Spree has everything in place to add this, but it can be a bit daunting to find all the bits and pieces that could and should be overridden. Which I hope to clarify a bit. In order to built this feature, we re-open some <code>Helpers</code> and <code>Controllers</code> from Spree and we inject some HTML using deface.</p>
+
+<p>You could write this as a spree extension, but that requires even more moving parts to be in place. And I think it is a better, more efficient way to first write the customisation in your main app and then, later on, when things have settled, extract it into a spree extension.</p>
+
+<p>You could write this TDD, and you should really write at least some tests to spec out your changes. But testing overrides of methods, controller actions and so on, is <em>really</em> daunting in Spree: you'll be stubbing and mocking a gazillion of unrelated before-filters, finders and scopes. Just to spec that your method adds one other scope, you might need over 100 lines of setup. This is a problem, but not one that I want to address in this post.</p>
+
+<p>Let's get rolling. First, override the <a href="https://github.com/spree/spree/blob/3-0-stable/frontend/app/controllers/spree/products_controller.rb#L11">ProductsController#index</a> action. Add a file <code>app/controllers/spree/products_controller_decorator.rb</code>.
+The idea is to add a sorting scope that is already <a href="https://github.com/spree/spree/blob/3-0-stable/core/app/models/spree/product/scopes.rb">available on
+Product</a>. The ordering scopes I want add are <code>ascend_by_updated_at</code>, <code>ascend+by_master_price</code> and <code>descend_by_master_price</code>. When implementing this, you can add <code>sorting=ascend_by_updated_at</code> or one of the other sorting scopes to the URL of the app (e.g. http://localhost:3000/orders?sorting=ascend_by_updated_at). This way we can finish the controller and then move on to the view.</p>
+
+<h2>Controller</h2>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">Spree</span>
+  <span class="no">ProductsController</span><span class="o">.</span><span class="n">class_eval</span> <span class="k">do</span>
+    <span class="k">def</span> <span class="nf">index</span>
+      <span class="vi">@searcher</span> <span class="o">=</span> <span class="n">build_searcher</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="ss">include_images</span><span class="p">:</span> <span class="kp">true</span><span class="p">))</span>
+      <span class="n">sorting_scope</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:sorting</span><span class="o">].</span><span class="n">try</span><span class="p">(</span><span class="ss">:to_sym</span><span class="p">)</span> <span class="o">||</span> <span class="ss">:ascend_by_updated_at</span>
+      <span class="vi">@products</span> <span class="o">=</span> <span class="vi">@searcher</span><span class="o">.</span><span class="n">retrieve_products</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">sorting_scope</span><span class="p">)</span>
+      <span class="vi">@taxonomies</span> <span class="o">=</span> <span class="no">Spree</span><span class="o">::</span><span class="no">Taxonomy</span><span class="o">.</span><span class="n">includes</span><span class="p">(</span><span class="ss">root</span><span class="p">:</span> <span class="ss">:children</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
+
+
+<p>Now that this works, it needs to be secured and cleaned up:</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">Spree</span>
+  <span class="no">ProductsController</span><span class="o">.</span><span class="n">class_eval</span> <span class="k">do</span>
+    <span class="n">helper_method</span> <span class="n">sorting_param</span>
+    <span class="n">alias_method</span> <span class="ss">:old_index</span><span class="p">,</span> <span class="ss">:index</span>
+
+    <span class="k">def</span> <span class="nf">index</span>
+      <span class="n">old_index</span> <span class="c1"># Like calling super: http://stackoverflow.com/a/13806783/73673</span>
+      <span class="vi">@products</span> <span class="o">=</span> <span class="vi">@products</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">sorting_scope</span><span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">sorting_param</span>
+      <span class="n">params</span><span class="o">[</span><span class="ss">:sorting</span><span class="o">].</span><span class="n">try</span><span class="p">(</span><span class="ss">:to_sym</span><span class="p">)</span> <span class="o">||</span> <span class="n">default_sorting</span>
+    <span class="k">end</span>
+
+    <span class="kp">private</span>
+
+    <span class="k">def</span> <span class="nf">sorting_scope</span>
+      <span class="n">allowed_sortings</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">sorting_param</span><span class="p">)</span> <span class="p">?</span> <span class="n">sorting_param</span> <span class="p">:</span> <span class="n">default_sorting</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">default_sorting</span>
+      <span class="ss">:ascend_by_updated_at</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">allowed_sortings</span>
+      <span class="o">[</span><span class="ss">:descend_by_master_price</span><span class="p">,</span> <span class="ss">:ascend_by_master_price</span><span class="p">,</span> <span class="ss">:ascend_by_updated_at</span><span class="o">]</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
+
+
+<p>There is a lot going on here. But the general idea is to use <a href="http://stackoverflow.com/a/13806783/73673">method aliasing</a> to be able to extend the original index.
+We have, furthermore, split out the scope-selecting into several methods. This allows setting a default and whitelisting allowed scopes. You don't want people to call just any string and call that as a method on our model (e.g. <code>sorting=delete_all</code>). I've declared<code>sorting_param</code> as a helper method because we'll need it later on (I know, not very YAGNI, but for the sake of brevity, let's already implement it here).</p>
+
+<p>If you want to find out where a view, controller or model is defining something, you can either run <code>bundle open spree_core</code> (or <code>spree_frontend</code> or <code>spree_backend</code>) or simply clone the stable branch into a directory and browse or search the code there. However, make very sure you have the correct version. For example, when using Github to browse the code, you have a good chance of copying the wrong (too old or too new) versions of a method into your project in order to override.</p>
+
+<h2>View and helpers</h2>
+
+<p>First iteration is to copy over Spree's <a href="https://github.com/spree/spree/blob/master/frontend/app/views/spree/shared/_products.html.erb">products</a> partial to <code>app/views/spree/shared/_products.html.erb</code>. We add the sorting links there. In a later iteration we'll rely on deface to inject our code, rather then duplicating the partial.
+But, for now, Rails will simply pick our file instead of Spree's version. In it, we add our links:</p>
+
+<div class="highlight"><pre><code class="language-erb" data-lang="erb"><span class="x">...</span>
+<span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">products</span><span class="o">.</span><span class="n">any?</span> <span class="cp">%&gt;</span><span class="x"></span>
+<span class="x">&lt;div class=&quot;row sorting&quot;&gt;&lt;div class=&quot;col-sm-6 col-sm-offset-6&quot;&gt;</span>
+<span class="x">  Sort by:</span>
+<span class="x">  &lt;ul class=&quot;list-inline&quot;&gt;</span>
+<span class="x">    &lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Newest&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="ss">sorting</span><span class="p">:</span> <span class="ss">:ascend_by_updated_at</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x">&lt;/li&gt;</span>
+<span class="x">    &lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Lowest price&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="ss">sorting</span><span class="p">:</span> <span class="ss">:ascend_by_master_price</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x">&lt;/li&gt;</span>
+<span class="x">    &lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Highest price&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="ss">sorting</span><span class="p">:</span> <span class="ss">:descend_by_master_price</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x">&lt;/li&gt;</span>
+<span class="x">  &lt;/ul&gt;</span>
+<span class="x">&lt;/div&gt;&lt;/div&gt;</span>
+<span class="x">&lt;div id=&quot;products&quot; data-hook&gt;</span>
+<span class="x">...</span></code></pre></div>
+
+
+<p>For the links, we use <code>params.merge(...)</code> in order to persist any search, paging or filter params.</p>
+
+<p>On your development server, this will work, but when you look at <a href="https://github.com/spree/spree/blob/3-0-stable/frontend/app/views/spree/home/index.html.erb#L8">products/index.html.erb</a>, you can see <code>cache(cache_key_for_products). It uses [</code>cache_key_for_products`](https://github.com/spree/spree/blob/3-0-stable/core/app/helpers/spree/products_helper.rb#L54). The list of products will be cached, which is good, because the queries can be very heavy. But that cache disregards our ordering and the active-state of our links. We need to add the sorting to the cache-key.</p>
+
+<p>In order to override it, we have to add it to a file called <code>app/helpers/spree/products_helper_decorator.rb</code>. Because we are changing a lot inside the method, we can't really use the aliasing as used earlier, it won't help us a lot. Instead, we simply override the entire method. And document our changes.</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">Spree</span>
+  <span class="no">ProductsHelper</span><span class="o">.</span><span class="n">module_eval</span> <span class="k">do</span>
+    <span class="c1">##</span>
+    <span class="c1"># Override cache_key_for_products to add caching per sort param.</span>
+    <span class="k">def</span> <span class="nf">cache_key_for_products</span>
+      <span class="n">count</span> <span class="o">=</span> <span class="vi">@products</span><span class="o">.</span><span class="n">count</span>
+      <span class="c1"># Instead of default max_updated_at, we look at the first product in the list</span>
+      <span class="c1"># And we add sorting, so that we get a product-cache per sorting param</span>
+      <span class="n">first_id</span> <span class="o">=</span> <span class="vi">@products</span><span class="o">.</span><span class="n">first</span><span class="o">.</span><span class="n">id</span>
+      <span class="n">sorting</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:sorting</span><span class="o">]</span>
+      <span class="s2">&quot;</span><span class="si">#{</span><span class="no">I18n</span><span class="o">.</span><span class="n">locale</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">current_currency</span><span class="si">}</span><span class="s2">/spree/products/all-</span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:page</span><span class="o">]</span><span class="si">}</span><span class="s2">-</span><span class="si">#{</span><span class="n">first_id</span><span class="si">}</span><span class="s2">-</span><span class="si">#{</span><span class="n">sorting</span><span class="si">}</span><span class="s2">-</span><span class="si">#{</span><span class="n">count</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
+
+
+<p>We now have a working sorting feature, but it needs improvement.</p>
+
+<h2>Deface</h2>
+
+<p>One thing we should clean up, is our override of the partial file. Unless you want to change how a file behaves, or want to alter its HTML structure, you should avoid copying them over. That makes upgrading a lot harder. And it can breeak a lot of addons that want to inject HTML into the views.</p>
+
+<p><a href="https://guides.spreecommerce.com/developer/view.html#using-deface">Deface is made for this</a>, so let's use it. Create a file <code>app/overrides/sorting_links_in_products.rb</code> (And possibly restart the rails server, I've found that deface sometimes does not pick up new files otherwise):</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Deface</span><span class="o">::</span><span class="no">Override</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:virtual_path</span>  <span class="o">=&gt;</span> <span class="s2">&quot;spree/shared/_products&quot;</span><span class="p">,</span>
+                     <span class="ss">:insert_before</span> <span class="o">=&gt;</span> <span class="s2">&quot;#products[data-hook]&quot;</span><span class="p">,</span>
+                     <span class="ss">:partial</span>       <span class="o">=&gt;</span> <span class="s2">&quot;spree/shared/sorting_links&quot;</span><span class="p">,</span>
+                     <span class="ss">:name</span>          <span class="o">=&gt;</span> <span class="s2">&quot;sorting_links_in_products&quot;</span><span class="p">)</span></code></pre></div>
+
+
+<p>And a partial <code>app/views/spree/shared/_sorting_links.html.erb</code></p>
+
+<div class="highlight"><pre><code class="language-erb" data-lang="erb"><span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">products</span><span class="o">.</span><span class="n">any?</span> <span class="o">&amp;&amp;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:controller</span><span class="o">]</span> <span class="o">==</span> <span class="s1">&#39;spree/products&#39;</span> <span class="cp">%&gt;</span><span class="x"></span>
+<span class="x">&lt;div class=&quot;row sorting&quot;&gt;&lt;div class=&quot;col-sm-6 col-sm-offset-6&quot;&gt;</span>
+<span class="x">  </span><span class="cp">&lt;%=</span> <span class="n">t</span><span class="p">(</span><span class="ss">:sort_by</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x"></span>
+<span class="x">  &lt;ul class=&quot;list-inline&quot;&gt;</span>
+<span class="x">    &lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to_unless</span> <span class="n">current_sorting?</span><span class="p">(</span><span class="ss">:ascend_by_updated_at</span><span class="p">),</span> <span class="n">t</span><span class="p">(</span><span class="ss">:newest</span><span class="p">),</span> <span class="n">params</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="ss">sorting</span><span class="p">:</span> <span class="ss">:ascend_by_updated_at</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x">&lt;/li&gt;</span>
+<span class="x">    &lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to_unless</span> <span class="n">current_sorting?</span><span class="p">(</span><span class="ss">:ascend_by_master_price</span><span class="p">),</span> <span class="n">t</span><span class="p">(</span><span class="ss">:lowest_price</span><span class="p">),</span> <span class="n">params</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="ss">sorting</span><span class="p">:</span> <span class="ss">:ascend_by_master_price</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x">&lt;/li&gt;</span>
+<span class="x">    &lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to_unless</span> <span class="n">current_sorting?</span><span class="p">(</span><span class="ss">:descend_by_master_price</span><span class="p">),</span> <span class="n">t</span><span class="p">(</span><span class="ss">:highest_price</span><span class="p">),</span> <span class="n">params</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="ss">sorting</span><span class="p">:</span> <span class="ss">:descend_by_master_price</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x">&lt;/li&gt;</span>
+<span class="x">  &lt;/ul&gt;</span>
+<span class="x">&lt;/div&gt;&lt;/div&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span></code></pre></div>
+
+
+<p>Some changes to the first iteration of this erb-code, are that we now use the locales to render strings, and that we only render the sorting-link as a link when it is not active.</p>
+
+<p>I've also added an additional condition where I check for the controller. This is not the cleanest, but since the <code>products</code> partial can be reused (it is a shared partial), and we inject into this partial regardless of who is requesting it, we should only add the sorting links when we are sure the partial is being renderd via the controller that can handle the sorting. For example, the partial is being used when rendering the products in a taxonomy. And there, the products already are sorted, so we don't want to sort them. But the controller rendering them, there, will ignore the sorting param and won't have the helper-methods we use.</p>
+
+<p>Note tha we could clean this out even more by DRY-ing up the <code>link_to_unless current_sorting...</code> repetition with e.g. another helper, or partials, or both, but IMHO that is overengineering. Some repetition in views is fine: they give us the freedom to place some icons, override a text and so on, much easier and cleaner.
+We can now remove our version of <code>products</code> partial, since it is no longer overriding the Spree version.</p>
+
+<p>One cleanup was to use a <code>current_sorting?</code> helper. Which does not
+exist, so let's create that with the familiar decorator/monkey-patching. Add it to <code>app/helpers/spree/products_helper_decorator.rb</code>:</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">Spree</span>
+  <span class="no">ProductsHelper</span><span class="o">.</span><span class="n">module_eval</span> <span class="k">do</span>
+    <span class="c1">#... cache_key_for_products</span>
+
+    <span class="k">def</span> <span class="nf">current_sorting?</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+      <span class="n">sorting_param</span> <span class="o">==</span> <span class="n">key</span><span class="o">.</span><span class="n">to_sym</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
+
+
+<p>In this helper, <code>sorting_param</code> is requested from the controller, which re-uses the default, that's why we made it a helper earlier.</p>
+
+<p>We now have a few sorting links that are implemented without hacking Spree, and without copying over entire classes or files. We can still lean on Spree and upgrade it quite safely.</p>
+
+<p>Oh, and I'll leave the CSS and declaration of localised strings as homework.</p>
+
+<p>Do you often override these Spree core items? Do you know any tips and tricks on how to manage these during Spree upgrades?</p>
+
+    </div>
+    <div class="four columns">
+    <figure class="decorative">
+      <img src="/images//2015/05/09/add-sorting-to-your-product-page-in-spree.png" alt="Example of the feature" />
+    </figure>
+    </div>
+  </div>
+  <footer>
+    <time datetime="2015-05-09T00:00:00+02:00"
+    pubdate="pubdate">
+      Posted on 09 May 2015
+    </time>
+    in
+    
+    
+      
+      
+
+
+  
+    
+      <a href="/tags.html#spree-ref" class="black radius label">spree<span class="size">2</span></a>
+    
+      <a href="/tags.html#rails-ref" class="black radius label">rails<span class="size">7</span></a>
+    
+      <a href="/tags.html#webdevelopment-ref" class="black radius label">webdevelopment<span class="size">18</span></a>
+    
+  
+
+
+
+    
+  </footer>
+</article>
+
+<div id="author">
+  <p>
+  
+  
+    <strong>About  the author:</strong> Bèr Kessels is an experienced webdeveloper  with a great passion for
+    technology and Open Source. A golden combination to implement that technology in a good and efficient
+    way. Follow <a href="https://twitter.com/berkes">@berkes</a> on Twitter. Or read more <a href="/over.html">about Bèr</a>.
+  
+  </p>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'berkes'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<hr/>
+<aside>
+  
+  
+  <h1>Read on:</h1>
+  
+  <ul>
+    
+      <li><span>February 19, 2015</span> &raquo; <a href="/2015/02/19/when-factorygirl-leads-to-bad-habits">When FactoryGirl leads to bad habits</a></li>
+
+    
+      <li><span>February  3, 2015</span> &raquo; <a href="/2015/02/03/selecting-a-good-wysiwyg-for-rails-its-all-about-usecases">Selecting a Good WYSIWYG for Rails: it's all about use-cases</a></li>
+
+    
+      <li><span>February  4, 2014</span> &raquo; <a href="/2014/02/04/new-post">Uitgevers, geef mij niet de schuld, wanneer ik mijn ebooks niet van jullie koop!</a></li>
+
+    
+  </ul>
+</aside>
+
+
+
+    </section>
+
+    <footer class="main row">
+      <div class="contact four columns">
+        <p>
+            Bèr ‘berkes’ Kessels<br />
+            Bèr Kessels is an Open Source Webdeveloper.<br />
+            <a href='mailto:ber@berk.es'>ber@berk.es</a>
+          </p>
+          <p>
+            <a href="http://github.com/berkes/">github.com/berkes</a><br />
+            <a href="http://twitter.com/berkes/">twitter.com/berkes</a><br />
+          </p>
+      </div>
+      <div class="four columns">
+        Copyright 2001-2015
+        with a
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Attribute-Share-alike 3.0 Unported license</a>
+      </div>
+      <div class="four columns">
+        <a class="extra" href="/archive.html">Archive (All English articles)</a> <br />
+        <a class="extra" href="/archief.html">Archief (Alle Nederlandse artikelen)</a> <br />
+        <a class="extra" href="/tags.html">Tags</a> <br />
+        <a href="http://feeds.feedburner.com/berkes"> RSS </a> <br />
+      </div>
+    </footer>
+  </div>
+  <!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik.webschuur.com/" : "http://piwik.webschuur.com/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 9);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://piwik.webschuur.com/piwik.php?idsite=9" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</body>
+</html>
