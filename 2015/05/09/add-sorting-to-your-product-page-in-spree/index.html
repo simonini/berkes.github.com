@@ -107,7 +107,7 @@ Product</a>. The ordering scopes I want add are <code>ascend_by_updated_at</code
 
 <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">Spree</span>
   <span class="no">ProductsController</span><span class="o">.</span><span class="n">class_eval</span> <span class="k">do</span>
-    <span class="n">helper_method</span> <span class="n">sorting_param</span>
+    <span class="n">helper_method</span> <span class="ss">:sorting_param</span>
     <span class="n">alias_method</span> <span class="ss">:old_index</span><span class="p">,</span> <span class="ss">:index</span>
 
     <span class="k">def</span> <span class="nf">index</span>
