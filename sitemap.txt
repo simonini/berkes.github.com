@@ -8,6 +8,7 @@ http://berk.es/over.html
 http://berk.es/sitemap.txt
 http://berk.es/tags.html
 
+http://berk.es/2015/12/14/beste-nunl-dit-vinden-wij-jammer
 http://berk.es/2015/05/09/add-sorting-to-your-product-page-in-spree
 http://berk.es/2015/02/19/when-factorygirl-leads-to-bad-habits
 http://berk.es/2015/02/03/selecting-a-good-wysiwyg-for-rails-its-all-about-usecases
