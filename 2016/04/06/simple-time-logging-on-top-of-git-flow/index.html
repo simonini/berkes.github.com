@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+  <link rel="openid.server" href="http://openid.yubico.com/server.php" />
+  <link rel="openid.delegate" href="http://openid.yubico.com/server.php/idpage?user=vvbdkthjbecc" />
+
+   <title>Simple time logging on top of git flow</title>
+   <meta name="author" content="Bèr ‘berkes’ Kessels" />
+   <link href="http://feeds.feedburner.com/berkes" rel="alternate" title="Simple time logging on top of git flow Feed" type="application/atom+xml" />
+   <link rel="author" href="/humans.txt" type="text/plain" />
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+   <!-- Included CSS Files -->
+   <link rel="stylesheet" href="/assets//stylesheets/foundation.css">
+   <link rel="stylesheet" href="/assets//stylesheets/pygments.css">
+   <link rel="stylesheet" href="/assets//stylesheets/app.css">
+
+   <!--[if lt IE 9]>
+   <link rel="stylesheet" href="/assets//stylesheets/ie.css">
+   <![endif]-->
+
+   <script src="/assets//javascripts/modernizr.foundation.js"></script>
+
+   <!-- IE Fix for HTML5 Tags -->
+   <!--[if lt IE 9]>
+     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+   <![endif]-->
+
+   <!-- Fonts -->
+   <link href='http://fonts.googleapis.com/css?family=Arvo:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=OFL+Sorts+Mill+Goudy+TT" media="screen, projection, print">
+</head>
+<body>
+	<!-- container -->
+	<div class="container">
+    <header>
+      <div class="row">
+        <a href="/" title="Home">
+          <img src="/assets//images/logo.png" alt="Logo" title="Bèr ‘berkes’ Kessels" />
+        </a>
+      </div>
+
+      <nav id="main" class="row">
+        <div class="onion">
+        <ul>
+          <li>
+          <a href="/about.html">EN / About</a>
+          </li>
+          <li>
+          <a href="/archive.html">EN / Articles</a>
+          </li>
+          <li>
+          <a href="/over.html">NL / Over</a>
+          </li>
+          <li>
+          <a href="/archief.html">NL / Artikelen</a>
+          </li>
+        </ul>
+        </div>
+      </nav>
+    </header>
+    <section id="main-content" class="row">
+      <article>
+  <header>
+    <h1>Simple time logging on top of git flow</h1>
+  </header> 
+  <div class="body row">
+    <div class="eight columns">
+      <p>My current team found out that we should have tracked some time over the last year.
+Extracting timelogs in retrosepct is not fun. Git helps a lot, combined with chat-logs from Slack, Google Calendars will give a good basis. A day of grep, sed, and awk, and you have some time-logs.</p>
+
+<p>I decided that from now on, I want to track what I start and finish working on in a basic log. And I am using git with
+<a href="https://github.com/petervanderdoes/gitflow/wiki/Installation">git-flow by Peter van der Does</a>, which is what you get when you
+<code>apt-get install git-flow</code>. This allows special git-flow hooks.</p>
+
+<p>I want this to write logs to a simple textfile. But have a place where I could call external APIs to insert some tracking data into external trackers, when my team uses these.</p>
+
+<p>The result is certainly not a replacement for actual timetracking. But a log that will aide with answering "when did you work on what?".</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[2016-04-06T06:43:13Z] /home/ber/Documenten/BLG_blog STARTED article-git-flow-logging
+[2016-04-06T06:43:16Z] /home/ber/tmp/flowtest STARTED a-feature
+[2016-04-06T06:43:47Z] /home/ber/tmp/flowtest STARTED another-feature
+[2016-04-06T07:12:10Z] /home/ber/Documenten/BLG_blog FINISHED article-git-flow-logging
+[2016-04-06T07:43:52Z] /home/ber/tmp/flowtest FINISHED another-feature</code></pre></div>
+
+
+<p>These will be written out when using</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">git flow feature start some-feature
+git flow feature finish branch
+<span class="c">## or the short alternative</span>
+git flow feature finish</code></pre></div>
+
+
+<p>It requires you to work with git-flow and use feature branches for everything. But you should use topic branches anyway.</p>
+
+<p>Git-flow triggers its own hooks. So just create a simple utility script that is exectuable and logs an activity, or calls an external API or whatever you are using. Then call that script from the git-flow hooks.</p>
+
+<p>Note that, as far as I can tell, the upsteam git-flow by nvie himself, does not
+have own git-hooks. <a href="https://github.com/petervanderdoes/gitflow">Peter van der Does' fork</a>
+has this. Which is also the source used for the Debian package (so also for
+Ubuntu).</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/bin/bash</span>
+<span class="nb">set</span> -e
+
+<span class="nv">working_dir</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>
+<span class="nv">feature</span><span class="o">=</span><span class="nv">$2</span>
+<span class="nv">action</span><span class="o">=</span><span class="nv">$1</span>
+<span class="nv">now</span><span class="o">=</span><span class="k">$(</span>date -u +<span class="s2">&quot;%Y-%m-%dT%H:%M:%SZ&quot;</span><span class="k">)</span> <span class="c"># ISO8601</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;[$now] $working_dir $action $feature&quot;</span> &gt;&gt; ~/.git-flow-feature.log</code></pre></div>
+
+
+<p>Write that to e.g. <code>~/bin/log-git-flow-feature</code> and make executable with
+<code>chmod +x ~/bin/log-git-flow-feature</code>.</p>
+
+<p>Note: when you create scripts with <code>git-foo</code>
+a subcommand <code>git foo</code> is made available. You probably don't want to name this
+script <code>git-flow-log-feature</code> or so, to prevent <code>git flow log</code> from becoming
+a command.</p>
+
+<p>Now just add two hooks and make them exectuable. This will add hooks to a specific
+git repo:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s1">&#39;log-git-flow-feature STARTED &quot;$@&quot;&#39;</span> &gt;&gt; /path/to/project/.git/hooks/pre-flow-feature-start
+chmod +x /path/to/project/.git/hooks/pre-flow-feature-start
+<span class="nb">echo</span> <span class="s1">&#39;log-git-flow-feature FINISHED &quot;$@&quot;&#39;</span> &gt;&gt; /path/to/project/.git/hooks/pre-flow-feature-finish
+chmod +x /path/to/project/.git/hooks/pre-flow-feature-finish</code></pre></div>
+
+
+<p>When I need to call an external time-tracker, the <code>~/bin/log-git-flow-feature</code>
+script is the place to do this. An example:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#...</span>
+curl -X POST -D <span class="s2">&quot;{ &#39;note&#39;: &#39;$feature in $working_dir&#39; }&quot;</span> http://timetracker.io/api/entry</code></pre></div>
+
+
+<p>I've create <a href="https://gist.github.com/berkes/714141a6c131b20496fc00d6e3a90d38">a gist with the contents of the files</a> so
+if you want to enhance it, feel free to fork it!</p>
+
+<p>There is a lot of room for improvement:</p>
+
+<ul>
+<li>make this work with "generic" git-hooks instead of relying on git-flow. Should
+probably match against patterns in branches that are created, merged, rebased
+etc.</li>
+<li>map directories with projects, log name of the project.</li>
+<li>don't use "pwd" but determine the actual working copy of git instead, to allow
+this to work with fancy setups or when working from within subdirectories.</li>
+<li>log <code>git flow feature checkout</code> as well, to log switching between (long)running branches.</li>
+<li>fall back on generic git-hooks</li>
+</ul>
+
+
+    </div>
+    <div class="four columns">
+      <figure class="decorative">
+  <img src="/images//2016/04/06/simple-time-logging-on-top-of-git-flow.png" alt="Woodcut from Doré. Purely illustrative" />
+  
+    <figcaption>Doré Woodcut. Its only function is to make the layout look better. And these images are really nice themselves</figcaption>
+  
+</figure>
+
+    </div>
+  </div>
+  <footer>
+    <time datetime="2016-04-06T00:00:00+02:00"
+    pubdate="pubdate">
+      Posted on 06 April 2016
+    </time>
+    in
+    
+    
+      
+      
+
+
+  
+    
+      <a href="/tags.html#git-ref" class="black radius label">git<span class="size">3</span></a>
+    
+      <a href="/tags.html#productivity-ref" class="black radius label">productivity<span class="size">1</span></a>
+    
+  
+
+
+
+    
+  </footer>
+</article>
+
+<div id="author">
+  <p>
+  
+  
+    <strong>About  the author:</strong> Bèr Kessels is an experienced webdeveloper  with a great passion for
+    technology and Open Source. A golden combination to implement that technology in a good and efficient
+    way. Follow <a href="https://twitter.com/berkes">@berkes</a> on Twitter. Or read more <a href="/over.html">about Bèr</a>.
+  
+  </p>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'berkes'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<hr/>
+<aside>
+  
+  
+  <h1>Read on:</h1>
+  
+  <ul>
+    
+      <li><span>December 14, 2015</span> &raquo; <a href="/2015/12/14/beste-nunl-dit-vinden-wij-jammer">Beste Nu.nl. Dit vinden wij jammer.</a></li>
+
+    
+      <li><span>May  9, 2015</span> &raquo; <a href="/2015/05/09/add-sorting-to-your-product-page-in-spree">Add sorting to your product page in Spree</a></li>
+
+    
+      <li><span>February 19, 2015</span> &raquo; <a href="/2015/02/19/when-factorygirl-leads-to-bad-habits">When FactoryGirl leads to bad habits</a></li>
+
+    
+  </ul>
+</aside>
+
+
+    </section>
+
+    <footer class="main row">
+      <div class="contact four columns">
+        <p>
+            Bèr ‘berkes’ Kessels<br />
+            Bèr Kessels is an Open Source Webdeveloper.<br />
+            <a href='mailto:ber@berk.es'>ber@berk.es</a>
+          </p>
+          <p>
+            <a href="http://github.com/berkes/">github.com/berkes</a><br />
+            <a href="http://twitter.com/berkes/">twitter.com/berkes</a><br />
+          </p>
+      </div>
+      <div class="four columns">
+        Copyright 2001-2016
+        with a
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">Creative Commons Attribute-Share-alike 3.0 Unported license</a>
+      </div>
+      <div class="four columns">
+        <a class="extra" href="/archive.html">Archive (All English articles)</a> <br />
+        <a class="extra" href="/archief.html">Archief (Alle Nederlandse artikelen)</a> <br />
+        <a class="extra" href="/tags.html">Tags</a> <br />
+        <a href="http://feeds.feedburner.com/berkes"> RSS </a> <br />
+      </div>
+    </footer>
+  </div>
+  <!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik.webschuur.com/" : "http://piwik.webschuur.com/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 9);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://piwik.webschuur.com/piwik.php?idsite=9" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</body>
+</html>

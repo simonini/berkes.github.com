@@ -4,13 +4,107 @@
  <title>Bèr ‘berkes’ Kessels</title>
  <link href="http://berk.es/atom.xml" rel="self"/>
  <link href="http://berk.es"/>
- <updated>2015-12-14T10:55:20+01:00</updated>
+ <updated>2016-04-06T13:46:27+02:00</updated>
  <id>http://berk.es</id>
  <author>
    <name>Bèr ‘berkes’ Kessels</name>
    <email>ber@berk.es</email>
  </author>
 
+ 
+ <entry>
+   <title>Simple time logging on top of git flow</title>
+   <link href="http://berk.es/2016/04/06/simple-time-logging-on-top-of-git-flow"/>
+   <updated>2016-04-06T00:00:00+02:00</updated>
+   <id>http://berk.es/2016/04/06/simple-time-logging-on-top-of-git-flow</id>
+   <content type="html">&lt;p&gt;My current team found out that we should have tracked some time over the last year.
+Extracting timelogs in retrosepct is not fun. Git helps a lot, combined with chat-logs from Slack, Google Calendars will give a good basis. A day of grep, sed, and awk, and you have some time-logs.&lt;/p&gt;
+
+&lt;p&gt;I decided that from now on, I want to track what I start and finish working on in a basic log. And I am using git with
+&lt;a href=&quot;https://github.com/petervanderdoes/gitflow/wiki/Installation&quot;&gt;git-flow by Peter van der Does&lt;/a&gt;, which is what you get when you
+&lt;code&gt;apt-get install git-flow&lt;/code&gt;. This allows special git-flow hooks.&lt;/p&gt;
+
+&lt;p&gt;I want this to write logs to a simple textfile. But have a place where I could call external APIs to insert some tracking data into external trackers, when my team uses these.&lt;/p&gt;
+
+&lt;p&gt;The result is certainly not a replacement for actual timetracking. But a log that will aide with answering &quot;when did you work on what?&quot;.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;[2016-04-06T06:43:13Z] /home/ber/Documenten/BLG_blog STARTED article-git-flow-logging
+[2016-04-06T06:43:16Z] /home/ber/tmp/flowtest STARTED a-feature
+[2016-04-06T06:43:47Z] /home/ber/tmp/flowtest STARTED another-feature
+[2016-04-06T07:12:10Z] /home/ber/Documenten/BLG_blog FINISHED article-git-flow-logging
+[2016-04-06T07:43:52Z] /home/ber/tmp/flowtest FINISHED another-feature&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;These will be written out when using&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git flow feature start some-feature
+git flow feature finish branch
+&lt;span class=&quot;c&quot;&gt;## or the short alternative&lt;/span&gt;
+git flow feature finish&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;It requires you to work with git-flow and use feature branches for everything. But you should use topic branches anyway.&lt;/p&gt;
+
+&lt;p&gt;Git-flow triggers its own hooks. So just create a simple utility script that is exectuable and logs an activity, or calls an external API or whatever you are using. Then call that script from the git-flow hooks.&lt;/p&gt;
+
+&lt;p&gt;Note that, as far as I can tell, the upsteam git-flow by nvie himself, does not
+have own git-hooks. &lt;a href=&quot;https://github.com/petervanderdoes/gitflow&quot;&gt;Peter van der Does' fork&lt;/a&gt;
+has this. Which is also the source used for the Debian package (so also for
+Ubuntu).&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt; -e
+
+&lt;span class=&quot;nv&quot;&gt;working_dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;pwd&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;feature&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$2&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;date -u +&lt;span class=&quot;s2&quot;&gt;&amp;quot;%Y-%m-%dT%H:%M:%SZ&amp;quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# ISO8601&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;[$now] $working_dir $action $feature&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; ~/.git-flow-feature.log&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Write that to e.g. &lt;code&gt;~/bin/log-git-flow-feature&lt;/code&gt; and make executable with
+&lt;code&gt;chmod +x ~/bin/log-git-flow-feature&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Note: when you create scripts with &lt;code&gt;git-foo&lt;/code&gt;
+a subcommand &lt;code&gt;git foo&lt;/code&gt; is made available. You probably don't want to name this
+script &lt;code&gt;git-flow-log-feature&lt;/code&gt; or so, to prevent &lt;code&gt;git flow log&lt;/code&gt; from becoming
+a command.&lt;/p&gt;
+
+&lt;p&gt;Now just add two hooks and make them exectuable. This will add hooks to a specific
+git repo:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;log-git-flow-feature STARTED &amp;quot;$@&amp;quot;&amp;#39;&lt;/span&gt; &amp;gt;&amp;gt; /path/to/project/.git/hooks/pre-flow-feature-start
+chmod +x /path/to/project/.git/hooks/pre-flow-feature-start
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;log-git-flow-feature FINISHED &amp;quot;$@&amp;quot;&amp;#39;&lt;/span&gt; &amp;gt;&amp;gt; /path/to/project/.git/hooks/pre-flow-feature-finish
+chmod +x /path/to/project/.git/hooks/pre-flow-feature-finish&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;When I need to call an external time-tracker, the &lt;code&gt;~/bin/log-git-flow-feature&lt;/code&gt;
+script is the place to do this. An example:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#...&lt;/span&gt;
+curl -X POST -D &lt;span class=&quot;s2&quot;&gt;&amp;quot;{ &amp;#39;note&amp;#39;: &amp;#39;$feature in $working_dir&amp;#39; }&amp;quot;&lt;/span&gt; http://timetracker.io/api/entry&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I've create &lt;a href=&quot;https://gist.github.com/berkes/714141a6c131b20496fc00d6e3a90d38&quot;&gt;a gist with the contents of the files&lt;/a&gt; so
+if you want to enhance it, feel free to fork it!&lt;/p&gt;
+
+&lt;p&gt;There is a lot of room for improvement:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;make this work with &quot;generic&quot; git-hooks instead of relying on git-flow. Should
+probably match against patterns in branches that are created, merged, rebased
+etc.&lt;/li&gt;
+&lt;li&gt;map directories with projects, log name of the project.&lt;/li&gt;
+&lt;li&gt;don't use &quot;pwd&quot; but determine the actual working copy of git instead, to allow
+this to work with fancy setups or when working from within subdirectories.&lt;/li&gt;
+&lt;li&gt;log &lt;code&gt;git flow feature checkout&lt;/code&gt; as well, to log switching between (long)running branches.&lt;/li&gt;
+&lt;li&gt;fall back on generic git-hooks&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>Beste Nu.nl. Dit vinden wij jammer.</title>
@@ -6575,37 +6669,6 @@ Overigens behoud ik wel een afbreek-mogelijkheid. Als ik na een week helemaal kn
   Op mijn buro staat mijn laptop links van mijn desktop-pc. Ik wil vanuit mijn laptop de desktop-pc (deze heet emanuela en heeft het netwerkadres emanuela.fritz.box) aansturen. Dus typ ik op mijn laptop in:  &lt;code&gt;ssh -X ber@emanuela.fritz.box x2x -east -to :0&lt;/code&gt;Hiermee log ik op emanuela in als 'ber', en stel het scherm van emanuela in, zodat het rechts van mijn laptop verschijnt. Als ik de muis rechts uit het scherm van mijn laptop laat lopen, komt de muisaanwijzer het scherm van emanuela binnenwandelen. Het toetsenbord van mijn laptop werkt vanaf dan op het scherm van emanuela. Ook mooi, is dat dingen die ik op emanuela knip of copieer (control-c) later binnen mijn laptop te plakken zijn (en vice versa). Uiteraard kan ik geen schermen van links naar rechts verplaatsen. Meer details zijn te vinden in een inleiding op &lt;a href=&quot;http://www.linux.com/archive/feature/148824&quot;&gt;linux.com&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Een alternatief is &lt;a href=&quot;http://synergy2.sourceforge.net/&quot;&gt;synergy&lt;/a&gt;. Hiermee kun je makkelijk verschillende OSsen mengen, en het heeft grafische tools om dingen in te stellen. Voot mij doet X2X het echter perfect. Simpel, snel en makkelijk te gebruiken.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Lots of missing files in development of Drupal? Switch off Drupal's error handling</title>
-   <link href="http://berk.es/2010/01/05/lots-of-missing-files-in-development-of-drupal-switch-off-drupals-error-handling"/>
-   <updated>2010-01-05T00:00:00+01:00</updated>
-   <id>http://berk.es/2010/01/05/lots-of-missing-files-in-development-of-drupal-switch-off-drupals-error-handling</id>
-   <content type="html">&lt;p&gt;When testing, or developing an existing site, one often does not copy over all the filebase.
-A site that has been collecting uploads (such as images in blogs) for a while may have a gigantic amount of images. Often, when setting up a development environment, it is too much to keep the entire filebase in sync, even when you work on a recent codebase and a recent database.&lt;/p&gt;
-
-&lt;p&gt;In Drupal, this gives a lot of problems with the &quot;file not found&quot; handling. The default Drupal .htaccess puts 404 errors, file not found, on to Drupal. So that Drupal can write watchdog errors, or fire things such as imagecache image-actions.
-On a page with several images this may result in tens, or sometimes even over 50 file-not-found errors. And since they are all passed to Drupal, the whole of Drupal is bootstrapped, database-connections are opened, watchdog entries are written, and maybe a lot more, even.&lt;/p&gt;
-
-&lt;p&gt;On my poor old dual-core laptop, this can result in 15 apache threads hammering the database and the CPU all at once! As if I am serving fifteen simultaneous visitors at once!&lt;/p&gt;
-
-&lt;p&gt;The simple solution, is to switch off Drupal's error-handling in .htaccess.&lt;/p&gt;
-
-&lt;p&gt;In the file .htaccess, in Drupal root, simply replace the line&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# Make Drupal handle any 404 errors.
-ErrorDocument 404 /index.php
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;into&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# Make Drupal handle any 404 errors.
-ErrorDocument 404 &quot;The requested page was not found.  
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;That speeds up your development -environment with missing images often a hundred- or more-fold!&lt;/p&gt;
 </content>
  </entry>
  
